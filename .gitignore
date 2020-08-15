@@ -140,6 +140,7 @@ cython_debug/
 # our list of things to ignore
 backups
 bin
+conf/
 config/settings/
 media_root
 previews
