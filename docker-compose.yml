@@ -10,7 +10,7 @@ services:
       - postgres-data:/var/lib/postgresql/data/
 
   web:
-    container_name: django-news
+    container_name: trailhawks
     build:
       context: .
       dockerfile: .docker/Dockerfile
@@ -18,6 +18,8 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     depends_on:
       - db
+    env_file:
+      - ".env"
     environment:
       - "ALLOWED_HOSTS=*"
       - "DATABASE_URL=postgres://postgres@db/postgres"
