@@ -10,8 +10,8 @@ ENV PYTHONUNBUFFERED 1
 
 COPY requirements/base.txt /tmp/requirements.txt
 
-# RUN --mount=type=cache,target=/root/.cache/pip pip install -r /tmp/requirements.txt
-RUN pip install -r /tmp/requirements.txt
+RUN --mount=type=cache,target=/root/.cache/pip pip install -r /tmp/requirements.txt
+# RUN pip install -r /tmp/requirements.txt
 
 WORKDIR /src/
 
