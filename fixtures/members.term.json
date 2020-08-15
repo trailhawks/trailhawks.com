@@ -1,0 +1,192 @@
+[
+{
+  "pk": 3, 
+  "model": "members.term", 
+  "fields": {
+    "member": 3, 
+    "start": "2009-01-01", 
+    "end": "2010-12-31", 
+    "office": 1
+  }
+},
+{
+  "pk": 4, 
+  "model": "members.term", 
+  "fields": {
+    "member": 2, 
+    "start": "2011-01-01", 
+    "end": "2011-06-01", 
+    "office": 1
+  }
+},
+{
+  "pk": 5, 
+  "model": "members.term", 
+  "fields": {
+    "member": 6, 
+    "start": "2011-06-01", 
+    "end": "2011-12-31", 
+    "office": 1
+  }
+},
+{
+  "pk": 6, 
+  "model": "members.term", 
+  "fields": {
+    "member": 21, 
+    "start": "2012-01-01", 
+    "end": null, 
+    "office": 1
+  }
+},
+{
+  "pk": 7, 
+  "model": "members.term", 
+  "fields": {
+    "member": 17, 
+    "start": "2009-01-01", 
+    "end": "2010-12-31", 
+    "office": 2
+  }
+},
+{
+  "pk": 8, 
+  "model": "members.term", 
+  "fields": {
+    "member": 6, 
+    "start": "2010-01-01", 
+    "end": "2011-12-31", 
+    "office": 2
+  }
+},
+{
+  "pk": 9, 
+  "model": "members.term", 
+  "fields": {
+    "member": 66, 
+    "start": "2011-01-01", 
+    "end": null, 
+    "office": 2
+  }
+},
+{
+  "pk": 10, 
+  "model": "members.term", 
+  "fields": {
+    "member": 2, 
+    "start": "2009-01-01", 
+    "end": "2009-12-31", 
+    "office": 3
+  }
+},
+{
+  "pk": 11, 
+  "model": "members.term", 
+  "fields": {
+    "member": 5, 
+    "start": "2010-01-01", 
+    "end": "2011-12-31", 
+    "office": 3
+  }
+},
+{
+  "pk": 12, 
+  "model": "members.term", 
+  "fields": {
+    "member": 158, 
+    "start": "2012-01-01", 
+    "end": null, 
+    "office": 3
+  }
+},
+{
+  "pk": 13, 
+  "model": "members.term", 
+  "fields": {
+    "member": 96, 
+    "start": "2011-01-01", 
+    "end": null, 
+    "office": 6
+  }
+},
+{
+  "pk": 14, 
+  "model": "members.term", 
+  "fields": {
+    "member": 1, 
+    "start": "2009-01-01", 
+    "end": "2011-06-01", 
+    "office": 5
+  }
+},
+{
+  "pk": 15, 
+  "model": "members.term", 
+  "fields": {
+    "member": 59, 
+    "start": "2011-06-01", 
+    "end": null, 
+    "office": 5
+  }
+},
+{
+  "pk": 16, 
+  "model": "members.term", 
+  "fields": {
+    "member": 121, 
+    "start": "2011-01-01", 
+    "end": null, 
+    "office": 9
+  }
+},
+{
+  "pk": 17, 
+  "model": "members.term", 
+  "fields": {
+    "member": 3, 
+    "start": "2011-01-01", 
+    "end": null, 
+    "office": 7
+  }
+},
+{
+  "pk": 18, 
+  "model": "members.term", 
+  "fields": {
+    "member": 75, 
+    "start": "2009-01-01", 
+    "end": "2009-12-31", 
+    "office": 4
+  }
+},
+{
+  "pk": 19, 
+  "model": "members.term", 
+  "fields": {
+    "member": 4, 
+    "start": "2010-01-01", 
+    "end": "2010-12-31", 
+    "office": 4
+  }
+},
+{
+  "pk": 20, 
+  "model": "members.term", 
+  "fields": {
+    "member": 31, 
+    "start": "2011-01-01", 
+    "end": "2011-12-31", 
+    "office": 4
+  }
+},
+{
+  "pk": 21, 
+  "model": "members.term", 
+  "fields": {
+    "member": 34, 
+    "start": "2012-01-01", 
+    "end": null, 
+    "office": 4
+  }
+}
+]

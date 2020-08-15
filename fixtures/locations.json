@@ -1,0 +1,50 @@
+[
+{
+  "pk": 1, 
+  "model": "locations.location", 
+  "fields": {
+    "description": "Meet in the trailhead parking lot just off 8th & Oak in north Lawrence.", 
+    "zoom": 16, 
+    "longitude": "-95.216403", 
+    "latitude": "38.972013", 
+    "slug": "river-trails-parking-lot", 
+    "name": "River Trails Parking Lot"
+  }
+},
+{
+  "pk": 2, 
+  "model": "locations.location", 
+  "fields": {
+    "description": "Meet at the trailhead for the Clinton Lake North Shore Trail system. Just past the Corps of Engineers building. At the first parking lot on the right.", 
+    "zoom": 15, 
+    "longitude": "-95.340723", 
+    "latitude": "38.939538", 
+    "slug": "clinton-lake-north-shore-trail", 
+    "name": "Clinton Lake North Shore Trail"
+  }
+},
+{
+  "pk": 3, 
+  "model": "locations.location", 
+  "fields": {
+    "description": "Owens Flower Shop parking lot, 9th and Indiana. Park along the street.", 
+    "zoom": 16, 
+    "longitude": "-95.242903", 
+    "latitude": "38.968510", 
+    "slug": "owens-flower-shop-parking-lot", 
+    "name": "Owens Flower Shop Parking Lot"
+  }
+},
+{
+  "pk": 4, 
+  "model": "locations.location", 
+  "fields": {
+    "description": "Olathe Prairie Center 26235 West 135th St. Olathe, KS", 
+    "zoom": 15, 
+    "longitude": "-94.890397", 
+    "latitude": "38.882665", 
+    "slug": "olathe-prairie-center", 
+    "name": "Olathe Prairie Center"
+  }
+}
+]
