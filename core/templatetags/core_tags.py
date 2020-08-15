@@ -3,7 +3,8 @@ import feedparser
 from dateutil.parser import *
 from dateutil.tz import *
 from django.template import Library
-from lawrencetrailhawks import __VERSION__
+
+from core import __VERSION__
 
 
 register = Library()

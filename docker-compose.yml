@@ -24,6 +24,7 @@ services:
       - "ALLOWED_HOSTS=*"
       - "DATABASE_URL=postgres://postgres@db/postgres"
       - "DJANGO_DEBUG=true"
+      - "DJANGO_SETTINGS_MODULE=config.settings_trailhawks"
     ports:
       - "8000:8000"
     volumes:
