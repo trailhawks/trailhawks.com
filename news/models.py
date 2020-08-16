@@ -1,11 +1,11 @@
 from __future__ import unicode_literals
+
 from django.contrib.contenttypes import generic
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
-from django_comments.moderation import CommentModerator, moderator
 
 from .managers import NewsManager
 from core.models import CommentMixin, ShortUrlMixin
@@ -76,13 +76,3 @@ class News(CommentMixin, ShortUrlMixin, models.Model):
 
     def get_next_news(self):
         return self.get_next_by_publish(status__gte=self.STATUS_PUBLIC)
-
-
-class NewsModerator(CommentModerator):
-    email_notification = True
-    enable_field = 'enable_comments'
-    auto_close_field = 'pub_date'
-    close_after = 7
-
-
-moderator.register(News, NewsModerator)

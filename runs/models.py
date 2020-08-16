@@ -1,8 +1,8 @@
 from __future__ import unicode_literals
+
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
-from django_comments.moderation import CommentModerator, moderator
 
 from .managers import RunManager
 from core.models import CommentMixin, MachineTagMixin, ShortUrlMixin
@@ -43,11 +43,3 @@ class Run(MachineTagMixin, CommentMixin, ShortUrlMixin):
     @models.permalink
     def get_absolute_url(self):
         return ('run_detail', (), {'slug': self.slug})
-
-
-class RunModerator(CommentModerator):
-    email_notification = True
-    enable_field = 'enable_comments'
-
-
-moderator.register(Run, RunModerator)

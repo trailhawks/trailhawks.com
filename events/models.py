@@ -1,10 +1,10 @@
 from __future__ import unicode_literals
+
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
-from django_comments.moderation import CommentModerator, moderator
 
 from core.models import CommentMixin, MachineTagMixin, ShortUrlMixin
 from .managers import EventManager
@@ -51,13 +51,3 @@ class Event(MachineTagMixin, CommentMixin, ShortUrlMixin):
     @models.permalink
     def get_absolute_url(self):
         return ('event_detail', (), {'slug': self.slug})
-
-
-class EventModerator(CommentModerator):
-    email_notification = True
-    enable_field = 'enable_comments'
-    # auto_close_field = 'publish'
-    # close_after = 7
-
-
-moderator.register(Event, EventModerator)

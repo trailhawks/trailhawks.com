@@ -7,7 +7,6 @@ from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
-from django_comments.moderation import CommentModerator, moderator
 from num2words import num2words
 
 from .managers import RaceManager
@@ -137,16 +136,6 @@ class Race(MachineTagMixin, CommentMixin, ShortUrlMixin):
     @cached_property
     def is_finished(self):
         return not self.result_set.count() == 0
-
-
-class RaceModerator(CommentModerator):
-    email_notification = True
-    enable_field = 'enable_comments'
-    auto_close_field = 'start_datetime'
-    close_after = 30
-
-
-moderator.register(Race, RaceModerator)
 
 
 @python_2_unicode_compatible

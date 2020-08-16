@@ -43,13 +43,6 @@
         <li class="next"><a href="{{ object.get_next_post.get_absolute_url }}">Newer &rarr;</a></li>
       {% endif %}
     </ul>
-
-    <hr>
-
-    {% if object.enable_comments %}
-      {% include "comments/comments.html" %}
-    {% endif %}
-
   </div>
 
   <div class="col-md-4">

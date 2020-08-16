@@ -8,7 +8,7 @@ from shorturls import default_converter as converter
 
 
 class CommentMixin(models.Model):
-    enable_comments = models.BooleanField(default=True)
+    enable_comments = models.BooleanField(default=False)
 
     class Meta:
         abstract = True
