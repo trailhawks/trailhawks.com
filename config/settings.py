@@ -4,7 +4,6 @@ from unipath import FSPath as Path
 
 
 PROJECT_ROOT = Path(__file__).ancestor(2)
-# TEMPLATE_ROOT = os.path.join(PROJECT_ROOT, 'lawrencetrailhawks', 'templates')
 TEMPLATE_ROOT = os.path.join(PROJECT_ROOT, 'templates')
 
 DEBUG = True
@@ -36,7 +35,7 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = PROJECT_ROOT.child('static_root')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    PROJECT_ROOT.child('lawrencetrailhawks', 'assets')
+    PROJECT_ROOT.child('assets')
 ]
 
 STATICFILES_FINDERS = [
@@ -181,7 +180,7 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': False,
         },
-        'lawrencetrailhawks': {
+        'trailhawks': {
             'handlers': ['console'],
             'level': 'DEBUG',
             # 'filters': ['special']
@@ -206,14 +205,12 @@ SHORTEN_MODELS = {
 
 ALLOWED_HOSTS = [
     '*',
-    'hawkhundred.com',
     '.hawkhundred.com',
-    'lawrencetrailhawks.com',
-    '.lawrencetrailhawks.com',
-    'trailhawks.com',
-    '.trailhawks.com',
-    'lth.im',
     '.lth.im',
+    '.trailhawks.com',
+    'hawkhundred.com',
+    'lth.im',
+    'trailhawks.com',
 ]
 
 MACHINE_TAG_NAMESPACE = 'trailhawks'

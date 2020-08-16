@@ -65,7 +65,7 @@ def officer_list(request):
             message_html = loader.render_to_string('emails/contact_message.html', {'body': message, 'sender': sender, 'subject': subject})
             message_text = loader.render_to_string('emails/contact_message.txt', {'body': message, 'sender': sender, 'subject': subject})
 
-            msg = EmailMultiAlternatives(subject, message_text, 'no-reply@lawrencetrailhawks.com', recipients)
+            msg = EmailMultiAlternatives(subject, message_text, 'no-reply@trailhawks.com', recipients)
             msg.attach_alternative(message_html, 'text/html')
             msg.send()
 

@@ -55,9 +55,9 @@ def notify_admins(sender, comment, **kwargs):
     email = EmailMultiAlternatives(
         subject,
         txt_body,
-        from_email="no-reply@lawrencetrailhawks.com",
+        from_email="no-reply@trailhawks.com",
         to=notify_list,
-        bcc=['admin@lawrencetrailhawks.com'])
+        bcc=['admin@trailhawks.com'])
     email.attach_alternative(t.render(c), "text/html")
     email.send()
 
@@ -79,8 +79,8 @@ def notify_commenters(sender, comment, **kwargs):
         email = EmailMultiAlternatives(
             subject,
             txt_body,
-            from_email='no-reply@lawrencetrailhawks.com',
-            to=['admin@lawrencetrailhawks.com'],
+            from_email='no-reply@trailhawks.com',
+            to=['admin@trailhawks.com'],
             bcc=notify_list)
         email.attach_alternative(t.render(c), "text/html")
         email.send()
