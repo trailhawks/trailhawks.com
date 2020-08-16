@@ -6,6 +6,10 @@ bump:
 	bumpversion patch
 	git push origin main
 
+.PHONY: build
+build:
+	docker-compose build
+
 .PHONY: check
 check:
 	docker-compose run --rm web python manage.py check
@@ -25,3 +29,9 @@ migrate:
 .PHONY: static
 static:
 	docker-compose run --rm web python manage.py collectstatic
+
+.PHONY: up
+up:
+	docker-compose build
+	docker-compose down
+	docker-compose up
