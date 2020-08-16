@@ -28,7 +28,7 @@ migrate:
 
 .PHONY: static
 static:
-	docker-compose run --rm web python manage.py collectstatic
+	docker-compose run --rm web python manage.py collectstatic --noinput
 
 .PHONY: up
 up:
