@@ -210,14 +210,12 @@ SHORTEN_MODELS = {
 }
 
 ALLOWED_HOSTS = [
-    'hawkhundred.com',
     '.hawkhundred.com',
-    'lawrencetrailhawks.com',
-    '.lawrencetrailhawks.com',
-    'trailhawks.com',
-    '.trailhawks.com',
-    'lth.im',
     '.lth.im',
+    '.trailhawks.com',
+    'hawkhundred.com',
+    'lth.im',
+    'trailhawks.com',
 ]
 
 MACHINE_TAG_NAMESPACE = 'trailhawks'
