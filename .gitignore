@@ -141,6 +141,7 @@ cython_debug/
 backups
 bin
 conf/
+config/__settings/
 config/settings/
 media_root
 previews
