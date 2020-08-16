@@ -1,17 +1,18 @@
 import os
 
+from environs import Env
 from unipath import FSPath as Path
 
+
+env = Env()
 
 PROJECT_ROOT = Path(__file__).ancestor(2)
 TEMPLATE_ROOT = os.path.join(PROJECT_ROOT, 'templates')
 
-DEBUG = True
+DEBUG = env.bool("DJANGO_DEBUG", default=False)
 TEMPLATE_DEBUG = DEBUG
 
-ADMINS = (
-    # ('Nick Lang', 'nick.lang@example.com'),
-)
+ADMINS = ()
 
 MANAGERS = ADMINS
 
@@ -203,15 +204,7 @@ SHORTEN_MODELS = {
     'U': 'runs.run',
 }
 
-ALLOWED_HOSTS = [
-    '*',
-    '.hawkhundred.com',
-    '.lth.im',
-    '.trailhawks.com',
-    'hawkhundred.com',
-    'lth.im',
-    'trailhawks.com',
-]
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=list())
 
 MACHINE_TAG_NAMESPACE = 'trailhawks'
 
@@ -227,3 +220,35 @@ REST_FRAMEWORK = {
     # 'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
     'PAGINATE_BY': 10
 }
+
+TWITTER = {
+    'username': env("TWITTER_USERNAME", default=""),
+    'password': env("TWITTER_PASSWORD", default=""),
+}
+
+FLICKR = {
+    'key': env("FLICKR_KEY", default=""),
+    'secret': env("FLICKR_SECRET", default=""),
+    'username': env("FLICKR_USERNAME", default=""),
+}
+
+AKISMET_API_KEY = env("AKISMET_API_KEY", default="")
+DBBACKUP_POSTGRESQL_BACKUP_COMMANDS = env("DBBACKUP_POSTGRESQL_BACKUP_COMMANDS", default="")
+DBBACKUP_S3_ACCESS_KEY = env("DBBACKUP_S3_ACCESS_KEY", default="")
+DBBACKUP_S3_BUCKET = env("DBBACKUP_S3_BUCKET", default="")
+DBBACKUP_S3_SECRET_KEY = env("DBBACKUP_S3_SECRET_KEY", default="")
+DBBACKUP_STORAGE = env("DBBACKUP_STORAGE", default="")
+DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="")
+DJRILL_WEBHOOK_SECRET = env("DJRILL_WEBHOOK_SECRET", default="")
+EMAIL_HOST = env("EMAIL_HOST", default="")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", default="")
+EMAIL_HOST_USER = env("EMAIL_HOST_USER", default="")
+EMAIL_PORT = env("EMAIL_PORT", default="")
+EMAIL_USE_TLS = env("EMAIL_USE_TLS", default="")
+FOAUTH_PASSWORD = env("FOAUTH_PASSWORD", default="")
+FOAUTH_USERNAME = env("FOAUTH_USERNAME", default="")
+MAILHIDE_PRIVATE_KEY = env("MAILHIDE_PRIVATE_KEY", default="")
+MAILHIDE_PUBLIC_KEY = env("MAILHIDE_PUBLIC_KEY", default="")
+SERVER_EMAIL = env("SERVER_EMAIL", default="")
+THUMBOR_SECURITY_KEY = env("THUMBOR_SECURITY_KEY", default="")
+THUMBOR_SERVER = env("THUMBOR_SERVER", default="")
