@@ -1,5 +1,3 @@
-import sys
-
 from django.conf import settings
 from django.template import Library
 from libthumbor import CryptoURL
@@ -66,15 +64,10 @@ def thumb(url, **kwargs):
 
     # just for code clarity
     thumbor_kwargs = kwargs
-    if not 'fit_in' in thumbor_kwargs:
+    if 'fit_in' not in thumbor_kwargs:
         thumbor_kwargs['fit_in'] = True
 
     thumbor_kwargs['image_url'] = url
     path = crypto.generate(**thumbor_kwargs)
 
     return u'{}{}'.format(base, path)
-
-
-#@register.simple_tag
-#def thumbor_url(image_url, **kwargs):
-#    return thumb(image_url, **kwargs)
