@@ -8,11 +8,10 @@ logger = logging.getLogger(__name__)
 
 
 class Command(NoArgsCommand):
-
     def handle(self, **options):
-        logger.info('syncing all flickr photos')
+        logger.info("syncing all flickr photos")
         try:
             sync_flickr_all()
-            logger.info('done syncing all flickr photos')
+            logger.info("done syncing all flickr photos")
         except Exception as e:
             logger.exception(e)

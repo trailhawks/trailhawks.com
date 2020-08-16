@@ -4,7 +4,7 @@ from .views import NewsDetail, NewsList
 
 
 urlpatterns = patterns(
-    '',
-    url(r'^$', NewsList.as_view(), name='news_list'),
-    url(r'^(?P<pk>\d+)/$', NewsDetail.as_view(), name='news_detail'),
+    "",
+    url(r"^$", NewsList.as_view(), name="news_list"),
+    url(r"^(?P<pk>\d+)/$", NewsDetail.as_view(), name="news_detail"),
 )

@@ -9,11 +9,10 @@ logger = logging.getLogger(__name__)
 
 
 class Command(NoArgsCommand):
-
     def handle(self, **options):
-        logger.info('syncing recent twitter messages')
+        logger.info("syncing recent twitter messages")
         try:
             sync_twitter()
-            logger.info('done syncing recent twitter messages')
+            logger.info("done syncing recent twitter messages")
         except Exception as e:
             logger.exception(e)

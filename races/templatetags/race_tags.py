@@ -18,13 +18,13 @@ def replace_char(value, arg):
 
 @register.assignment_tag(takes_context=True)
 def get_latest_race(context):
-    return Race.objects.upcoming().order_by('start_datetime').first()
+    return Race.objects.upcoming().order_by("start_datetime").first()
 
 
 @register.assignment_tag(takes_context=True)
 def get_latest_races(context):
     try:
-        return Race.objects.upcoming().order_by('start_datetime')
+        return Race.objects.upcoming().order_by("start_datetime")
     except:
         return None
 
@@ -47,13 +47,13 @@ def get_all_results(context):
 
 @register.assignment_tag(takes_context=True)
 def get_past_race(context):
-    return Race.objects.complete().order_by('start_datetime').first()
+    return Race.objects.complete().order_by("start_datetime").first()
 
 
 @register.assignment_tag(takes_context=True)
 def get_past_races(context):
     try:
-        return Race.objects.complete().order_by('start_datetime')
+        return Race.objects.complete().order_by("start_datetime")
     except:
         return None
 
@@ -68,7 +68,7 @@ def get_race_by_slug(context, slug):
 
 @register.assignment_tag(takes_context=True)
 def get_results_for_race(context, race, race_type=None, gender=None):
-    queryset = Result.objects.filter(race=race).order_by('dq', 'dnf', 'dns', 'time')
+    queryset = Result.objects.filter(race=race).order_by("dq", "dnf", "dns", "time")
     if race_type:
         queryset = queryset.filter(race_type__pk=race_type.pk)
     if gender:
@@ -78,11 +78,11 @@ def get_results_for_race(context, race, race_type=None, gender=None):
 
 @register.assignment_tag(takes_context=True)
 def get_race_types_for_race(context, race):
-    return RaceType.objects.filter(result__race__pk=race.pk).distinct('name')
+    return RaceType.objects.filter(result__race__pk=race.pk).distinct("name")
 
 
-@register.inclusion_tag('races/includes/results_table.html', takes_context=True)
+@register.inclusion_tag("races/includes/results_table.html", takes_context=True)
 def render_results(context, race_results):
     return {
-        'race_results': race_results,
+        "race_results": race_results,
     }

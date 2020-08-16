@@ -17,22 +17,28 @@ class Event(MachineTagMixin, CommentMixin, ShortUrlMixin):
     STATUS_DRAFT = 1
     STATUS_PUBLIC = 2
     STATUS_CHOICES = (
-        (STATUS_DRAFT, _('Draft')),
-        (STATUS_PUBLIC, _('Public')),
+        (STATUS_DRAFT, _("Draft")),
+        (STATUS_PUBLIC, _("Public")),
     )
     title = models.CharField(max_length=250)
     slug = models.SlugField(blank=True, null=True)
     body = models.TextField()
-    status = models.IntegerField(_('status'), choices=STATUS_CHOICES, default=STATUS_PUBLIC)
-    facebook_url = models.URLField(blank=True, null=True, help_text='Link to Facebook page')
-    facebook_event_url = models.URLField(blank=True, null=True, help_text='Link to Facebook Event page')
-    races = models.ManyToManyField('races.Race', related_name='events')
+    status = models.IntegerField(
+        _("status"), choices=STATUS_CHOICES, default=STATUS_PUBLIC
+    )
+    facebook_url = models.URLField(
+        blank=True, null=True, help_text="Link to Facebook page"
+    )
+    facebook_event_url = models.URLField(
+        blank=True, null=True, help_text="Link to Facebook Event page"
+    )
+    races = models.ManyToManyField("races.Race", related_name="events")
 
     objects = EventManager()
 
     class Meta:
-        verbose_name = _('Event')
-        verbose_name_plural = _('Events')
+        verbose_name = _("Event")
+        verbose_name_plural = _("Events")
 
     def __str__(self):
         return self.title
@@ -50,4 +56,4 @@ class Event(MachineTagMixin, CommentMixin, ShortUrlMixin):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('event_detail', (), {'slug': self.slug})
+        return ("event_detail", (), {"slug": self.slug})

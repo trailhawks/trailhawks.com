@@ -6,7 +6,6 @@ from django.utils import timezone
 
 
 class RunQuerySet(QuerySet):
-
     def active(self):
         return self.filter(active__exact=True)
 
@@ -25,7 +24,6 @@ class RunQuerySet(QuerySet):
 
 
 class RunManager(Manager):
-
     def get_query_set(self):
         return RunQuerySet(self.model, using=self._db)
 

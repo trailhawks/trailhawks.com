@@ -15,8 +15,8 @@ def remove_http(value):
     value = value to be filtered
     arg = string of len 2, first char to be replaced with second char
     """
-    value = value.replace('http://', '')
-    value = value.replace('https://', '')
+    value = value.replace("http://", "")
+    value = value.replace("https://", "")
     return value
 
 
@@ -24,7 +24,7 @@ def remove_http(value):
 def get_photos_by_machine_tags(context, machine_tags, num=10, random=False):
     queryset = Photo.objects.active().filter(tags__name__in=machine_tags)
     if random:
-        queryset = queryset.order_by('?')
+        queryset = queryset.order_by("?")
     return queryset[:num]
 
 
@@ -50,8 +50,8 @@ def thumb(url, **kwargs):
     https://github.com/heynemann/libthumbor/blob/master/libthumbor/url.py
 
     """
-    THUMBOR_BASE_URL = getattr(settings, 'THUMBOR_BASE_URL', None)
-    THUMBOR_KEY = getattr(settings, 'THUMBOR_KEY', 'MY_SECURE_KEY')
+    THUMBOR_BASE_URL = getattr(settings, "THUMBOR_BASE_URL", None)
+    THUMBOR_KEY = getattr(settings, "THUMBOR_KEY", "MY_SECURE_KEY")
 
     if THUMBOR_BASE_URL:
         base = THUMBOR_BASE_URL
@@ -59,15 +59,15 @@ def thumb(url, **kwargs):
         # otherwise assume that thumbor is setup behind the same
         # CDN behind the `thumbor` namespace.
         scheme, netloc = urlparse.urlsplit(url)[:2]
-        base = '{}://{}/thumbor'.format(scheme, netloc)
+        base = "{}://{}/thumbor".format(scheme, netloc)
     crypto = CryptoURL(key=THUMBOR_KEY)
 
     # just for code clarity
     thumbor_kwargs = kwargs
-    if 'fit_in' not in thumbor_kwargs:
-        thumbor_kwargs['fit_in'] = True
+    if "fit_in" not in thumbor_kwargs:
+        thumbor_kwargs["fit_in"] = True
 
-    thumbor_kwargs['image_url'] = url
+    thumbor_kwargs["image_url"] = url
     path = crypto.generate(**thumbor_kwargs)
 
-    return u'{}{}'.format(base, path)
+    return u"{}{}".format(base, path)

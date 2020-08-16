@@ -4,10 +4,10 @@ from rest_framework import serializers
 from syncr.flickr.models import Photo
 
 
-CAROUSEL_HEIGHT = getattr(settings, 'CAROUSEL_HEIGHT', 500)
-CAROUSEL_WIDTH = getattr(settings, 'CAROUSEL_WIDTH', 1200)
-SIDEBAR_HEIGHT = getattr(settings, 'SIDEBAR_HEIGHT', 500)
-SIDEBAR_WIDTH = getattr(settings, 'SIDEBAR_WIDTH', 1200)
+CAROUSEL_HEIGHT = getattr(settings, "CAROUSEL_HEIGHT", 500)
+CAROUSEL_WIDTH = getattr(settings, "CAROUSEL_WIDTH", 1200)
+SIDEBAR_HEIGHT = getattr(settings, "SIDEBAR_HEIGHT", 500)
+SIDEBAR_WIDTH = getattr(settings, "SIDEBAR_WIDTH", 1200)
 
 
 class PhotoSerializer(serializers.HyperlinkedModelSerializer):
@@ -23,24 +23,24 @@ class PhotoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta(object):
         model = Photo
         fields = (
-            'flickr_id',
+            "flickr_id",
             #'slug',
-            'title',
-            'description',
-            'url',
-            'photopage_url',
-            'medium_height',
-            'medium_width',
-            'medium_url',
-            'large_height',
-            'large_width',
-            'large_url',
-            'carousel_height',
-            'carousel_url',
-            'carousel_width',
-            'sidebar_height',
-            'sidebar_url',
-            'sidebar_width',
+            "title",
+            "description",
+            "url",
+            "photopage_url",
+            "medium_height",
+            "medium_width",
+            "medium_url",
+            "large_height",
+            "large_width",
+            "large_url",
+            "carousel_height",
+            "carousel_url",
+            "carousel_width",
+            "sidebar_height",
+            "sidebar_url",
+            "sidebar_width",
         )
 
     def get_medium_url(self, obj):
@@ -56,10 +56,12 @@ class PhotoSerializer(serializers.HyperlinkedModelSerializer):
         return CAROUSEL_WIDTH
 
     def get_carousel_url(self, obj):
-        return generate_url(obj.get_medium_url(),
-                            smart=True,
-                            width=CAROUSEL_WIDTH,
-                            height=CAROUSEL_HEIGHT)
+        return generate_url(
+            obj.get_medium_url(),
+            smart=True,
+            width=CAROUSEL_WIDTH,
+            height=CAROUSEL_HEIGHT,
+        )
 
     def get_sidebar_height(self, obj):
         return SIDEBAR_HEIGHT
@@ -68,7 +70,6 @@ class PhotoSerializer(serializers.HyperlinkedModelSerializer):
         return SIDEBAR_WIDTH
 
     def get_sidebar_url(self, obj):
-        return generate_url(obj.get_medium_url(),
-                            smart=True,
-                            width=SIDEBAR_WIDTH,
-                            height=SIDEBAR_HEIGHT)
+        return generate_url(
+            obj.get_medium_url(), smart=True, width=SIDEBAR_WIDTH, height=SIDEBAR_HEIGHT
+        )

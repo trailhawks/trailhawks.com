@@ -6,9 +6,9 @@ from .models import News
 
 class NewsDetail(DetailView):
     queryset = News.objects.all()
-    navitem = 'news'
+    navitem = "news"
 
 
 class NewsList(ListView):
     queryset = News.objects.public()
-    navitem = 'news'
+    navitem = "news"

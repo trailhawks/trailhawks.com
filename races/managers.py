@@ -4,7 +4,6 @@ from django.utils import timezone
 
 
 class RaceQuerySet(QuerySet):
-
     def active(self):
         return self.filter(active__exact=True)
 
@@ -16,7 +15,6 @@ class RaceQuerySet(QuerySet):
 
 
 class RaceManager(Manager):
-
     def get_query_set(self):
         return RaceQuerySet(self.model, using=self._db)
 

@@ -8,10 +8,10 @@ from sponsors.admin import SponsorInline
 
 
 class EventAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug': ['title']}
-    list_display = ('title', 'status')
-    list_filter = ('status',)
-    filter_horizontal = ('races',)
+    prepopulated_fields = {"slug": ["title"]}
+    list_display = ("title", "status")
+    list_filter = ("status",)
+    filter_horizontal = ("races",)
     save_on_top = True
     inlines = (
         FaqInline,

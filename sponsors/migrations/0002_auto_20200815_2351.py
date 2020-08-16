@@ -7,13 +7,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('sponsors', '0001_initial'),
+        ("sponsors", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='sponsor',
-            name='email',
+            model_name="sponsor",
+            name="email",
             field=models.EmailField(max_length=254, null=True, blank=True),
         ),
     ]

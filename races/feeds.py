@@ -8,15 +8,16 @@ class RaceFeed(ICalFeed):
     A race event calendar
 
     """
-    product_id = '-//trailhawks.com//Races//EN'
-    timezone = 'CST'
-    title = 'Lawrence Trail Hawks Race Calendar'
+
+    product_id = "-//trailhawks.com//Races//EN"
+    timezone = "CST"
+    title = "Lawrence Trail Hawks Race Calendar"
 
     def items(self):
-        return Race.objects.all().order_by('-start_datetime')
+        return Race.objects.all().order_by("-start_datetime")
 
     def item_title(self, item):
-        return u'{0} {1}'.format(item.annual, item.title)
+        return u"{0} {1}".format(item.annual, item.title)
 
     def item_description(self, item):
         return item.description

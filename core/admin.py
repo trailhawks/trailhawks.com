@@ -4,7 +4,8 @@ from django.core.exceptions import ObjectDoesNotExist
 
 class BaseMetadataAdmin(admin.ModelAdmin):
     """Base admin class for generic content."""
-    readonly_fields = ('updated_user', 'updated', 'created_user', 'created')
+
+    readonly_fields = ("updated_user", "updated", "created_user", "created")
 
     def save_model(self, request, obj, form, change):
         try:

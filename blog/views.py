@@ -5,8 +5,8 @@ from .models import Post
 
 class PostMixin(object):
     queryset = Post.objects.public()
-    date_field = 'publish'
-    navitem = 'blog'
+    date_field = "publish"
+    navitem = "blog"
 
 
 class PostArchive(PostMixin, dates.ArchiveIndexView):

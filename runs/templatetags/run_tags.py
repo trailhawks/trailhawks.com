@@ -8,10 +8,7 @@ register = Library()
 
 @register.assignment_tag(takes_context=True)
 def get_todays_runs(context):
-    return {
-        'todays_run': Run.objects.today(),
-        'next_run': Run.objects.next()
-    }
+    return {"todays_run": Run.objects.today(), "next_run": Run.objects.next()}
 
 
 @register.assignment_tag(takes_context=True)

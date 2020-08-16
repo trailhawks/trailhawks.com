@@ -28,7 +28,7 @@ class Command(DocOptCommand):
 
     def prepare_date(self, date_str):
         try:
-            date_obj = datetime.strptime(date_str, '%m/%d/%Y')
+            date_obj = datetime.strptime(date_str, "%m/%d/%Y")
             return date_obj
         except ValueError:
             return False
@@ -42,15 +42,19 @@ class Command(DocOptCommand):
             return False
 
     def gather_information(self, race_id, number):
-        click.echo('Hello there! We are going to copy a race now.')
+        click.echo("Hello there! We are going to copy a race now.")
 
         # get race
         if not race_id:
-            races = Race.objects.all().order_by('-start_datetime')
+            races = Race.objects.all().order_by("-start_datetime")
             for race in races:
-                click.echo('{0}. {1}'.format(race.pk, race.title))
+                click.echo("{0}. {1}".format(race.pk, race.title))
 
-            race = self.get_race(click.prompt("First, give me the ID of the Race object we're gonna copy. If there is more than one race already, give me ID of the latest one."))
+            race = self.get_race(
+                click.prompt(
+                    "First, give me the ID of the Race object we're gonna copy. If there is more than one race already, give me ID of the latest one."
+                )
+            )
         else:
             race = self.get_race(race_id)
 
@@ -59,24 +63,30 @@ class Command(DocOptCommand):
 
         # get number
         if not number:
-            number = click.prompt("What is the number of the race? If this is a second race, write 2. If third, then 3. You got it")
+            number = click.prompt(
+                "What is the number of the race? If this is a second race, write 2. If third, then 3. You got it"
+            )
 
-        date = self.prepare_date(click.prompt("What is the date of this new race? (Format: MM/DD/YYYY)"))
+        date = self.prepare_date(
+            click.prompt("What is the date of this new race? (Format: MM/DD/YYYY)")
+        )
         while not date:
-            date = self.prepare_date(click.prompt("Wrong format! Provide a date in format: MM/DD/YYYY)"))
+            date = self.prepare_date(
+                click.prompt("Wrong format! Provide a date in format: MM/DD/YYYY)")
+            )
 
         return (race, number, date)
 
     def handle_docopt(self, arguments):
-        number = arguments.get('--number')
-        race_id = arguments.get('--race')
+        number = arguments.get("--number")
+        race_id = arguments.get("--race")
 
         (race, number, date) = self.gather_information(race_id, number)
 
         click.echo("OK! That's it. Now I'll copy your race.")
 
         number = int(number)
-        title = unicode('{} #{}'.format(str(race), str(number)))
+        title = unicode("{} #{}".format(str(race), str(number)))
         race_id = race.id
 
         new_race = race
@@ -96,7 +106,9 @@ class Command(DocOptCommand):
             new_race.race_directors.add(race_director)
 
         # copy FAQs
-        faqs = FAQ.objects.filter(content_type__app_label=race._meta.app_label, object_id=race.pk)
+        faqs = FAQ.objects.filter(
+            content_type__app_label=race._meta.app_label, object_id=race.pk
+        )
         for faq in faqs:
             faq.pk = None
             faq.id = None

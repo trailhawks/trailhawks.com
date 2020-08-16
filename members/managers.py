@@ -6,7 +6,6 @@ from django.utils import timezone
 
 
 class MemberQuerySet(QuerySet):
-
     def current(self):
         one_year_ago = timezone.now() - datetime.timedelta(weeks=52)
         return self.filter(date_paid__gte=one_year_ago)
@@ -20,7 +19,6 @@ class MemberQuerySet(QuerySet):
 
 
 class MemberManager(Manager):
-
     def get_query_set(self):
         return MemberQuerySet(self.model, using=self._db)
 
@@ -35,7 +33,6 @@ class MemberManager(Manager):
 
 
 class TermQuerySet(QuerySet):
-
     def current(self):
         query = Q(start__lte=timezone.now()) & Q(end=None) | Q(end__gt=timezone.now())
         return self.filter(query)  # .order_by('-start_datetime')
@@ -46,7 +43,6 @@ class TermQuerySet(QuerySet):
 
 
 class TermManager(Manager):
-
     def get_query_set(self):
         return TermQuerySet(self.model, using=self._db)
 

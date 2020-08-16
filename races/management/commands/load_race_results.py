@@ -25,59 +25,57 @@ class Command(DocOptCommand):
     docs = __doc__
 
     def handle_docopt(self, arguments):
-        race = arguments['--race']
-        csv_filename = arguments['--csv']
+        race = arguments["--race"]
+        csv_filename = arguments["--csv"]
 
         logger.info(race)
 
         if not csv_filename:
-            raise Exception('You forgot the CSV silly')
+            raise Exception("You forgot the CSV silly")
 
         if not race:
-            raise Exception('You forgot to add the Race silly')
+            raise Exception("You forgot to add the Race silly")
 
         try:
             race = Race.objects.get(pk=int(race))
         except ValueError:
             race = Race.objects.get(slug=race)
 
-        with open(csv_filename, 'r') as f:
+        with open(csv_filename, "r") as f:
             result_data = list(csv.DictReader(f))
 
         for row in result_data:
             defaults = {}
             race_type = None
-            bib_number = row['bib']
-            time = row['time']
-            place = row['comments']
-            first_name = row['first_name']
-            last_name = row['last_name']
-            distance = row['distance']
+            bib_number = row["bib"]
+            time = row["time"]
+            place = row["comments"]
+            first_name = row["first_name"]
+            last_name = row["last_name"]
+            distance = row["distance"]
 
-            if row['gender'].strip() in ['m', 'M']:
+            if row["gender"].strip() in ["m", "M"]:
                 gender = 1
             else:
                 gender = 2
 
             racer, _ = Racer.objects.get_or_create(
-                first_name=first_name,
-                last_name=last_name,
-                gender=gender)
+                first_name=first_name, last_name=last_name, gender=gender
+            )
 
             if len(distance):
-                race_type, _ = RaceType.objects.get_or_create(
-                    name=distance)
+                race_type, _ = RaceType.objects.get_or_create(name=distance)
 
-            if 'CR' in place:
-                defaults['course_record'] = True
+            if "CR" in place:
+                defaults["course_record"] = True
 
-            if 'DNF' in time:
-                defaults['dnf'] = True
+            if "DNF" in time:
+                defaults["dnf"] = True
 
-            if 'DNS' in time:
-                defaults['dns'] = True
+            if "DNS" in time:
+                defaults["dns"] = True
 
-            logger.info('Found Racer: {0}'.format(racer))
+            logger.info("Found Racer: {0}".format(racer))
 
             # might update_or_create...
             result, _ = Result.objects.get_or_create(
@@ -86,13 +84,14 @@ class Command(DocOptCommand):
                 time=time,
                 bib_number=bib_number,
                 place=place,
-                defaults=defaults)
+                defaults=defaults,
+            )
 
             if race_type:
                 result.race_type = race_type
                 result.save()
 
-            logger.info('Result for {0} for race: {1}'.format(racer, race))
+            logger.info("Result for {0} for race: {1}".format(racer, race))
             logger.info(result)
 
-        logger.info('results loaded')
+        logger.info("results loaded")

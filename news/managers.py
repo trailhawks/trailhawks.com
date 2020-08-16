@@ -6,7 +6,6 @@ from django.utils import timezone
 
 
 class NewsQuerySet(QuerySet):
-
     def draft(self):
         return self.filter(status__exact=self.model.STATUS_DRAFT)
 
@@ -19,7 +18,6 @@ class NewsQuerySet(QuerySet):
 
 
 class NewsManager(Manager):
-
     def get_query_set(self):
         return NewsQuerySet(self.model, using=self._db)
 

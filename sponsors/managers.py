@@ -3,7 +3,6 @@ from django.db.models.query import QuerySet
 
 
 class SponsorQuerySet(QuerySet):
-
     def active(self):
         return self.filter(active__exact=True)
 
@@ -12,7 +11,6 @@ class SponsorQuerySet(QuerySet):
 
 
 class SponsorManager(Manager):
-
     def get_query_set(self):
         return SponsorQuerySet(self.model, using=self._db)
 
