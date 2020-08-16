@@ -30,6 +30,10 @@ USE_ETAGS = True
 TIME_ZONE = 'America/Chicago'
 LANGUAGE_CODE = 'en-us'
 
+DATABASES = {
+    "default": env.dj_db_url("DATABASE_URL", default="postgres://postgres@db/postgres")
+}
+
 MEDIA_ROOT = PROJECT_ROOT.child('media_root')
 MEDIA_URL = '/media/'
 
