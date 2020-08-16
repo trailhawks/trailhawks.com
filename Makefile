@@ -1,6 +1,11 @@
 .PHONY: build
 build: docker
 
+.PHONY: bump
+bump:
+	bumpversion patch
+	git push origin main
+
 .PHONY: check
 check:
 	docker-compose run --rm web python manage.py check
