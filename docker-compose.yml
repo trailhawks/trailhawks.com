@@ -14,16 +14,12 @@ services:
     build:
       context: .
       dockerfile: .docker/Dockerfile
-      # target: dev
     command: python manage.py runserver 0.0.0.0:8000
     depends_on:
       - db
     env_file:
       - ".env"
     environment:
-      - "ALLOWED_HOSTS=*"
-      - "DATABASE_URL=postgres://postgres@db/postgres"
-      - "DJANGO_DEBUG=true"
       - "DJANGO_SETTINGS_MODULE=config.settings_trailhawks"
     ports:
       - "8000:8000"
@@ -37,16 +33,12 @@ services:
     build:
       context: .
       dockerfile: .docker/Dockerfile
-      # target: dev
     command: python manage.py runserver 0.0.0.0:8000
     depends_on:
       - db
     env_file:
       - ".env"
     environment:
-      - "ALLOWED_HOSTS=*"
-      - "DATABASE_URL=postgres://postgres@db/postgres"
-      - "DJANGO_DEBUG=true"
       - "DJANGO_SETTINGS_MODULE=config.settings_hawkhundred"
     ports:
       - "8010:8000"
