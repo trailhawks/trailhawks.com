@@ -1,4 +1,4 @@
 import signals
 
 
-__VERSION__ = '2.18.0'
+__VERSION__ = '2.18.1'
