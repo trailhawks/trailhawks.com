@@ -32,6 +32,29 @@ services:
       - django-media:/src/media
       - django-static:/src/static
 
+  hawkhundred:
+    container_name: hawkhundred
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+      # target: dev
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - db
+    env_file:
+      - ".env"
+    environment:
+      - "ALLOWED_HOSTS=*"
+      - "DATABASE_URL=postgres://postgres@db/postgres"
+      - "DJANGO_DEBUG=true"
+      - "DJANGO_SETTINGS_MODULE=config.settings_hawkhundred"
+    ports:
+      - "8010:8000"
+    volumes:
+      - .:/src
+      - django-media:/src/media
+      - django-static:/src/static
+
 volumes:
   django-media:
   django-static:
