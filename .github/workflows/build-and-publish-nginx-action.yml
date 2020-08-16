@@ -1,7 +1,6 @@
 name: CI
 
 on:
-  pull_request:
   push:
     branches:
       main
@@ -58,7 +57,7 @@ jobs:
 
   build:
     # needs: [test]
-    name: Build and Publish Docker image
+    name: Build and Publish Trail Hawks Nginx Docker image
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
@@ -67,22 +66,6 @@ jobs:
         uses: actions/checkout@v1
         with:
           fetch-depth: 1
-
-      - name: build and push image
-        uses: docker/build-push-action@v1
-        env:
-          DOCKER_BUILDKIT: 1
-          INPUT_CACHE_FROMS: ${{ github.repository }}/trailhawks:latest
-        with:
-          registry: docker.pkg.github.com
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          dockerfile: "./.docker/Dockerfile"
-          repository: ${{ github.repository }}/trailhawks
-          tag_with_ref: true
-          tag_with_sha: true
-          tags: latest
-          # add_git_labels: true
 
       - name: build and push image
         uses: docker/build-push-action@v1
