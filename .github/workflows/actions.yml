@@ -81,5 +81,5 @@ jobs:
           repository: ${{ github.repository }}/trailhawks
           tag_with_ref: true
           tag_with_sha: true
-          # tags: latest
+          tags: latest
           # add_git_labels: true
