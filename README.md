@@ -29,4 +29,4 @@ open http://localhost:8000/admin/
 
 ## License
 
-The website code is released for learning purposes and to help other non-profits. For non-commercial usage, please contact @jefftriplett for licensing information.
+The website code is released for learning purposes and to help other non-profits. For non-commercial usage, please contact [@jefftriplett](https://github.com/jefftriplett) for licensing information.
