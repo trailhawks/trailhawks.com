@@ -9,6 +9,19 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data/
 
+  caddy:
+    image: caddy:2.1.1
+    depends_on:
+      - web
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "./Caddyfile:/etc/caddy/Caddyfile"
+      - "./caddy_data:/data"
+      - ./media_root:/src/media
+      - ./static_root:/src/static
+
   web:
     container_name: trailhawks
     build:
@@ -21,33 +34,31 @@ services:
       - ".env"
     environment:
       - "DJANGO_SETTINGS_MODULE=config.settings_trailhawks"
-    ports:
-      - "8000:8000"
+    expose:
+      - 8000
     volumes:
       - .:/src
-      - django-media:/src/media
-      - django-static:/src/static
+      - ./media_root:/src/media
+      - ./static_root:/src/static
 
-  hawkhundred:
-    container_name: hawkhundred
-    build:
-      context: .
-      dockerfile: .docker/Dockerfile
-    command: python manage.py runserver 0.0.0.0:8000
-    depends_on:
-      - db
-    env_file:
-      - ".env"
-    environment:
-      - "DJANGO_SETTINGS_MODULE=config.settings_hawkhundred"
-    ports:
-      - "8010:8000"
-    volumes:
-      - .:/src
-      - django-media:/src/media
-      - django-static:/src/static
+  # hawkhundred:
+  #   container_name: hawkhundred
+  #   build:
+  #     context: .
+  #     dockerfile: .docker/Dockerfile
+  #   command: python manage.py runserver 0.0.0.0:8000
+  #   depends_on:
+  #     - db
+  #   env_file:
+  #     - ".env"
+  #   environment:
+  #     - "DJANGO_SETTINGS_MODULE=config.settings_hawkhundred"
+  #   expose:
+  #     - 8010
+  #   volumes:
+  #     - .:/src
+  #     - ./media_root:/src/media
+  #     - ./static_root:/src/static
 
 volumes:
-  django-media:
-  django-static:
   postgres-data:
