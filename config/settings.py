@@ -34,10 +34,10 @@ DATABASES = {
     "default": env.dj_db_url("DATABASE_URL", default="postgres://postgres@db/postgres")
 }
 
-MEDIA_ROOT = PROJECT_ROOT.child("media")
+MEDIA_ROOT = PROJECT_ROOT.child("media_root")
 MEDIA_URL = "/media/"
 
-STATIC_ROOT = PROJECT_ROOT.child("static")
+STATIC_ROOT = PROJECT_ROOT.child("static_root")
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [PROJECT_ROOT.child("assets")]
 
