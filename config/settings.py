@@ -107,7 +107,6 @@ INSTALLED_APPS = [
 INSTALLED_APPS += [
     "ajaximage",
     "backupdb",
-    "django_comments",
     "django_thumbor",
     "favicon",
     "markup_deprecated",
