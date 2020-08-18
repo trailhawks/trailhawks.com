@@ -40,8 +40,8 @@ services:
       - ".env"
     environment:
       - "DJANGO_SETTINGS_MODULE=config.settings_hawkhundred"
-    expose:
-      - 8010
+    ports:
+      - 8010:8000
     volumes:
       - .:/src
       - ./media_root:/src/media_root
