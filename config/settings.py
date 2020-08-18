@@ -112,7 +112,6 @@ INSTALLED_APPS += [
     "micawber.contrib.mcdjango",
     "rest_framework",
     "robots",
-    "shorturls",
     "simple_open_graph",
     "storages",
     "syncr.flickr",
