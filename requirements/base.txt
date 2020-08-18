@@ -6,7 +6,7 @@ django-adaptors==0.2.5
 django-ajaximage==0.2.7
 django-backupdb==0.6.0
 django-braces==1.4.0
-django-contrib-comments<1.9
+django-contrib-comments<1.9  # to remove
 django-docopt-command==0.2.2
 django-extensions==1.6.1
 django-favicon==0.1.2
@@ -16,7 +16,7 @@ django-ical==1.3
 django-markup-deprecated==0.0.3
 django-registration==1.0
 django-robots==3.0
-django-shorturls==1.1.0
+django-shorturls==1.1.0  # to remove
 django-simple-open-graph==0.3
 django-storages==1.1.8
 django-taggit==0.18.0

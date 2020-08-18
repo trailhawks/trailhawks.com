@@ -1,14 +1,13 @@
 from __future__ import unicode_literals
+
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
-from core.models import ShortUrlMixin
-
 
 @python_2_unicode_compatible
-class Location(models.Model, ShortUrlMixin):
+class Location(models.Model):
     name = models.CharField(max_length=250)
     slug = models.SlugField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)

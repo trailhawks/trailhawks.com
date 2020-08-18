@@ -8,11 +8,10 @@ from django.utils.translation import ugettext_lazy as _
 from taggit.managers import TaggableManager
 
 from .managers import PostManager
-from core.models import ShortUrlMixin
 
 
 @python_2_unicode_compatible
-class Post(ShortUrlMixin, models.Model):
+class Post(models.Model):
     """Post model."""
 
     STATUS_DRAFT = 1

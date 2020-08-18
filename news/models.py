@@ -8,7 +8,6 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from .managers import NewsManager
-from core.models import ShortUrlMixin
 
 
 ALERT_CHOICES = (
@@ -21,7 +20,7 @@ ALERT_CHOICES = (
 
 
 @python_2_unicode_compatible
-class News(ShortUrlMixin, models.Model):
+class News(models.Model):
     """News model."""
 
     STATUS_DRAFT = 1

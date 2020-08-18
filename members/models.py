@@ -7,12 +7,12 @@ from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
-from core.models import MachineTagMixin, ShortUrlMixin
+from core.models import MachineTagMixin
 from .managers import MemberManager, TermManager
 
 
 @python_2_unicode_compatible
-class Member(MachineTagMixin, ShortUrlMixin):
+class Member(MachineTagMixin):
     GENDER_CHOICES = (
         (1, "Male"),
         (2, "Female"),

@@ -182,19 +182,6 @@ LOGGING = {
 
 TEST_RUNNER = "django.test.runner.DiscoverRunner"
 
-SHORT_BASE_URL = "https://lth.im/"
-
-SHORTEN_MODELS = {
-    "B": "blog.post",
-    "E": "events.event",
-    "F": "faq.faq",
-    "L": "links.links",
-    "M": "members.member",
-    "N": "news.news",
-    "R": "races.race",
-    "U": "runs.run",
-}
-
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=list())
 
 MACHINE_TAG_NAMESPACE = "trailhawks"

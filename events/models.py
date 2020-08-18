@@ -6,12 +6,12 @@ from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
-from core.models import MachineTagMixin, ShortUrlMixin
+from core.models import MachineTagMixin
 from .managers import EventManager
 
 
 @python_2_unicode_compatible
-class Event(MachineTagMixin, ShortUrlMixin):
+class Event(MachineTagMixin):
     """Event model."""
 
     STATUS_DRAFT = 1
