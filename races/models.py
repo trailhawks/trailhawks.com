@@ -65,7 +65,9 @@ class Race(MachineTagMixin):
 
     # background = AjaxImageField(upload_to='races/backgrounds', blank=True, null=True,
     #                             help_text='Optional background photo')
-    background = models.ForeignKey("flickr.Photo", blank=True, null=True)
+    background = models.ForeignKey(
+        "flickr.Photo", on_delete=models.CASCADE, blank=True, null=True
+    )
 
     race_type = models.IntegerField(choices=DISCIPLINE_CHOICES, default=RUN)
     sponsors = models.ManyToManyField("sponsors.Sponsor", related_name="sponsors")
@@ -77,7 +79,9 @@ class Race(MachineTagMixin):
     unit = models.IntegerField(choices=UNIT_CHOICES, default=KM, blank=True, null=True)
     start_datetime = models.DateTimeField(verbose_name="Start Date and Time")
     description = models.TextField()
-    location = models.ForeignKey("locations.Location", blank=True, null=True)
+    location = models.ForeignKey(
+        "locations.Location", on_delete=models.CASCADE, blank=True, null=True
+    )
     course_map = models.URLField(
         blank=True, null=True, help_text="Link to course map if avail."
     )
@@ -163,7 +167,7 @@ class Race(MachineTagMixin):
 class Registration(models.Model):
     """Registration model."""
 
-    race = models.ForeignKey("races.Race")
+    race = models.ForeignKey("races.Race", on_delete=models.CASCADE)
     description = models.CharField(max_length=100, blank=True, null=True)
     reg_date = models.DateField("Registration Date")
     end_date = models.DateField("End Date", blank=True, null=True)
@@ -241,6 +245,7 @@ class Racer(MachineTagMixin):
     country = models.CharField(max_length=40, null=True, blank=True)
     contact = models.ForeignKey(
         "races.EmergencyContact",
+        on_delete=models.CASCADE,
         verbose_name="Emergency Contact",
         blank=True,
         null=True,
@@ -291,10 +296,11 @@ class Racer(MachineTagMixin):
 class Result(models.Model):
     """Result model."""
 
-    racer = models.ForeignKey("races.Racer")
-    race = models.ForeignKey("races.Race")
+    racer = models.ForeignKey("races.Racer", on_delete=models.CASCADE)
+    race = models.ForeignKey("races.Race", on_delete=models.CASCADE)
     race_type = models.ForeignKey(
         "races.RaceType",
+        on_delete=models.CASCADE,
         null=True,
         blank=True,
         help_text="For races with multiple race types.",
@@ -339,8 +345,8 @@ class Report(models.Model):
 
     report = models.URLField(help_text="Link to race report")
     title = models.CharField(max_length=200)
-    race = models.ForeignKey("races.Race")
-    racer = models.ForeignKey("races.Racer")
+    race = models.ForeignKey("races.Race", on_delete=models.CASCADE)
+    racer = models.ForeignKey("races.Racer", on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = _("Report")

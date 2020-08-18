@@ -41,7 +41,9 @@ class News(models.Model):
     )
 
     # show in main news feed? handy for race results...
-    content_type = models.ForeignKey("contenttypes.ContentType", blank=True, null=True)
+    content_type = models.ForeignKey(
+        "contenttypes.ContentType", on_delete=models.CASCADE, blank=True, null=True
+    )
     object_id = models.PositiveIntegerField(blank=True, null=True)
     content_object = GenericForeignKey("content_type", "object_id")
 
