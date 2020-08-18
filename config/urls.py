@@ -78,8 +78,12 @@ urlpatterns = [
     path("api/v1/", include(router.urls)),
     path("humans.txt≥", HumansView.as_view()),
     path("robots.txt", include("robots.urls")),
-    path("sitemap.xml", sitemap, {"sitemaps": sitemaps},
-         name="django.contrib.sitemaps.views.sitemap"),
+    path(
+        "sitemap.xml",
+        sitemap,
+        {"sitemaps": sitemaps},
+        name="django.contrib.sitemaps.views.sitemap",
+    ),
     path("", include("favicon.urls")),
     # website templates
     # path(

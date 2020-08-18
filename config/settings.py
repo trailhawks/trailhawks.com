@@ -67,7 +67,7 @@ TEMPLATES = [
 ROOT_URLCONF = "config.urls"
 
 # Middleware
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
