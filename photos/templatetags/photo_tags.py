@@ -2,7 +2,7 @@ from django.conf import settings
 from django.template import Library
 from libthumbor import CryptoURL
 from syncr.flickr.models import Photo
-from urlparse import urlparse
+from urllib.parse import urlparse
 
 
 register = Library()
