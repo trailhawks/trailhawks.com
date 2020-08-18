@@ -10,7 +10,6 @@ PROJECT_ROOT = Path(__file__).ancestor(2)
 TEMPLATE_ROOT = os.path.join(PROJECT_ROOT, "templates")
 
 DEBUG = env.bool("DJANGO_DEBUG", default=False)
-TEMPLATE_DEBUG = DEBUG
 
 ADMINS = ()
 
@@ -46,34 +45,23 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
-# Template stuff
-TEMPLATE_LOADERS = [
-    "django.template.loaders.filesystem.Loader",
-    "django.template.loaders.app_directories.Loader",
-]
-
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
-# Template stuff
-TEMPLATE_LOADERS = [
-    "django.template.loaders.filesystem.Loader",
-    "django.template.loaders.app_directories.Loader",
-]
-
-TEMPLATE_CONTEXT_PROCESSORS = [
-    "django.core.context_processors.request",
-    "django.contrib.auth.context_processors.auth",
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.media",
-    "django.core.context_processors.static",
-    "django.core.context_processors.tz",
-    "django.contrib.messages.context_processors.messages",
-]
-
-TEMPLATE_DIRS = [
-    os.path.join(TEMPLATE_ROOT, "defaults"),
+TEMPLATES = [
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [os.path.join(TEMPLATE_ROOT, "defaults")],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+            ]
+        },
+    }
 ]
 
 ROOT_URLCONF = "config.urls"

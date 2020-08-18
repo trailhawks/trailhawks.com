@@ -1,10 +1,9 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
 from . import views
 
 
-urlpatterns = patterns(
-    "",
+urlpatterns = [
     url(r"^$", views.PhotoListView.as_view(), name="photo_list"),
     url(r"^review/$", views.PhotoReview.as_view(), name="photo_review_list"),
     url(r"^groups/$", views.PhotoSetListView.as_view(), name="photoset_list"),
@@ -14,4 +13,4 @@ urlpatterns = patterns(
         views.PhotoSetDetailView.as_view(),
         name="photoset_detail",
     ),
-)
+]
