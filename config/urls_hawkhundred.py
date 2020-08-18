@@ -48,7 +48,7 @@ urlpatterns = [
     url(r"^runs/", include("runs.urls")),
     url(r"^sponsors/", include("sponsors.urls")),
     url(r"^ajaximage/", include("ajaximage.urls")),
-    url(r"^robots\.txt$", include("robots.urls")),
+    url(r"^robots\.txt", include("robots.urls")),
     url(
         r"^sitemap\.xml$",
         sitemap,
