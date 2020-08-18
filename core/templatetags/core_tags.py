@@ -10,7 +10,7 @@ from core import __VERSION__
 register = Library()
 
 
-@register.assignment_tag(takes_context=True)
+@register.simple_tag(takes_context=True)
 def get_latest_tweets(context):
     try:
         d = feedparser.parse(
@@ -32,7 +32,7 @@ def get_latest_tweets(context):
         return
 
 
-@register.assignment_tag(takes_context=True)
+@register.simple_tag(takes_context=True)
 def get_rrca_news(context):
     try:
         d = feedparser.parse("http://feeds.feedburner.com/RRCA-News?format=xml")

@@ -1,9 +1,8 @@
 from braces.views import LoginRequiredMixin
 from django.contrib import messages
-from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, redirect
-from django.views.generic import View
+from django.shortcuts import get_object_or_404
+from django.urls import reverse
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from syncr.flickr.models import Photo, PhotoSet

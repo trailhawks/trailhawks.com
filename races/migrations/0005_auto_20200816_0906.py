@@ -18,6 +18,7 @@ class Migration(migrations.Migration):
                 null=True,
                 blank=True,
                 to="members.Member",
+                on_delete=models.CASCADE,
                 help_text="If racer is a trailhawk select profile.",
             ),
         ),

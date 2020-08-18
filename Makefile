@@ -12,7 +12,7 @@ build:
 
 .PHONY: check
 check:
-	docker-compose run --rm web python manage.py check
+	docker-compose run --rm web python manage.py check --deploy
 
 .PHONY: docker
 docker:

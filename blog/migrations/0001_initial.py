@@ -90,7 +90,12 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "author",
-                    models.ForeignKey(blank=True, to="members.Member", null=True),
+                    models.ForeignKey(
+                        blank=True,
+                        to="members.Member",
+                        on_delete=models.CASCADE,
+                        null=True,
+                    ),
                 ),
                 (
                     "tags",

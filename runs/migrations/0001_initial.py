@@ -57,10 +57,18 @@ class Migration(migrations.Migration):
                 ),
                 ("details", models.TextField()),
                 ("active", models.BooleanField(default=True)),
-                ("contact", models.ForeignKey(to="members.Member")),
+                (
+                    "contact",
+                    models.ForeignKey(to="members.Member", on_delete=models.CASCADE),
+                ),
                 (
                     "location",
-                    models.ForeignKey(blank=True, to="locations.Location", null=True),
+                    models.ForeignKey(
+                        blank=True,
+                        to="locations.Location",
+                        on_delete=models.CASCADE,
+                        null=True,
+                    ),
                 ),
             ],
             options={

@@ -30,7 +30,10 @@ class Migration(migrations.Migration):
                 (
                     "content_type",
                     models.ForeignKey(
-                        blank=True, to="contenttypes.ContentType", null=True
+                        blank=True,
+                        to="contenttypes.ContentType",
+                        on_delete=models.CASCADE,
+                        null=True,
                     ),
                 ),
             ],

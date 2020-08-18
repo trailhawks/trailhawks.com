@@ -20,7 +20,7 @@ def remove_http(value):
     return value
 
 
-@register.assignment_tag(takes_context=True)
+@register.simple_tag(takes_context=True)
 def get_photos_by_machine_tags(context, machine_tags, num=10, random=False):
     queryset = Photo.objects.active().filter(tags__contains=machine_tags)
     if random:
@@ -28,7 +28,7 @@ def get_photos_by_machine_tags(context, machine_tags, num=10, random=False):
     return queryset[:num]
 
 
-@register.assignment_tag(takes_context=True)
+@register.simple_tag(takes_context=True)
 def get_photos_count_by_machine_tags(context, machine_tags):
     return Photo.objects.active().filter(tags__contains=machine_tags).all().count()
 

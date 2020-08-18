@@ -1,5 +1,4 @@
 from django.template import Library
-from django.template.loader import render_to_string
 
 
 register = Library()
@@ -17,7 +16,7 @@ NETWORK_TEMPLATES = {
 }
 
 
-@register.assignment_tag(takes_context=True)
+@register.simple_tag(takes_context=True)
 def render_share_link(context, network, url, text=None, description=None):
     if network in NETWORK_TEMPLATES:
         data = NETWORK_TEMPLATES[network]
@@ -30,7 +29,7 @@ def render_share_link(context, network, url, text=None, description=None):
     return ""
 
 
-@register.assignment_tag(takes_context=True)
+@register.simple_tag(takes_context=True)
 def render_share_group(context, url, text=None, description=None):
     data = []
     for network in NETWORK_TEMPLATES:

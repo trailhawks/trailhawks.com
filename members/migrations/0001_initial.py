@@ -56,7 +56,10 @@ class Migration(migrations.Migration):
                 (
                     "username",
                     models.ForeignKey(
-                        blank=True, to=settings.AUTH_USER_MODEL, null=True
+                        blank=True,
+                        to=settings.AUTH_USER_MODEL,
+                        on_delete=models.CASCADE,
+                        null=True,
                     ),
                 ),
             ],
@@ -102,11 +105,21 @@ class Migration(migrations.Migration):
                 ("end", models.DateField(null=True, blank=True)),
                 (
                     "member",
-                    models.ForeignKey(blank=True, to="members.Member", null=True),
+                    models.ForeignKey(
+                        blank=True,
+                        to="members.Member",
+                        on_delete=models.CASCADE,
+                        null=True,
+                    ),
                 ),
                 (
                     "office",
-                    models.ForeignKey(blank=True, to="members.Office", null=True),
+                    models.ForeignKey(
+                        blank=True,
+                        to="members.Office",
+                        on_delete=models.CASCADE,
+                        null=True,
+                    ),
                 ),
             ],
             options={"verbose_name": "term", "verbose_name_plural": "terms",},

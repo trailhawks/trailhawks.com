@@ -15,7 +15,9 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="race",
             name="background",
-            field=models.ForeignKey(blank=True, to="flickr.Photo", null=True),
+            field=models.ForeignKey(
+                blank=True, to="flickr.Photo", on_delete=models.CASCADE, null=True
+            ),
             preserve_default=True,
         ),
     ]
