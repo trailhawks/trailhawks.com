@@ -7,7 +7,6 @@
 {% load core_tags %}
 {% load faq_tags %}
 {% load flickr %}
-{% load mailhide %}
 {% load markup %}
 {% load micawber_tags %}
 {% load news_tags %}
@@ -117,7 +116,7 @@
           <dt>What: </dt>
           <dd>{{ run.details }}</dd>
           <dt>Contact: </dt>
-          <dd><a href="{{ run.contact.email|mailhide }}">{{ run.contact.full_hawk_name }}</a></dd>
+          <dd><a href="{{ run.contact.email }}">{{ run.contact.full_hawk_name }}</a></dd>
         </dl>
       {% endfor %}
     </div>
@@ -149,7 +148,7 @@
             <dt>What: </dt>
             <dd>{{ run.details }}</dd>
             <dt>Contact: </dt>
-            <dd><a href="mailto:{{ run.contact.email|mailhide }}">{{ run.contact.full_hawk_name }}</a></dd>
+            <dd><a href="mailto:{{ run.contact.email }}">{{ run.contact.full_hawk_name }}</a></dd>
           </dl>
         {% empty %}
           <p class="quiet large">No upcoming scheduled runs</p>

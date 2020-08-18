@@ -106,7 +106,6 @@ INSTALLED_APPS = [
 
 INSTALLED_APPS += [
     "ajaximage",
-    "backupdb",
     "django_thumbor",
     "favicon",
     "markup_deprecated",
@@ -205,21 +204,12 @@ FLICKR = {
     "username": env("FLICKR_USERNAME", default=""),
 }
 
-DBBACKUP_POSTGRESQL_BACKUP_COMMANDS = env(
-    "DBBACKUP_POSTGRESQL_BACKUP_COMMANDS", default=""
-)
-DBBACKUP_S3_ACCESS_KEY = env("DBBACKUP_S3_ACCESS_KEY", default="")
-DBBACKUP_S3_BUCKET = env("DBBACKUP_S3_BUCKET", default="")
-DBBACKUP_S3_SECRET_KEY = env("DBBACKUP_S3_SECRET_KEY", default="")
-DBBACKUP_STORAGE = env("DBBACKUP_STORAGE", default="")
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="")
 EMAIL_HOST = env("EMAIL_HOST", default="")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", default="")
 EMAIL_HOST_USER = env("EMAIL_HOST_USER", default="")
 EMAIL_PORT = env("EMAIL_PORT", default="")
 EMAIL_USE_TLS = env("EMAIL_USE_TLS", default="")
-MAILHIDE_PRIVATE_KEY = env("MAILHIDE_PRIVATE_KEY", default="")
-MAILHIDE_PUBLIC_KEY = env("MAILHIDE_PUBLIC_KEY", default="")
 SERVER_EMAIL = env("SERVER_EMAIL", default="")
 THUMBOR_SECURITY_KEY = env("THUMBOR_SECURITY_KEY", default="")
 THUMBOR_SERVER = env("THUMBOR_SERVER", default="")

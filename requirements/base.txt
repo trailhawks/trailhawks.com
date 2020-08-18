@@ -4,7 +4,6 @@ click==3.3
 DateUtils
 django-adaptors==0.2.5
 django-ajaximage==0.2.7
-django-backupdb==0.6.0
 django-braces==1.4.0  # switch to Django's LoginRequiredMixin
 django-contrib-comments<1.9  # to remove
 django-docopt-command==0.2.2
@@ -31,7 +30,6 @@ micawber==0.3.3
 num2words==0.5.3
 psycopg2-binary
 pycrypto==2.6.1
-recaptcha-client==1.0.6
 requests<3.0.0
 simplejson==3.6.5
 titlecase==0.8.0

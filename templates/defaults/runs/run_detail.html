@@ -3,7 +3,6 @@
 
 {% load core_tags %}
 {% load faq_tags %}
-{% load mailhide %}
 {% load markup %}
 {% load news_tags %}
 {% load photo_tags %}
@@ -64,7 +63,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
       <dt>Where:</dt>
       <dd>{{ object.location }}</dd>
       <dt>Run Leader:</dt>
-      <dd><a href="{{ object.contact.email|mailhide }}">{{ object.contact.full_name }}</a></dd>
+      <dd><a href="{{ object.contact.email }}">{{ object.contact.full_name }}</a></dd>
     <dl>
 
     {% get_latest_news_for_object object as news_list %}
