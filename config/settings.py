@@ -228,3 +228,7 @@ MAILHIDE_PUBLIC_KEY = env("MAILHIDE_PUBLIC_KEY", default="")
 SERVER_EMAIL = env("SERVER_EMAIL", default="")
 THUMBOR_SECURITY_KEY = env("THUMBOR_SECURITY_KEY", default="")
 THUMBOR_SERVER = env("THUMBOR_SERVER", default="")
+
+# to be removed:
+SHORT_BASE_URL = ""
+SHORTEN_MODELS = []
