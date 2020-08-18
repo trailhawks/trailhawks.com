@@ -75,7 +75,6 @@ urlpatterns = (
         url(r"^runs/", include("runs.urls")),
         url(r"^sponsors/", include("sponsors.urls")),
         url(r"^ajaximage/", include("ajaximage.urls")),
-        url(r"^djrill/", include("djrill.urls")),
         url(r"^api/v1/", include(router.urls)),
         url(r"^humans\.txt$", HumansView.as_view()),
         url(r"^robots\.txt$", include("robots.urls")),

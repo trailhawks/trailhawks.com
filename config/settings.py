@@ -112,7 +112,6 @@ INSTALLED_APPS += [
     "django_extensions",
     "django_gravatar",
     "django_thumbor",
-    "djrill",
     "favicon",
     # 'import_export',
     "micawber.contrib.mcdjango",
@@ -224,7 +223,6 @@ FLICKR = {
     "username": env("FLICKR_USERNAME", default=""),
 }
 
-AKISMET_API_KEY = env("AKISMET_API_KEY", default="")
 DBBACKUP_POSTGRESQL_BACKUP_COMMANDS = env(
     "DBBACKUP_POSTGRESQL_BACKUP_COMMANDS", default=""
 )
@@ -233,7 +231,6 @@ DBBACKUP_S3_BUCKET = env("DBBACKUP_S3_BUCKET", default="")
 DBBACKUP_S3_SECRET_KEY = env("DBBACKUP_S3_SECRET_KEY", default="")
 DBBACKUP_STORAGE = env("DBBACKUP_STORAGE", default="")
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="")
-DJRILL_WEBHOOK_SECRET = env("DJRILL_WEBHOOK_SECRET", default="")
 EMAIL_HOST = env("EMAIL_HOST", default="")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", default="")
 EMAIL_HOST_USER = env("EMAIL_HOST_USER", default="")
