@@ -231,6 +231,7 @@ class Racer(MachineTagMixin):
     last_name = models.CharField(max_length=40)
     trailhawk = models.OneToOneField(
         "members.Member",
+        on_delete=models.CASCADE,
         null=True,
         blank=True,
         help_text="If racer is a trailhawk select profile.",
