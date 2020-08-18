@@ -7,13 +7,6 @@ from django.db import models
 from shorturls import default_converter as converter
 
 
-class CommentMixin(models.Model):
-    enable_comments = models.BooleanField(default=False)
-
-    class Meta:
-        abstract = True
-
-
 class MachineTagMixin(models.Model):
     class Meta:
         abstract = True

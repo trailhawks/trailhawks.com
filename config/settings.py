@@ -154,7 +154,7 @@ LOGGING = {
         "simple": {"format": "%(levelname)s %(message)s"},
     },
     "handlers": {
-        "null": {"level": "DEBUG", "class": "logging.NullHandler",},
+        "null": {"level": "DEBUG", "class": "logging.NullHandler"},
         "console": {
             "level": "DEBUG",
             "class": "logging.StreamHandler",
@@ -167,7 +167,7 @@ LOGGING = {
         },
     },
     "loggers": {
-        "django": {"handlers": ["null"], "propagate": True, "level": "INFO",},
+        "django": {"handlers": ["null"], "propagate": True, "level": "INFO"},
         "django.request": {
             "handlers": ["mail_admins"],
             "level": "ERROR",

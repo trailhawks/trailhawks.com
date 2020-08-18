@@ -10,7 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 from num2words import num2words
 
 from .managers import RaceManager
-from core.models import CommentMixin, MachineTagMixin, ShortUrlMixin
+from core.models import MachineTagMixin, ShortUrlMixin
 
 
 @python_2_unicode_compatible
@@ -30,7 +30,7 @@ class RaceType(models.Model):
 
 
 @python_2_unicode_compatible
-class Race(MachineTagMixin, CommentMixin, ShortUrlMixin):
+class Race(MachineTagMixin, ShortUrlMixin):
     """Race model."""
 
     KM = 1

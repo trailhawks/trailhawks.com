@@ -5,11 +5,11 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from .managers import RunManager
-from core.models import CommentMixin, MachineTagMixin, ShortUrlMixin
+from core.models import MachineTagMixin, ShortUrlMixin
 
 
 @python_2_unicode_compatible
-class Run(MachineTagMixin, CommentMixin, ShortUrlMixin):
+class Run(MachineTagMixin, ShortUrlMixin):
     """Run model."""
 
     DAY_OF_WEEK = (
