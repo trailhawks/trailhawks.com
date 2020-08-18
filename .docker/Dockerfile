@@ -12,8 +12,8 @@ ENV PYTHONUNBUFFERED 1
 COPY requirements/base.txt /tmp/requirements.txt
 
 # TODO
-# RUN apt-get update && \
-#     apt-get install libxml2
+RUN apt-get update && \
+    apt-get install libxml2
 
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip install -r /tmp/requirements.txt
