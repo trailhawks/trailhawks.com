@@ -15,4 +15,4 @@ class RunList(ListView):
     navitem = "runs"
 
     def get_queryset(self):
-        return super(RunList, self).get_queryset().active()
+        return super(RunList, self).get_queryset().all().active()

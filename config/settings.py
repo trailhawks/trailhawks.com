@@ -88,7 +88,6 @@ MIDDLEWARE_CLASSES = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.contrib.flatpages.middleware.FlatpageFallbackMiddleware",
     "django.contrib.redirects.middleware.RedirectFallbackMiddleware",
-    "waffle.middleware.WaffleMiddleware",
 ]
 
 INSTALLED_APPS = [
@@ -126,7 +125,6 @@ INSTALLED_APPS += [
     "syncr.flickr",
     "syncr.twitter",
     "taggit",
-    "waffle",
 ]
 
 INSTALLED_APPS += [

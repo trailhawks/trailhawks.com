@@ -9,19 +9,6 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data/
 
-  # caddy:
-  #   image: caddy:2.1.1
-  #   depends_on:
-  #     - web
-  #   ports:
-  #     - "80:80"
-  #     - "443:443"
-  #   volumes:
-  #     - "./Caddyfile:/etc/caddy/Caddyfile"
-  #     - "./caddy_data:/data"
-  #     - ./media_root:/src/media_root
-  #     - ./static_root:/src/static_root
-
   web:
     container_name: trailhawks
     build:
@@ -34,8 +21,8 @@ services:
       - ".env"
     environment:
       - "DJANGO_SETTINGS_MODULE=config.settings_trailhawks"
-    expose:
-      - 8000
+    ports:
+      - 8000:8000
     volumes:
       - .:/src
       - ./media_root:/src/media_root
