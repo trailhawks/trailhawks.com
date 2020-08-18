@@ -21,8 +21,6 @@
       {% endif %}
     </div>
     <div class="col-md-4">
-      {% include "panels/meta.html" %}
-
       {% get_photos_by_machine_tags object.get_machine_tags num=10 random=1 as photos %}
       {{ photos|length }}
       {% include "includes/flickr_photos.html" %}

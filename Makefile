@@ -33,6 +33,7 @@ static:
 .PHONY: up
 up:
 	docker-compose build
+	docker-compose run --rm web python manage.py check
 	docker-compose run --rm web python manage.py makemigrations
 	docker-compose run --rm web python manage.py migrate
 	docker-compose down

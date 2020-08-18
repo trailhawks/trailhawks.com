@@ -4,7 +4,8 @@ from django.conf import settings
 from django.conf.urls import include, patterns, url
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.contrib.sitemaps import FlatPageSitemap, GenericSitemap
+from django.contrib.flatpages.sitemaps import FlatPageSitemap
+from django.contrib.sitemaps import GenericSitemap
 from django.contrib.sitemaps.views import sitemap
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import TemplateView
@@ -77,7 +78,7 @@ urlpatterns = (
         url(r"^ajaximage/", include("ajaximage.urls")),
         url(r"^api/v1/", include(router.urls)),
         url(r"^humans\.txt$", HumansView.as_view()),
-        url(r"^robots\.txt$", include("robots.urls")),
+        url(r"^robots\.txt", include("robots.urls")),
         url(
             r"^sitemap\.xml$",
             sitemap,

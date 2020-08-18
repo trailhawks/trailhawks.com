@@ -1,10 +1,10 @@
 from django.contrib import admin
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.admin import GenericStackedInline
 
 from .models import FAQ
 
 
-class FaqInline(generic.GenericStackedInline):
+class FaqInline(GenericStackedInline):
     model = FAQ
     extra = 0
 
@@ -20,7 +20,7 @@ class FaqAdmin(admin.ModelAdmin):
     )
 
     def get_object_name(self, obj):
-        if obj.content_object and len(unicode(obj.content_object)):
+        if obj.content_object and len(str(obj.content_object)):
             return obj.content_object
 
     get_object_name.short_description = "associated object"
