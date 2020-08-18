@@ -105,21 +105,17 @@ INSTALLED_APPS = [
 ]
 
 INSTALLED_APPS += [
-    "django_comments",
-    "markup_deprecated",
     "ajaximage",
     "backupdb",
-    "django_extensions",
-    "django_gravatar",
+    "django_comments",
     "django_thumbor",
     "favicon",
-    # 'import_export',
+    "markup_deprecated",
     "micawber.contrib.mcdjango",
     "rest_framework",
     "robots",
     "shorturls",
     "simple_open_graph",
-    # 'storage_migration',
     "storages",
     "syncr.flickr",
     "syncr.twitter",
