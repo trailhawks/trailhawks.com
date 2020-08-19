@@ -9,6 +9,7 @@ bump:
 .PHONY: build
 build:
 	docker-compose build
+	docker images | grep trailhawks
 
 .PHONY: check
 check:
@@ -17,6 +18,10 @@ check:
 .PHONY: docker
 docker:
 	docker-compose build
+
+.PHONY: lint
+lint:
+	curlylint templates
 
 .PHONY: makemigrations
 makemigrations:
