@@ -20,13 +20,13 @@
 {% for obj in obj_list %}
   <div class="row">
     <div class="col-md-12">
-      <h3>{{ obj.grouper|default:"Club"|title }} Questions</h2>
+      <h2>{{ obj.grouper|default:"Club"|title }} Questions</h2>
     </div>
   </div>
   <div class="row">
     {% for faq in obj.list %}
       <div class="col-md-6">
-        <h4>{{ faq.question }}</h4>
+        <h3>{{ faq.question }}</h3>
         {{ faq.answer|markdown }}
       </div>
       {% if forloop.counter|divisibleby:2 %}</div><div class="row">{% endif %}

@@ -26,7 +26,7 @@
         <li{% if view.navitem == 'events' %} class="active" {% endif %}><a href="{% url 'race_index' %}">Events &amp; Races</a></li>
         <li><a href="{% url 'run_list' %}">Group Runs</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Club Information <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Club Information <strong class="caret"></strong></a>
           <ul class="dropdown-menu">
           <li{% if view.navitem == 'blog' %} class="active" {% endif %}><a href="{% url 'blog_list' %}">Blog</a></li>
           <li{% if view.navitem == 'links' %} class="active" {% endif %}><a href="{% url 'link_list' %}">Links</a></li>
@@ -83,23 +83,23 @@
         <ul class="list-unstyled">
           {# Upcoming races #}
           {% get_latest_races as latest_races %}
-          <li><b>{{ latest_races.count|intcomma }}</b> upcoming races</a></li>
+          <li><strong>{{ latest_races.count|intcomma }}</strong> upcoming races</li>
 
           {# Past races #}
           {% get_past_races as past_races %}
-          <li><b>{{ past_races.count|intcomma }}</b> past races</a></li>
+          <li><strong>{{ past_races.count|intcomma }}</strong> past races</li>
 
           {# Total members #}
           {% get_active_members as active_members %}
-          <li><b>{{ active_members.count|intcomma }}</b> members</a></li>
+          <li><strong>{{ active_members.count|intcomma }}</strong> members</li>
 
           {# Total racers #}
           {% get_all_racers as racers %}
-          <li><b>{{ racers.count|intcomma }}</b> racers</a></li>
+          <li><strong>{{ racers.count|intcomma }}</strong> racers</li>
 
           {# Total results #}
           {% get_all_results as results %}
-          <li><b>{{ results.count|intcomma }}</b> results</a></li>
+          <li><strong>{{ results.count|intcomma }}</strong> results</li>
 
         </ul>
       </div>
