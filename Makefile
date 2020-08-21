@@ -36,6 +36,10 @@ makemigrations:
 migrate:
 	docker-compose run --rm web python manage.py migrate
 
+.PHONY: pip-compile
+lint:
+	pip-compile requirements/requirements.in
+
 .PHONY: static
 static:
 	docker-compose run --rm web python manage.py collectstatic --noinput

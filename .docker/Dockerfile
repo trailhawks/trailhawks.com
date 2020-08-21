@@ -9,7 +9,7 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK 1
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-COPY requirements/base.txt /tmp/requirements.txt
+COPY requirements/requirements.txt /tmp/requirements.txt
 
 # TODO
 RUN apt-get update && \

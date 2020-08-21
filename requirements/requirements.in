@@ -1,6 +1,5 @@
 # boto==2.36.0
 # raven==5.1.1
-click==3.3
 DateUtils
 django-braces  # switch to Django's LoginRequiredMixin
 django-contrib-comments  # to remove
