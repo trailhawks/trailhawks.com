@@ -15,6 +15,10 @@ build:
 check:
 	docker-compose run --rm web python manage.py check --deploy
 
+.PHONY: djcodemod
+djcodemod:
+	djcodemod run --deprecated-in 3.0 .
+
 .PHONY: docker
 docker:
 	docker-compose build
