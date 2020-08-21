@@ -4,7 +4,6 @@ from ajaximage.fields import AjaxImageField
 from django.db import models
 from django.template.defaultfilters import slugify, title
 from django.utils import timezone
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.functional import cached_property
 from num2words import num2words
 from django.urls import reverse
@@ -12,6 +11,7 @@ from django.urls import reverse
 from .managers import RaceManager
 from core.models import MachineTagMixin
 from django.utils.translation import gettext_lazy as _
+from six import python_2_unicode_compatible
 
 
 @python_2_unicode_compatible

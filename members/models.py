@@ -4,12 +4,12 @@ import datetime
 
 from ajaximage.fields import AjaxImageField
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 from django.urls import reverse
 
 from core.models import MachineTagMixin
 from .managers import MemberManager, TermManager
 from django.utils.translation import gettext_lazy as _
+from six import python_2_unicode_compatible
 
 
 @python_2_unicode_compatible
