@@ -1,13 +1,13 @@
 import os
 
-from environs import Env
-from unipath import FSPath as Path
+import environs
 
 
-env = Env()
+env = environs.Env()
 
-PROJECT_ROOT = Path(__file__).ancestor(2)
-TEMPLATE_ROOT = os.path.join(PROJECT_ROOT, "templates")
+BASE_DIR = environs.Path(__file__).parent.parent
+
+TEMPLATE_ROOT = BASE_DIR.joinpath("templates")
 
 DEBUG = env.bool("DJANGO_DEBUG", default=False)
 
@@ -33,12 +33,12 @@ DATABASES = {
     "default": env.dj_db_url("DATABASE_URL", default="postgres://postgres@db/postgres")
 }
 
-MEDIA_ROOT = PROJECT_ROOT.child("media_root")
+MEDIA_ROOT = str(BASE_DIR.joinpath("media_root"))
 MEDIA_URL = "/media/"
 
-STATIC_ROOT = PROJECT_ROOT.child("static_root")
+STATIC_ROOT = str(BASE_DIR.joinpath("static_root"))
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [PROJECT_ROOT.child("assets")]
+STATICFILES_DIRS = [str(BASE_DIR.joinpath("assets"))]
 
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
@@ -51,7 +51,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(TEMPLATE_ROOT, "defaults")],
+        "DIRS": [str(TEMPLATE_ROOT.joinpath("defaults"))],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

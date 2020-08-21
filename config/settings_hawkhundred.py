@@ -1,5 +1,3 @@
-import os
-
 from config.settings import *
 
 
@@ -11,9 +9,9 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-            os.path.join(TEMPLATE_ROOT, "hawkhundred.com"),
-            os.path.join(TEMPLATE_ROOT, "race_defaults"),
-            os.path.join(TEMPLATE_ROOT, "defaults"),
+            str(TEMPLATE_ROOT.joinpath("hawkhundred.com")),
+            str(TEMPLATE_ROOT.joinpath("race_defaults")),
+            str(TEMPLATE_ROOT.joinpath("defaults")),
         ],
         "APP_DIRS": True,
         "OPTIONS": {
