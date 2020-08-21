@@ -5,9 +5,10 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.encoding import python_2_unicode_compatible
-from django.utils.translation import ugettext_lazy as _
+from django.urls import reverse
 
 from .managers import SponsorManager
+from django.utils.translation import gettext_lazy as _
 
 
 @python_2_unicode_compatible
@@ -47,6 +48,5 @@ class Sponsor(models.Model):
             self.slug = slugify(self.name)
         super(Sponsor, self).save(*args, **kwargs)
 
-    @models.permalink
     def get_absolute_url(self):
-        return ("sponsor_detail", (), {"pk": self.pk})
+        return reverse("sponsor_detail", kwargs={"pk": self.pk})

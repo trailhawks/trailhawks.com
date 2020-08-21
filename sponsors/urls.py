@@ -1,9 +1,9 @@
-from django.conf.urls import url
 
 from .views import SponsorDetailView, SponsorListView
+from django.urls import path
 
 
 urlpatterns = [
-    url(r"^$", SponsorListView.as_view(), name="sponsor_list"),
-    url(r"^(?P<pk>\d+)/$", SponsorDetailView.as_view(), name="sponsor_detail"),
+    path('', SponsorListView.as_view(), name="sponsor_list"),
+    path('<int:pk>/', SponsorDetailView.as_view(), name="sponsor_detail"),
 ]

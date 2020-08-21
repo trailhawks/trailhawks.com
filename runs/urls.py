@@ -1,9 +1,9 @@
-from django.conf.urls import url
 
 from .views import RunDetail, RunList
+from django.urls import path, re_path
 
 
 urlpatterns = [
-    url(r"^$", RunList.as_view(), name="run_list"),
-    url(r"^(?P<slug>[-\w]+)/$", RunDetail.as_view(), name="run_detail"),
+    path('', RunList.as_view(), name="run_list"),
+    re_path(r"^(?P<slug>[-\w]+)/$", RunDetail.as_view(), name="run_detail"),
 ]

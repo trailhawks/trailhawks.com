@@ -14,8 +14,8 @@ def sync_flickr():
     for photo in Photo.objects.all():
         try:
             fs.syncPhoto(photo.flickr_id)
-        except Exception, e:
-            print e
+        except Exception as e:
+            print(e)
 
 
 def sync_flickr_all():
@@ -29,8 +29,8 @@ def sync_flickr_all():
     for photo in Photo.objects.all():
         try:
             fs.syncPhoto(photo.flickr_id)
-        except Exception, e:
-            print e
+        except Exception as e:
+            print(e)
 
 
 def sync_twitter():

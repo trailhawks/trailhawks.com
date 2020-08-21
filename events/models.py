@@ -4,10 +4,11 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
-from django.utils.translation import ugettext_lazy as _
+from django.urls import reverse
 
 from core.models import MachineTagMixin
 from .managers import EventManager
+from django.utils.translation import gettext_lazy as _
 
 
 @python_2_unicode_compatible
@@ -54,6 +55,5 @@ class Event(MachineTagMixin):
 
         super(Event, self).save(*args, **kwargs)
 
-    @models.permalink
     def get_absolute_url(self):
-        return ("event_detail", (), {"slug": self.slug})
+        return reverse("event_detail", kwargs={"slug": self.slug})

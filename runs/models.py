@@ -2,10 +2,11 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
-from django.utils.translation import ugettext_lazy as _
+from django.urls import reverse
 
 from .managers import RunManager
 from core.models import MachineTagMixin
+from django.utils.translation import gettext_lazy as _
 
 
 @python_2_unicode_compatible
@@ -45,6 +46,5 @@ class Run(MachineTagMixin):
     def __str__(self):
         return "{0}: {1}".format(self.get_day_of_week_display(), self.name)
 
-    @models.permalink
     def get_absolute_url(self):
-        return ("run_detail", (), {"slug": self.slug})
+        return reverse("run_detail", kwargs={"slug": self.slug})

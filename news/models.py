@@ -5,9 +5,10 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
-from django.utils.translation import ugettext_lazy as _
+from django.urls import reverse
 
 from .managers import NewsManager
+from django.utils.translation import gettext_lazy as _
 
 
 ALERT_CHOICES = (
@@ -70,9 +71,8 @@ class News(models.Model):
 
         super(News, self).save(*args, **kwargs)
 
-    @models.permalink
     def get_absolute_url(self):
-        return ("news_detail", (), {"pk": self.pk})
+        return reverse("news_detail", kwargs={"pk": self.pk})
 
     def get_previous_news(self):
         return self.get_previous_by_publish(status__gte=self.STATUS_PUBLIC)

@@ -6,11 +6,12 @@ from django.template.defaultfilters import slugify, title
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.functional import cached_property
-from django.utils.translation import ugettext_lazy as _
 from num2words import num2words
+from django.urls import reverse
 
 from .managers import RaceManager
 from core.models import MachineTagMixin
+from django.utils.translation import gettext_lazy as _
 
 
 @python_2_unicode_compatible
@@ -121,12 +122,10 @@ class Race(MachineTagMixin):
     def __str__(self):
         return self.get_full_name()
 
-    @models.permalink
     def get_absolute_url(self):
-        return (
+        return reverse(
             "race_detail",
-            (),
-            {
+            kwargs={
                 "year": self.start_datetime.strftime("%Y"),
                 "month": self.start_datetime.strftime("%b").lower(),
                 "day": self.start_datetime.strftime("%d"),
@@ -260,9 +259,8 @@ class Racer(MachineTagMixin):
     def __str__(self):
         return "%s %s" % (self.first_name, self.last_name)
 
-    @models.permalink
     def get_absolute_url(self):
-        return ("racer_detail", (), {"pk": self.pk})
+        return reverse("racer_detail", kwargs={"pk": self.pk})
 
     def get_machine_tags(self):
         machine_tags = super(Racer, self).get_machine_tags()

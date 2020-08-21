@@ -3,7 +3,8 @@ from __future__ import unicode_literals
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
+from django.urls import reverse
 
 
 @python_2_unicode_compatible
@@ -26,6 +27,5 @@ class Links(models.Model):
     def __str__(self):
         return self.name
 
-    @models.permalink
     def get_absolute_url(self):
-        return ("link_detail", (), {"pk": self.pk})
+        return reverse("link_detail", kwargs={"pk": self.pk})

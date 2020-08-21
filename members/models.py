@@ -5,10 +5,11 @@ import datetime
 from ajaximage.fields import AjaxImageField
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
-from django.utils.translation import ugettext_lazy as _
+from django.urls import reverse
 
 from core.models import MachineTagMixin
 from .managers import MemberManager, TermManager
+from django.utils.translation import gettext_lazy as _
 
 
 @python_2_unicode_compatible
@@ -52,9 +53,8 @@ class Member(MachineTagMixin):
     def __str__(self):
         return self.full_hawk_name
 
-    @models.permalink
     def get_absolute_url(self):
-        return ("member_detail", (), {"pk": self.pk})
+        return reverse("member_detail", kwargs={"pk": self.pk})
 
     def get_machine_tags(self):
         machine_tags = super(Member, self).get_machine_tags()
