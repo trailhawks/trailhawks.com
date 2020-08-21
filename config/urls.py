@@ -13,7 +13,7 @@ from rest_framework.routers import DefaultRouter
 
 from members.views import officer_list
 from sitemaps.default import StaticViewSitemap
-from views import (
+from core.views import (
     AboutView,
     HomepageView,
     HumansView,
