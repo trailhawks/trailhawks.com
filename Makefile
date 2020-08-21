@@ -37,12 +37,16 @@ migrate:
 	docker-compose run --rm web python manage.py migrate
 
 .PHONY: pip-compile
-lint:
+pip-compile:
 	pip-compile requirements/requirements.in
 
 .PHONY: static
 static:
-	docker-compose run --rm web python manage.py collectstatic --noinput
+	@npx -p tailwindcss@1.7.3 tailwindcss build ./frontend/index.css \
+		--config ./frontend/tailwind.config.js \
+		--output ./assets/css/tailwind.css
+
+	@docker-compose run --rm web python manage.py collectstatic --noinput
 
 .PHONY: up
 up:
