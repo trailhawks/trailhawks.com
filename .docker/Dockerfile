@@ -3,7 +3,7 @@
 FROM segment/chamber:2.8.2 AS chamber
 
 
-FROM python:3.6-buster AS builder
+FROM python:3.7-buster AS builder
 
 ENV PIP_DISABLE_PIP_VERSION_CHECK 1
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -20,7 +20,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     # && rm -rf /root/.cache
 
 
-FROM python:3.6-slim-buster AS final
+FROM python:3.7-slim-buster AS final
 
 ENV PIP_DISABLE_PIP_VERSION_CHECK 1
 ENV PYTHONDONTWRITEBYTECODE 1
