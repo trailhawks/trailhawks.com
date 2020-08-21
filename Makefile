@@ -17,8 +17,8 @@ check:
 
 .PHONY: djcodemod
 djcodemod:
-	djcodemod run --deprecated-in 3.1 .
-	djcodemod run --removed-in 3.1 .
+	djcodemod run --deprecated-in 3.0 .
+	djcodemod run --removed-in 3.0 .
 
 .PHONY: docker
 docker:
