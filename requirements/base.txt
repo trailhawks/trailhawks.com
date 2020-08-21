@@ -17,7 +17,7 @@ django-simple-open-graph==0.3
 django-storages==1.1.8
 django-taggit
 django-thumbor==0.5
-Django<3.0
+Django<3.1
 djangorestframework<3.8
 environs[django]
 feedparser==5.1.3
