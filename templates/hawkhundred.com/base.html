@@ -4,6 +4,10 @@
 {% load simple_open_graph %}
 {% load static %}
 
+{% block post_head %}
+<meta name="google-site-verification" content="_Kz6E3Y--MPqOSnDnUxyrYvFKc6jZ5V7zRUh1LFvQc4" />
+{% endblock post_head %}
+
 {% block opengraph %}
 {% with 'The Hawk Hundred is a 100-mile, 50-mile and Marathon Trail race put on by the Lawrence Trail Hawks. This year’s race takes place on September 5th and 6th in Lawrence, Kansas.' as og_description %}
 {% opengraph_meta "type='website', url='/', title='The Hawk Hundred', description=og_description, image='https://hawkhundred.com/static/img/header-hawk-2020.jpg'" %}
