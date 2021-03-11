@@ -3,36 +3,21 @@
 FROM segment/chamber:2.8.2 AS chamber
 
 
-FROM python:3.7-buster AS builder
+FROM python:3.7-buster AS dev
 
 ENV PIP_DISABLE_PIP_VERSION_CHECK 1
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-COPY requirements/requirements.txt /tmp/requirements.txt
+COPY requirements/requirements.txt /tmp/
 
-# TODO
-RUN apt-get update && \
-    apt-get install libxml2
-
-RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install -r /tmp/requirements.txt
-    # && rm -rf /root/.cache
-
-
-FROM python:3.7-slim-buster AS final
-
-ENV PIP_DISABLE_PIP_VERSION_CHECK 1
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-
-COPY --from=builder /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu
-COPY --from=builder /usr/local /usr/local
-COPY --from=builder /root /root
-COPY --from=chamber /chamber /bin/chamber
-
-RUN /sbin/ldconfig
+RUN --mount=type=cache,target=/root/.cache/pip pip install -r /tmp/requirements.txt
 
 WORKDIR /src/
+
+
+FROM dev AS production
+
+COPY --from=chamber /chamber /bin/chamber
 
 COPY . /src/
