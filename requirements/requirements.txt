@@ -11,7 +11,7 @@ chardet==3.0.4            # via requests
 dateutils==0.6.8          # via -r requirements/requirements.in
 dj-database-url==0.5.0    # via environs
 dj-email-url==1.0.1       # via environs
-git+https://github.com/trailhawks/django-ajaximage.git@c2c87a89860d56088ec97099ef89f3be1bba5ee7#egg=django-ajaximage-git  # via -r requirements/requirements.in
+git+https://github.com/trailhawks/django-ajaximage.git@ab4ceca0bed93216d317d5576be9ce41c45e657b#egg=django-ajaximage-git  # via -r requirements/requirements.in
 django-braces==1.14.0     # via -r requirements/requirements.in
 django-cache-url==3.1.2   # via environs
 django-contrib-comments==1.9.2  # via -r requirements/requirements.in
