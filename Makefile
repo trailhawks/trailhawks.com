@@ -38,6 +38,7 @@ migrate:
 
 .PHONY: pip-compile
 pip-compile:
+	pip install --upgrade -r requirements/requirements.in
 	pip-compile requirements/requirements.in
 
 .PHONY: static
