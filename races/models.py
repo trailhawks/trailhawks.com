@@ -54,7 +54,7 @@ class Race(MachineTagMixin):
     )
     active = models.BooleanField(default=True)
     number = models.IntegerField(blank=True, null=True)
-    annual = models.CharField(max_length=15, blank=True, null=True)
+    annual = models.CharField(max_length=32, blank=True, null=True)
     slug = models.SlugField(
         unique=True,
         help_text="Suggested value automatically generated from title and annual. Must be unique.",
