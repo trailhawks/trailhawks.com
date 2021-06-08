@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('races', '0007_remove_race_enable_comments'),
+        ("races", "0007_remove_race_enable_comments"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='race',
-            name='annual',
+            model_name="race",
+            name="annual",
             field=models.CharField(blank=True, max_length=32, null=True),
         ),
     ]

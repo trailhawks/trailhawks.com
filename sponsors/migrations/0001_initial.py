@@ -57,7 +57,10 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-            options={"verbose_name": "Sponsor", "verbose_name_plural": "Sponsors",},
+            options={
+                "verbose_name": "Sponsor",
+                "verbose_name_plural": "Sponsors",
+            },
             bases=(models.Model,),
         ),
     ]

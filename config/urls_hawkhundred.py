@@ -20,7 +20,11 @@ admin.autodiscover()
 urlpatterns = [
     path("404/", TemplateView.as_view(template_name="404.html")),
     path("500/", TemplateView.as_view(template_name="500.html")),
-    path("faqs/", TemplateView.as_view(template_name="faqs.html"), name="race_faqs",),
+    path(
+        "faqs/",
+        TemplateView.as_view(template_name="faqs.html"),
+        name="race_faqs",
+    ),
     path(
         "gallery/",
         TemplateView.as_view(template_name="gallery.html"),

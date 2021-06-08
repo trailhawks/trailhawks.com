@@ -11,5 +11,8 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(model_name="race", name="background",),
+        migrations.RemoveField(
+            model_name="race",
+            name="background",
+        ),
     ]

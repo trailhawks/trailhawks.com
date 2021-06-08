@@ -21,7 +21,10 @@ def render_share_link(context, network, url, text=None, description=None):
     if network in NETWORK_TEMPLATES:
         data = NETWORK_TEMPLATES[network]
         data = data.format(
-            network=network, url=url, text=text or "", description=description or "",
+            network=network,
+            url=url,
+            text=text or "",
+            description=description or "",
         )
 
         return data

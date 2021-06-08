@@ -81,7 +81,8 @@ def officer_list(request):
     else:
         form = ContactForm()
 
-    return render(None, "contact.html", {"form": form}, context_instance=RequestContext(request)
+    return render(
+        None, "contact.html", {"form": form}, context_instance=RequestContext(request)
     )
 
 

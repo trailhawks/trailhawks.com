@@ -72,6 +72,7 @@ class Migration(migrations.Migration):
             bases=(core.models.ShortUrlMixin, models.Model),
         ),
         migrations.AlterUniqueTogether(
-            name="news", unique_together=set([("slug", "pub_date")]),
+            name="news",
+            unique_together=set([("slug", "pub_date")]),
         ),
     ]

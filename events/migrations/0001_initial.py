@@ -47,7 +47,10 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-            options={"verbose_name": "Event", "verbose_name_plural": "Events",},
+            options={
+                "verbose_name": "Event",
+                "verbose_name_plural": "Events",
+            },
             bases=(models.Model, core.models.ShortUrlMixin),
         ),
     ]

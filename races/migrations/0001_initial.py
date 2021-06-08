@@ -301,7 +301,10 @@ class Migration(migrations.Migration):
                     models.ForeignKey(to="races.Racer", on_delete=models.CASCADE),
                 ),
             ],
-            options={"verbose_name": "Report", "verbose_name_plural": "Reports",},
+            options={
+                "verbose_name": "Report",
+                "verbose_name_plural": "Reports",
+            },
             bases=(models.Model,),
         ),
         migrations.CreateModel(

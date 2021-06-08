@@ -86,7 +86,10 @@ class Migration(migrations.Migration):
                 ("slug", models.SlugField(null=True, blank=True)),
                 ("order", models.IntegerField(default=100)),
             ],
-            options={"verbose_name": "office", "verbose_name_plural": "offices",},
+            options={
+                "verbose_name": "office",
+                "verbose_name_plural": "offices",
+            },
             bases=(models.Model,),
         ),
         migrations.CreateModel(
@@ -122,7 +125,10 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-            options={"verbose_name": "term", "verbose_name_plural": "terms",},
+            options={
+                "verbose_name": "term",
+                "verbose_name_plural": "terms",
+            },
             bases=(models.Model,),
         ),
     ]
