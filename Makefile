@@ -3,7 +3,7 @@ build: docker
 
 .PHONY: bump
 bump:
-	bumpversion patch
+	bumpver update
 	git push origin main
 
 .PHONY: build

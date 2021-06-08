@@ -1,0 +1,20 @@
+[tool.bumpver]
+current_version = "2021.6.1"
+version_pattern = "YYYY.MM.INC1"
+commit_message = ":bookmark: bump version {old_version} -> {new_version}"
+commit = true
+tag = true
+# push = true
+
+[bumpver.file_patterns]
+"config/__init__.py" = [
+    '__version__ = "{version}"',
+]
+"README.md" = [
+    "{version}",
+    "{pep440_version}",
+]
+"bumpver.toml" = [
+    'current_version = "{version}"',
+]
+
