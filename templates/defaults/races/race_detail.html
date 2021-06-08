@@ -184,7 +184,7 @@ client.on("ready", function( readyEvent ) {
             <h3>Race Director{{ object.race_directors.count|pluralize }}</h3>
             <ul>
             {% for race_directory in object.race_directors.all %}
-                <li><a href="{% url 'member_detail' pk=race_directory.pk %}">{{ race_directory.full_hawk_name }}</a> - <a href="{{ race_directory.email }}">contact</a></li>
+                <li><a href="{% url 'member_detail' pk=race_directory.pk %}">{{ race_directory.full_hawk_name }}</a> - <a href="mailto:{{ race_directory.email }}">contact</a></li>
             {% endfor %}
             </ul>
         {% endif %}
