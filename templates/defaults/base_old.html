@@ -56,10 +56,10 @@
               <ul class="dropdown-menu">
                 <li><a href="{% url 'run_list' %}">Weekly runs</a></li>
                 {% if weekly_runs %}
-                <li class="divider"></li>
-                {% for weekly_run in weekly_runs %}
-                <li><a href="{{ weekly_run.get_absolute_url }}">{{ weekly_run.name }}</a></li>
-                {% endfor %}
+                  <li class="divider"></li>
+                  {% for weekly_run in weekly_runs %}
+                    <li><a href="{{ weekly_run.get_absolute_url }}">{{ weekly_run.name }}</a></li>
+                  {% endfor %}
                 {% endif %}
               </ul>
             </li>
@@ -103,46 +103,46 @@
 
       <div class="row">
         <div class="col-xs-12">
-        {% block sub_nav %}{% endblock sub_nav %}
+          {% block sub_nav %}{% endblock sub_nav %}
         </div>
       </div>
 
       {% block content-wrapper %}
-      <div class="row">
-        <div class="col-xs-12">
-        {% block content %}{% endblock content %}
+        <div class="row">
+          <div class="col-xs-12">
+            {% block content %}{% endblock content %}
+          </div>
         </div>
-      </div>
       {% endblock content-wrapper %}
 
       <hr>
-    <footer>
-      {% block footer %}
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-8">
-            <ul class="nav nav-pills">
-                <li><a href="/signup/"><i class="fa fa-plus-circle"></i> Join Us</a></li>
-                <li><a href="http://www.facebook.com/home.php#/group.php?gid=91186762641&amp;ref=ts"><i class="fa fa-facebook"></i> Facebook</a></li>
-                <li><a href="http://www.twitter.com/trailhawks"><i class="fa fa-twitter"></i> Twitter</a></li>
-                <li><a href="http://groups.yahoo.com/group/Lawrence_Trail_Hawks/"><i class="fa fa-group"></i> Yahoo! Group</a></li>
-                <li><a href="http://www.flickr.com/photos/trailhawks"><i class="fa fa-flickr"></i> Flickr</a></li>
-                <li><a href="https://github.com/organizations/TrailHawks"><i class="fa fa-github"></i> Github</a></li>
-                <li><a href="{% url 'contact' %}"><i class="fa fa-envelope"></i> Contact us</a></li>
-            </ul>
-            <hr>
-            <p>2009-{% now "Y" %} Lawrence Trail Hawks. All rights Reserved</p>
+      <footer>
+        {% block footer %}
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-8">
+                <ul class="nav nav-pills">
+                  <li><a href="/signup/"><i class="fa fa-plus-circle"></i> Join Us</a></li>
+                  <li><a href="http://www.facebook.com/home.php#/group.php?gid=91186762641&amp;ref=ts"><i class="fa fa-facebook"></i> Facebook</a></li>
+                  <li><a href="http://www.twitter.com/trailhawks"><i class="fa fa-twitter"></i> Twitter</a></li>
+                  <li><a href="http://groups.yahoo.com/group/Lawrence_Trail_Hawks/"><i class="fa fa-group"></i> Yahoo! Group</a></li>
+                  <li><a href="http://www.flickr.com/photos/trailhawks"><i class="fa fa-flickr"></i> Flickr</a></li>
+                  <li><a href="https://github.com/organizations/TrailHawks"><i class="fa fa-github"></i> Github</a></li>
+                  <li><a href="{% url 'contact' %}"><i class="fa fa-envelope"></i> Contact us</a></li>
+                </ul>
+                <hr>
+                <p>2009-{% now "Y" %} Lawrence Trail Hawks. All rights Reserved</p>
+              </div>
+              <div class="col-xs-2">
+                <a href="http://www.djangoproject.com/"><img src="https://www.djangoproject.com/m/img/badges/djangopowered126x54.gif" border="0" alt="Powered by Django." title="Powered by Django."></a>
+              </div>
+              <div class="col-xs-2">
+                <a href="http://www.rrca.org"><img src="http://www.rrca.org/images/hero/2010_RRCA_Logo_small.jpg" border="0" alt="RRCA" class="right" height="80"></a>
+              </div>
+            </div>
           </div>
-          <div class="col-xs-2">
-              <a href="http://www.djangoproject.com/"><img src="https://www.djangoproject.com/m/img/badges/djangopowered126x54.gif" border="0" alt="Powered by Django." title="Powered by Django."></a>
-          </div>
-          <div class="col-xs-2">
-              <a href="http://www.rrca.org"><img src="http://www.rrca.org/images/hero/2010_RRCA_Logo_small.jpg" border="0" alt="RRCA" class="right" height="80"></a>
-          </div>
-        </div>
-      </div>
-      {% endblock footer %}
-    </footer>
+        {% endblock footer %}
+      </footer>
 
 
     </div> <!-- /container -->
@@ -153,7 +153,7 @@
     <script src="{{ STATIC_URL }}js/jquery.js"></script>
     <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
     <script src="//cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
-{% comment %}
+    {% comment %}
 <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -164,7 +164,7 @@ var pageTracker = _gat._getTracker("UA-16156214-1");
 pageTracker._trackPageview();
 } catch(err) {}
 </script>
-{% endcomment %}
-{% block post_script %}{% endblock post_script %}
+    {% endcomment %}
+    {% block post_script %}{% endblock post_script %}
   </body>
 </html>

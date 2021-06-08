@@ -10,13 +10,13 @@
         <span class="icon-bar"></span>
       </button>
       <div class="navbar-brand" href="/">
-          <a href="/"><img src="{% static 'img/logo.png' %}" width="200" alt="Lawrence Trail Hawks" /></a>
+        <a href="/"><img src="{% static 'img/logo.png' %}" width="200" alt="Lawrence Trail Hawks" /></a>
       </div>
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         {% for item in menu %}
-        <li><a href="{{ item.url }}{{ page.url }}">{{ item.title }}</a></li>
+          <li><a href="{{ item.url }}{{ page.url }}">{{ item.title }}</a></li>
         {% endfor %}
       </ul>
     </div><!--/.nav-collapse -->

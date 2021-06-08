@@ -3,11 +3,11 @@
 
 
 {% block content %}
-<h1>Events</h1>
+  <h1>Events</h1>
 
-<ul>
+  <ul>
     {% for event in event_list %}
-    <li><a href="{% url 'event_detail' slug=event.slug %}">{{ event }}</a></li>
+      <li><a href="{% url 'event_detail' slug=event.slug %}">{{ event }}</a></li>
     {% endfor %}
-</ul>
+  </ul>
 {% endblock content %}

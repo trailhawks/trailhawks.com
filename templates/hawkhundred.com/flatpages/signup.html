@@ -5,10 +5,10 @@
 
 {% block content %}
 
-{{ block.super }}
+  {{ block.super }}
 
-{% get_race_by_slug slug='the-hawk-10' as race %}
+  {% get_race_by_slug slug='the-hawk-10' as race %}
 
-{{ race.reg_description|markdown }}
+  {{ race.reg_description|markdown }}
 
 {% endblock content %}
