@@ -20,7 +20,7 @@ services:
     env_file:
       - ".env"
     environment:
-      - "DJANGO_SETTINGS_MODULE=config.settings_trailhawks"
+      - "DJANGO_SETTINGS_MODULE=config.settings_tailwind"
     ports:
       - 8000:8000
     volumes:

@@ -40,6 +40,9 @@ TAILWIND_CSS_VERSION := "latest"
             ./requirements/requirements.in \
             --output-file ./requirements/requirements.txt
 
+@run +ARGS="--help":
+    {{manage}} {{ARGS}}
+
 @server:
     docker-compose up -d db
     {{manage}} migrate --noinput
