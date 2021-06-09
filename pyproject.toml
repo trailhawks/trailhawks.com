@@ -10,10 +10,9 @@ tag = true
 "core/__init__.py" = [
     '__version__ = "{version}"',
 ]
-"README.md" = [
-    "{version}",
-    "{pep440_version}",
-]
 "pyproject.toml" = [
     'current_version = "{version}"',
+]
+"README.md" = [
+    "{version}",
 ]
