@@ -13,6 +13,7 @@ from rest_framework.routers import DefaultRouter
 
 from members.views import officer_list
 from sitemaps.default import StaticViewSitemap
+from core import __version__
 from core.views import (
     AboutView,
     HomepageView,
@@ -54,7 +55,11 @@ router = DefaultRouter()
 router.register(r"photos", PhotoViewSet)
 router.register(r"random_photos", RandomPhotoViewSet)
 
-admin.autodiscover()
+admin_header = f"Lawrence Trail Hawks v{__version__}"
+admin.site.enable_nav_sidebar = False
+admin.site.site_header = admin_header
+admin.site.site_title = admin_header
+
 
 urlpatterns = [
     path("", HomepageView.as_view(), name="homepage"),
