@@ -1,17 +1,24 @@
+[tool.poetry]
+name = "Lawrence Trail Hawks"
+version = "2021.6.16"
+description = ""
+authors = ["Jeff Triplett <jeff.triplett@gmail.com>"]
+
 [tool.bumpver]
-current_version = "2021.6.13"
+current_version = "2021.6.16"
 version_pattern = "YYYY.MM.INC1"
 commit_message = ":bookmark: bump version {old_version} -> {new_version}"
 commit = true
 tag = true
-# push = true
+push = true
 
-[bumpver.file_patterns]
-"core/__init__.py" = [
-    '__version__ = "{version}"',
-]
+[tool.bumpver.file_patterns]
 "pyproject.toml" = [
     'current_version = "{version}"',
+    'version = "{version}"',
+]
+"core/__init__.py" = [
+    '__version__ = "{version}"',
 ]
 "README.md" = [
     "{version}",
