@@ -8,7 +8,7 @@ tag = true
 
 [bumpver.file_patterns]
 "config/__init__.py" = [
-    '__version__ = "{version}"',
+    '__VERSION__ = "{version}"',
 ]
 "README.md" = [
     "{version}",
@@ -17,4 +17,3 @@ tag = true
 "bumpver.toml" = [
     'current_version = "{version}"',
 ]
-
