@@ -1,8 +1,16 @@
 module.exports = {
-  purge: [],
+  mode: 'jit',
+  purge: [
+      './templates/*.html',
+      './templates/**/*.html',
+  ],
   theme: {
     extend: {},
   },
   variants: {},
-  plugins: [],
+  plugins: [
+    // require('@tailwindcss/custom-forms'),
+    require('@tailwindcss/typography'),
+    // require('tailwindcss-debug-screens'),
+  ]
 }
