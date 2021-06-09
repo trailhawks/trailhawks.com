@@ -9,9 +9,9 @@ logger = logging.getLogger(__name__)
 
 
 @click.command()
-@click.option('--race')
-@click.option('csv_filename', '--csv')
-@click.option('--update', default=False)
+@click.option("--race")
+@click.option("csv_filename", "--csv")
+@click.option("--update", default=False)
 def command(race, csv_filename, update):
     logger.info(race)
 
