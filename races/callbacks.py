@@ -8,11 +8,11 @@ logger = logging.getLogger(__name__)
 
 
 def host_(request):
-    logger.debug("host::{0}".format(request.get_host()))
+    logger.debug("host::{}".format(request.get_host()))
 
 
 def host_race(request, slug):
-    logger.debug("event::{0}".format(slug))
+    logger.debug("event::{}".format(slug))
 
     if "." in slug:
         slug = slug.split(".")[0]
@@ -25,7 +25,7 @@ def host_race(request, slug):
     except Event.DoesNotExist:
         request.event = None
 
-    logger.debug("race::{0}".format(slug))
+    logger.debug("race::{}".format(slug))
     if not hasattr(request, "race"):
         try:
             race = Race.objects.get(slug=slug)

@@ -59,7 +59,7 @@ class Member(MachineTagMixin):
     def get_machine_tags(self):
         machine_tags = super(Member, self).get_machine_tags()
         machine_tags += [
-            "trailhawk:member={0}".format(
+            "trailhawk:member={}".format(
                 "-".join([self.first_name, self.last_name]).lower()
             )
         ]
@@ -85,13 +85,13 @@ class Member(MachineTagMixin):
     @property
     def full_hawk_name(self):
         if self.hawk_name:
-            return '%s "%s" %s' % (self.first_name, self.hawk_name, self.last_name)
+            return '{} "{}" {}'.format(self.first_name, self.hawk_name, self.last_name)
         else:
-            return "%s %s" % (self.first_name, self.last_name)
+            return "{} {}".format(self.first_name, self.last_name)
 
     @property
     def full_name(self):
-        return "%s %s" % (self.first_name, self.last_name)
+        return "{} {}".format(self.first_name, self.last_name)
 
     @property
     def get_position(self):

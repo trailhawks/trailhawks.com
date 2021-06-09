@@ -17,7 +17,7 @@ class RaceFeed(ICalFeed):
         return Race.objects.all().order_by("-start_datetime")
 
     def item_title(self, item):
-        return u"{0} {1}".format(item.annual, item.title)
+        return u"{} {}".format(item.annual, item.title)
 
     def item_description(self, item):
         return item.description

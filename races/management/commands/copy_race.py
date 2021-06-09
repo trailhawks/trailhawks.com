@@ -35,7 +35,7 @@ def gather_information(race_id, number):
     if not race_id:
         races = Race.objects.all().order_by("-start_datetime")
         for race in races:
-            click.echo("{0}. {1}".format(race.pk, race.title))
+            click.echo("{}. {}".format(race.pk, race.title))
 
         race = get_race(
             click.prompt(

@@ -138,16 +138,16 @@ class Race(MachineTagMixin):
         if self.number:
             number = num2words(self.number, ordinal=True)
             if self.number == 1:
-                name = "Inaugural {0}".format(self.title)
+                name = "Inaugural {}".format(self.title)
             else:
-                name = "{0} Annual {1}".format(number, self.title)
+                name = "{} Annual {}".format(number, self.title)
         else:
-            name = "{0} {1}".format(self.annual, self.title)
+            name = "{} {}".format(self.annual, self.title)
         return title(name)
 
     @cached_property
     def ical_uid(self):
-        return "race-{0}@trailhawks.com".format(self.pk)
+        return "race-{}@trailhawks.com".format(self.pk)
 
     @cached_property
     def get_overall_results(self):
@@ -177,7 +177,7 @@ class Registration(models.Model):
         verbose_name_plural = _("Registration Dates")
 
     def __str__(self):
-        return "%s %s" % (self.race.title, self.reg_date)
+        return "{} {}".format(self.race.title, self.reg_date)
 
     @property
     def has_expired(self):
@@ -201,7 +201,7 @@ class EmergencyContact(models.Model):
         verbose_name_plural = _("Emergency Contacts")
 
     def __str__(self):
-        return "%s %s" % (self.first_name, self.last_name)
+        return "{} {}".format(self.first_name, self.last_name)
 
 
 @python_2_unicode_compatible
@@ -257,7 +257,7 @@ class Racer(MachineTagMixin):
         verbose_name_plural = _("Racers")
 
     def __str__(self):
-        return "%s %s" % (self.first_name, self.last_name)
+        return "{} {}".format(self.first_name, self.last_name)
 
     def get_absolute_url(self):
         return reverse("racer_detail", kwargs={"pk": self.pk})
@@ -273,7 +273,7 @@ class Racer(MachineTagMixin):
 
     @property
     def full_name(self):
-        return "%s %s" % (self.first_name, self.last_name)
+        return "{} {}".format(self.first_name, self.last_name)
 
     @property
     def get_results(self):
@@ -322,7 +322,7 @@ class Result(models.Model):
         verbose_name_plural = _("Results")
 
     def __str__(self):
-        return "%s - %s - %s" % (self.racer, self.race.title, self.time)
+        return "{} - {} - {}".format(self.racer, self.race.title, self.time)
 
     def save(self, *args, **kwargs):
 

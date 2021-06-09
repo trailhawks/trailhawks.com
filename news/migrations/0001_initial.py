@@ -73,6 +73,6 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterUniqueTogether(
             name="news",
-            unique_together=set([("slug", "pub_date")]),
+            unique_together={("slug", "pub_date")},
         ),
     ]

@@ -60,7 +60,7 @@ def command(race, csv_filename, update):
         if "DNS" in time:
             defaults["dns"] = True
 
-        logger.info("Found Racer: {0}".format(racer))
+        logger.info("Found Racer: {}".format(racer))
 
         # might update_or_create...
         result, _ = Result.objects.get_or_create(
@@ -76,7 +76,7 @@ def command(race, csv_filename, update):
             result.race_type = race_type
             result.save()
 
-        logger.info("Result for {0} for race: {1}".format(racer, race))
+        logger.info("Result for {} for race: {}".format(racer, race))
         logger.info(result)
 
     logger.info("results loaded")

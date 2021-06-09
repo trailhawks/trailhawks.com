@@ -44,7 +44,7 @@ class Run(MachineTagMixin):
         verbose_name_plural = _("Runs")
 
     def __str__(self):
-        return "{0}: {1}".format(self.get_day_of_week_display(), self.name)
+        return "{}: {}".format(self.get_day_of_week_display(), self.name)
 
     def get_absolute_url(self):
         return reverse("run_detail", kwargs={"slug": self.slug})
