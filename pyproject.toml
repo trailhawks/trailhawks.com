@@ -8,7 +8,7 @@ tag = true
 
 [bumpver.file_patterns]
 "core/__init__.py" = [
-    '__VERSION__ = "{version}"',
+    '__version__ = "{version}"',
 ]
 "README.md" = [
     "{version}",
