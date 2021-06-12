@@ -135,14 +135,14 @@ class Race(MachineTagMixin):
         )
 
     def get_full_name(self):
-        name = ""
+        name = f"{self.title}"
         if self.number:
             number = num2words(self.number, ordinal=True)
             if self.number == 1:
                 name = f"Inaugural {self.title}"
             else:
                 name = f"{number} Annual {self.title}"
-        else:
+        elif self.annual:
             name = f"{self.annual} {self.title}"
         return title(name)
 
