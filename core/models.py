@@ -8,9 +8,7 @@ class MachineTagMixin(models.Model):
 
     def get_machine_tags(self):
         machine_tag_namespace = getattr(settings, "MACHINE_TAG_NAMESPACE", "trailhawks")
-        machine_tags = [
-            f"{machine_tag_namespace}:{self._meta.model_name}={self.pk}"
-        ]
+        machine_tags = [f"{machine_tag_namespace}:{self._meta.model_name}={self.pk}"]
         return machine_tags
 
 
