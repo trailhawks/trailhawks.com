@@ -21,7 +21,6 @@ environs[django]
 feedparser
 flickrapi==2.0
 httplib2==0.9
-ipdb
 lxml
 Markdown==2.6.5
 micawber
