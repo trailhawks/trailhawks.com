@@ -16,9 +16,40 @@ TAILWIND_CSS_VERSION := "latest"
 @check:
     docker-compose run --rm web python manage.py check --deploy
 
+# opens a console
+@console:
+    {{compose}} /bin/bash
+
 @djcodemod:
     djcodemod run --deprecated-in 3.0 .
     djcodemod run --removed-in 3.0 .
+
+@import_from_ultrasignup:
+    just run import_from_ultrasignup 53172
+    # just run import_from_ultrasignup 53173
+    # just run import_from_ultrasignup 53174
+
+    # 2020
+    # just run import_from_ultrasignup 73780
+
+    # # 2019
+    # just run import_from_ultrasignup 63105
+    # just run import_from_ultrasignup 63106
+    # just run import_from_ultrasignup 63107
+
+    # # 2018
+    # just run import_from_ultrasignup 53172
+    # just run import_from_ultrasignup 53173
+    # just run import_from_ultrasignup 53174
+
+    # # 2017
+    # just run import_from_ultrasignup 43955
+    # just run import_from_ultrasignup 43957
+    # just run import_from_ultrasignup 43956
+
+    # # 2016
+    # just run import_from_ultrasignup 36684
+    # just run import_from_ultrasignup 36685
 
 @lint:
     curlylint templates
