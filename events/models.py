@@ -19,7 +19,7 @@ class Event(MachineTagMixin):
     )
     title = models.CharField(max_length=250)
     slug = models.SlugField(blank=True, null=True)
-    body = models.TextField()
+    body = models.TextField(blank=True)
     status = models.IntegerField(
         _("status"), choices=STATUS_CHOICES, default=STATUS_PUBLIC
     )
