@@ -24,6 +24,9 @@ TAILWIND_CSS_VERSION := "latest"
     djcodemod run --deprecated-in 3.0 .
     djcodemod run --removed-in 3.0 .
 
+@down:
+    docker-compose down
+
 @import_from_ultrasignup:
     just run import_from_ultrasignup 53172
     # just run import_from_ultrasignup 53173
@@ -86,6 +89,9 @@ TAILWIND_CSS_VERSION := "latest"
         --output ./assets/css/tailwind.css
 
     @docker-compose run --rm web python manage.py collectstatic --noinput
+
+@test:
+    docker-compose run --rm web pytest
 
 @up:
     # docker-compose build
