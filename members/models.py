@@ -7,7 +7,6 @@ from django.urls import reverse
 from core.models import MachineTagMixin
 from .managers import MemberManager, TermManager
 from django.utils.translation import gettext_lazy as _
-from six import python_2_unicode_compatible
 
 
 class Member(MachineTagMixin):

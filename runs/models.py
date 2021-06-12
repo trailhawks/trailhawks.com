@@ -4,7 +4,6 @@ from django.urls import reverse
 from .managers import RunManager
 from core.models import MachineTagMixin
 from django.utils.translation import gettext_lazy as _
-from six import python_2_unicode_compatible
 
 
 class Run(MachineTagMixin):

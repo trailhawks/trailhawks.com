@@ -1,7 +1,6 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.translation import gettext_lazy as _
-from six import python_2_unicode_compatible
 
 
 class Location(models.Model):

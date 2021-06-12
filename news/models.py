@@ -6,7 +6,6 @@ from django.urls import reverse
 
 from .managers import NewsManager
 from django.utils.translation import gettext_lazy as _
-from six import python_2_unicode_compatible
 
 
 ALERT_CHOICES = (

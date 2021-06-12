@@ -5,7 +5,6 @@ from taggit.managers import TaggableManager
 
 from .managers import PostManager
 from django.utils.translation import gettext_lazy as _
-from six import python_2_unicode_compatible
 
 
 class Post(models.Model):
