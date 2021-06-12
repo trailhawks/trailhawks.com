@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('races', '0013_auto_20210612_1103'),
+        ("races", "0013_auto_20210612_1103"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='result',
-            name='bib_number',
+            model_name="result",
+            name="bib_number",
             field=models.IntegerField(blank=True),
         ),
     ]
