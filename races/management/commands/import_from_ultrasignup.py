@@ -8,9 +8,10 @@ from races.models import Race, RaceType, Racer, Result
 
 @click.command()
 @click.argument("result_id")
-@click.option("race_id", "--race")
+@click.option("race_id", "--race", "--race-id", "--race-pk")
+@click.option("race_slug", "--slug", "--race-slug")
 @click.option("race_type_name", "--race-type")
-def command(result_id, race_id, race_type_name):
+def command(result_id, race_id, race_slug, race_type_name):
     headers = {"Content-type": "application/json"}
     url = f"https://ultrasignup.com/service/events.svc/results/{result_id}/1/json"
 
@@ -26,11 +27,20 @@ def command(result_id, race_id, race_type_name):
         input_buffer = request.json()
         filename.write_text(json.dumps(input_buffer, indent=2))
 
-    race = Race.objects.get(pk=race_id)
+    try:
+        if race_id:
+            race = Race.objects.get(pk=race_id)
+        elif race_slug:
+            race = Race.objects.get(slug=race_slug)
+        else:
+            raise Exception("We need a Race <pk> or <slug>")
+    except Race.DoesNotExist:
+        raise Exception(f"Race <pk:{race_id}> or <slug:{race_slug}> not found")
 
     race_type, _ = RaceType.objects.get_or_create(name=race_type_name)
 
     for item in input_buffer:
+        # TODO: try to track by member too...
         racer, _ = Racer.objects.update_or_create(
             first_name=item["firstname"],
             last_name=item["lastname"],
@@ -55,7 +65,7 @@ def command(result_id, race_id, race_type_name):
             race_type=race_type,
             racer=racer,
             defaults={
-                "bib_number": item["bib"],
+                "bib_number": item["bib"] or None,
                 "time": formattime,
                 "dnf": item["status"] == 3,
                 "dns": item["status"] == 2,
