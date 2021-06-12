@@ -187,24 +187,6 @@ class Registration(models.Model):
 
 
 @python_2_unicode_compatible
-class EmergencyContact(models.Model):
-    """Emergency Contact model."""
-
-    first_name = models.CharField(max_length=40)
-    last_name = models.CharField(max_length=40)
-    phone = models.CharField(max_length=13)
-    address = models.TextField()
-    relationship = models.CharField(max_length=40)
-
-    class Meta:
-        verbose_name = _("Emergency Contact")
-        verbose_name_plural = _("Emergency Contacts")
-
-    def __str__(self):
-        return "{} {}".format(self.first_name, self.last_name)
-
-
-@python_2_unicode_compatible
 class Racer(MachineTagMixin):
     """Racer model."""
 
@@ -213,17 +195,6 @@ class Racer(MachineTagMixin):
     GENDER_CHOICES = (
         (MALE, "Male"),
         (FEMALE, "Female"),
-    )
-
-    SMALL = 1
-    MEDIUM = 2
-    LARGE = 3
-    XLARGE = 4
-    SIZE_CHOICES = (
-        (SMALL, "S"),
-        (MEDIUM, "M"),
-        (LARGE, "L"),
-        (XLARGE, "XL"),
     )
 
     first_name = models.CharField(max_length=40)
@@ -238,18 +209,10 @@ class Racer(MachineTagMixin):
     email = models.CharField(max_length=50, blank=True, null=True)
     phone = models.CharField(max_length=13, blank=True, null=True)
     gender = models.IntegerField(choices=GENDER_CHOICES)
-    shirt_size = models.IntegerField(choices=SIZE_CHOICES, null=True, blank=True)
     birth_date = models.DateField(null=True, blank=True)
     city = models.CharField(max_length=40, null=True, blank=True)
     state = models.CharField(max_length=40, null=True, blank=True)
     country = models.CharField(max_length=40, null=True, blank=True)
-    contact = models.ForeignKey(
-        "races.EmergencyContact",
-        on_delete=models.CASCADE,
-        verbose_name="Emergency Contact",
-        blank=True,
-        null=True,
-    )
 
     class Meta:
         ordering = ["last_name", "first_name"]

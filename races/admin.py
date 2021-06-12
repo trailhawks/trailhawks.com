@@ -5,7 +5,6 @@ from num2words import num2words
 from titlecase import titlecase
 
 from .models import (
-    EmergencyContact,
     Race,
     Racer,
     RaceType,
@@ -123,17 +122,13 @@ class RacerAdmin(admin.ModelAdmin):
     list_display = ("last_name", "first_name", "gender", "email", "trailhawk")
     list_filter = ("gender",)
     ordering = ["last_name", "first_name"]
-    raw_id_fields = ("trailhawk", "contact")
+    raw_id_fields = ["trailhawk"]
     search_fields = ("first_name", "last_name")
 
 
 class ReportAdmin(admin.ModelAdmin):
     list_display = ["title", "racer"]
     raw_id_fields = ["race", "racer"]
-
-
-class EmergencyContactAdmin(admin.ModelAdmin):
-    pass
 
 
 class RaceTypeAdmin(admin.ModelAdmin):
@@ -146,4 +141,3 @@ admin.site.register(Racer, RacerAdmin)
 admin.site.register(Report, ReportAdmin)
 admin.site.register(Result, ResultAdmin)
 admin.site.register(Registration, RegistrationAdmin)
-admin.site.register(EmergencyContact, EmergencyContactAdmin)
