@@ -25,7 +25,7 @@ def migrate_race(modeladmin, request, queryset):
         race.annual = titlecase(
             "{} Annual".format(num2words(race.number, ordinal=True))
         )
-        race.slug = "{}-{}".format(slugify(race.title), race.number)
+        race.slug = "{}-{}".format(slugify(race.title), race.annual)
         race.active = False
         race.start_datetime = race.start_datetime + relativedelta(years=1)
         race.save()
