@@ -59,7 +59,7 @@ def thumb(url, **kwargs):
         # otherwise assume that thumbor is setup behind the same
         # CDN behind the `thumbor` namespace.
         scheme, netloc = urlparse.urlsplit(url)[:2]
-        base = "{}://{}/thumbor".format(scheme, netloc)
+        base = f"{scheme}://{netloc}/thumbor"
     crypto = CryptoURL(key=THUMBOR_KEY)
 
     # just for code clarity
@@ -70,4 +70,4 @@ def thumb(url, **kwargs):
     thumbor_kwargs["image_url"] = url
     path = crypto.generate(**thumbor_kwargs)
 
-    return u"{}{}".format(base, path)
+    return f"{base}{path}"

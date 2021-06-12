@@ -26,7 +26,7 @@ def command(race, csv_filename, update):
     except ValueError:
         race = Race.objects.get(slug=race)
 
-    with open(csv_filename, "r") as f:
+    with open(csv_filename) as f:
         result_data = list(csv.DictReader(f))
 
     for row in result_data:
@@ -60,7 +60,7 @@ def command(race, csv_filename, update):
         if "DNS" in time:
             defaults["dns"] = True
 
-        logger.info("Found Racer: {}".format(racer))
+        logger.info(f"Found Racer: {racer}")
 
         # might update_or_create...
         result, _ = Result.objects.get_or_create(
@@ -76,7 +76,7 @@ def command(race, csv_filename, update):
             result.race_type = race_type
             result.save()
 
-        logger.info("Result for {} for race: {}".format(racer, race))
+        logger.info(f"Result for {racer} for race: {race}")
         logger.info(result)
 
     logger.info("results loaded")

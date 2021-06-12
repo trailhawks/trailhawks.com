@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils import timezone
@@ -11,7 +9,6 @@ from django.utils.translation import gettext_lazy as _
 from six import python_2_unicode_compatible
 
 
-@python_2_unicode_compatible
 class Event(MachineTagMixin):
     """Event model."""
 
@@ -53,7 +50,7 @@ class Event(MachineTagMixin):
         if self.status == self.STATUS_PUBLIC:
             self.pub_date = now
 
-        super(Event, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse("event_detail", kwargs={"slug": self.slug})

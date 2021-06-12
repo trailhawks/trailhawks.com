@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import datetime
 
 from ajaximage.fields import AjaxImageField
@@ -12,7 +10,6 @@ from django.utils.translation import gettext_lazy as _
 from six import python_2_unicode_compatible
 
 
-@python_2_unicode_compatible
 class Member(MachineTagMixin):
     GENDER_CHOICES = (
         (1, "Male"),
@@ -57,7 +54,7 @@ class Member(MachineTagMixin):
         return reverse("member_detail", kwargs={"pk": self.pk})
 
     def get_machine_tags(self):
-        machine_tags = super(Member, self).get_machine_tags()
+        machine_tags = super().get_machine_tags()
         machine_tags += [
             "trailhawk:member={}".format(
                 "-".join([self.first_name, self.last_name]).lower()
@@ -85,13 +82,13 @@ class Member(MachineTagMixin):
     @property
     def full_hawk_name(self):
         if self.hawk_name:
-            return '{} "{}" {}'.format(self.first_name, self.hawk_name, self.last_name)
+            return f'{self.first_name} "{self.hawk_name}" {self.last_name}'
         else:
-            return "{} {}".format(self.first_name, self.last_name)
+            return f"{self.first_name} {self.last_name}"
 
     @property
     def full_name(self):
-        return "{} {}".format(self.first_name, self.last_name)
+        return f"{self.first_name} {self.last_name}"
 
     @property
     def get_position(self):
@@ -120,7 +117,6 @@ class Member(MachineTagMixin):
         return Report.objects.filter(racer__trailhawk=self)
 
 
-@python_2_unicode_compatible
 class Office(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(blank=True, null=True)

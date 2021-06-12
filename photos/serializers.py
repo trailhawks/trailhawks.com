@@ -20,7 +20,7 @@ class PhotoSerializer(serializers.HyperlinkedModelSerializer):
     sidebar_url = serializers.SerializerMethodField()
     sidebar_width = serializers.SerializerMethodField()
 
-    class Meta(object):
+    class Meta:
         model = Photo
         fields = (
             "flickr_id",

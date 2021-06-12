@@ -3,7 +3,7 @@ from django.views.generic import dates
 from .models import Post
 
 
-class PostMixin(object):
+class PostMixin:
     queryset = Post.objects.public()
     date_field = "publish"
     navitem = "blog"

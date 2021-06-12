@@ -1,12 +1,9 @@
-from __future__ import unicode_literals
-
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.translation import gettext_lazy as _
 from six import python_2_unicode_compatible
 
 
-@python_2_unicode_compatible
 class Location(models.Model):
     name = models.CharField(max_length=250)
     slug = models.SlugField(blank=True, null=True)
@@ -31,4 +28,4 @@ class Location(models.Model):
         if not self.slug:
             self.slug = slugify(self.name)
 
-        super(Location, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)

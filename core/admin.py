@@ -14,4 +14,4 @@ class BaseMetadataAdmin(admin.ModelAdmin):
             obj.created_user = request.user
 
         obj.updated_user = request.user
-        super(BaseMetadataAdmin, self).save_model(request, obj, form, change)
+        super().save_model(request, obj, form, change)

@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from ajaximage.fields import AjaxImageField
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db import models
@@ -11,7 +9,6 @@ from django.utils.translation import gettext_lazy as _
 from six import python_2_unicode_compatible
 
 
-@python_2_unicode_compatible
 class Sponsor(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(
@@ -46,7 +43,7 @@ class Sponsor(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
-        super(Sponsor, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse("sponsor_detail", kwargs={"pk": self.pk})

@@ -5,7 +5,7 @@ from django.views.generic.list import ListView
 from .models import Race, Racer
 
 
-class RaceMixin(object):
+class RaceMixin:
     queryset = Race.objects.all()
     date_field = "start_datetime"
     allow_future = True
@@ -17,7 +17,7 @@ class RaceIndex(TemplateView):
     navitem = "races"
 
     def get_context_data(self, **kwargs):
-        context = super(RaceIndex, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["completed_races"] = Race.objects.complete().order_by("-start_datetime")
         context["upcoming_races"] = Race.objects.upcoming().order_by("start_datetime")
         return context

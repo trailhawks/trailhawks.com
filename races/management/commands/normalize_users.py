@@ -22,7 +22,7 @@ class Command(BaseCommand):
                     member = Member.objects.get(
                         first_name=racer.first_name, last_name=racer.last_name
                     )
-                    logger.info("{} {}".format(member.first_name, member.last_name))
+                    logger.info(f"{member.first_name} {member.last_name}")
                     racer.trailhawk = member
                     racer.save()
                 except Member.DoesNotExist:
@@ -56,5 +56,5 @@ class Command(BaseCommand):
                     if first:
                         first = False
                     else:
-                        logger.info("deleting: {}".format(racer_id))
+                        logger.info(f"deleting: {racer_id}")
                         Racer.objects.filter(id=racer_id).delete()

@@ -11,7 +11,7 @@ class HomepageView(TemplateView):
     navitem = "home"
 
     def get_context_data(self, **kwargs):
-        context = super(HomepageView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["use_bootstrap"] = True if self.request.GET.get("bootstrap") else False
         return context
 

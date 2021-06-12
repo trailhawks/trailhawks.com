@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from ajaximage.fields import AjaxImageField
 from django.db import models
 from django.template.defaultfilters import slugify, title
@@ -14,7 +12,6 @@ from django.utils.translation import gettext_lazy as _
 from six import python_2_unicode_compatible
 
 
-@python_2_unicode_compatible
 class RaceType(models.Model):
     """Race Type model."""
 
@@ -30,7 +27,6 @@ class RaceType(models.Model):
         return self.name
 
 
-@python_2_unicode_compatible
 class Race(MachineTagMixin):
     """Race model."""
 
@@ -144,16 +140,16 @@ class Race(MachineTagMixin):
         if self.number:
             number = num2words(self.number, ordinal=True)
             if self.number == 1:
-                name = "Inaugural {}".format(self.title)
+                name = f"Inaugural {self.title}"
             else:
-                name = "{} Annual {}".format(number, self.title)
+                name = f"{number} Annual {self.title}"
         else:
-            name = "{} {}".format(self.annual, self.title)
+            name = f"{self.annual} {self.title}"
         return title(name)
 
     @cached_property
     def ical_uid(self):
-        return "race-{}@trailhawks.com".format(self.pk)
+        return f"race-{self.pk}@trailhawks.com"
 
     @cached_property
     def get_overall_results(self):
@@ -168,7 +164,6 @@ class Race(MachineTagMixin):
         return not self.result_set.count() == 0
 
 
-@python_2_unicode_compatible
 class Registration(models.Model):
     """Registration model."""
 
@@ -183,7 +178,7 @@ class Registration(models.Model):
         verbose_name_plural = _("Registration Dates")
 
     def __str__(self):
-        return "{} {}".format(self.race.title, self.reg_date)
+        return f"{self.race.title} {self.reg_date}"
 
     @property
     def has_expired(self):
@@ -192,7 +187,6 @@ class Registration(models.Model):
         return False
 
 
-@python_2_unicode_compatible
 class Racer(MachineTagMixin):
     """Racer model."""
 
@@ -226,13 +220,13 @@ class Racer(MachineTagMixin):
         verbose_name_plural = _("Racers")
 
     def __str__(self):
-        return "{} {}".format(self.first_name, self.last_name)
+        return f"{self.first_name} {self.last_name}"
 
     def get_absolute_url(self):
         return reverse("racer_detail", kwargs={"pk": self.pk})
 
     def get_machine_tags(self):
-        machine_tags = super(Racer, self).get_machine_tags()
+        machine_tags = super().get_machine_tags()
         try:
             if self.trailhawk:
                 machine_tags += self.trailhawk.get_machine_tags()
@@ -242,7 +236,7 @@ class Racer(MachineTagMixin):
 
     @property
     def full_name(self):
-        return "{} {}".format(self.first_name, self.last_name)
+        return f"{self.first_name} {self.last_name}"
 
     @property
     def get_results(self):
@@ -260,7 +254,6 @@ class Racer(MachineTagMixin):
                 return gender
 
 
-@python_2_unicode_compatible
 class Result(models.Model):
     """Result model."""
 
@@ -291,7 +284,7 @@ class Result(models.Model):
         verbose_name_plural = _("Results")
 
     def __str__(self):
-        return "{} - {} - {}".format(self.racer, self.race.title, self.time)
+        return f"{self.racer} - {self.race.title} - {self.time}"
 
     def save(self, *args, **kwargs):
 
@@ -307,7 +300,6 @@ class Result(models.Model):
         return super().save(*args, **kwargs)
 
 
-@python_2_unicode_compatible
 class Report(models.Model):
     """Report model."""
 

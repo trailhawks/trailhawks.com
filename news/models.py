@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db import models
 from django.template.defaultfilters import slugify
@@ -20,7 +18,6 @@ ALERT_CHOICES = (
 )
 
 
-@python_2_unicode_compatible
 class News(models.Model):
     """News model."""
 
@@ -69,7 +66,7 @@ class News(models.Model):
         if not self.pub_date and self.status == self.STATUS_PUBLIC:
             self.pub_date = now
 
-        super(News, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse("news_detail", kwargs={"pk": self.pk})

@@ -28,7 +28,7 @@ class MemberEmailPreview(TemplateView):
     template_name = "emails/renewal.html"
 
     def get_context_data(self):
-        context = super(MemberEmailPreview, self).get_context_data()
+        context = super().get_context_data()
         context["first_name"] = "Trailhawks"
         context["expire_date"] = datetime.now()
         return context
@@ -39,7 +39,7 @@ class MemberListView(ListView):
     navitem = "members"
 
     def get_context_data(self, **kwargs):
-        context = super(MemberListView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["current_officers"] = Term.objects.current().order_by("office__order")
         context["previous_officers"] = Term.objects.previous().order_by("office__order")
         context["run_leaders"] = Run.objects.active()
@@ -124,7 +124,7 @@ def member_list(request):
             [
                 member.id,
                 member.first_name,
-                '"{}"'.format(member.hawk_name),
+                f'"{member.hawk_name}"',
                 member.last_name,
                 member.gender,
                 # member.get_gender_display(),

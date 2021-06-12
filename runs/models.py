@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from django.db import models
 from django.urls import reverse
 
@@ -9,7 +7,6 @@ from django.utils.translation import gettext_lazy as _
 from six import python_2_unicode_compatible
 
 
-@python_2_unicode_compatible
 class Run(MachineTagMixin):
     """Run model."""
 
@@ -44,7 +41,7 @@ class Run(MachineTagMixin):
         verbose_name_plural = _("Runs")
 
     def __str__(self):
-        return "{}: {}".format(self.get_day_of_week_display(), self.name)
+        return f"{self.get_day_of_week_display()}: {self.name}"
 
     def get_absolute_url(self):
         return reverse("run_detail", kwargs={"slug": self.slug})
