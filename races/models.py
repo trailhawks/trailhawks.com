@@ -24,7 +24,7 @@ class RaceType(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
-        return super(RaceType, self).save(*args, **kwargs)
+        return super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
@@ -57,6 +57,7 @@ class Race(MachineTagMixin):
     annual = models.CharField(max_length=32, blank=True, null=True)
     slug = models.SlugField(
         unique=True,
+        blank=True,
         help_text="Suggested value automatically generated from title and annual. Must be unique.",
     )
 
@@ -118,6 +119,11 @@ class Race(MachineTagMixin):
         ordering = ["-start_datetime"]
         verbose_name = _("Race")
         verbose_name_plural = _("Races")
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(" ".join([self.title, self.annual or ""]))
+        return super().save(*args, **kwargs)
 
     def __str__(self):
         return self.get_full_name()
@@ -298,7 +304,7 @@ class Result(models.Model):
         if "dns" in self.time.lower():
             self.dns = True
 
-        return super(Result, self).save(*args, **kwargs)
+        return super().save(*args, **kwargs)
 
 
 @python_2_unicode_compatible
