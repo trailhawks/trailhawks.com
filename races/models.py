@@ -265,7 +265,7 @@ class Result(models.Model):
         blank=True,
         help_text="For races with multiple race types.",
     )
-    bib_number = models.IntegerField()
+    bib_number = models.IntegerField(blank=True, null=True)
     time = models.CharField(max_length=20, null=True, blank=True)
     place = models.TextField(
         null=True,
