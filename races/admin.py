@@ -20,15 +20,26 @@ from sponsors.admin import SponsorInline
 
 def migrate_race(modeladmin, request, queryset):
     for race in queryset.all():
+        # track existing events since m2ms aren't automatically copied...
+        events = race.events.all()
+
         race.pk = None
-        race.number = race.number + 1
+        if race.number:
+            race.number = race.number + 1
+        else:
+            race.number = 1
+
         race.annual = titlecase(
             "{} Annual".format(num2words(race.number, ordinal=True))
         )
-        race.slug = "{}-{}".format(slugify(race.title), race.annual)
+        race.slug = slugify("{} {}".format(race.title, race.annual or ""))
         race.active = False
         race.start_datetime = race.start_datetime + relativedelta(years=1)
         race.save()
+
+        # update m2ms...
+        for event in events:
+            race.events.add(event.pk)
 
 
 migrate_race.short_description = "Duplicate the race for the next year"
