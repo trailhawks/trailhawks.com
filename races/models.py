@@ -79,7 +79,7 @@ class Race(MachineTagMixin):
     )
     unit = models.IntegerField(choices=UNIT_CHOICES, default=KM, blank=True, null=True)
     start_datetime = models.DateTimeField(verbose_name="Start Date and Time")
-    description = models.TextField()
+    description = models.TextField(blank=True)
     location = models.ForeignKey(
         "locations.Location", on_delete=models.CASCADE, blank=True, null=True
     )
@@ -346,6 +346,7 @@ class Report(models.Model):
     title = models.CharField(max_length=200)
     race = models.ForeignKey("races.Race", on_delete=models.CASCADE)
     racer = models.ForeignKey("races.Racer", on_delete=models.CASCADE)
+    description = models.TextField(blank=True)
 
     class Meta:
         verbose_name = _("Report")
