@@ -95,6 +95,7 @@ INSTALLED_APPS = [
 INSTALLED_APPS += [
     "ajaximage",
     "django_thumbor",
+    "dbbackup",
     "favicon",
     "markup_deprecated",
     "micawber.contrib.mcdjango",
@@ -189,6 +190,11 @@ FLICKR = {
     "key": env("FLICKR_KEY", default=""),
     "secret": env("FLICKR_SECRET", default=""),
     "username": env("FLICKR_USERNAME", default=""),
+}
+
+DBBACKUP_STORAGE = "django.core.files.storage.FileSystemStorage"
+DBBACKUP_STORAGE_OPTIONS = {
+    "location": env("DBBACKUP_STORAGE_OPTIONS_LOCATION", default="/src")
 }
 
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="")

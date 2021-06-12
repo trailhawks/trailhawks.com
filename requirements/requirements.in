@@ -5,6 +5,7 @@ DateUtils
 django-braces  # switch to Django's LoginRequiredMixin
 django-click
 django-contrib-comments  # to remove
+django-dbbackup
 django-favicon
 django-filter
 django-ical
