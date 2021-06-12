@@ -17,19 +17,19 @@
       <h2><a name="{{ race_type.slug }}"></a>{{ race_type.name }} Results</h2>
       <ul class="flex flex-wrap list-none pl-0 mb-0 border border-t-0 border-r-0 border-l-0 border-b-1 border-gray-200" id="{{ race_type.slug }}-tabs">
         <li><a href="#{{ race_type.slug }}-overall-results" data-toggle="tab">Overall Results</a></li>
-        <li><a href="#{{ race_type.slug }}-female-results" data-toggle="tab">Female Results</a></li>
-        <li><a href="#{{ race_type.slug }}-male-results" data-toggle="tab">Male Results</a></li>
+        <li><a href="#{{ race_type.slug }}-womens-results" data-toggle="tab">Women's Results</a></li>
+        <li><a href="#{{ race_type.slug }}-mens-results" data-toggle="tab">Men's Results</a></li>
       </ul>
       <div class="tab-content">
         <div class="tab-pane active" id="{{ race_type.slug }}-overall-results">
           {% get_results_for_race race=object race_type=race_type as race_results %}
           {% render_results race_results %}
         </div>
-        <div class="tab-pane" id="{{ race_type.slug }}-female-results">
+        <div class="tab-pane" id="{{ race_type.slug }}-womens-results">
           {% get_results_for_race race=object race_type=race_type gender=2 as race_results %}
           {% render_results race_results %}
         </div>
-        <div class="tab-pane" id="{{ race_type.slug }}-male-results">
+        <div class="tab-pane" id="{{ race_type.slug }}-mens-results">
           {% get_results_for_race race=object race_type=race_type gender=1 as race_results %}
           {% render_results race_results %}
         </div>

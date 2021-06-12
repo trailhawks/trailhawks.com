@@ -192,8 +192,8 @@ class Racer(MachineTagMixin):
     MALE = 1
     FEMALE = 2
     GENDER_CHOICES = (
-        (MALE, "Male"),
-        (FEMALE, "Female"),
+        (MALE, "Man"),
+        (FEMALE, "Woman"),
     )
 
     first_name = models.CharField(max_length=40)
@@ -270,7 +270,7 @@ class Result(models.Model):
     place = models.TextField(
         null=True,
         blank=True,
-        help_text="Ex. First Overall Male or First Masters Female",
+        help_text="Ex. First Overall Man or First Masters Woman",
     )
     course_record = models.BooleanField(default=False)
     dq = models.BooleanField("Disqualified", default=False)

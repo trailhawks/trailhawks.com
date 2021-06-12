@@ -11,8 +11,8 @@ from django.utils.translation import gettext_lazy as _
 
 class Member(MachineTagMixin):
     GENDER_CHOICES = (
-        (1, "Male"),
-        (2, "Female"),
+        (1, "Man"),
+        (2, "Woman"),
     )
 
     username = models.ForeignKey(
