@@ -1,4 +1,4 @@
-from django.db import models, migrations
+from django.db import migrations, models
 import django.utils.timezone
 import core.models
 import taggit.managers
