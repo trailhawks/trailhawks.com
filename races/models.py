@@ -11,21 +11,6 @@ from core.models import MachineTagMixin
 from django.utils.translation import gettext_lazy as _
 
 
-class RaceType(models.Model):
-    """Race Type model."""
-
-    name = models.CharField(max_length=200)
-    slug = models.SlugField(blank=True)
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
-        return super().save(*args, **kwargs)
-
-    def __str__(self):
-        return self.name
-
-
 class Race(MachineTagMixin):
     """Race model."""
 
@@ -163,29 +148,6 @@ class Race(MachineTagMixin):
         return not self.result_set.count() == 0
 
 
-class Registration(models.Model):
-    """Registration model."""
-
-    race = models.ForeignKey("races.Race", on_delete=models.CASCADE)
-    description = models.CharField(max_length=100, blank=True, null=True)
-    reg_date = models.DateField("Registration Date")
-    end_date = models.DateField("End Date", blank=True, null=True)
-    reg_cost = models.IntegerField("Registration Cost")
-
-    class Meta:
-        verbose_name = _("Registration Dates")
-        verbose_name_plural = _("Registration Dates")
-
-    def __str__(self):
-        return f"{self.race.title} {self.reg_date}"
-
-    @property
-    def has_expired(self):
-        if self.end_date:
-            return timezone.now() < self.end_date
-        return False
-
-
 class Racer(MachineTagMixin):
     """Racer model."""
 
@@ -253,6 +215,61 @@ class Racer(MachineTagMixin):
                 return gender
 
 
+class RaceType(models.Model):
+    """Race Type model."""
+
+    name = models.CharField(max_length=200)
+    slug = models.SlugField(blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        return super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name
+
+
+class Report(models.Model):
+    """Report model."""
+
+    report = models.URLField(help_text="Link to race report")
+    title = models.CharField(max_length=200)
+    race = models.ForeignKey("races.Race", on_delete=models.CASCADE)
+    racer = models.ForeignKey("races.Racer", on_delete=models.CASCADE)
+    description = models.TextField(blank=True)
+
+    class Meta:
+        verbose_name = _("Report")
+        verbose_name_plural = _("Reports")
+
+    def __str__(self):
+        return self.title
+
+
+class Registration(models.Model):
+    """Registration model."""
+
+    race = models.ForeignKey("races.Race", on_delete=models.CASCADE)
+    description = models.CharField(max_length=100, blank=True, null=True)
+    reg_date = models.DateField("Registration Date")
+    end_date = models.DateField("End Date", blank=True, null=True)
+    reg_cost = models.IntegerField("Registration Cost")
+
+    class Meta:
+        verbose_name = _("Registration Dates")
+        verbose_name_plural = _("Registration Dates")
+
+    def __str__(self):
+        return f"{self.race.title} {self.reg_date}"
+
+    @property
+    def has_expired(self):
+        if self.end_date:
+            return timezone.now() < self.end_date
+        return False
+
+
 class Result(models.Model):
     """Result model."""
 
@@ -297,20 +314,3 @@ class Result(models.Model):
             self.dns = True
 
         return super().save(*args, **kwargs)
-
-
-class Report(models.Model):
-    """Report model."""
-
-    report = models.URLField(help_text="Link to race report")
-    title = models.CharField(max_length=200)
-    race = models.ForeignKey("races.Race", on_delete=models.CASCADE)
-    racer = models.ForeignKey("races.Racer", on_delete=models.CASCADE)
-    description = models.TextField(blank=True)
-
-    class Meta:
-        verbose_name = _("Report")
-        verbose_name_plural = _("Reports")
-
-    def __str__(self):
-        return self.title
