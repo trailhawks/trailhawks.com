@@ -1,12 +1,12 @@
 module.exports = {
   mode: 'jit',
   purge: [
-      './templates/*.html',
-      './templates/**/*.html',
+      './templates/tailwind/*.html',
+      './templates/tailwind/**/*.html',
+      './templates/tailwind/**/**/*.html',
+      './templates/tailwind/**/**/**/*.html',
   ],
-  theme: {
-    extend: {},
-  },
+  theme: {},
   variants: {},
   plugins: [
     // require('@tailwindcss/custom-forms'),
