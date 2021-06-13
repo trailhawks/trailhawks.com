@@ -29,7 +29,10 @@ TAILWIND_CSS_VERSION := "latest"
 @fmt:
     -isort --project=black .
     -black .
-    -djhtml --tabwidth=4 --in-place templates/*.html templates/**/*.html
+    -djhtml --tabwidth=4 --in-place \
+        templates/**/**/*.html \
+        templates/**/**/**/*.html \
+        templates/**/**/**/**/*.html
     -rustywind --write ./templates/tailwind/
 
 @import_from_ultrasignup:
