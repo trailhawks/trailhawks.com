@@ -1,6 +1,5 @@
 from config.settings import *
 
-
 SITE_ID = 2
 
 ROOT_URLCONF = "config.urls_hawkhundred"

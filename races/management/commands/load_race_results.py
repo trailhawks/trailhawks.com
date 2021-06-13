@@ -1,9 +1,9 @@
 import csv
-import djclick as click
 import logging
 
-from races.models import Race, RaceType, Racer, Result
+import djclick as click
 
+from races.models import Race, Racer, RaceType, Result
 
 logger = logging.getLogger(__name__)
 

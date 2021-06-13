@@ -9,21 +9,14 @@ from django.urls import include, path
 from django.views.generic import TemplateView
 from rest_framework.routers import DefaultRouter
 
-from members.views import officer_list
-from sitemaps.default import StaticViewSitemap
-from core import __version__
-from core.views import (
-    AboutView,
-    HomepageView,
-    HumansView,
-    StyleGuideView,
-    ThanksView,
-)
 from blog.models import Post
+from core import __version__
+from core.views import AboutView, HomepageView, HumansView, StyleGuideView, ThanksView
+from members.views import officer_list
 from news.models import News
-from races.models import Race
 from photos.apis import PhotoViewSet, RandomPhotoViewSet
-
+from races.models import Race
+from sitemaps.default import StaticViewSitemap
 
 blog_dict = {
     "queryset": Post.objects.public(),

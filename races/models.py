@@ -1,14 +1,15 @@
 from ajaximage.fields import AjaxImageField
 from django.db import models
 from django.template.defaultfilters import slugify, title
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.functional import cached_property
+from django.utils.translation import gettext_lazy as _
 from num2words import num2words
-from django.urls import reverse
+
+from core.models import MachineTagMixin
 
 from .managers import RaceManager
-from core.models import MachineTagMixin
-from django.utils.translation import gettext_lazy as _
 
 
 class Race(MachineTagMixin):

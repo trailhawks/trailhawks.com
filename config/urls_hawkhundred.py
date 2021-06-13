@@ -9,7 +9,6 @@ from django.views.generic import TemplateView
 
 from sitemaps.races import StaticViewSitemap
 
-
 sitemaps = {
     "flatpages": FlatPageSitemap,
     "static": StaticViewSitemap,

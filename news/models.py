@@ -1,12 +1,11 @@
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db import models
 from django.template.defaultfilters import slugify
-from django.utils import timezone
 from django.urls import reverse
-
-from .managers import NewsManager
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
+from .managers import NewsManager
 
 ALERT_CHOICES = (
     ("", _("Default no style.")),

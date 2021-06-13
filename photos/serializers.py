@@ -3,7 +3,6 @@ from django_thumbor import generate_url
 from rest_framework import serializers
 from syncr.flickr.models import Photo
 
-
 CAROUSEL_HEIGHT = getattr(settings, "CAROUSEL_HEIGHT", 500)
 CAROUSEL_WIDTH = getattr(settings, "CAROUSEL_WIDTH", 1200)
 SIDEBAR_HEIGHT = getattr(settings, "SIDEBAR_HEIGHT", 500)

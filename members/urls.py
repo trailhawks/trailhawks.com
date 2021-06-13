@@ -1,6 +1,6 @@
-from .views import member_list, MemberDetailView, MemberEmailPreview, MemberListView
 from django.urls import path
 
+from .views import MemberDetailView, MemberEmailPreview, MemberListView, member_list
 
 urlpatterns = [
     path("", MemberListView.as_view(), name="member_list"),

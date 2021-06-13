@@ -2,7 +2,6 @@ from django.template import Library
 
 from ..models import Race, Racer, RaceType, Result
 
-
 register = Library()
 
 

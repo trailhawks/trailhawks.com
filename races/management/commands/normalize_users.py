@@ -5,7 +5,6 @@ from django.core.management.base import BaseCommand
 from members.models import Member
 from races.models import Racer, Result
 
-
 logger = logging.getLogger(__name__)
 
 

@@ -1,6 +1,6 @@
-from .views import RunDetail, RunList
 from django.urls import path, re_path
 
+from .views import RunDetail, RunList
 
 urlpatterns = [
     path("", RunList.as_view(), name="run_list"),

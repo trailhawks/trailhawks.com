@@ -2,7 +2,6 @@ import os
 
 import environs
 
-
 env = environs.Env()
 
 BASE_DIR = environs.Path(__file__).parent.parent

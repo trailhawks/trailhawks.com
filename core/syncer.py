@@ -1,5 +1,4 @@
 from django.conf import settings
-
 from syncr.flickr.models import Photo
 
 

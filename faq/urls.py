@@ -1,6 +1,6 @@
-from .views import FaqDetailView, FaqListView
 from django.urls import path
 
+from .views import FaqDetailView, FaqListView
 
 urlpatterns = [
     path("", FaqListView.as_view(), name="faq_list"),

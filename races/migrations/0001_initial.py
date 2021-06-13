@@ -1,5 +1,6 @@
-from django.db import migrations, models
 import ajaximage.fields
+from django.db import migrations, models
+
 import core.models
 
 

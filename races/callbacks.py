@@ -3,7 +3,6 @@ import logging
 from events.models import Event
 from races.models import Race
 
-
 logger = logging.getLogger(__name__)
 
 

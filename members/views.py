@@ -1,22 +1,22 @@
 import csv
-
 from datetime import datetime
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.sites.models import Site
 from django.core.mail import EmailMultiAlternatives
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from django.template import loader
-from django.template import RequestContext
+from django.template import RequestContext, loader
 from django.urls import reverse
 from django.views.generic import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
-from .forms import ContactForm
-from .models import Member, Term
 from races.models import Race
 from runs.models import Run
+
+from .forms import ContactForm
+from .models import Member, Term
 
 
 class MemberDetailView(DetailView):

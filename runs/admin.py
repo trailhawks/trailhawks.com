@@ -1,8 +1,9 @@
 from django.contrib import admin
 
-from .models import Run
 from faq.admin import FaqInline
 from news.admin import NewsInline
+
+from .models import Run
 
 
 @admin.register(Run)

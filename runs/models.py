@@ -1,9 +1,10 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
+
+from core.models import MachineTagMixin
 
 from .managers import RunManager
-from core.models import MachineTagMixin
-from django.utils.translation import gettext_lazy as _
 
 
 class Run(MachineTagMixin):

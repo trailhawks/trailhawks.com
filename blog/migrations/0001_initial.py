@@ -1,7 +1,8 @@
-from django.db import migrations, models
 import django.utils.timezone
-import core.models
 import taggit.managers
+from django.db import migrations, models
+
+import core.models
 
 
 class Migration(migrations.Migration):

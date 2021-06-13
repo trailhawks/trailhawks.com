@@ -1,4 +1,4 @@
-from django.views.generic import dates, TemplateView
+from django.views.generic import TemplateView, dates
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 

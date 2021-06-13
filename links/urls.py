@@ -1,6 +1,6 @@
-from .views import LinkDetailView, LinkListView
 from django.urls import path
 
+from .views import LinkDetailView, LinkListView
 
 urlpatterns = [
     path("", LinkListView.as_view(), name="link_list"),

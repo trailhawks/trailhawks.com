@@ -1,7 +1,7 @@
-from . import views
-from .feeds import RaceFeed
 from django.urls import path, re_path
 
+from . import views
+from .feeds import RaceFeed
 
 urlpatterns = [
     path("", views.RaceIndex.as_view(), name="race_index"),

@@ -1,12 +1,11 @@
-import djclick as click
 import logging
-
 from datetime import datetime
+
+import djclick as click
 from django.utils.text import slugify
 
 from faq.models import FAQ
 from races.models import Race
-
 
 logger = logging.getLogger(__name__)
 

@@ -1,6 +1,6 @@
-from . import views
 from django.urls import path, re_path
 
+from . import views
 
 urlpatterns = [
     path("", views.PhotoListView.as_view(), name="photo_list"),

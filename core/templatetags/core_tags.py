@@ -1,11 +1,9 @@
 import feedparser
-
 from dateutil.parser import *
 from dateutil.tz import *
 from django.template import Library
 
 from core import __version__
-
 
 register = Library()
 

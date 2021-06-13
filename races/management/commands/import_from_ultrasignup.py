@@ -1,9 +1,10 @@
-import djclick as click
 import json
+from pathlib import Path
+
+import djclick as click
 import requests
 
-from pathlib import Path
-from races.models import Race, RaceType, Racer, Result
+from races.models import Race, Racer, RaceType, Result
 
 
 @click.command()

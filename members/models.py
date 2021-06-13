@@ -3,10 +3,11 @@ import datetime
 from ajaximage.fields import AjaxImageField
 from django.db import models
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 
 from core.models import MachineTagMixin
+
 from .managers import MemberManager, TermManager
-from django.utils.translation import gettext_lazy as _
 
 
 class Member(MachineTagMixin):

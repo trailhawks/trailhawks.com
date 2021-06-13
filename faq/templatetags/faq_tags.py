@@ -4,7 +4,6 @@ from django.template import Library
 
 from ..models import FAQ
 
-
 register = Library()
 
 

@@ -1,10 +1,11 @@
 from django.contrib import admin
 
-from .models import Event
 from faq.admin import FaqInline
 from links.admin import LinksInline
 from news.admin import NewsInline
 from sponsors.admin import SponsorInline
+
+from .models import Event
 
 
 @admin.register(Event)

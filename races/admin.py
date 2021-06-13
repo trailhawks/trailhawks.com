@@ -4,18 +4,12 @@ from django.template.defaultfilters import slugify
 from num2words import num2words
 from titlecase import titlecase
 
-from .models import (
-    Race,
-    Racer,
-    RaceType,
-    Registration,
-    Report,
-    Result,
-)
 from faq.admin import FaqInline
 from links.admin import LinksInline
 from news.admin import NewsInline
 from sponsors.admin import SponsorInline
+
+from .models import Race, Racer, RaceType, Registration, Report, Result
 
 
 def migrate_race(modeladmin, request, queryset):

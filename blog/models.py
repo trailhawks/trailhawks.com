@@ -1,10 +1,10 @@
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 from taggit.managers import TaggableManager
 
 from .managers import PostManager
-from django.utils.translation import gettext_lazy as _
 
 
 class Post(models.Model):
