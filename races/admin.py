@@ -79,11 +79,7 @@ class RegistrationInline(admin.TabularInline):
     extra = 0
 
 
-class RegistrationAdmin(admin.ModelAdmin):
-    list_display = ["description", "race", "reg_date", "end_date", "reg_cost"]
-    raw_id_fields = ["race"]
-
-
+@admin.register(Race)
 class RaceAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ["title", "annual"]}
     list_display = ("title", "number", "annual", "active", "start_datetime")
@@ -112,6 +108,33 @@ class RaceAdmin(admin.ModelAdmin):
     )
 
 
+@admin.register(RaceType)
+class RaceTypeAdmin(admin.ModelAdmin):
+    list_display = ["name", "slug"]
+
+
+@admin.register(Racer)
+class RacerAdmin(admin.ModelAdmin):
+    list_display = ("last_name", "first_name", "gender", "email", "trailhawk")
+    list_filter = ("gender",)
+    ordering = ["last_name", "first_name"]
+    raw_id_fields = ["trailhawk"]
+    search_fields = ("first_name", "last_name")
+
+
+@admin.register(Registration)
+class RegistrationAdmin(admin.ModelAdmin):
+    list_display = ["description", "race", "reg_date", "end_date", "reg_cost"]
+    raw_id_fields = ["race"]
+
+
+@admin.register(Report)
+class ReportAdmin(admin.ModelAdmin):
+    list_display = ["title", "racer"]
+    raw_id_fields = ["race", "racer"]
+
+
+@admin.register(Result)
 class ResultAdmin(admin.ModelAdmin):
     list_display = (
         "race",
@@ -127,28 +150,3 @@ class ResultAdmin(admin.ModelAdmin):
     list_filter = ("race_type", "course_record", "dns", "dnf", "dq", "race")
     raw_id_fields = ("racer", "race")
     search_fields = ("time", "place")
-
-
-class RacerAdmin(admin.ModelAdmin):
-    list_display = ("last_name", "first_name", "gender", "email", "trailhawk")
-    list_filter = ("gender",)
-    ordering = ["last_name", "first_name"]
-    raw_id_fields = ["trailhawk"]
-    search_fields = ("first_name", "last_name")
-
-
-class ReportAdmin(admin.ModelAdmin):
-    list_display = ["title", "racer"]
-    raw_id_fields = ["race", "racer"]
-
-
-class RaceTypeAdmin(admin.ModelAdmin):
-    list_display = ["name", "slug"]
-
-
-admin.site.register(Race, RaceAdmin)
-admin.site.register(RaceType, RaceTypeAdmin)
-admin.site.register(Racer, RacerAdmin)
-admin.site.register(Report, ReportAdmin)
-admin.site.register(Result, ResultAdmin)
-admin.site.register(Registration, RegistrationAdmin)

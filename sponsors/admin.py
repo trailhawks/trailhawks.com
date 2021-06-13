@@ -25,6 +25,7 @@ class SponsorInline(GenericStackedInline):
     extra = 0
 
 
+@admin.register(Sponsor)
 class SponsorAdmin(admin.ModelAdmin):
     actions = [
         set_active_to_false,
@@ -61,6 +62,3 @@ class SponsorAdmin(admin.ModelAdmin):
             {"classes": ("collapse",), "fields": ("content_type", "object_id")},
         ),
     )
-
-
-admin.site.register(Sponsor, SponsorAdmin)

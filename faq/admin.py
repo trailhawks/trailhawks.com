@@ -9,6 +9,7 @@ class FaqInline(GenericStackedInline):
     extra = 0
 
 
+@admin.register(FAQ)
 class FaqAdmin(admin.ModelAdmin):
     list_display = ("question", "content_type", "get_object_name")
     fieldsets = (
@@ -24,6 +25,3 @@ class FaqAdmin(admin.ModelAdmin):
             return obj.content_object
 
     get_object_name.short_description = "associated object"
-
-
-admin.site.register(FAQ, FaqAdmin)

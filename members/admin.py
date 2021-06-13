@@ -13,6 +13,7 @@ class TermInline(admin.TabularInline):
     extra = 0
 
 
+@admin.register(Member)
 class MemberAdmin(admin.ModelAdmin):
     list_display = (
         "__str__",
@@ -32,19 +33,16 @@ class MemberAdmin(admin.ModelAdmin):
     ]
 
 
+@admin.register(Office)
 class OfficeAdmin(admin.ModelAdmin):
     list_display = ("name", "order")
     prepopulated_fields = {"slug": ["name"]}
     ordering = ["order"]
 
 
+@admin.register(Term)
 class TermAdmin(admin.ModelAdmin):
     list_display = ("member", "office", "start", "end")
     list_filter = ["office"]
     raw_id_fields = ["member"]
     ordering = ["-start", "-end"]
-
-
-admin.site.register(Member, MemberAdmin)
-admin.site.register(Office, OfficeAdmin)
-admin.site.register(Term, TermAdmin)

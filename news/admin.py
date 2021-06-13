@@ -9,6 +9,7 @@ class NewsInline(GenericStackedInline):
     extra = 0
 
 
+@admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ["title"]}
     list_display = ["title", "pub_date", "status", "content_type", "object_id"]
@@ -23,6 +24,3 @@ class NewsAdmin(admin.ModelAdmin):
             {"classes": ("collapse",), "fields": ("content_type", "object_id")},
         ),
     )
-
-
-admin.site.register(News, NewsAdmin)

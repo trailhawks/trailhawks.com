@@ -5,6 +5,7 @@ from faq.admin import FaqInline
 from news.admin import NewsInline
 
 
+@admin.register(Run)
 class RunAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ["name"]}
     list_display = ["name", "day_of_week", "active", "run_time"]
@@ -14,6 +15,3 @@ class RunAdmin(admin.ModelAdmin):
         NewsInline,
         FaqInline,
     )
-
-
-admin.site.register(Run, RunAdmin)

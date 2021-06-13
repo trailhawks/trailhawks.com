@@ -9,6 +9,7 @@ class LinksInline(GenericStackedInline):
     extra = 0
 
 
+@admin.register(Links)
 class LinksAdmin(admin.ModelAdmin):
     list_display = ("name", "content_type", "object_id")
     fieldsets = (
@@ -18,6 +19,3 @@ class LinksAdmin(admin.ModelAdmin):
             {"classes": ("collapse",), "fields": ("content_type", "object_id")},
         ),
     )
-
-
-admin.site.register(Links, LinksAdmin)

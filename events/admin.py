@@ -7,6 +7,7 @@ from news.admin import NewsInline
 from sponsors.admin import SponsorInline
 
 
+@admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ["title"]}
     list_display = ("title", "status")
@@ -19,6 +20,3 @@ class EventAdmin(admin.ModelAdmin):
         LinksInline,
         SponsorInline,
     )
-
-
-admin.site.register(Event, EventAdmin)
