@@ -1,6 +1,6 @@
 {% load static %}
 
-<div class="relative flex flex-wrap items-center content-between py-3 px-4 navbar-default" role="navigation">
+<div class="flex relative flex-wrap content-between items-center py-3 px-4 navbar-default" role="navigation">
   <div class="container mx-auto sm:px-4">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -13,8 +13,8 @@
         <a href="/"><img src="{% static 'img/logo.png' %}" width="200" alt="Lawrence Trail Hawks" /></a>
       </div>
     </div>
-    <div class="flex-grow items-center hidden">
-      <ul class="flex flex-wrap list-none pl-0 mb-0 flex flex-wrap list-reset pl-0 mb-0">
+    <div class="hidden flex-grow items-center">
+      <ul class="flex flex-wrap pl-0 mb-0 list-none list-reset">
         {% for item in menu %}
           <li><a href="{{ item.url }}{{ page.url }}">{{ item.title }}</a></li>
         {% endfor %}

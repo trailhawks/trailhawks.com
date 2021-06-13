@@ -9,7 +9,7 @@
 
 {% block content %}
   <div class="flex flex-wrap ">
-    <div class="md:w-full pr-4 pl-4">
+    <div class="pr-4 pl-4 md:w-full">
       <h1>Trail Hawk Photo Review</h1>
 
       {% if messages %}
@@ -22,7 +22,7 @@
         <div class="flex flex-wrap ">
           <h3 class="text-center">{{ photo.description|safe }}</h3>
           <div class="md:w-1/4 pr-4 pl-4">
-            <a href="{{ photo.photopage_url }}"><img class="img-responsive max-w-full h-auto border-1 border-gray-200 rounded p-1" src='{% thumbor_url photo.get_large_url smart=True height=400 width=400 %}'></a>
+            <a href="{{ photo.photopage_url }}"><img class="p-1 max-w-full h-auto rounded border-gray-200 img-responsive border-1" src='{% thumbor_url photo.get_large_url smart=True height=400 width=400 %}'></a>
             <p>Active: {{ photo.active }}</p>
             <p>Tags: {% for tag in photo.tags.all %}{{ tag }}, {% endfor %}</p>
             <form action="." method="post" class="flex items-center">
@@ -36,7 +36,7 @@
             </form>
           </div>
           <div class="md:w-3/4 pr-4 pl-4">
-            <a href="{{ photo.photopage_url }}"><img class="img-responsive max-w-full h-auto border-1 border-gray-200 rounded p-1" src='{% thumbor_url photo.get_large_url smart=True height=500 width=1200 %}'></a>
+            <a href="{{ photo.photopage_url }}"><img class="p-1 max-w-full h-auto rounded border-gray-200 img-responsive border-1" src='{% thumbor_url photo.get_large_url smart=True height=500 width=1200 %}'></a>
           </div>
           <hr>
         </div>
@@ -47,13 +47,13 @@
           {% if page_obj.has_previous %}
             <li class="previous"><a href="{% url 'photo_review_list' %}?page={{ page_obj.previous_page_number }}">&laquo; Previous</a></li>
           {% else %}
-            <li class="previous opacity-75"><a href="#">&laquo; Previous</a></li>
+            <li class="opacity-75 previous"><a href="#">&laquo; Previous</a></li>
           {% endif %}
 
           {% if page_obj.has_next %}
             <li class="next"><a href="{% url 'photo_review_list' %}?page={{ page_obj.next_page_number }}">Next &raquo;</a></li>
           {% else %}
-            <li class="next opacity-75"><a href="#">Next &raquo;</a></li>
+            <li class="opacity-75 next"><a href="#">Next &raquo;</a></li>
           {% endif %}
         </ul>
       {% endif %}

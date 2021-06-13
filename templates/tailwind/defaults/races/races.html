@@ -4,14 +4,14 @@
 
 {% block content %}
   <div class="flex flex-wrap ">
-    <div class="md:w-full pr-4 pl-4">
+    <div class="pr-4 pl-4 md:w-full">
 
       {% if upcoming_races %}
         <section id="events">
           <div class="flex flex-wrap ">
-            <div class="md:w-full pr-4 pl-4">
+            <div class="pr-4 pl-4 md:w-full">
               <h2>Upcoming events
-                <a class="ical inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline btn-default btn-xs" href="{% url 'race_ical' %}">ICAL</a>
+                <a class="inline-block py-1 px-3 font-normal leading-normal text-center no-underline align-middle rounded border select-none ical whitespace-no-wrap btn-default btn-xs" href="{% url 'race_ical' %}">ICAL</a>
               </h2>
             </div>
           </div>
@@ -25,7 +25,7 @@
 
       <section id="events">
         <div class="flex flex-wrap ">
-          <div class="md:w-full pr-4 pl-4">
+          <div class="pr-4 pl-4 md:w-full">
             <h1>Past events</h1>
           </div>
         </div>

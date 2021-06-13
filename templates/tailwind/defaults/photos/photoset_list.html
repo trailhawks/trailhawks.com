@@ -9,14 +9,14 @@
 
 {% block content %}
   <div class="flex flex-wrap ">
-    <div class="md:w-full pr-4 pl-4">
+    <div class="pr-4 pl-4 md:w-full">
       <h1>Photo Galleries</h1>
 
       <div class="flex flex-wrap ">
         {% for photoset in object_list %}
           <div class="md:w-1/4 pr-4 pl-4">
             <a href="{% url 'photoset_detail' flickr_id=photoset.flickr_id %}">
-              <img class="img-responsive max-w-full h-auto border-1 border-gray-200 rounded p-1" src="{% thumbor_url photoset.primary.get_medium_url smart=True height=300 width=300 %}">
+              <img class="p-1 max-w-full h-auto rounded border-gray-200 img-responsive border-1" src="{% thumbor_url photoset.primary.get_medium_url smart=True height=300 width=300 %}">
             </a>
             <p>{{ photoset.title|safe }}</p>
           </div>
@@ -28,21 +28,21 @@
           {% if page_obj.has_previous %}
             <li class="previous"><a href="{% url 'photo_list' %}?page={{ page_obj.previous_page_number }}">&laquo; Previous</a></li>
           {% else %}
-            <li class="previous opacity-75"><a href="#">&laquo; Previous</a></li>
+            <li class="opacity-75 previous"><a href="#">&laquo; Previous</a></li>
           {% endif %}
 
           {% if page_obj.has_next %}
             <li class="next"><a href="{% url 'photo_list' %}?page={{ page_obj.next_page_number }}">Next &raquo;</a></li>
           {% else %}
-            <li class="next opacity-75"><a href="#">Next &raquo;</a></li>
+            <li class="opacity-75 next"><a href="#">Next &raquo;</a></li>
           {% endif %}
         </ul>
       {% endif %}
 
       {% comment %}
     <div class="flex flex-wrap ">
-      <div class="md:w-full pr-4 pl-4">
-        <p class="text-center"><a class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded  no-underline bg-blue-600 text-white hover:bg-blue-600 py-3 px-4 leading-tight text-xl" href="https://www.flickr.com/photos/trailhawks">Check out our <i class="icon-flickr"></i> Flickr page for more photos.</a></p>
+      <div class="pr-4 pl-4 md:w-full">
+        <p class="text-center"><a class="inline-block py-3 px-4 text-xl font-normal leading-tight text-center text-white no-underline align-middle bg-blue-600 rounded border select-none whitespace-no-wrap  hover:bg-blue-600" href="https://www.flickr.com/photos/trailhawks">Check out our <i class="icon-flickr"></i> Flickr page for more photos.</a></p>
       </div>
     </div>
     {% endcomment %}

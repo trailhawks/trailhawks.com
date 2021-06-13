@@ -21,13 +21,13 @@
           {% if page_obj.has_previous %}
             <li class="previous"><a href="{% url 'blog_list' %}?page={{ page_obj.previous_page_number }}">&laquo; Previous</a></li>
           {% else %}
-            <li class="previous opacity-75"><a href="#">&laquo; Previous</a></li>
+            <li class="opacity-75 previous"><a href="#">&laquo; Previous</a></li>
           {% endif %}
 
           {% if page_obj.has_next %}
             <li class="next"><a href="{% url 'blog_list' %}?page={{ page_obj.next_page_number }}">Next &raquo;</a></li>
           {% else %}
-            <li class="next opacity-75"><a href="#">Next &raquo;</a></li>
+            <li class="opacity-75 next"><a href="#">Next &raquo;</a></li>
           {% endif %}
         </ul>
       {% endif %}

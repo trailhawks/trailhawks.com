@@ -31,7 +31,7 @@
 
 {% block content %}
   <div class="flex flex-wrap ">
-    <div class="md:w-full pr-4 pl-4">
+    <div class="pr-4 pl-4 md:w-full">
       <h1>{{ object.annual|capfirst }} {{ object.title }} Results</h1>
     </div>
   </div>
@@ -41,7 +41,7 @@
       {% get_race_types_for_race object as race_types %}
       {% for race_type in race_types %}
         <h2><a name="{{ race_type.slug }}"></a>{{ race_type.name }} Results</h2>
-        <ul class="flex flex-wrap list-none pl-0 mb-0 border border-t-0 border-r-0 border-l-0 border-b-1 border-gray-200" id="{{ race_type.slug }}-tabs">
+        <ul class="flex flex-wrap pl-0 mb-0 list-none border border-t-0 border-r-0 border-l-0 border-gray-200 border-b-1" id="{{ race_type.slug }}-tabs">
           <li><a href="#{{ race_type.slug }}-overall-results" data-toggle="tab">Overall Results</a></li>
           <li><a href="#{{ race_type.slug }}-womens-results" data-toggle="tab">Women's Results</a></li>
           <li><a href="#{{ race_type.slug }}-mens-results" data-toggle="tab">Men's Results</a></li>
@@ -71,12 +71,12 @@
         </div>
         <div class="panel-body">
           {% get_race_types_for_race object as race_types %}
-          <div class="flex flex-col pl-0 mb-0 border rounded border-gray-300">
+          <div class="flex flex-col pl-0 mb-0 rounded border border-gray-300">
             {% for race_type in race_types %}
-              <a class="relative block py-3 px-6 -mb-px border border-r-0 border-l-0 border-gray-300 no-underline" href="#{{ race_type.slug }}"><h4 class="list-group-item-heading">{{ race_type.name }}</h4></a>
-              <a class="relative block py-3 px-6 -mb-px border border-r-0 border-l-0 border-gray-300 no-underline" href="#{{ race_type.slug }}-overall-results">Overall Results</a>
-              <a class="relative block py-3 px-6 -mb-px border border-r-0 border-l-0 border-gray-300 no-underline" href="#{{ race_type.slug }}-mens-results">Men's Results</a>
-              <a class="relative block py-3 px-6 -mb-px border border-r-0 border-l-0 border-gray-300 no-underline" href="#{{ race_type.slug }}-womens-results">Women's Results</a>
+              <a class="block relative py-3 px-6 -mb-px no-underline border border-r-0 border-l-0 border-gray-300" href="#{{ race_type.slug }}"><h4 class="list-group-item-heading">{{ race_type.name }}</h4></a>
+              <a class="block relative py-3 px-6 -mb-px no-underline border border-r-0 border-l-0 border-gray-300" href="#{{ race_type.slug }}-overall-results">Overall Results</a>
+              <a class="block relative py-3 px-6 -mb-px no-underline border border-r-0 border-l-0 border-gray-300" href="#{{ race_type.slug }}-mens-results">Men's Results</a>
+              <a class="block relative py-3 px-6 -mb-px no-underline border border-r-0 border-l-0 border-gray-300" href="#{{ race_type.slug }}-womens-results">Women's Results</a>
             {% endfor %}
           </div>
         </div>

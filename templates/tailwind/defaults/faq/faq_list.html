@@ -11,7 +11,7 @@
   <section id="faqs">
 
     <div class="flex flex-wrap ">
-      <div class="md:w-full pr-4 pl-4">
+      <div class="pr-4 pl-4 md:w-full">
         <h1>Frequently Asked Questions</h1>
       </div>
     </div>
@@ -19,7 +19,7 @@
     {% regroup object_list by content_type as obj_list %}
     {% for obj in obj_list %}
       <div class="flex flex-wrap ">
-        <div class="md:w-full pr-4 pl-4">
+        <div class="pr-4 pl-4 md:w-full">
           <h2>{{ obj.grouper|default:"Club"|title }} Questions</h2>
         </div>
       </div>

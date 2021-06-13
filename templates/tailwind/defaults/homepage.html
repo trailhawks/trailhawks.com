@@ -20,7 +20,7 @@
 
 {% block content %}
   <div class="flex flex-wrap ">
-    <div class="md:w-full pr-4 pl-4">
+    <div class="pr-4 pl-4 md:w-full">
       {% cache 60 homepage-carousel %}
         {% get_random_photos 5 as photos %}
         <div id="carousel-homepage" class="carousel slide" data-ride="carousel">
@@ -76,7 +76,7 @@
             </div>
             <hr>
           {% endfor %}
-          <a class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline block w-full bg-blue-600 text-white hover:bg-blue-600" href="{% url 'news_list' %}">More news &#187;</a>
+          <a class="block inline-block py-1 px-3 w-full font-normal leading-normal text-center text-white no-underline align-middle bg-blue-600 rounded border select-none whitespace-no-wrap hover:bg-blue-600" href="{% url 'news_list' %}">More news &#187;</a>
         </div>
       </div>
     </div>
@@ -190,7 +190,7 @@
 
             {# latest_race.description|oembed:"600x600"|markdown #}
 
-            <p><a class="inline-block align-middle text-center select-none border font-normal whitespace-no-wrap rounded py-1 px-3 leading-normal no-underline block w-full bg-blue-600 text-white hover:bg-blue-600" href="{{ latest_race.get_absolute_url }}">More information &#187;</a></p>
+            <p><a class="block inline-block py-1 px-3 w-full font-normal leading-normal text-center text-white no-underline align-middle bg-blue-600 rounded border select-none whitespace-no-wrap hover:bg-blue-600" href="{{ latest_race.get_absolute_url }}">More information &#187;</a></p>
           </div>
         </div>
       {% else %}
@@ -222,7 +222,7 @@
 
   <section id="events">
     <div class="flex flex-wrap  upcoming-races">
-      <div class="md:w-full pr-4 pl-4">
+      <div class="pr-4 pl-4 md:w-full">
         <h2>Upcoming races</h2>
       </div>
     </div>
@@ -236,12 +236,12 @@
 
   <section id="races">
     <div class="flex flex-wrap ">
-      <div class="md:w-full pr-4 pl-4">
+      <div class="pr-4 pl-4 md:w-full">
         <h2>Past races</h2>
       </div>
     </div>
     <div class="flex flex-wrap  past-races">
-      <div class="md:w-full pr-4 pl-4">
+      <div class="pr-4 pl-4 md:w-full">
         {% get_past_races as past_races %}
         {% for past_race in past_races reversed %}
           <div><a href="{{ past_race.get_absolute_url }}">{{ past_race }}</a></div>
@@ -256,7 +256,7 @@
   {% if homepage_sponsors %}
     <section id="sponsors">
       <div class="flex flex-wrap ">
-        <div class="md:w-full pr-4 pl-4">
+        <div class="pr-4 pl-4 md:w-full">
           <h2>Sponsors</h2>
         </div>
       </div>
