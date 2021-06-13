@@ -9,28 +9,28 @@
 {% block title %}Frequently Asked Questions{% endblock title %}
 
 {% block content %}
-  <section id="faqs">
+    <section id="faqs">
 
-    {% get_race_by_slug slug='the-hawk-10' as race %}
+        {% get_race_by_slug slug='the-hawk-10' as race %}
 
-    <div class="flex flex-wrap ">
-      <div class="pr-4 pl-4 md:w-full">
-        <h1>Frequently Asked Questions</h1>
-      </div>
-    </div>
+        <div class="flex flex-wrap ">
+            <div class="pr-4 pl-4 md:w-full">
+                <h1>Frequently Asked Questions</h1>
+            </div>
+        </div>
 
-    {% get_faqs_for_object race as faq_list %}
-    {% if faq_list %}
-      <div class="flex flex-wrap ">
-        {% for faq in faq_list %}
-          <div class="md:w-1/2 pr-4 pl-4">
-            <h3>{{ faq.question }}</h3>
-            {{ faq.answer|markdown }}
-          </div>
-          {% if forloop.counter|divisibleby:2 %}</div><div class="flex flex-wrap ">{% endif %}
-        {% endfor %}
-      </div>
-    {% endif %}
+        {% get_faqs_for_object race as faq_list %}
+        {% if faq_list %}
+            <div class="flex flex-wrap ">
+                {% for faq in faq_list %}
+                    <div class="md:w-1/2 pr-4 pl-4">
+                        <h3>{{ faq.question }}</h3>
+                        {{ faq.answer|markdown }}
+                    </div>
+                    {% if forloop.counter|divisibleby:2 %}</div><div class="flex flex-wrap ">{% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
 
-  </section>
+    </section>
 {% endblock content %}

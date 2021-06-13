@@ -9,18 +9,18 @@
 
 
 {% block content %}
-  <div class="flex flex-wrap ">
-    <div class="md:w-2/3 pr-4 pl-4">
-      <h1>News</h1>
-      <ul>
-        {% for news in object_list %}
-          <li><a href="{% url 'news_detail' news.pk %}">{{ news.pub_date|date }}: {{ news.title }}</a></li>
-        {% endfor %}
-      </ul>
-    </div>
+    <div class="flex flex-wrap ">
+        <div class="md:w-2/3 pr-4 pl-4">
+            <h1>News</h1>
+            <ul>
+                {% for news in object_list %}
+                    <li><a href="{% url 'news_detail' news.pk %}">{{ news.pub_date|date }}: {{ news.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
 
-    <div class="md:w-1/3 pr-4 pl-4">
-      {% include "includes/flickr_photos.html" %}
+        <div class="md:w-1/3 pr-4 pl-4">
+            {% include "includes/flickr_photos.html" %}
+        </div>
     </div>
-  </div>
 {% endblock content %}

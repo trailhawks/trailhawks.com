@@ -5,20 +5,20 @@
 
 
 {% block content %}
-  <div class="flex flex-wrap ">
-    <div class="md:w-2/3 pr-4 pl-4">
-      <p class="text-xl font-light">The Trailhawks have multiple runs per week. All with varying levels of distance and difficulty.</p>
-      <p>We welcome runners of all abilities. So come join us for a run.</p>
-      <p>Weekly runs:</p>
-      <ul>
-        {% for object in object_list %}
-          <li><a href="{{ object.get_absolute_url }}">{{ object.get_day_of_week_display }}: {{ object.name }} at {{ object.run_time }}</a></li>
-        {% endfor %}
-      </ul>
-    </div>
+    <div class="flex flex-wrap ">
+        <div class="md:w-2/3 pr-4 pl-4">
+            <p class="text-xl font-light">The Trailhawks have multiple runs per week. All with varying levels of distance and difficulty.</p>
+            <p>We welcome runners of all abilities. So come join us for a run.</p>
+            <p>Weekly runs:</p>
+            <ul>
+                {% for object in object_list %}
+                    <li><a href="{{ object.get_absolute_url }}">{{ object.get_day_of_week_display }}: {{ object.name }} at {{ object.run_time }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
 
-    <div class="md:w-1/3 pr-4 pl-4">
-      {% include "includes/flickr_photos.html" %}
+        <div class="md:w-1/3 pr-4 pl-4">
+            {% include "includes/flickr_photos.html" %}
+        </div>
     </div>
-  </div>
 {% endblock content %}

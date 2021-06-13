@@ -3,38 +3,38 @@
 {% block title %}Races{% endblock title %}
 
 {% block content %}
-  <div class="flex flex-wrap ">
-    <div class="pr-4 pl-4 md:w-full">
+    <div class="flex flex-wrap ">
+        <div class="pr-4 pl-4 md:w-full">
 
-      {% if upcoming_races %}
-        <section id="events">
-          <div class="flex flex-wrap ">
-            <div class="pr-4 pl-4 md:w-full">
-              <h2>Upcoming events
-                <a class="inline-block py-1 px-3 font-normal leading-normal text-center no-underline align-middle rounded border select-none ical whitespace-no-wrap btn-default btn-xs" href="{% url 'race_ical' %}">ICAL</a>
-              </h2>
-            </div>
-          </div>
-          <div class="flex flex-wrap ">
-            {% for race in upcoming_races %}
-              {% include 'includes/_race.html' with race=race %}
-            {% endfor %}
-          </div>
-        </section>
-      {% endif %}
+            {% if upcoming_races %}
+                <section id="events">
+                    <div class="flex flex-wrap ">
+                        <div class="pr-4 pl-4 md:w-full">
+                            <h2>Upcoming events
+                                <a class="inline-block py-1 px-3 font-normal leading-normal text-center no-underline align-middle rounded border select-none ical whitespace-no-wrap btn-default btn-xs" href="{% url 'race_ical' %}">ICAL</a>
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap ">
+                        {% for race in upcoming_races %}
+                            {% include 'includes/_race.html' with race=race %}
+                        {% endfor %}
+                    </div>
+                </section>
+            {% endif %}
 
-      <section id="events">
-        <div class="flex flex-wrap ">
-          <div class="pr-4 pl-4 md:w-full">
-            <h1>Past events</h1>
-          </div>
+            <section id="events">
+                <div class="flex flex-wrap ">
+                    <div class="pr-4 pl-4 md:w-full">
+                        <h1>Past events</h1>
+                    </div>
+                </div>
+                <div class="flex flex-wrap ">
+                    {% for race in completed_races %}
+                        {% include 'includes/_race.html' with race=race %}
+                    {% endfor %}
+                </div>
+            </section>
         </div>
-        <div class="flex flex-wrap ">
-          {% for race in completed_races %}
-            {% include 'includes/_race.html' with race=race %}
-          {% endfor %}
-        </div>
-      </section>
     </div>
-  </div>
 {% endblock content %}

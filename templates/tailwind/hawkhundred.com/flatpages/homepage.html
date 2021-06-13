@@ -6,35 +6,35 @@
 
 {% block content %}
 
-  <div class="py-8 px-4 mb-8 bg-gray-200 rounded md:py-16 md:px-8">
-    {{ block.super }}
-  </div>
+    <div class="py-8 px-4 mb-8 bg-gray-200 rounded md:py-16 md:px-8">
+        {{ block.super }}
+    </div>
 
-  <section id="sponsors">
-    {% get_race_by_slug slug='the-hawk-10' as race %}
-    {% get_sponsors_for_object race as sponsor_list %}
-    {% if sponsor_list %}
+    <section id="sponsors">
+        {% get_race_by_slug slug='the-hawk-10' as race %}
+        {% get_sponsors_for_object race as sponsor_list %}
+        {% if sponsor_list %}
 
-      <div class="flex flex-wrap ">
-        <div class="pr-4 pl-4 md:w-full">
-          <h2><a name="sponsors"></a>Sponsors
-          </h2>
-        </div>
-      </div>
+            <div class="flex flex-wrap ">
+                <div class="pr-4 pl-4 md:w-full">
+                    <h2><a name="sponsors"></a>Sponsors
+                    </h2>
+                </div>
+            </div>
 
-      <div class="flex flex-wrap ">
-        {% for sponsor in sponsor_list %}
-          <div class="md:w-1/2 pr-4 pl-4">
-            <h3>{{ sponsor.name }}</h3>
-            <a href="{{ sponsor.url }}">
-              <img class="img-responsive" src="{{ sponsor.logo.url }}" />
-            </a>
-          </div>
+            <div class="flex flex-wrap ">
+                {% for sponsor in sponsor_list %}
+                    <div class="md:w-1/2 pr-4 pl-4">
+                        <h3>{{ sponsor.name }}</h3>
+                        <a href="{{ sponsor.url }}">
+                            <img class="img-responsive" src="{{ sponsor.logo.url }}" />
+                        </a>
+                    </div>
 
-          {% if forloop.counter|divisibleby:2 %}</div><div class="flex flex-wrap ">{% endif %}
-        {% endfor %}
-      </div>
-    {% endif %}
-  </section>
+                    {% if forloop.counter|divisibleby:2 %}</div><div class="flex flex-wrap ">{% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </section>
 
 {% endblock content %}
