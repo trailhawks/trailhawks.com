@@ -26,6 +26,12 @@ TAILWIND_CSS_VERSION := "latest"
 @down:
     docker-compose down
 
+@fmt:
+    -isort --project=black .
+    -black .
+    -djhtml --tabwidth=4 --in-place templates/*.html templates/**/*.html
+    -rustywind --write ./templates/tailwind/
+
 @import_from_ultrasignup:
     {{manage}} import_from_ultrasignup 53172
     # just run import_from_ultrasignup 53173
@@ -54,7 +60,12 @@ TAILWIND_CSS_VERSION := "latest"
     # just run import_from_ultrasignup 36685
 
 @lint:
-    curlylint templates
+    -black --check --diff .
+    -isort --check --diff --project=black .
+    -unimport --check --diff .
+    -vulture --min-confidence=80 .
+    # -curlylint templates
+    # -rustywind --dry-run ./templates/tailwind/
 
 @logs +ARGS="":
     docker-compose logs {{ARGS}}

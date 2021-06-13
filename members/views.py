@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.sites.models import Site
 from django.core.mail import EmailMultiAlternatives
 from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
 from django.template import loader
 from django.template import RequestContext
 from django.urls import reverse
@@ -16,7 +17,6 @@ from .forms import ContactForm
 from .models import Member, Term
 from races.models import Race
 from runs.models import Run
-from django.shortcuts import render
 
 
 class MemberDetailView(DetailView):
