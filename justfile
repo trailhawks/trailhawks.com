@@ -14,7 +14,7 @@ TAILWIND_CSS_VERSION := "latest"
     docker images | grep trailhawks
 
 @check:
-    docker-compose run --rm web python manage.py check --deploy
+    {{manage}} check --deploy
 
 # opens a console
 @console:
@@ -27,7 +27,7 @@ TAILWIND_CSS_VERSION := "latest"
     docker-compose down
 
 @import_from_ultrasignup:
-    just run import_from_ultrasignup 53172
+    {{manage}} import_from_ultrasignup 53172
     # just run import_from_ultrasignup 53173
     # just run import_from_ultrasignup 53174
 
@@ -56,16 +56,19 @@ TAILWIND_CSS_VERSION := "latest"
 @lint:
     curlylint templates
 
+@logs +ARGS="":
+    docker-compose logs {{ARGS}}
+
 @makemigrations:
-    docker-compose run --rm web python manage.py makemigrations
+    {{manage}} makemigrations
 
 @migrate:
-    docker-compose run --rm web python manage.py migrate
+    {{manage}} migrate
 
 @pip-compile:
     pip install --upgrade -r requirements/requirements.in
     pip-compile requirements/requirements.in
-    docker-compose run --rm web \
+    {{compose}} \
         pip install \
             --upgrade \
             --requirement ./requirements/requirements.in && \
@@ -82,21 +85,15 @@ TAILWIND_CSS_VERSION := "latest"
     docker-compose up web
 
 @static:
-    @npx -p tailwindcss@{{TAILWIND_CSS_VERSION}} tailwindcss build \
+    npx -p tailwindcss@{{TAILWIND_CSS_VERSION}} tailwindcss build \
         ./frontend/index.css \
         --config ./frontend/tailwind.config.js \
         --output ./assets/css/tailwind.css
 
-    @docker-compose run --rm web python manage.py collectstatic --noinput
+    {{manage}} collectstatic --noinput
 
 @test:
-    docker-compose run --rm web pytest
+    {{compose}} pytest
 
 @up:
-    # docker-compose build
-    # docker-compose run --rm web python manage.py check
-    # docker-compose run --rm web python manage.py makemigrations
-    # docker-compose run --rm web python manage.py migrate
-    # docker-compose down
     docker-compose up -d
-    # docker-compose logs -f
