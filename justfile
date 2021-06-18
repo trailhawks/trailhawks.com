@@ -14,11 +14,11 @@ TAILWIND_CSS_VERSION := "latest"
     docker images | grep trailhawks
 
 @check:
-    {{manage}} check --deploy
+    {{ manage }} check --deploy
 
 # opens a console
 @console:
-    {{compose}} /bin/bash
+    {{ compose }} /bin/bash
 
 @djcodemod:
     djcodemod run --deprecated-in 3.1 .
@@ -36,7 +36,7 @@ TAILWIND_CSS_VERSION := "latest"
     -rustywind --write ./templates/tailwind/
 
 @import_from_ultrasignup:
-    {{manage}} import_from_ultrasignup 53172
+    {{ manage }} import_from_ultrasignup 53172
     # just run import_from_ultrasignup 53173
     # just run import_from_ultrasignup 53174
 
@@ -71,18 +71,18 @@ TAILWIND_CSS_VERSION := "latest"
     # -rustywind --dry-run ./templates/tailwind/
 
 @logs +ARGS="":
-    docker-compose logs {{ARGS}}
+    docker-compose logs {{ ARGS }}
 
 @makemigrations:
-    {{manage}} makemigrations
+    {{ manage }} makemigrations
 
 @migrate:
-    {{manage}} migrate
+    {{ manage }} migrate
 
 @pip-compile:
     pip install --upgrade -r requirements/requirements.in
     pip-compile requirements/requirements.in
-    {{compose}} \
+    {{ compose }} \
         pip install \
             --upgrade \
             --requirement ./requirements/requirements.in && \
@@ -91,23 +91,29 @@ TAILWIND_CSS_VERSION := "latest"
             --output-file ./requirements/requirements.txt
 
 @run +ARGS="--help":
-    {{manage}} {{ARGS}}
+    {{ manage }} {{ ARGS }}
 
 @server:
     docker-compose up -d db
-    {{manage}} migrate --noinput
+    {{ manage }} migrate --noinput
     docker-compose up web
 
+@spatula:
+    # spatula scrape --fastmode spatula_demo.RaceDetail --source "https://ultrasignup.com/results_event.aspx?did=63105"
+    spatula scrape --fastmode spatula_demo.RaceList
+    # spatula test --fastmode spatula_demo.RaceDetail
+    # spatula test --fastmode spatula_demo.RaceDetail --source "https://ultrasignup.com/results_event.aspx?did=63105"
+
 @static:
-    npx -p tailwindcss@{{TAILWIND_CSS_VERSION}} tailwindcss build \
+    npx -p tailwindcss@{{ TAILWIND_CSS_VERSION }} tailwindcss build \
         ./frontend/index.css \
         --config ./frontend/tailwind.config.js \
         --output ./assets/css/tailwind.css
 
-    {{manage}} collectstatic --noinput
+    {{ manage }} collectstatic --noinput
 
 @test:
-    {{compose}} pytest
+    {{ compose }} pytest
 
 @up:
     docker-compose up -d
