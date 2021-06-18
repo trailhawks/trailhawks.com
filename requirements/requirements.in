@@ -37,6 +37,7 @@ whitenoise
 
 black==21.6b0
 bumpver
+friendly
 
 # git+https://github.com/vikingco/django-storage-migration.git#egg=django-storage-migration-git
 # git+https://gitlab.com/jeff.triplett/django-syncr.git#egg=django-syncr-git
