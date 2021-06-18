@@ -30,6 +30,7 @@ psycopg2-binary
 pycrypto==2.6.1
 python-slugify
 requests
+spatula
 titlecase
 uwsgi
 whitenoise
