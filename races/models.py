@@ -77,6 +77,12 @@ class Race(MachineTagMixin):
         help_text="Link to registartion flyer or to registration URL for online signup.",
     )
     reg_description = models.TextField(blank=True, null=True)
+    ultrasignup_id = models.CharField(
+        max_length=50,
+        null=True,
+        blank=True,
+        help_text="This should be the ID of your UltraSignup.com ?did=",
+    )
     entry_form = models.FileField(upload_to="races/entry_forms", null=True, blank=True)
     discounts = models.TextField(
         blank=True,

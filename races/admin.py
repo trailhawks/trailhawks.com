@@ -76,12 +76,21 @@ class RegistrationInline(admin.TabularInline):
 @admin.register(Race)
 class RaceAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ["title", "annual"]}
-    list_display = ("title", "number", "annual", "active", "start_datetime")
-    list_filter = ("active", "start_datetime", "number", "annual", "location")
+    list_display = [
+        "title",
+        "number",
+        "annual",
+        "active",
+        "start_datetime",
+        "ultrasignup_id",
+        "reg_url",
+    ]
+    list_editable = ["ultrasignup_id"]
+    list_filter = ["active", "start_datetime", "number", "annual", "location"]
     ordering = ["-start_datetime"]
     raw_id_fields = ["background"]
     save_on_top = True
-    search_fields = ("title", "slogan", "description", "slogan")
+    search_fields = ["title", "slogan", "description", "slogan"]
     actions = [
         migrate_race,
         set_location_to_clinton,
