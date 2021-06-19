@@ -1,11 +1,11 @@
 [tool.poetry]
 name = "Lawrence Trail Hawks"
-version = "2021.6.33"
+version = "2021.6.34"
 description = ""
 authors = ["Jeff Triplett <jeff.triplett@gmail.com>"]
 
 [tool.bumpver]
-current_version = "2021.6.33"
+current_version = "2021.6.34"
 version_pattern = "YYYY.MM.INC1"
 commit_message = ":bookmark: bump version {old_version} -> {new_version}"
 commit = true
