@@ -6,7 +6,7 @@ TAILWIND_CSS_VERSION := "latest"
     just --list
 
 @bump:
-    bumpver update
+    bumpver update --allow-dirty
     git push origin main
 
 @build:
@@ -80,6 +80,7 @@ TAILWIND_CSS_VERSION := "latest"
     {{ manage }} migrate
 
 @pip-compile:
+    rm ./requirements/requirements.txt
     pip install --upgrade -r requirements/requirements.in
     pip-compile requirements/requirements.in
     {{ compose }} \
@@ -95,6 +96,7 @@ TAILWIND_CSS_VERSION := "latest"
 
 @scrape:
     spatula scrape --fastmode scrape_ultrasignup.RaceList
+    # --output-dir=./media_root/_scrapes/results
 
 @server:
     docker-compose up -d db
