@@ -93,16 +93,13 @@ TAILWIND_CSS_VERSION := "latest"
 @run +ARGS="--help":
     {{ manage }} {{ ARGS }}
 
+@scrape:
+    spatula scrape --fastmode scrape_ultrasignup.RaceList
+
 @server:
     docker-compose up -d db
     {{ manage }} migrate --noinput
     docker-compose up web
-
-@spatula:
-    # spatula scrape --fastmode spatula_demo.RaceDetail --source "https://ultrasignup.com/results_event.aspx?did=63105"
-    spatula scrape --fastmode spatula_demo.RaceList
-    # spatula test --fastmode spatula_demo.RaceDetail
-    # spatula test --fastmode spatula_demo.RaceDetail --source "https://ultrasignup.com/results_event.aspx?did=63105"
 
 @static:
     npx -p tailwindcss@{{ TAILWIND_CSS_VERSION }} tailwindcss build \
@@ -114,6 +111,9 @@ TAILWIND_CSS_VERSION := "latest"
 
 @test:
     {{ compose }} pytest
+
+@test-spatula:
+    spatula test --fastmode scrape_ultrasignup.RaceList --source "https://ultrasignup.com/results_event.aspx?did=63105"
 
 @up:
     docker-compose up -d
