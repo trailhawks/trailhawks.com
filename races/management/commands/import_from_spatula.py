@@ -1,12 +1,12 @@
-import djclick as click
 import json
-
-from dateutil.parser import parse
 from pathlib import Path
 
-# from slugify import slugify
+import djclick as click
+from dateutil.parser import parse
 
 from races.models import Race, Racer, RaceType, Result
+
+# from slugify import slugify
 
 
 @click.command()

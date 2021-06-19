@@ -1,4 +1,5 @@
 from enum import Enum
+
 from spatula import (
     HtmlListPage,
     HtmlPage,
