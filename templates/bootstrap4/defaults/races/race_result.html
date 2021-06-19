@@ -43,8 +43,8 @@
                 <h2><a name="{{ race_type.slug }}"></a>{{ race_type.name }} Results</h2>
                 <ul class="nav nav-tabs" id="{{ race_type.slug }}-tabs">
                     <li><a href="#{{ race_type.slug }}-overall-results" data-toggle="tab">Overall Results</a></li>
-                    <li><a href="#{{ race_type.slug }}-womens-results" data-toggle="tab">Women's Results</a></li>
-                    <li><a href="#{{ race_type.slug }}-mens-results" data-toggle="tab">Men's Results</a></li>
+                    <li><a href="#{{ race_type.slug }}-womens-results" data-toggle="tab">Women&apos;s Results</a></li>
+                    <li><a href="#{{ race_type.slug }}-mens-results" data-toggle="tab">Men&apos;s Results</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="{{ race_type.slug }}-overall-results">
@@ -75,8 +75,8 @@
                         {% for race_type in race_types %}
                             <a class="list-group-item" href="#{{ race_type.slug }}"><h4 class="list-group-item-heading">{{ race_type.name }}</h4></a>
                             <a class="list-group-item" href="#{{ race_type.slug }}-overall-results">Overall Results</a>
-                            <a class="list-group-item" href="#{{ race_type.slug }}-mens-results">Men's Results</a>
-                            <a class="list-group-item" href="#{{ race_type.slug }}-womens-results">Women's Results</a>
+                            <a class="list-group-item" href="#{{ race_type.slug }}-mens-results">Men&apos;s Results</a>
+                            <a class="list-group-item" href="#{{ race_type.slug }}-womens-results">Women&apos;s Results</a>
                         {% endfor %}
                     </div>
                 </div>

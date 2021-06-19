@@ -243,8 +243,8 @@
                 <ul>
                     {% for race_type in race_types %}
                         <li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-overallresults">{{ race_type.name }} Overall Results</a></li>
-                        <li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-mensresults">{{ race_type.name }} Men's Results</a></li>
-                        <li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-womensresults">{{ race_type.name }} Women's Results</a></li>
+                        <li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-mensresults">{{ race_type.name }} Men&apos;s Results</a></li>
+                        <li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-womensresults">{{ race_type.name }} Women&apos;s Results</a></li>
                     {% endfor %}
                 </ul>
             {% endif %}
@@ -329,8 +329,8 @@
                     <ul class="flex flex-col pl-0 mb-0 rounded border border-gray-300">
                         {% for race_type in race_types %}
                             <li class="block relative py-3 px-6 -mb-px no-underline border border-r-0 border-l-0 border-gray-300"><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-overallresults">{{ race_type.name }} Overall Results</a></li>
-                            <li class="block relative py-3 px-6 -mb-px no-underline border border-r-0 border-l-0 border-gray-300"><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-mensresults">{{ race_type.name }} Men's Results</a></li>
-                            <li class="block relative py-3 px-6 -mb-px no-underline border border-r-0 border-l-0 border-gray-300"><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-womensresults">{{ race_type.name }} Women's Results</a></li>
+                            <li class="block relative py-3 px-6 -mb-px no-underline border border-r-0 border-l-0 border-gray-300"><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-mensresults">{{ race_type.name }} Men&apos;s Results</a></li>
+                            <li class="block relative py-3 px-6 -mb-px no-underline border border-r-0 border-l-0 border-gray-300"><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-womensresults">{{ race_type.name }} Women&apos;s Results</a></li>
                         {% endfor %}
                     </ul>
                 </div>
