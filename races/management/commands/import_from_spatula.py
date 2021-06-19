@@ -72,6 +72,7 @@ def command(folder):
                         "dnf": data["status"] == 3,
                         "dns": data["status"] == 2,
                         "time": formattime,
+                        "import_data": data,
                     },
                 )
             except Result.MultipleObjectsReturned as e:
