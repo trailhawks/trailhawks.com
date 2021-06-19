@@ -300,6 +300,7 @@ class Result(models.Model):
     dq = models.BooleanField("Disqualified", default=False)
     dns = models.BooleanField("Did not Start", default=False)
     dnf = models.BooleanField("Did not Finish", default=False)
+    import_data = models.JSONField(default=dict, blank=True)
 
     class Meta:
         ordering = ("time",)
@@ -311,13 +312,14 @@ class Result(models.Model):
 
     def save(self, *args, **kwargs):
 
-        if "cr" in self.time.lower():
-            self.course_record = True
+        if self.time:
+            if "cr" in self.time.lower():
+                self.course_record = True
 
-        if "dnf" in self.time.lower():
-            self.dnf = True
+            if "dnf" in self.time.lower():
+                self.dnf = True
 
-        if "dns" in self.time.lower():
-            self.dns = True
+            if "dns" in self.time.lower():
+                self.dns = True
 
         return super().save(*args, **kwargs)
