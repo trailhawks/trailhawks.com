@@ -12,7 +12,7 @@ from django.views.generic import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
-from races.models import Race
+from races.models import Race, Result
 from runs.models import Run
 
 from .forms import ContactForm
@@ -92,8 +92,12 @@ class MemberExport(TemplateView):
 
 @login_required
 def member_list(request):
-    response = HttpResponse(content_type="text/csv")
-    response["Content-Disposition"] = "attachment; filename=member_list.csv"
+    if request.GET.get("plain"):
+        response = HttpResponse(content_type="text/plain")
+    else:
+        response = HttpResponse(content_type="text/csv")
+        response["Content-Disposition"] = "attachment; filename=member_list.csv"
+
     current_site = Site.objects.get_current()
 
     members = Member.objects.all().order_by("-date_paid")
@@ -146,3 +150,71 @@ def member_list(request):
         )
 
     return response
+
+
+class MemberResultCsvDetail(ListView):
+    queryset = Member.objects.all()
+
+    def get(self, *args, **kwargs):
+        members = self.get_queryset().select_related("racer", "racer_trailhawk").all()
+
+        if self.request.GET.get("plain"):
+            response = HttpResponse(content_type="text/plain")
+        else:
+            response = HttpResponse(content_type="text/csv")
+            response[
+                "Content-Disposition"
+            ] = f"attachment; filename={members.slug}_results.csv"
+
+        results = Result.objects.filter(racer__trailhawk__in=members).order_by(
+            "race__name",
+            "race__start_datetime__year",
+            "race_type__name",
+            "dq",
+            "dnf",
+            "dns",
+            "time",
+        )
+
+        result_list = csv.writer(response)
+        result_list.writerow(
+            [
+                "racer.trailhawk" "racer.trailhawk.date_paid",
+                "racer.trailhawk.member_since",
+                "race.title",
+                "race.start_datetime.year",
+                "race_type.name",
+                "racer.bib_number",
+                "racer.full_name",
+                "racer.gender",
+                "time",
+                "place",
+            ]
+        )
+
+        for result in results:
+            time = str(result.time).replace(",", ":")
+            if result.dq:
+                time = "DQ"
+            elif result.dns:
+                time = "DNS"
+            elif result.dnf:
+                time = "DNF"
+
+            result_list.writerow(
+                [
+                    result.racer.trailhawk,
+                    result.racer.trailhawk.date_paid,
+                    result.racer.trailhawk.member_since,
+                    result.race.title,
+                    result.race.start_datetime.year,
+                    result.race_type.name,
+                    result.bib_number,
+                    result.racer.full_name,
+                    result.racer.get_gender_display(),
+                    time,
+                    result.place,
+                ]
+            )
+
+        return response
