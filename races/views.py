@@ -73,13 +73,16 @@ class RaceResultCsvDetail(RaceMixin, dates.DateDetailView):
                 "Content-Disposition"
             ] = f"attachment; filename={race.slug}_{race.start_datetime.year}_results.csv"
 
-        results = Result.objects.filter(race=race).order_by("dq", "dnf", "dns", "time")
+        results = Result.objects.filter(race=race).order_by(
+            "race_type__name", "dq", "dnf", "dns", "time"
+        )
 
         result_list = csv.writer(response)
         result_list.writerow(
             [
                 "race.title",
                 "race.start_datetime.year",
+                "race_type.name",
                 "racer.bib_number",
                 "racer.full_name",
                 "time",
@@ -99,6 +102,7 @@ class RaceResultCsvDetail(RaceMixin, dates.DateDetailView):
             result_list.writerow(
                 [
                     result.race.title,
+                    result.race_type.name,
                     result.race.start_datetime.year,
                     result.bib_number,
                     result.racer.full_name,
