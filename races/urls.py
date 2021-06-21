@@ -24,4 +24,9 @@ urlpatterns = [
     re_path(
         r"^racers/(?P<pk>[-\w]+)/$", views.RacerDetail.as_view(), name="racer_detail"
     ),
+    path(
+        "series/<slug:slug>/csv/",
+        views.SeriesResultCsvDetail.as_view(),
+        name="series_results_index",
+    ),
 ]

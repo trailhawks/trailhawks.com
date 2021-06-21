@@ -5,7 +5,7 @@ from django.views.generic import TemplateView, dates
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
-from .models import Race, Racer, Result
+from .models import Race, Racer, Result, Series
 
 
 class RaceMixin:
@@ -122,3 +122,65 @@ class RacerDetail(DetailView):
 class RacerList(ListView):
     model = Racer
     navitem = "races"
+
+
+class SeriesResultCsvDetail(DetailView):
+    queryset = Series.objects.all()
+    template_name = "races/race_result.html"
+
+    def get(self, *args, **kwargs):
+        series = self.get_object()
+
+        if self.request.GET.get("plain"):
+            response = HttpResponse(content_type="text/plain")
+        else:
+            response = HttpResponse(content_type="text/csv")
+            response[
+                "Content-Disposition"
+            ] = f"attachment; filename={series.slug}_results.csv"
+
+        results = Result.objects.filter(race__in=series.races.all()).order_by(
+            "race__name",
+            "race__start_datetime__year",
+            "race_type__name",
+            "dq",
+            "dnf",
+            "dns",
+            "time",
+        )
+
+        result_list = csv.writer(response)
+        result_list.writerow(
+            [
+                "race.title",
+                "race.start_datetime.year",
+                "race_type.name",
+                "racer.bib_number",
+                "racer.full_name",
+                "time",
+                "place",
+            ]
+        )
+
+        for result in results:
+            time = str(result.time).replace(",", ":")
+            if result.dq:
+                time = "DQ"
+            elif result.dns:
+                time = "DNS"
+            elif result.dnf:
+                time = "DNF"
+
+            result_list.writerow(
+                [
+                    result.race.title,
+                    result.race.start_datetime.year,
+                    result.race_type.name,
+                    result.bib_number,
+                    result.racer.full_name,
+                    time,
+                    result.place,
+                ]
+            )
+
+        return response
