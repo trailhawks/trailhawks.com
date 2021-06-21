@@ -1,8 +1,11 @@
+import csv
+
+from django.http import HttpResponse
 from django.views.generic import TemplateView, dates
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
-from .models import Race, Racer
+from .models import Race, Racer, Result
 
 
 class RaceMixin:
@@ -53,6 +56,58 @@ class RaceDateDetail(RaceMixin, dates.DateDetailView):
 class RaceResultDetail(RaceMixin, dates.DateDetailView):
     queryset = Race.objects.all()
     template_name = "races/race_result.html"
+
+
+class RaceResultCsvDetail(RaceMixin, dates.DateDetailView):
+    queryset = Race.objects.all()
+    template_name = "races/race_result.html"
+
+    def get(self, *args, **kwargs):
+        race = self.get_object()
+
+        if self.request.GET.get("plain"):
+            response = HttpResponse(content_type="text/plain")
+        else:
+            response = HttpResponse(content_type="text/csv")
+            response[
+                "Content-Disposition"
+            ] = f"attachment; filename={race.slug}_{race.start_datetime.year}_results.csv"
+
+        results = Result.objects.filter(race=race).order_by("dq", "dnf", "dns", "time")
+
+        result_list = csv.writer(response)
+        result_list.writerow(
+            [
+                "race.title",
+                "race.start_datetime.year",
+                "racer.bib_number",
+                "racer.full_name",
+                "time",
+                "place",
+            ]
+        )
+
+        for result in results:
+            time = str(result.time).replace(",", ":")
+            if result.dq:
+                time = "DQ"
+            elif result.dns:
+                time = "DNS"
+            elif result.dnf:
+                time = "DNF"
+
+            result_list.writerow(
+                [
+                    result.race.title,
+                    result.race.start_datetime.year,
+                    result.bib_number,
+                    result.racer.full_name,
+                    time,
+                    result.place,
+                ]
+            )
+
+        return response
 
 
 class RacerDetail(DetailView):
