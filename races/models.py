@@ -323,3 +323,23 @@ class Result(models.Model):
                 self.dns = True
 
         return super().save(*args, **kwargs)
+
+
+class Series(models.Model):
+    """Series model."""
+
+    name = models.CharField(max_length=200)
+    slug = models.SlugField(blank=True)
+    races = models.ManyToManyField("races.Race", related_name="series")
+
+    class Meta:
+        verbose_name = _("Series")
+        verbose_name_plural = _("Series")
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        return super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name

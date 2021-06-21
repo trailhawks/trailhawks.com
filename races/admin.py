@@ -9,7 +9,7 @@ from links.admin import LinksInline
 from news.admin import NewsInline
 from sponsors.admin import SponsorInline
 
-from .models import Race, Racer, RaceType, Registration, Report, Result
+from .models import Race, Racer, RaceType, Registration, Report, Result, Series
 
 
 def migrate_race(modeladmin, request, queryset):
@@ -153,3 +153,9 @@ class ResultAdmin(admin.ModelAdmin):
     list_filter = ("race_type", "course_record", "dns", "dnf", "dq", "race")
     raw_id_fields = ("racer", "race")
     search_fields = ("time", "place")
+
+
+@admin.register(Series)
+class SeriesTypeAdmin(admin.ModelAdmin):
+    list_display = ["name", "slug"]
+    filter_horizontal = ("races",)
