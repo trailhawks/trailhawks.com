@@ -5,7 +5,7 @@ from .views import (
     MemberDetailView,
     MemberEmailPreview,
     MemberListView,
-    MemberResultCsvDetail,
+    MemberResultCsvListView,
 )
 
 urlpatterns = [
@@ -15,7 +15,7 @@ urlpatterns = [
     path("member_list/", member_list, name="admin_member_list"),
     path(
         "csv/",
-        MemberResultCsvDetail.as_view(),
+        MemberResultCsvListView.as_view(),
         name="admin_member_csv_list",
     ),
 ]

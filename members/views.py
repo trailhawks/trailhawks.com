@@ -152,7 +152,7 @@ def member_list(request):
     return response
 
 
-class MemberResultCsvDetail(ListView):
+class MemberResultCsvListView(ListView):
     queryset = Member.objects.all()
 
     def get(self, *args, **kwargs):
