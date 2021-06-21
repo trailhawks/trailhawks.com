@@ -156,24 +156,26 @@ class MemberResultCsvListView(ListView):
     queryset = Member.objects.all()
 
     def get(self, *args, **kwargs):
-        members = self.get_queryset().select_related("racer", "racer_trailhawk").all()
+        members = self.get_queryset().all()
 
         if self.request.GET.get("plain"):
             response = HttpResponse(content_type="text/plain")
         else:
             response = HttpResponse(content_type="text/csv")
-            response[
-                "Content-Disposition"
-            ] = f"attachment; filename={members.slug}_results.csv"
+            response["Content-Disposition"] = f"attachment; filename=member_results.csv"
 
-        results = Result.objects.filter(racer__trailhawk__in=members).order_by(
-            "race__name",
-            "race__start_datetime__year",
-            "race_type__name",
-            "dq",
-            "dnf",
-            "dns",
-            "time",
+        results = (
+            Result.objects.filter(racer__trailhawk__in=members)
+            .select_related("race", "race_type", "racer", "racer__trailhawk")
+            .order_by(
+                "race__name",
+                "race__start_datetime__year",
+                "race_type__name",
+                "dq",
+                "dnf",
+                "dns",
+                "time",
+            )
         )
 
         result_list = csv.writer(response)
