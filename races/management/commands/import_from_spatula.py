@@ -77,6 +77,9 @@ def command(folder):
                 )
             except Result.MultipleObjectsReturned as e:
                 click.secho(f"{e}", bold=True, fg="red")
+                click.echo(f"race: {race}")
+                click.echo(f"race_type: {race_type}")
+                click.echo(f"racer: {racer}")
 
         except (Race.DoesNotExist, Race.MultipleObjectsReturned) as e:
             ultrasignup_url = f"https://ultrasignup.com/results_event.aspx?did={did}"
