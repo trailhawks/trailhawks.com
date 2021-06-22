@@ -151,6 +151,11 @@ class ResultAdmin(admin.ModelAdmin):
         "dq",
     )
     list_filter = ("race_type", "course_record", "dns", "dnf", "dq", "race")
+    ordering = [
+        "race",
+        "time",
+        "race_type",
+    ]
     raw_id_fields = ("racer", "race")
     search_fields = ("time", "place")
 
