@@ -17,11 +17,11 @@ class Races(Enum):
     SHORELINE_SHUFFLE = 78562
     SKYLINE_SHUFFLE = 76498
     THE_HAWK_HUNDRED = 83843
-    THE_NIGHT_HAWK = 82056
+    THE_NIGHT_HAWK = 63105
     THE_SNAKE = 63478
 
 
-DEFAULT_RACE_ID = Races.THE_HAWK_HUNDRED.value
+DEFAULT_RACE_ID = Races.THE_NIGHT_HAWK.value
 
 
 class RaceList(Page):
@@ -34,9 +34,9 @@ class RaceList(Page):
     def process_page(self):
         for race in Races:
             yield RaceListDetail(
-                dict(
-                    ultrasignup_id=race.value,
-                ),
+                # dict(
+                #     ultrasignup_id=race.value,
+                # ),
                 source=f"https://ultrasignup.com/results_event.aspx?did={race.value}",
             )
 
@@ -64,8 +64,8 @@ class RaceListDetail(HtmlListPage):
             dict(
                 did=did,
                 race_url=href,
-                ultrasignup_id=self.input.get("ultrasignup_id", did),
                 year=item.text,
+                # **self.input,
             ),
             source=href,
         )
@@ -87,7 +87,11 @@ class RaceResultListPage(HtmlListPage):
         href = XPath("@href").match_one(item)
         if not href.startswith("http"):
             href = f"https://ultrasignup.com{href}"
-        return RaceResultDetail(dict(race_results_url=href, **self.input), source=href)
+        race_id = href.split("=")[-1]
+        # return dict(race_results_url=href, **self.input)
+        return RaceResultDetail(
+            dict(race_id=race_id, race_results_url=href, **self.input), source=href
+        )
 
 
 class RaceResultDetail(HtmlPage):
@@ -108,21 +112,31 @@ class RaceResultDetail(HtmlPage):
             cancellation = False
 
         try:
+            did = (
+                XPath("//a[@class='event_selected_link']")
+                .match_one(self.root)
+                .get("href")
+                .split("=")[-1]
+            )
+        except SelectorError:
+            did = ""
+
+        try:
             distance = (
                 XPath("//a[@class='event_selected_link']").match_one(self.root).text
             )
         except SelectorError:
             distance = ""
 
-        try:
-            distance_results = XPath(
-                "//a[@class='event_link' or @class='event_selected_link']"
-            ).match(self.root)
-            distance_results = {
-                item.text: item.get("href") for item in distance_results
-            }
-        except SelectorError:
-            distance_results = None
+        # try:
+        #     distance_results = XPath(
+        #         "//a[@class='event_link' or @class='event_selected_link']"
+        #     ).match(self.root)
+        #     distance_results = {
+        #         item.text: item.get("href") for item in distance_results
+        #     }
+        # except SelectorError:
+        #     distance_results = None
 
         try:
             event_date = XPath("//span[@class='event-date']").match_one(self.root).text
@@ -145,13 +159,12 @@ class RaceResultDetail(HtmlPage):
                 cancellation=cancellation,
                 date=event_date,
                 distance=distance,
-                distance_results=distance_results,
                 title=title.text,
                 virtual=virtual,
                 website=website,
                 **self.input,
             ),
-            source=f"https://ultrasignup.com/service/events.svc/results/{self.input['did']}/1/json",
+            source=f"https://ultrasignup.com/service/events.svc/results/{did}/1/json",
         )
 
 
@@ -161,7 +174,7 @@ class ResultJsonListPage(JsonListPage):
     information so that we know which race we have parsed.
     """
 
-    example_source = "https://ultrasignup.com/service/events.svc/results/63478/1/json"
+    example_source = "https://ultrasignup.com/service/events.svc/results/63105/1/json"
     source = NullSource()
 
     def process_item(self, item):

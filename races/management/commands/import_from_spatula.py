@@ -11,7 +11,12 @@ from races.models import Race, Racer, RaceType, Result
 
 @click.command()
 @click.argument("folder")
-def command(folder):
+@click.option("--delete/--no-delete", default=False)
+def command(delete, folder):
+    if delete:
+        click.secho("deleting existing results...")
+        Result.objects.all().delete()
+
     missing = []
     filenames = Path(folder).glob("*.json")
     for filename in filenames:
@@ -20,9 +25,11 @@ def command(folder):
         did = data["did"]
         distance = data["distance"]
         formattime = data["formattime"]
-        start_datetime = parse(data["date"].split("@")[0])
-        title = data["title"]
-        ultrasignup_id = data["ultrasignup_id"]
+        # start_datetime = parse(data["date"].split("@")[0])
+        # title = data["title"]
+        # ultrasignup_id = data["ultrasignup_id"]
+
+        # TODO: place...
 
         # click.echo(
         #     [
@@ -65,14 +72,15 @@ def command(folder):
             try:
                 result, _ = Result.objects.update_or_create(
                     race=race,
-                    race_type=race_type,
                     racer=racer,
+                    race_type=race_type,
                     defaults={
                         "bib_number": data["bib"] or None,
                         "dnf": data["status"] == 3,
                         "dns": data["status"] == 2,
-                        "time": formattime,
                         "import_data": data,
+                        # "race_type": race_type,
+                        "time": formattime,
                     },
                 )
             except Result.MultipleObjectsReturned as e:
