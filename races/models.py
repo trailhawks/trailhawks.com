@@ -109,7 +109,7 @@ class Race(MachineTagMixin):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(" ".join([self.title, self.annual or ""]))
+            self.slug = slugify(f"{self.title} {self.start_datetime.strftime('%Y')}")
         return super().save(*args, **kwargs)
 
     def __str__(self):
