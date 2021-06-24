@@ -3,16 +3,19 @@ from pathlib import Path
 
 import djclick as click
 from dateutil.parser import parse
+from num2words import num2words
+from slugify import slugify
+from titlecase import titlecase
 
 from races.models import Race, Racer, RaceType, Result
-
-# from slugify import slugify
 
 
 @click.command()
 @click.argument("folder")
+@click.option("--create/--no-create", default=False)
 @click.option("--delete/--no-delete", default=False)
-def command(delete, folder):
+@click.option("--update/--no-update", default=False)
+def command(create, delete, update, folder):
     if delete:
         click.secho("deleting existing results...")
         Result.objects.all().delete()
@@ -22,30 +25,58 @@ def command(delete, folder):
     for filename in filenames:
         data = json.loads(filename.read_text())
 
+        date = parse(data["date"].split("@")[0])
         did = data["did"]
         distance = data["distance"]
         formattime = data["formattime"]
-        # start_datetime = parse(data["date"].split("@")[0])
-        # title = data["title"]
-        # ultrasignup_id = data["ultrasignup_id"]
+        gender = data["gender"]
+        gender_place = data["gender_place"]
+        place = data["place"]
 
-        # TODO: place...
+        place_data = []
 
-        # click.echo(
-        #     [
-        #         title,
-        #         start_datetime.year,
-        #         ultrasignup_id,
-        #         did,
-        #         distance,
-        #         data["firstname"],
-        #         data["lastname"],
-        #         data["formattime"],
-        #     ]
-        # )
+        if gender_place in [1, 2, 3]:
+            if gender.upper() in ["F", "W"]:
+                if place in [1, 2, 3]:
+                    place_data.append(
+                        titlecase(f"{num2words(place, ordinal=True)} Place Overall.")
+                    )
+                place_data.append(
+                    titlecase(f"{num2words(gender_place, ordinal=True)} Place Womens.")
+                )
+            elif gender.upper() in ["M"]:
+                place_data.append(
+                    titlecase(f"{num2words(gender_place, ordinal=True)} Place Mens.")
+                )
+            else:
+                place_data.append(
+                    titlecase(f"{num2words(gender_place, ordinal=True)} Place Overall.")
+                )
+
+        if len(place_data):
+            place_data = " ".join(place_data)
+        else:
+            place_data = ""
 
         try:
-            race = Race.objects.get(ultrasignup_id=did)
+            title = f"{data['title']} {date.strftime('%Y')}"
+            race_defaults = {
+                "slug": slugify(title),
+                "start_datetime": date,
+                "title": title,
+            }
+            if create:
+                race, _ = Race.objects.get_or_create(
+                    ultrasignup_id=did,
+                    defaults=race_defaults,
+                )
+            elif update:
+                race, _ = Race.objects.update_or_create(
+                    ultrasignup_id=did,
+                    defaults=race_defaults,
+                )
+            else:
+                race = Race.objects.get(ultrasignup_id=did)
 
             # TODO: Fix slugs
             race_type, _ = RaceType.objects.get_or_create(name=distance)
@@ -79,6 +110,7 @@ def command(delete, folder):
                         "dnf": data["status"] == 3,
                         "dns": data["status"] == 2,
                         "import_data": data,
+                        "place": place_data,
                         # "race_type": race_type,
                         "time": formattime,
                     },
