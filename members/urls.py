@@ -1,11 +1,11 @@
 from django.urls import path
 
 from .views import (
-    member_list,
     MemberDetailView,
     MemberEmailPreview,
     MemberListView,
     MemberResultCsvListView,
+    member_list,
 )
 
 urlpatterns = [
