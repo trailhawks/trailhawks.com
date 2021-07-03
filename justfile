@@ -95,8 +95,14 @@ TAILWIND_CSS_VERSION := "latest"
     {{ manage }} {{ ARGS }}
 
 @scrape:
-    spatula scrape --fastmode scrape_ultrasignup.RaceList
-    # --output-dir=./media_root/_scrapes/results
+    just spatula scrape
+
+@scrape-test:
+    just spatula test
+
+@spatula +ARGS="scrape":
+    rm -rf _scrapes/*
+    {{ compose }} spatula {{ ARGS }} --fastmode scrapers.scrape_ultrasignup.RaceListFromDjango
 
 @server:
     docker-compose up -d db
@@ -113,9 +119,6 @@ TAILWIND_CSS_VERSION := "latest"
 
 @test:
     {{ compose }} pytest
-
-@test-spatula:
-    spatula test --fastmode scrape_ultrasignup.RaceList --source "https://ultrasignup.com/results_event.aspx?did=63105"
 
 @up:
     docker-compose up -d
