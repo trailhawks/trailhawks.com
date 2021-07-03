@@ -1,4 +1,4 @@
-from enum import Enum
+# from enum import Enum
 
 from spatula import (
     HtmlListPage,
@@ -10,65 +10,33 @@ from spatula import (
     XPath,
 )
 
+import django  # noqa
 
-class Races(Enum):
-    PI_DAY = 69866
-    SANDERS_SAUNTER = 73085
-    SHORELINE_SHUFFLE = 78562
-    SKYLINE_SHUFFLE = 76498
-    THE_HAWK_HUNDRED = 83843
-    THE_NIGHT_HAWK = 63105
-    THE_SNAKE = 63478
+django.setup()  # noqa
+
+from races.models import Race  # noqa
 
 
-DEFAULT_RACE_ID = Races.THE_NIGHT_HAWK.value
-
-
-class RaceList(Page):
-    """
-    Seed our top-level races to gather data.
-    """
-
+class RaceListFromDjango(Page):
     source = NullSource()
+
+    def process_error_response(self, exception):
+        self.logger.warning(exception)
 
     def process_page(self):
-        for race in Races:
-            yield RaceListDetail(
-                # dict(
-                #     ultrasignup_id=race.value,
-                # ),
-                source=f"https://ultrasignup.com/results_event.aspx?did={race.value}",
+        races = Race.objects.exclude(ultrasignup_id=None)
+        for race in races:
+            source = (
+                f"https://ultrasignup.com/results_event.aspx?did={race.ultrasignup_id}"
             )
-
-
-class RaceListDetail(HtmlListPage):
-    """
-    Collect annual year information for every race.
-    """
-
-    example_source = f"https://ultrasignup.com/results_event.aspx?did={DEFAULT_RACE_ID}"
-    selector = XPath("//td/a[contains(@href,'/results_event.aspx?')]")
-    source = NullSource()
-
-    def process_error_response(self, exc):
-        self.logger.warning(exc)
-
-    def process_item(self, item):
-        href = XPath("@href").match_one(item)
-        if not href.startswith("http"):
-            href = f"https://ultrasignup.com{href}"
-
-        did = href.split("=")[-1]
-
-        return RaceResultListPage(
-            dict(
-                did=did,
-                race_url=href,
-                year=item.text,
-                # **self.input,
-            ),
-            source=href,
-        )
+            yield RaceResultListPage(
+                dict(
+                    did=race.ultrasignup_id,
+                    race_url=f"https://trailhawks.com{race.get_absolute_url()}",
+                    year=race.start_datetime.year,
+                ),
+                source=source,
+            )
 
 
 class RaceResultListPage(HtmlListPage):
@@ -77,7 +45,6 @@ class RaceResultListPage(HtmlListPage):
     race number.
     """
 
-    # example_source = f"https://ultrasignup.com/results_event.aspx?did={DEFAULT_RACE_ID}"
     selector = XPath(
         "//a[@class='event_link' or @class='event_selected_link']", min_items=None
     )
@@ -88,7 +55,6 @@ class RaceResultListPage(HtmlListPage):
         if not href.startswith("http"):
             href = f"https://ultrasignup.com{href}"
         race_id = href.split("=")[-1]
-        # return dict(race_results_url=href, **self.input)
         return RaceResultDetail(
             dict(race_id=race_id, race_results_url=href, **self.input), source=href
         )
@@ -182,6 +148,6 @@ class ResultJsonListPage(JsonListPage):
 
 
 if __name__ == "__main__":
-    page = RaceList()
+    page = RaceListFromDjango()
     for e in page.do_scrape():
         print(e)
