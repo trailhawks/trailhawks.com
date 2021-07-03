@@ -50,6 +50,9 @@ class RaceResultListPage(HtmlListPage):
     )
     source = NullSource()
 
+    def process_error_response(self, exception):
+        self.logger.warning(exception)
+
     def process_item(self, item):
         href = XPath("@href").match_one(item)
         if not href.startswith("http"):
@@ -67,6 +70,9 @@ class RaceResultDetail(HtmlPage):
 
     example_source = "https://ultrasignup.com/results_event.aspx?did=63105"
     source = NullSource()
+
+    def process_error_response(self, exception):
+        self.logger.warning(exception)
 
     def process_page(self):
         try:
