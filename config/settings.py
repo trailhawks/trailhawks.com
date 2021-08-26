@@ -100,6 +100,7 @@ INSTALLED_APPS += [
     "favicon",
     "markup_deprecated",
     "micawber.contrib.mcdjango",
+    "pagedown.apps.PagedownConfig",
     "rest_framework",
     "robots",
     "simple_open_graph",

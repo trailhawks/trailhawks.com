@@ -10,6 +10,7 @@ django-favicon
 django-filter
 django-ical
 django-markup-deprecated
+django-pagedown
 django-robots
 django-shorturls==1.1.0  # to remove
 django-simple-open-graph==0.3
@@ -35,7 +36,7 @@ titlecase
 uwsgi
 whitenoise
 
-black==21.6b0
+black
 bumpver
 friendly
 
