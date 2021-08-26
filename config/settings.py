@@ -95,8 +95,8 @@ INSTALLED_APPS = [
 
 INSTALLED_APPS += [
     "ajaximage",
-    "django_thumbor",
     "dbbackup",
+    "django_thumbor",
     "favicon",
     "markup_deprecated",
     "micawber.contrib.mcdjango",
