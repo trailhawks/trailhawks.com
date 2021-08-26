@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.db import models
+from pagedown.widgets import AdminPagedownWidget
 
 from .models import Member, Office, Term
 
@@ -15,6 +17,9 @@ class TermInline(admin.TabularInline):
 
 @admin.register(Member)
 class MemberAdmin(admin.ModelAdmin):
+    formfield_overrides = {
+        models.TextField: {"widget": AdminPagedownWidget},
+    }
     list_display = (
         "__str__",
         "first_name",
@@ -35,6 +40,9 @@ class MemberAdmin(admin.ModelAdmin):
 
 @admin.register(Office)
 class OfficeAdmin(admin.ModelAdmin):
+    formfield_overrides = {
+        models.TextField: {"widget": AdminPagedownWidget},
+    }
     list_display = ("name", "order")
     prepopulated_fields = {"slug": ["name"]}
     ordering = ["order"]
@@ -42,6 +50,9 @@ class OfficeAdmin(admin.ModelAdmin):
 
 @admin.register(Term)
 class TermAdmin(admin.ModelAdmin):
+    formfield_overrides = {
+        models.TextField: {"widget": AdminPagedownWidget},
+    }
     list_display = ("member", "office", "start", "end")
     list_filter = ["office"]
     raw_id_fields = ["member"]
