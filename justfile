@@ -1,3 +1,5 @@
+set dotenv-load := false
+
 compose := "docker-compose run --rm --no-deps web"
 manage := compose + " python manage.py"
 TAILWIND_CSS_VERSION := "latest"
