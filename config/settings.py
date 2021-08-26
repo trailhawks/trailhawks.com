@@ -95,11 +95,12 @@ INSTALLED_APPS = [
 
 INSTALLED_APPS += [
     "ajaximage",
-    "django_thumbor",
     "dbbackup",
+    "django_thumbor",
     "favicon",
     "markup_deprecated",
     "micawber.contrib.mcdjango",
+    "pagedown.apps.PagedownConfig",
     "rest_framework",
     "robots",
     "simple_open_graph",
@@ -204,6 +205,7 @@ EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", default="")
 EMAIL_HOST_USER = env("EMAIL_HOST_USER", default="")
 EMAIL_PORT = env("EMAIL_PORT", default="")
 EMAIL_USE_TLS = env("EMAIL_USE_TLS", default="")
+PAGEDOWN_IMAGE_UPLOAD_ENABLED = env.bool("PAGEDOWN_IMAGE_UPLOAD_ENABLED", default=True)
 SERVER_EMAIL = env("SERVER_EMAIL", default="")
 THUMBOR_SECURITY_KEY = env("THUMBOR_SECURITY_KEY", default="")
 THUMBOR_SERVER = env("THUMBOR_SERVER", default="")
