@@ -54,8 +54,6 @@ admin.site.site_title = admin_header
 
 urlpatterns = [
     path("", HomepageView.as_view(), name="homepage"),
-    path("404/", TemplateView.as_view(template_name="404.html")),
-    path("500/", TemplateView.as_view(template_name="500.html")),
     path("about/", AboutView.as_view(), name="about"),
     path("contact/", officer_list, name="contact"),
     path("contact/thanks/", ThanksView.as_view(), name="thanks"),
@@ -80,6 +78,9 @@ urlpatterns = [
         {"sitemaps": sitemaps},
         name="django.contrib.sitemaps.views.sitemap",
     ),
+    path("404/", TemplateView.as_view(template_name="404.html")),
+    path("500/", TemplateView.as_view(template_name="500.html")),
+    path("", include("pagedown.urls")),
     path("", include("favicon.urls")),
     # website templates
     # path(
