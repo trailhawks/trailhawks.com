@@ -96,7 +96,7 @@ INSTALLED_APPS = [
 
 INSTALLED_APPS += [
     "ajaximage",
-    "dbbackup",
+    # "dbbackup",
     "django_thumbor",
     "favicon",
     "markup_deprecated",
@@ -105,7 +105,7 @@ INSTALLED_APPS += [
     "rest_framework",
     "robots",
     "simple_open_graph",
-    "storages",
+    # "storages",
     "syncr.flickr",
     "syncr.twitter",
     "taggit",
