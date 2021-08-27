@@ -70,7 +70,7 @@ urlpatterns = [
     path("sponsors/", include("sponsors.urls")),
     path("ajaximage/", include("ajaximage.urls")),
     path("api/v1/", include(router.urls)),
-    path("humans.txt≥", HumansView.as_view()),
+    path("humans.txt", HumansView.as_view()),
     path("robots.txt", include("robots.urls")),
     path(
         "sitemap.xml",
