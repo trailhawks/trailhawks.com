@@ -9,6 +9,7 @@ django-dbbackup
 django-favicon
 django-filter
 django-ical
+django-light
 django-markup-deprecated
 django-pagedown
 django-robots
