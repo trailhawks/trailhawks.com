@@ -38,7 +38,7 @@ TAILWIND_CSS_VERSION := "latest"
     -rustywind --write ./templates/tailwind/
 
 @import_from_ultrasignup:
-    {{ manage }} import_from_ultrasignup 53172
+    {{ manage }} import_from_ultrasignup --race=53172
     # just run import_from_ultrasignup 53173
     # just run import_from_ultrasignup 53174
 
