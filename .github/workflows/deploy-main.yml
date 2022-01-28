@@ -35,9 +35,9 @@ jobs:
           git config --global user.email "actions@users.noreply.github.com"
           git config --global user.name "Automated Publisher"
 
-      - name: Bump Version
-        run: |
-          bumpver update
+      # - name: Bump Version
+      #   run: |
+      #     bumpver update
 
       - name: Set up Docker Buildx
         id: buildx
@@ -59,6 +59,6 @@ jobs:
           tags: |
             ghcr.io/${{ github.repository }}:latest
 
-      - name: Push Release Build to GitHub
-        run: |
-          git push
+      # - name: Push Release Build to GitHub
+      #   run: |
+      #     git push
