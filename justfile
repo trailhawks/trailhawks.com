@@ -92,6 +92,10 @@ pip-compile *ARGS:
 @pip-compile-upgrade:
     just pip-compile --upgrade
 
+# Python linting
+@pre-commit:
+    git ls-files -- . | xargs pre-commit run --config=./.pre-commit-config.yaml --files
+
 @run +ARGS="--help":
     {{ manage }} {{ ARGS }}
 

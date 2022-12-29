@@ -1,0 +1,72 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-case-conflict
+      # - id: check-json
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: check-toml
+      - id: end-of-file-fixer
+        alias: autoformat
+      - id: trailing-whitespace
+        alias: autoformat
+-   repo: https://github.com/adamchainz/django-upgrade
+    rev: 1.12.0
+    hooks:
+    - id: django-upgrade
+      args: [--target-version, "3.2"]
+-   repo: https://github.com/asottile/pyupgrade
+    rev: v3.3.1
+    hooks:
+      - id: pyupgrade
+        args: [--py37-plus]
+-   repo: https://github.com/rtts/djhtml
+    rev: v1.5.2
+    hooks:
+      - id: djhtml
+        # Indent only HTML files in template directories
+        files: .*/templates/.*\.html$
+# -   repo: https://github.com/thibaudcolas/curlylint
+#     rev: v0.13.1
+#     hooks:
+#       - id: curlylint
+#         types: [html]
+-   repo: https://github.com/psf/black
+    rev: 22.12.0
+    hooks:
+      - id: black
+        args: [
+          "."
+        ]
+        alias: autoformat
+        additional_dependencies: ['click==8.0.4']
+-   repo: https://github.com/asottile/blacken-docs
+    rev: v1.12.1
+    hooks:
+      - id: blacken-docs
+        alias: autoformat
+        additional_dependencies: ['black==22.1.0', 'click==8.0.4']
+  # - repo: https://github.com/PyCQA/flake8
+  #   rev: 6.0.0
+  #   hooks:
+  #     - id: flake8
+  #       args: [
+  #         "--exclude=conftest.py,manage.py,config/settings*.py",
+  #         "--ignore=E203,E501,W503,E741",
+  #       ]
+  #       additional_dependencies:
+  #         - flake8-bugbear==22.7.1
+  #         - flake8-comprehensions==3.10.0
+  #         - flake8-print==4.0.1
+  #         - flake8-no-pep420==2.3.0
+  #         - flake8-tidy-imports==4.8.0
+-   repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: 'v0.0.199'
+    hooks:
+      - id: ruff
+        # Respect `exclude` and `extend-exclude` settings.
+        args: ["--force-exclude"]
