@@ -1,82 +1,82 @@
 [
 {
-  "pk": 1, 
-  "model": "members.office", 
+  "pk": 1,
+  "model": "members.office",
   "fields": {
-    "order": 10, 
-    "name": "President", 
+    "order": 10,
+    "name": "President",
     "slug": "president"
   }
 },
 {
-  "pk": 2, 
-  "model": "members.office", 
+  "pk": 2,
+  "model": "members.office",
   "fields": {
-    "order": 20, 
-    "name": "Vice President", 
+    "order": 20,
+    "name": "Vice President",
     "slug": "vice-president"
   }
 },
 {
-  "pk": 3, 
-  "model": "members.office", 
+  "pk": 3,
+  "model": "members.office",
   "fields": {
-    "order": 30, 
-    "name": "Treasurer", 
+    "order": 30,
+    "name": "Treasurer",
     "slug": "treasurer"
   }
 },
 {
-  "pk": 4, 
-  "model": "members.office", 
+  "pk": 4,
+  "model": "members.office",
   "fields": {
-    "order": 40, 
-    "name": "Secretary", 
+    "order": 40,
+    "name": "Secretary",
     "slug": "secretary"
   }
 },
 {
-  "pk": 5, 
-  "model": "members.office", 
+  "pk": 5,
+  "model": "members.office",
   "fields": {
-    "order": 50, 
-    "name": "Web Master", 
+    "order": 50,
+    "name": "Web Master",
     "slug": "web-master"
   }
 },
 {
-  "pk": 6, 
-  "model": "members.office", 
+  "pk": 6,
+  "model": "members.office",
   "fields": {
-    "order": 60, 
-    "name": "Membership Director", 
+    "order": 60,
+    "name": "Membership Director",
     "slug": "membership-director"
   }
 },
 {
-  "pk": 7, 
-  "model": "members.office", 
+  "pk": 7,
+  "model": "members.office",
   "fields": {
-    "order": 70, 
-    "name": "PR Director", 
+    "order": 70,
+    "name": "PR Director",
     "slug": "pr-director"
   }
 },
 {
-  "pk": 8, 
-  "model": "members.office", 
+  "pk": 8,
+  "model": "members.office",
   "fields": {
-    "order": 25, 
-    "name": "Ex-President", 
+    "order": 25,
+    "name": "Ex-President",
     "slug": "ex-president"
   }
 },
 {
-  "pk": 9, 
-  "model": "members.office", 
+  "pk": 9,
+  "model": "members.office",
   "fields": {
-    "order": 80, 
-    "name": "Social Media Director", 
+    "order": 80,
+    "name": "Social Media Director",
     "slug": "social-media-director"
   }
 }
