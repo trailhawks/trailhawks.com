@@ -25,8 +25,7 @@ class FaqAdmin(admin.ModelAdmin):
         ),
     )
 
+    @admin.display(description="associated object")
     def get_object_name(self, obj):
         if obj.content_object and len(str(obj.content_object)):
             return obj.content_object
-
-    get_object_name.short_description = "associated object"

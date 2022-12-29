@@ -35,7 +35,7 @@ def command(filename, update):
                     "date_paid": parse(result["Registration Date"].split(" ")[0]),
                     "gender": result["Identified Gender"],
                     # "notes": result[""],
-                }
+                },
             )
             if created:
                 click.echo(f"{member} was imported")

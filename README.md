@@ -9,7 +9,7 @@
   </a>
 </p>
 
-> The [trailhawks.com](https://trailhawks.com) and [hawkhundred.com](https://hawkhundred.com) websites have been running on Django and Postgres going on ten years. 
+> The [trailhawks.com](https://trailhawks.com) and [hawkhundred.com](https://hawkhundred.com) websites have been running on Django and Postgres going on ten years.
 
 ### 🏠 [Homepage](https://github.com/trailhawks/trailhawks.com)
 

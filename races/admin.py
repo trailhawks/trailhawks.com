@@ -14,6 +14,7 @@ from sponsors.admin import SponsorInline
 from .models import Race, Racer, RaceType, Registration, Report, Result, Series
 
 
+@admin.action(description="Duplicate the race for the next year")
 def migrate_race(modeladmin, request, queryset):
     for race in queryset.all():
         # track existing events since m2ms aren't automatically copied...
@@ -25,9 +26,7 @@ def migrate_race(modeladmin, request, queryset):
         else:
             race.number = 1
 
-        race.annual = titlecase(
-            "{} Annual".format(num2words(race.number, ordinal=True))
-        )
+        race.annual = titlecase(f"{num2words(race.number, ordinal=True)} Annual")
         race.slug = slugify("{} {}".format(race.title, race.annual or ""))
         race.active = False
         race.start_datetime = race.start_datetime + relativedelta(years=1)
@@ -38,30 +37,19 @@ def migrate_race(modeladmin, request, queryset):
             race.events.add(event.pk)
 
 
-migrate_race.short_description = "Duplicate the race for the next year"
-
-
+@admin.action(description="Set location to Clinton Lake")
 def set_location_to_clinton(modeladmin, request, queryset):
     queryset.update(location=2)
 
 
-set_location_to_clinton.short_description = "Set location to Clinton Lake"
-
-
+@admin.action(description="Set location to the River Trails")
 def set_location_to_river_trails(modeladmin, request, queryset):
     queryset.update(location=1)
 
 
-set_location_to_river_trails.short_description = "Set location to the River Trails"
-
-
+@admin.action(description="Set location to the Olathe Prairie Center")
 def set_location_to_olathe_pc(modeladmin, request, queryset):
     queryset.update(location=4)
-
-
-set_location_to_olathe_pc.short_description = (
-    "Set location to the Olathe Prairie Center"
-)
 
 
 class RaceDirectorInline(admin.StackedInline):
