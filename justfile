@@ -122,5 +122,30 @@ pip-compile *ARGS:
 @test:
     {{ compose }} pytest
 
-@up:
+@up *ARGS:
     docker-compose up -d
+
+# new...
+
+# Remove current application services
+@remove:
+    ...
+
+# Start all services
+@start *ARGS="--detach":
+    docker-compose up {{ ARGS }}
+
+# Restart all services
+@restart:
+    docker-compose restart
+
+@status:
+    docker-compose ps
+
+# Stop all services
+@stop:
+    docker-compose down
+
+# Tail service logs
+@tail:
+    just logs --follow
