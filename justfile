@@ -81,17 +81,17 @@ TAILWIND_CSS_VERSION := "latest"
 @migrate:
     {{ manage }} migrate
 
-@pip-compile:
-    rm ./requirements/requirements.txt
-    pip install --upgrade -r requirements/requirements.in
-    pip-compile requirements/requirements.in
-    {{ compose }} \
-        pip install \
-            --upgrade \
-            --requirement ./requirements/requirements.in && \
-        pip-compile \
-            ./requirements/requirements.in \
-            --output-file ./requirements/requirements.txt
+# Compile new python dependencies
+pip-compile *ARGS:
+    docker-compose run \
+        --rm web \
+            bash -c "pip-compile {{ ARGS }} ./requirements/requirements.in \
+                # --generate-hashes \
+                --output-file ./requirements/requirements.txt"
+
+# Upgrade existing Python dependencies to their latest versions
+@pip-compile-upgrade:
+    just pip-compile --upgrade
 
 @run +ARGS="--help":
     {{ manage }} {{ ARGS }}
