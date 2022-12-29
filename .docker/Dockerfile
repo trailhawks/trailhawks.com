@@ -3,7 +3,7 @@
 FROM segment/chamber:2.8.2 AS chamber
 
 
-FROM python:3.7-buster AS dev
+FROM python:3.7-slim-buster AS dev
 
 ENV PIP_DISABLE_PIP_VERSION_CHECK 1
 ENV PYTHONDONTWRITEBYTECODE 1
