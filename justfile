@@ -13,7 +13,6 @@ TAILWIND_CSS_VERSION := "latest"
 
 @build:
     docker-compose build
-    docker images | grep trailhawks
 
 @check:
     {{ manage }} check --deploy

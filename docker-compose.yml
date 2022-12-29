@@ -14,13 +14,14 @@ services:
     build:
       context: .
       dockerfile: .docker/Dockerfile
-    command: python manage.py runserver 0.0.0.0:8000
+    # command: python manage.py runserver 0.0.0.0:8000
     depends_on:
       - db
     env_file:
       - ".env"
     environment:
-      - "DJANGO_SETTINGS_MODULE=config.settings_tailwind"
+      - "DJANGO_SETTINGS_MODULE=config.settings"
+      # - "DJANGO_SETTINGS_MODULE=config.settings_tailwind"
     ports:
       - 8000:8000
     volumes:

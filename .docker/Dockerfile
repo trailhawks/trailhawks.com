@@ -46,3 +46,5 @@ COPY --from=builder /src/ /src/
 COPY . /src/
 
 WORKDIR /src
+
+CMD ["/bin/bash", "/src/web-start.sh"]
