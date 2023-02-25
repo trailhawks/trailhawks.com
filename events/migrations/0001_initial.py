@@ -4,7 +4,6 @@ import core.models
 
 
 class Migration(migrations.Migration):
-
     dependencies = []
 
     operations = [

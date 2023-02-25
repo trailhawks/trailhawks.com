@@ -33,7 +33,6 @@ def command(race_id):
             filename.write_text(json.dumps(input_buffer, indent=2))
 
         if len(input_buffer) > 0:
-
             # try:
             #     if race_id:
             #         race = Race.objects.get(pk=race_id)

@@ -162,7 +162,7 @@ class MemberResultCsvListView(ListView):
             response = HttpResponse(content_type="text/plain")
         else:
             response = HttpResponse(content_type="text/csv")
-            response["Content-Disposition"] = f"attachment; filename=member_results.csv"
+            response["Content-Disposition"] = "attachment; filename=member_results.csv"
 
         results = (
             Result.objects.filter(racer__trailhawk__in=members)

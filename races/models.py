@@ -311,7 +311,6 @@ class Result(models.Model):
         return f"{self.racer} - {self.race.title} - {self.time}"
 
     def save(self, *args, **kwargs):
-
         if self.time:
             if "cr" in self.time.lower():
                 self.course_record = True

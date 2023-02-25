@@ -6,7 +6,6 @@ import core.models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("taggit", "0002_auto_20150616_2121"),
         ("members", "0001_initial"),

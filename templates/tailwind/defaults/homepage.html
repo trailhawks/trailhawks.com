@@ -36,8 +36,8 @@
                         {% for photo in photos %}
                             <div class="item {% if forloop.first %}active{% endif %}">
                                 <img data-src="{% thumbor_url photo.get_large_url height=500 width=1200 smart=True %}"
-                                    src="{% thumbor_url photo.get_large_url height=500 width=1200 smart=True %}"
-                                    alt="{{ photo.caption }}" height="500" width="1200">
+                                     src="{% thumbor_url photo.get_large_url height=500 width=1200 smart=True %}"
+                                     alt="{{ photo.caption }}" height="500" width="1200">
                                 <div class="carousel-caption">
                                     {% if photo.caption %}
                                         <h3>{{ photo.caption|safe }}</h3>
