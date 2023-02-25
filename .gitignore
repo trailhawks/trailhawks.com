@@ -143,7 +143,9 @@ bin
 conf/
 config/__settings/
 config/settings/
+docker-compose*
 media_root
 previews
+requirements*
 settings/
 static_root/
