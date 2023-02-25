@@ -13,7 +13,7 @@ ENV PYTHONUNBUFFERED 1
 RUN --mount=type=cache,target=/root/.cache \
     pip install --upgrade pip pip-tools
 
-COPY requirements/requirements.txt /tmp/
+COPY requirements.txt /tmp/
 
 RUN python3 -m venv /venv
 

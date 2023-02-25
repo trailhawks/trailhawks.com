@@ -84,9 +84,9 @@ TAILWIND_CSS_VERSION := "latest"
 pip-compile *ARGS:
     docker-compose run \
         --rm web \
-            bash -c "pip-compile {{ ARGS }} ./requirements/requirements.in \
+            bash -c "pip-compile {{ ARGS }} ./requirements.in \
                 # --generate-hashes \
-                --output-file ./requirements/requirements.txt"
+                --output-file ./requirements.txt"
 
 # Upgrade existing Python dependencies to their latest versions
 @pip-compile-upgrade:
@@ -126,7 +126,7 @@ pip-compile *ARGS:
     {{ compose }} pytest
 
 @up *ARGS:
-    docker-compose up -d
+    docker-compose up {{ ARGS }}
 
 # new...
 
