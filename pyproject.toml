@@ -25,19 +25,13 @@ push = true
 ]
 
 [tool.ruff]
-line-length = 88
-
 # Enable Pyflakes `E` and `F` codes by default.
 select = ["E", "F"]
+ignore = ["E501", "E741"] # temporary
 
-# Never enforce `E501` (line length violations).
-ignore = ["E501"]
-
-# Always autofix
-fix = true
-
-# Never try to fix `F401` (unused imports).
-unfixable = ["F401"]
+# Allow autofix for all enabled rules (when `--fix`) is provided.
+fixable = ["A", "B", "C", "D", "E", "F"]
+unfixable = []
 
 # Exclude a variety of commonly ignored directories.
 exclude = [
@@ -45,6 +39,7 @@ exclude = [
     ".direnv",
     ".eggs",
     ".git",
+    ".github",
     ".hg",
     ".mypy_cache",
     ".nox",
@@ -57,10 +52,19 @@ exclude = [
     "_build",
     "buck-out",
     "build",
+    "CONTRIBUTORS.md",
     "dist",
+    "migrations",
     "node_modules",
+    "settings/docker.py",
+    "static",
     "venv",
 ]
+
+# per-file-ignores = {}
+
+# Same as Black.
+line-length = 120
 
 # Allow unused variables when underscore-prefixed.
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
