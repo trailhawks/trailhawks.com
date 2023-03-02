@@ -65,7 +65,7 @@ class Member(MachineTagMixin):
     def active(self):
         try:
             return self.date_expires >= datetime.date.today()
-        except:
+        except Exception:
             return False
 
     active.boolean = True

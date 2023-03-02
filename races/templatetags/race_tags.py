@@ -24,7 +24,7 @@ def get_latest_race(context):
 def get_latest_races(context):
     try:
         return Race.objects.upcoming().order_by("start_datetime")
-    except:
+    except Exception:
         return None
 
 
@@ -32,7 +32,7 @@ def get_latest_races(context):
 def get_all_racers(context):
     try:
         return Racer.objects.all()
-    except:
+    except Exception:
         return None
 
 
@@ -40,7 +40,7 @@ def get_all_racers(context):
 def get_all_results(context):
     try:
         return Result.objects.all()
-    except:
+    except Exception:
         return None
 
 
@@ -53,7 +53,7 @@ def get_past_race(context):
 def get_past_races(context):
     try:
         return Race.objects.complete().order_by("start_datetime")
-    except:
+    except Exception:
         return None
 
 
@@ -61,7 +61,7 @@ def get_past_races(context):
 def get_race_by_slug(context, slug):
     try:
         return Race.objects.get(slug=slug)
-    except:
+    except Exception:
         return None
 
 

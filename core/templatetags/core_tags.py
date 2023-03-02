@@ -26,7 +26,7 @@ def get_latest_tweets(context):
             tweets.append(data)
         return tweets
 
-    except:
+    except Exception:
         return
 
 
@@ -36,7 +36,7 @@ def get_rrca_news(context):
         d = feedparser.parse("http://feeds.feedburner.com/RRCA-News?format=xml")
         return d["entries"][:4]
 
-    except:
+    except Exception:
         return
 
 
