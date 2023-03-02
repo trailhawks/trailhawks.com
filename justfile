@@ -7,6 +7,9 @@ TAILWIND_CSS_VERSION := "latest"
 @_default:
     just --list
 
+@fmt:
+    just --fmt --unstable
+
 @bump:
     bumpver update --allow-dirty
     git push origin main
@@ -26,15 +29,6 @@ TAILWIND_CSS_VERSION := "latest"
 
 @down:
     docker-compose down
-
-@fmt:
-    -isort --project=black .
-    -black .
-    -djhtml --tabwidth=4 --in-place \
-        templates/**/**/*.html \
-        templates/**/**/**/*.html \
-        templates/**/**/**/**/*.html
-    -rustywind --write ./templates/tailwind/
 
 @import_from_ultrasignup:
     {{ manage }} import_from_ultrasignup --race=53172
@@ -63,11 +57,12 @@ TAILWIND_CSS_VERSION := "latest"
     # just run import_from_ultrasignup 36684
     # just run import_from_ultrasignup 36685
 
-@lint:
-    -black --check --diff .
-    -isort --check --diff --project=black .
-    -unimport --check --diff .
-    -vulture --min-confidence=80 .
+@lint *ARGS:
+    just pre-commit {{ ARGS }}
+    # -black --check --diff .
+    # -isort --check --diff --project=black .
+    # -unimport --check --diff .
+    # -vulture --min-confidence=80 .
     # -curlylint templates
     # -rustywind --dry-run ./templates/tailwind/
 
@@ -94,8 +89,8 @@ pip-compile *ARGS:
     just pip-compile --upgrade
 
 # Python linting
-@pre-commit:
-    git ls-files -- . | xargs pre-commit run --config=./.pre-commit-config.yaml --files
+@pre-commit *ARGS:
+    pre-commit run --all-files {{ ARGS }}
 
 @run +ARGS="--help":
     {{ manage }} {{ ARGS }}
