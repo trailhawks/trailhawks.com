@@ -85,6 +85,7 @@ pip-compile *ARGS:
     docker-compose run \
         --rm web \
             bash -c "pip-compile {{ ARGS }} ./requirements.in \
+                --resolver=backtracking \
                 # --generate-hashes \
                 --output-file ./requirements.txt"
 
