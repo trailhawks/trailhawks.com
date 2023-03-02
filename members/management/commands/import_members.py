@@ -2,7 +2,6 @@ import csv
 import logging
 
 import djclick as click
-
 from dateutil.parser import parse
 
 from members.models import Member

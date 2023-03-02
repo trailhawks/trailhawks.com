@@ -1,5 +1,6 @@
 # from enum import Enum
 
+import django  # noqa
 from spatula import (
     HtmlListPage,
     HtmlPage,
@@ -9,8 +10,6 @@ from spatula import (
     SelectorError,
     XPath,
 )
-
-import django  # noqa
 
 django.setup()  # noqa
 
