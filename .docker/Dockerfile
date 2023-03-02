@@ -34,7 +34,7 @@ RUN --mount=type=cache,target=/root/.cache \
     pip install --upgrade pip pip-tools
 
 ENV PATH /venv/bin:/bin:/usr/bin:/usr/local/bin
-ENV PYTHONDONTWRITEBYTECODE=true
+ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONPATH /src
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONWARNINGS ignore
