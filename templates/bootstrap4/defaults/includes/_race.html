@@ -3,9 +3,9 @@
 <a href="{{ race.get_absolute_url }}">
     <div class="col-md-4 event"
          {% if race.background %}
-         style="background-image: url({% thumbor_url race.background.get_large_url height=180 width=240 smart=True %})"
+             style="background-image: url({% thumbor_url race.background.get_large_url height=180 width=240 smart=True %})"
          {% elif race.logo %}
-         style="background-image: url({% thumbor_url race.logo.url height=180 width=240 smart=True %})"
+             style="background-image: url({% thumbor_url race.logo.url height=180 width=240 smart=True %})"
          {% endif %}>
         <div class="overlay">
             <p class="race">{{ race.title }}</p>

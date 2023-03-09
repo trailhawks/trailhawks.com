@@ -4,7 +4,7 @@ from pathlib import Path
 import djclick as click
 import requests
 
-from races.models import Race, Racer, RaceType, Result
+from races.models import Race, Racer, Result
 
 
 @click.command()

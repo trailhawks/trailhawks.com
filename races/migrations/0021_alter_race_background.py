@@ -5,7 +5,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("flickr", "0006_photo_tags"),
         ("races", "0020_auto_20230308_2336"),
