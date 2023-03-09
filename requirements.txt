@@ -79,8 +79,6 @@ django-filter==22.1
     # via -r ./requirements.in
 django-ical==1.8.3
     # via -r ./requirements.in
-django-light==0.1.0.post3
-    # via -r ./requirements.in
 django-markup-deprecated==0.0.4
     # via -r ./requirements.in
 django-pagedown==2.2.1

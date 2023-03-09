@@ -81,7 +81,6 @@ MIDDLEWARE = [
 ]
 
 INSTALLED_APPS = [
-    "django_light",  # has to come before "django.contrib.admin"
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
