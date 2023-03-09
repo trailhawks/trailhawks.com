@@ -46,7 +46,7 @@ router = DefaultRouter()
 router.register(r"photos", PhotoViewSet)
 router.register(r"random_photos", RandomPhotoViewSet)
 
-admin_header = f"Lawrence Trail Hawks v{__version__}"
+admin_header = f"Trail Hawks v{__version__}"
 admin.site.enable_nav_sidebar = False
 admin.site.site_header = admin_header
 admin.site.site_title = admin_header
