@@ -44,15 +44,26 @@ class Race(MachineTagMixin):
 
     slogan = models.CharField(max_length=300, blank=True, null=True)
 
-    logo = AjaxImageField(upload_to="races/logos", blank=True, null=True)
+    logo = AjaxImageField(
+        upload_to="races/logos",
+        blank=True,
+        null=True,
+        help_text="The logo image is on the top of the race page.",
+    )
 
     # background = AjaxImageField(upload_to='races/backgrounds', blank=True, null=True,
     #                             help_text='Optional background photo')
     background = models.ForeignKey(
-        "flickr.Photo", on_delete=models.CASCADE, blank=True, null=True
+        "flickr.Photo",
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        help_text="The background image is used on the homepage. If a background image is not provided, the logo image will be used.",
     )
 
-    race_type = models.IntegerField(choices=DISCIPLINE_CHOICES, default=RUN)
+    race_type = models.IntegerField(
+        choices=DISCIPLINE_CHOICES, default=RUN, blank=True, null=True
+    )
     sponsors = models.ManyToManyField("sponsors.Sponsor", related_name="sponsors")
     race_directors = models.ManyToManyField("members.Member")
     awards = models.TextField(blank=True, null=True)
