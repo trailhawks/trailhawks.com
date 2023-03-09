@@ -2,6 +2,8 @@ from dateutil.relativedelta import relativedelta
 from django.contrib import admin
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.urls import reverse
+from django.utils.html import format_html
 from num2words import num2words
 from pagedown.widgets import AdminPagedownWidget
 from titlecase import titlecase
@@ -77,6 +79,7 @@ class RaceAdmin(admin.ModelAdmin):
         "start_datetime",
         "ultrasignup_id",
         "reg_url",
+        "download_csv_results",
     ]
     list_editable = ["ultrasignup_id"]
     list_filter = ["active", "start_datetime", "number", "annual", "location"]
@@ -102,6 +105,21 @@ class RaceAdmin(admin.ModelAdmin):
         "race_directors",
         "sponsors",
     )
+
+    @admin.display(description="Race Results")
+    def download_csv_results(self, obj):
+        if obj.result_set.exists():
+            url = reverse(
+                "race_result_csv_detail",
+                kwargs={
+                    "year": obj.start_datetime.strftime("%Y"),
+                    "month": obj.start_datetime.strftime("%b").lower(),
+                    "day": obj.start_datetime.strftime("%d"),
+                    "slug": obj.slug,
+                },
+            )
+            return format_html(f'<a href="{url}">Download CSV</a>')
+        return None
 
 
 @admin.register(RaceType)
@@ -155,5 +173,17 @@ class ResultAdmin(admin.ModelAdmin):
 
 @admin.register(Series)
 class SeriesTypeAdmin(admin.ModelAdmin):
-    list_display = ["name", "slug"]
+    list_display = ["name", "slug", "download_csv_results"]
     filter_horizontal = ("races",)
+
+    @admin.display(description="Race Results")
+    def download_csv_results(self, obj):
+        if obj.races.exists():
+            url = reverse(
+                "series_results_index",
+                kwargs={"slug": obj.slug},
+            )
+            return format_html(
+                f'<a href="{url}">Download {obj.races.count()} Races (CSV)</a>'
+            )
+        return None
