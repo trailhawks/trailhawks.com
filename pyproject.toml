@@ -75,6 +75,9 @@ target-version = "py37"
 # Ignore `E402` (import violations) in all `__init__.py` files, and in `path/to/file.py`.
 [tool.ruff.per-file-ignores]
 "__init__.py" = ["E402"]
+"config/settings_hawkhundred.py" = ["F403", "F405"]
+"config/settings_tailwind.py" = ["F403", "F405"]
+"config/settings_trailhawks.py" = ["F403", "F405"]
 "manage.py" = ["E402"]
 
 [tool.ruff.mccabe]
