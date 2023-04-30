@@ -169,6 +169,8 @@ TEST_RUNNER = "django.test.runner.DiscoverRunner"
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=list())
 
+CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS", default=list())
+
 MACHINE_TAG_NAMESPACE = "trailhawks"
 
 # Removing deprecation nagging...
