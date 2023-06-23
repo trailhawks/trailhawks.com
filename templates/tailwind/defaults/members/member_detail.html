@@ -8,7 +8,7 @@
 
 
 {% block content %}
-    <h1>{{ object.full_hawk_name }}</h1>
+    <h1 class="font-bold text-6xl">{{ object.full_hawk_name }}</h1>
 
     <div class="flex items-start">
         {% if object.avatar %}
@@ -36,7 +36,7 @@
     </div>
 
     {% if object.get_blog_posts %}
-        <h3>Blog Posts</h3>
+        <h3 class="text-2xl">Blog Posts</h3>
         <ul>
             {% for post in object.get_blog_posts %}
                 <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a> on {{ post.publish|date }}</li>
@@ -45,7 +45,7 @@
     {% endif %}
 
     {% if object.get_race_results %}
-        <h3>Race Results</h3>
+        <h3 class="text-2xl">Race Results</h3>
         {{ object.racer_set.results_set }}
         <ul>
             {% for result in object.get_race_results %}
@@ -55,7 +55,7 @@
     {% endif %}
 
     {% if object.get_race_reports %}
-        <h3>Race Reports</h3>
+        <h3 class="text-2xl">Race Reports</h3>
         <ul>
             {% for result in object.get_race_reports %}
                 <li><a href="{{ result.report }}">{{ result.title }}</a> for <a href="{{ result.race.get_absolute_url }}">{{ result.race.title }}</a> on {{ result.race.start_datetime|date }}</li>

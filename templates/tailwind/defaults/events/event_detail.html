@@ -2,7 +2,7 @@
 
 {% load core_tags %}
 {% load faq_tags %}
-{% load markup %}
+{% load markdownify %}
 {% load photo_tags %}
 {% load micawber_tags %}
 
@@ -10,15 +10,15 @@
 {% block title %}{{ object.title }}{% endblock title %}
 
 {% block content %}
-    <div class="flex flex-wrap ">
-        <div class="md:w-2/3 pr-4 pl-4">
+    <div class="flex flex-auto">
+        <div class="md:w-2/3">
 
-            <h1>{{ object.title }}</h1>
+            <h1 class="font-bold text-6xl">{{ object.title }}</h1>
 
-            <div class="text-xl font-light">{{ object.body|oembed:"600x600"|markdown }}</div>
+            <div class="text-xl font-light">{{ object.body|oembed:"600x600"|markdownify }}</div>
 
             {% if object.races.upcoming.count %}
-                <h3>Upcoming races</h3>
+                <h3 class="text-2xl">Upcoming races</h3>
                 <ul>
                     {% for race in object.races.upcoming %}
                         <li><a href="{{ race.get_absolute_url }}">{{ race.annual }} {{ race.title }}</a></li>
@@ -27,7 +27,7 @@
             {% endif %}
 
             {% if object.races.complete.count %}
-                <h3>Past races</h3>
+                <h3 class="text-2xl">Past races</h3>
                 <ul>
                     {% for race in object.races.complete %}
                         <li><a href="{{ race.get_absolute_url }}">{{ race.annual }} {{ race.title }}</a></li>
@@ -39,15 +39,15 @@
 
             {% get_faqs_for_object object as faq_list %}
             {% if faq_list %}
-                <h3>Frequently Asked Questions</h3>
+                <h3 class="text-2xl">Frequently Asked Questions</h3>
                 {% for faq in faq_list %}
-                    <h4>{{ faq.question|oembed:"600x600"|markdown }}</h4>
-                    {{ faq.answer|oembed:"600x600"|markdown }}
+                    <h4>{{ faq.question|oembed:"600x600"|markdownify }}</h4>
+                    {{ faq.answer|oembed:"600x600"|markdownify }}
                 {% endfor %}
             {% endif %}
         </div>
 
-        <div class="md:w-1/3 pr-4 pl-4">
+        <div class="md:w-1/3">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Panel title</h3>

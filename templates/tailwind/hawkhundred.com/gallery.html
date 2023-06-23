@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load markup %}
+{% load markdownify %}
 {% load race_tags %}
 {% load static %}
 
@@ -8,7 +8,7 @@
 
     {% get_race_by_slug slug='the-hawk-thirteenth-annual' as race %}
 
-    <h1>Gallery</h1>
+    <h1 class="font-bold text-6xl">Gallery</h1>
 
     <img class="p-1 max-w-full h-auto rounded border-gray-200 img-responsive border-1" src="{% static 'img/hawk100/Hawk-2016-4559.jpg' %}">
 

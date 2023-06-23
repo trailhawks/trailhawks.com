@@ -1,6 +1,6 @@
 {% extends "flatpages/default.html" %}
 
-{% load markup %}
+{% load markdownify %}
 {% load race_tags %}
 {% load sponsors_tags %}
 
@@ -15,23 +15,23 @@
         {% get_sponsors_for_object race as sponsor_list %}
         {% if sponsor_list %}
 
-            <div class="flex flex-wrap ">
-                <div class="pr-4 pl-4 md:w-full">
-                    <h2><a name="sponsors"></a>Sponsors
+            <div class="flex flex-auto">
+                <div class=" md:w-full">
+                    <h2 class="text-4xl font-bold"><a name="sponsors"></a>Sponsors
                     </h2>
                 </div>
             </div>
 
-            <div class="flex flex-wrap ">
+            <div class="flex flex-auto">
                 {% for sponsor in sponsor_list %}
-                    <div class="md:w-1/2 pr-4 pl-4">
-                        <h3>{{ sponsor.name }}</h3>
+                    <div class="md:w-1/2">
+                        <h3 class="text-2xl">{{ sponsor.name }}</h3>
                         <a href="{{ sponsor.url }}">
                             <img class="img-responsive" src="{{ sponsor.logo.url }}" />
                         </a>
                     </div>
 
-                    {% if forloop.counter|divisibleby:2 %}</div><div class="flex flex-wrap ">{% endif %}
+                    {% if forloop.counter|divisibleby:2 %}</div><div class="flex flex-auto">{% endif %}
                 {% endfor %}
             </div>
         {% endif %}

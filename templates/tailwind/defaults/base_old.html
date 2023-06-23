@@ -36,7 +36,7 @@
 
     <body>
         <!-- Static navbar -->
-        <div class="flex relative flex-wrap content-between items-center py-3 px-4 navbar-default navbar-static-top">
+        <div class="flex relative flex-auto content-between items-center py-3 px-4 navbar-default navbar-static-top">
             <div class="container mx-auto sm:px-4">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -47,7 +47,7 @@
                     <a class="inline-block pt-1 pb-1 mr-4 text-lg whitespace-no-wrap" href="/">Lawrence Trail Hawks</a>
                 </div>
                 <div class="hidden flex-grow items-center">
-                    <ul class="flex flex-wrap pl-0 mb-0 list-none list-reset">
+                    <ul class="flex flex-auto pl-0 mb-0 list-none list-reset">
                         <li{% if view.navitem == 'events' %} class="active" {% endif %}><a href="{% url 'event_list' %}">Events</a></li>
                         {% load run_tags %}
                         {% get_weekly_runs as weekly_runs %}
@@ -70,7 +70,7 @@
                         <li{% if view.navitem == 'links' %} class="active" {% endif %}><a href="{% url 'link_list' %}">Links</a></li>
                         <li{% if view.navitem == 'about' %} class="active" {% endif %}><a href="{% url 'about' %}">About</a></li>
                     </ul>
-                    <ul class="flex flex-wrap pl-0 mb-0 list-none list-reset navbar-right">
+                    <ul class="flex flex-auto pl-0 mb-0 list-none list-reset navbar-right">
                         <li><a href="http://www.facebook.com/home.php#/group.php?gid=91186762641&amp;ref=ts"><i class="fa fa-facebook"></i></a></li>
                         <li><a href="http://www.twitter.com/trailhawks"><i class="fa fa-twitter"></i></a></li>
                         <li><a href="https://www.flickr.com/photos/trailhawks"><i class="fa fa-flickr"></i></a></li>
@@ -83,7 +83,7 @@
         <div class="container mx-auto sm:px-4">
             {% comment %}
       <div class="masthead">
-        <ul class="flex flex-wrap pl-0 mb-0 list-none  pull-right hidden-xs">
+        <ul class="flex flex-auto pl-0 mb-0 list-none  pull-right hidden-xs">
             <li{% if view.navitem == 'home' %} class="active" {% endif %}><a href="/">Home</a></li>
             <li{% if view.navitem == 'events' %} class="active" {% endif %}><a href="{% url 'event_list' %}">Events</a></li>
             <li{% if view.navitem == 'runs' %} class="active" {% endif %}><a href="{% url 'run_list' %}">Runs</a></li>
@@ -101,15 +101,15 @@
       </div>
       {% endcomment %}
 
-            <div class="flex flex-wrap ">
-                <div class="pr-4 pl-4 sm:w-full">
+            <div class="flex flex-auto">
+                <div class=" sm:w-full">
                     {% block sub_nav %}{% endblock sub_nav %}
                 </div>
             </div>
 
             {% block content-wrapper %}
-                <div class="flex flex-wrap ">
-                    <div class="pr-4 pl-4 sm:w-full">
+                <div class="flex flex-auto">
+                    <div class=" sm:w-full">
                         {% block content %}{% endblock content %}
                     </div>
                 </div>
@@ -119,9 +119,9 @@
             <footer>
                 {% block footer %}
                     <div class="container mx-auto sm:px-4">
-                        <div class="flex flex-wrap ">
-                            <div class="sm:w-2/3 pr-4 pl-4">
-                                <ul class="flex flex-wrap pl-0 mb-0 list-none ">
+                        <div class="flex flex-auto">
+                            <div class="sm:w-2/3">
+                                <ul class="flex flex-auto pl-0 mb-0 list-none">
                                     <li><a href="/signup/"><i class="fa fa-plus-circle"></i> Join Us</a></li>
                                     <li><a href="http://www.facebook.com/home.php#/group.php?gid=91186762641&amp;ref=ts"><i class="fa fa-facebook"></i> Facebook</a></li>
                                     <li><a href="http://www.twitter.com/trailhawks"><i class="fa fa-twitter"></i> Twitter</a></li>
@@ -133,10 +133,10 @@
                                 <hr>
                                 <p>2009-{% now "Y" %} Lawrence Trail Hawks. All rights Reserved</p>
                             </div>
-                            <div class="sm:w-1/5 pr-4 pl-4">
+                            <div class="sm:w-1/5">
                                 <a href="http://www.djangoproject.com/"><img src="https://www.djangoproject.com/m/img/badges/djangopowered126x54.gif" border="0" alt="Powered by Django." title="Powered by Django."></a>
                             </div>
-                            <div class="sm:w-1/5 pr-4 pl-4">
+                            <div class="sm:w-1/5">
                                 <a href="http://www.rrca.org"><img src="http://www.rrca.org/images/hero/2010_RRCA_Logo_small.jpg" border="0" alt="RRCA" class="right" height="80"></a>
                             </div>
                         </div>

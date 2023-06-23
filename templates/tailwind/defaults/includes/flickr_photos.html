@@ -8,8 +8,8 @@
 {% endif %}
 
 {% for photo in photos %}
-    <div class="flex flex-wrap ">
-        <div class="pr-4 pl-4 sm:w-full md:w-full">
+    <div class="flex flex-auto">
+        <div class=" sm:w-full md:w-full">
             <div class="tumbnail">
                 <a href="{{ photo.photopage_url }}"><img class="p-1 max-w-full h-auto rounded border-gray-200 img-responsive border-1" src='{% thumbor_url photo.get_medium_url height=400 width=400 smart=True %}'></a>
                 <div class="caption">

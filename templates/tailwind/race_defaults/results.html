@@ -1,19 +1,19 @@
 {% extends "base.html" %}
 
-{% load markup %}
+{% load markdownify %}
 {% load race_tags %}
 
 {% block content %}
 
     {% with request.race as object %}
 
-        <h1>{{ object.annual|capfirst }} {{ object.title }} Results</h1>
+        <h1 class="font-bold text-6xl">{{ object.annual|capfirst }} {{ object.title }} Results</h1>
 
         {% get_race_types_for_race object as race_types %}
 
         {% for race_type in race_types %}
-            <h2><a name="{{ race_type.slug }}"></a>{{ race_type.name }} Results</h2>
-            <ul class="flex flex-wrap pl-0 mb-0 list-none border border-t-0 border-r-0 border-l-0 border-gray-200 border-b-1" id="{{ race_type.slug }}-tabs">
+            <h2 class="text-4xl font-bold"><a name="{{ race_type.slug }}"></a>{{ race_type.name }} Results</h2>
+            <ul class="flex flex-auto pl-0 mb-0 list-none border border-t-0 border-r-0 border-l-0 border-gray-200 border-b-1" id="{{ race_type.slug }}-tabs">
                 <li><a href="#{{ race_type.slug }}-overall-results" data-toggle="tab">Overall Results</a></li>
                 <li><a href="#{{ race_type.slug }}-womens-results" data-toggle="tab">Women&apos;s Results</a></li>
                 <li><a href="#{{ race_type.slug }}-mens-results" data-toggle="tab">Men&apos;s Results</a></li>

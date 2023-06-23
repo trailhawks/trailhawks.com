@@ -8,9 +8,9 @@
 
 
 {% block content %}
-    <div class="flex flex-wrap ">
-        <div class="md:w-2/3 pr-4 pl-4">
-            <h1>{{ object.full_name }}</h1>
+    <div class="flex flex-auto">
+        <div class="md:w-2/3">
+            <h1 class="font-bold text-6xl">{{ object.full_name }}</h1>
             {% if object.get_results %}
                 <p><strong>Results:</strong>
                     <ul>
@@ -20,7 +20,7 @@
                     </ul></p>
             {% endif %}
         </div>
-        <div class="md:w-1/3 pr-4 pl-4">
+        <div class="md:w-1/3">
             {% get_photos_by_machine_tags object.get_machine_tags num=10 random=1 as photos %}
             {{ photos|length }}
             {% include "includes/flickr_photos.html" %}

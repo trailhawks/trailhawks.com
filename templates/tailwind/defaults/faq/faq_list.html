@@ -1,7 +1,7 @@
 {% extends base_template_name|default:"base.html" %}
 
 
-{% load markup %}
+{% load markdownify %}
 
 
 {% block title %}Frequently Asked Questions{% endblock title %}
@@ -10,26 +10,26 @@
 {% block content %}
     <section id="faqs">
 
-        <div class="flex flex-wrap ">
-            <div class="pr-4 pl-4 md:w-full">
-                <h1>Frequently Asked Questions</h1>
+        <div class="flex flex-auto">
+            <div class=" md:w-full">
+                <h1 class="font-bold text-6xl">Frequently Asked Questions</h1>
             </div>
         </div>
 
         {% regroup object_list by content_type as obj_list %}
         {% for obj in obj_list %}
-            <div class="flex flex-wrap ">
-                <div class="pr-4 pl-4 md:w-full">
-                    <h2>{{ obj.grouper|default:"Club"|title }} Questions</h2>
+            <div class="flex flex-auto">
+                <div class=" md:w-full">
+                    <h2 class="text-4xl font-bold">{{ obj.grouper|default:"Club"|title }} Questions</h2>
                 </div>
             </div>
-            <div class="flex flex-wrap ">
+            <div class="flex flex-auto">
                 {% for faq in obj.list %}
-                    <div class="md:w-1/2 pr-4 pl-4">
-                        <h3>{{ faq.question }}</h3>
-                        {{ faq.answer|markdown }}
+                    <div class="md:w-1/2">
+                        <h3 class="text-2xl">{{ faq.question }}</h3>
+                        {{ faq.answer|markdownify }}
                     </div>
-                    {% if forloop.counter|divisibleby:2 %}</div><div class="flex flex-wrap ">{% endif %}
+                    {% if forloop.counter|divisibleby:2 %}</div><div class="flex flex-auto">{% endif %}
                 {% endfor %}
             </div>
         {% endfor %}

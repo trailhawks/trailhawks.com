@@ -8,13 +8,13 @@
 
 
 {% block content %}
-    <div class="flex flex-wrap ">
-        <div class="pr-4 pl-4 md:w-full">
-            <h1>Photo Galleries</h1>
+    <div class="flex flex-auto">
+        <div class=" md:w-full">
+            <h1 class="font-bold text-6xl">Photo Galleries</h1>
 
-            <div class="flex flex-wrap ">
+            <div class="flex flex-auto">
                 {% for photoset in object_list %}
-                    <div class="md:w-1/4 pr-4 pl-4">
+                    <div class="md:w-1/4">
                         <a href="{% url 'photoset_detail' flickr_id=photoset.flickr_id %}">
                             <img class="p-1 max-w-full h-auto rounded border-gray-200 img-responsive border-1" src="{% thumbor_url photoset.primary.get_medium_url smart=True height=300 width=300 %}">
                         </a>
@@ -40,8 +40,8 @@
             {% endif %}
 
             {% comment %}
-    <div class="flex flex-wrap ">
-      <div class="pr-4 pl-4 md:w-full">
+    <div class="flex flex-auto">
+      <div class=" md:w-full">
         <p class="text-center"><a class="inline-block py-3 px-4 text-xl font-normal leading-tight text-center text-white no-underline align-middle bg-blue-600 rounded border select-none whitespace-no-wrap  hover:bg-blue-600" href="https://www.flickr.com/photos/trailhawks">Check out our <i class="icon-flickr"></i> Flickr page for more photos.</a></p>
       </div>
     </div>

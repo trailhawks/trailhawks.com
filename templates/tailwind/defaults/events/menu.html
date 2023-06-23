@@ -1,6 +1,6 @@
 {% load static %}
 
-<div class="flex relative flex-wrap content-between items-center py-3 px-4 navbar-default" role="navigation">
+<div class="flex relative flex-auto content-between items-center py-3 px-4 navbar-default" role="navigation">
     <div class="container mx-auto sm:px-4">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="hidden flex-grow items-center">
-            <ul class="flex flex-wrap pl-0 mb-0 list-none list-reset">
+            <ul class="flex flex-auto pl-0 mb-0 list-none list-reset">
                 {% for item in menu %}
                     <li><a href="{{ item.url }}{{ page.url }}">{{ item.title }}</a></li>
                 {% endfor %}

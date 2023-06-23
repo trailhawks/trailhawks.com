@@ -8,54 +8,38 @@
 {% load static %}
 
 {% block navbar %}
-    <div class="navbar-wrapper">
-        <div class="container mx-auto sm:px-4">
-
-            <nav class="flex relative flex-wrap content-between items-center py-3 px-4 navbar-default navbar-static-top" role="navigation">
-                <div class="container mx-auto sm:px-4">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="inline-block pt-1 pb-1 mr-4 text-lg whitespace-no-wrap" href="/"><img src="{% static 'img/hawk-head-24.png' %}" height="22"> Lawrence Trail Hawks</a>
+    <div class="border-2 border-red-900 p-2">
+        <div class="container border-2 border-red-900">
+            <nav class="flex flex-auto content-between items-center" role="navigation">
+                <div class="container p-2">
+                    <div class="border-2 border-blue-800">
+                        <a class="pt-1 pb-1 mr-4 text-lg whitespace-no-wrap" href="/"><img src="{% static 'img/hawk-head-24.png' %}" height="22"> Lawrence Trail Hawks</a>
                     </div>
-                    <div class="hidden flex-grow items-center">
-                        <ul class="flex flex-wrap pl-0 mb-0 list-none list-reset">
-                            <li{% if view.navitem == 'events' %} class="active" {% endif %}><a href="{% url 'race_index' %}">Races &amp; Events</a></li>
-                            <li><a href="{% url 'run_list' %}">Group Runs</a></li>
-                            <li class="relative">
-                                <a href="#" class="inline-block ml-1 w-0 h-0 border-b-0  align border-t-1 border-r-1 border-l-1" data-toggle="dropdown">Club Information <strong class="caret"></strong></a>
-                                <ul class="hidden float-left absolute left-0 z-50 py-2 mt-1 text-base bg-white rounded border border-gray-300  list-reset	">
-                                    <li{% if view.navitem == 'blog' %} class="active" {% endif %}><a href="{% url 'blog_list' %}">Blog</a></li>
-                                    <li{% if view.navitem == 'links' %} class="active" {% endif %}><a href="{% url 'link_list' %}">Links</a></li>
-                                    <li{% if view.navitem == 'members' %} class="active" {% endif %}><a href="{% url 'member_list' %}">Members</a></li>
-                                    <li{% if view.navitem == 'sponsors' %} class="active" {% endif %}><a href="{% url 'sponsor_list' %}">Sponsors</a></li>
-                                    <li><a href="/brochure/">Tri-Fold Brochure</a></li>
-                                    <li><a href="/static/docs/Lawrence-Trail-Hawks-Guide-to-Running-Clinton-Lake.pdf">Guide to Running Clinton Lake</a></li>
-                                    <li><a href="/signup/"><i class="fa fa-plus-circle"></i> Join Us</a></li>
-                                    <li><a href="/contact/"><i class="fa fa-envelope"></i> Contact us</a></li>
-                                </ul>
-                            </li>
-                            <li{% if view.navitem == 'about' %} class="active" {% endif %}><a href="{% url 'about' %}">About</a></li>
-                        </ul>
-                        <ul class="flex flex-wrap pl-0 mb-0 list-none list-reset navbar-right">
-                            <li><a href="https://www.facebook.com/home.php#/group.php?gid=91186762641&amp;ref=ts"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="https://www.flickr.com/photos/trailhawks"><i class="fa fa-flickr"></i></a></li>
-                            <li><a href="https://github.com/organizations/TrailHawks"><i class="fa fa-github"></i></a></li>
-                        </ul>
-                    </div><!--/.nav-collapse -->
+                    <div class="border-2 border-blue-800 flex flex-auto gap-3">
+                        <span><a class="underline" href="{% url 'race_index' %}">Races &amp; Events</a></span>
+                        <span><a class="underline" href="{% url 'run_list' %}">Group Runs</a></span>
+                        <span><a class="underline" href="{% url 'blog_list' %}">Blog</a></span>
+                        <span><a class="underline" href="{% url 'link_list' %}">Links</a></span>
+                        <span><a class="underline" href="{% url 'member_list' %}">Members</a></span>
+                        <span><a class="underline" href="{% url 'sponsor_list' %}">Sponsors</a></span>
+                        <span><a class="underline" href="/brochure/">Tri-Fold Brochure</a></span>
+                        <span><a class="underline" href="/static/docs/Lawrence-Trail-Hawks-Guide-to-Running-Clinton-Lake.pdf">Guide to Running Clinton Lake</a></span>
+                        <span><a class="underline" href="/signup/"><i class="fa fa-plus-circle"></i> Join Us</a></span>
+                        <span><a class="underline" href="/contact/"><i class="fa fa-envelope"></i> Contact us</a></span>
+                        <span><a class="underline" href="{% url 'about' %}">About</a></span>
+                        <span><a class="underline" href="https://www.facebook.com/home.php#/group.php?gid=91186762641&amp;ref=ts"><i class="fa fa-facebook"></i></a></span>
+                        <span><a class="underline" href="https://www.flickr.com/photos/trailhawks"><i class="fa fa-flickr"></i></a></span>
+                        <span><a class="underline" href="https://github.com/organizations/TrailHawks"><i class="fa fa-github"></i></a></span>
+                    </div>
                 </div>
             </nav>
-
         </div>
     </div>
 {% endblock navbar %}
 
 
 {% block content-wrapper %}
-    <div class="container mx-auto sm:px-4">
+    <div class="container border-2 border-red-900 p-2">
         {% block content %}
         {% endblock content %}
     </div>
@@ -63,60 +47,49 @@
 
 
 {% block footer %}
-    <footer>
-        <div class="container mx-auto sm:px-4">
-            <hr>
-            <div class="flex flex-wrap ">
-                <div class="md:w-1/2 pr-4 pl-4">
-                    <ul class="list-unstyled">
-                        <li><a href="/signup/"><i class="fa fa-plus-circle"></i> Join Us</a></li>
-                        <li><a href="/contact/"><i class="fa fa-envelope"></i> Contact us</a></li>
-                        <li><a href="http://www.trailhawks.store"><i class="fa fa-plus-circle"></i> www.trailhawks.store</a></li>
-                        <li><a href="https://www.facebook.com/home.php#/group.php?gid=91186762641&amp;ref=ts"><i class="fa fa-facebook"></i> Facebook</a></li>
-                        <li><a href="https://www.instagram.com/trail.hawks/"><i class="fa fa-instagram"></i> Instagram</a></li>
-                        <li><a href="https://www.flickr.com/photos/trailhawks"><i class="fa fa-flickr"></i> Flickr</a></li>
-                        <li><a href="https://github.com/organizations/TrailHawks"><i class="fa fa-github"></i> Github</a></li>
-                    </ul>
-                </div>
-                <div class="md:w-1/4 pr-4 pl-4">
-                    <ul class="list-unstyled">
-                        {# Upcoming races #}
-                        {% get_latest_races as latest_races %}
-                        <li><strong>{{ latest_races.count|intcomma }}</strong> upcoming races</li>
-
-                        {# Past races #}
-                        {% get_past_races as past_races %}
-                        <li><strong>{{ past_races.count|intcomma }}</strong> past races</li>
-
-                        {# Total members #}
-                        {% get_active_members as active_members %}
-                        <li><strong>{{ active_members.count|intcomma }}</strong> members</li>
-
-                        {# Total racers #}
-                        {% get_all_racers as racers %}
-                        <li><strong>{{ racers.count|intcomma }}</strong> racers</li>
-
-                        {# Total results #}
-                        {% get_all_results as results %}
-                        <li><strong>{{ results.count|intcomma }}</strong> results</li>
-
-                    </ul>
-                </div>
-                <div class="md:w-1/5 pr-4 pl-4">
-                    <a href="https://www.djangoproject.com/"><img src="https://www.djangoproject.com/m/img/badges/djangopowered126x54.gif" border="0" alt="Powered by Django." title="Powered by Django."></a>
-                </div>
-                <div class="md:w-1/6 pr-4 pl-4">
-                    <a href="https://www.rrca.org"><img src="https://www.rrca.org/images/hero/2010_RRCA_Logo_small.jpg" border="0" alt="RRCA" class="right" height="80"></a>
-                </div>
-            </div>
-
-            <div class="flex flex-wrap ">
-                <div class="pr-4 pl-4 md:w-full">
-                    <hr>
-                    <p>&copy; 2009-{% now "Y" %} <a href="https://trailhawks.com/">Lawrence Trail Hawks</a>. All rights reserved. v{% get_version %}</p>
-                </div>
-            </div>
-
+    <div class="flex flex-auto gap-2">
+        <div class="w-1/3">
+            <ul class="list-unstyled">
+                <li><a class="underline" href="/signup/"><i class="fa fa-plus-circle"></i> Join Us</a></li>
+                <li><a class="underline" href="/contact/"><i class="fa fa-envelope"></i> Contact us</a></li>
+                <li><a class="underline" href="http://www.trailhawks.store"><i class="fa fa-plus-circle"></i> www.trailhawks.store</a></li>
+                <li><a class="underline" href="https://www.facebook.com/home.php#/group.php?gid=91186762641&amp;ref=ts"><i class="fa fa-facebook"></i> Facebook</a></li>
+                <li><a class="underline" href="https://www.instagram.com/trail.hawks/"><i class="fa fa-instagram"></i> Instagram</a></li>
+                <li><a class="underline" href="https://www.flickr.com/photos/trailhawks"><i class="fa fa-flickr"></i> Flickr</a></li>
+                <li><a class="underline" href="https://github.com/organizations/TrailHawks"><i class="fa fa-github"></i> Github</a></li>
+            </ul>
         </div>
-    </footer>
+        <div class="w-1/3">
+            <ul class="list-unstyled">
+                {# Upcoming races #}
+                {% get_latest_races as latest_races %}
+                <li><strong>{{ latest_races.count|intcomma }}</strong> upcoming races</li>
+
+                {# Past races #}
+                {% get_past_races as past_races %}
+                <li><strong>{{ past_races.count|intcomma }}</strong> past races</li>
+
+                {# Total members #}
+                {% get_active_members as active_members %}
+                <li><strong>{{ active_members.count|intcomma }}</strong> members</li>
+
+                {# Total racers #}
+                {% get_all_racers as racers %}
+                <li><strong>{{ racers.count|intcomma }}</strong> racers</li>
+
+                {# Total results #}
+                {% get_all_results as results %}
+                <li><strong>{{ results.count|intcomma }}</strong> results</li>
+            </ul>
+        </div>
+        <div class="w-1/3">
+            <a class="underline" href="https://www.djangoproject.com/"><img src="https://www.djangoproject.com/m/img/badges/djangopowered126x54.gif" border="0" alt="Powered by Django." title="Powered by Django."></a>
+            <a class="underline" href="https://www.rrca.org"><img src="https://www.rrca.org/images/hero/2010_RRCA_Logo_small.jpg" border="0" alt="RRCA" class="right" height="80"></a>
+        </div>
+    </div>
+    <div class="flex flex-auto">
+        <div class="w-full text-center">
+            <p>&copy; 2009-{% now "Y" %} <a class="underline" href="https://trailhawks.com/">Lawrence Trail Hawks</a>. All rights reserved. v{% get_version %}</p>
+        </div>
+    </div>
 {% endblock footer %}

@@ -1,7 +1,7 @@
 {% extends base_template_name|default:"base.html" %}
 
 
-{% load markup %}
+{% load markdownify %}
 {% load thumbor_tags %}
 
 
@@ -11,26 +11,26 @@
 {% block content %}
     <section id="photos">
 
-        <div class="flex flex-wrap ">
-            <div class="pr-4 pl-4 md:w-full">
-                <h1>Trail Hawk Photos
+        <div class="flex flex-auto">
+            <div class=" md:w-full">
+                <h1 class="font-bold text-6xl">Trail Hawk Photos
                     <a class="inline-block py-1 px-3 font-normal leading-normal text-center no-underline align-middle rounded border select-none ical whitespace-no-wrap btn-default btn-xs" href="{% url 'race_ical' %}">ICAL</a>
                 </h1>
             </div>
         </div>
 
-        <div class="flex flex-wrap ">
+        <div class="flex flex-auto">
             {% for photo in object_list %}
-                <div class="md:w-1/4 pr-4 pl-4">
+                <div class="md:w-1/4">
                     <a href="{{ photo.photopage_url }}"><img class="p-1 max-w-full h-auto rounded border-gray-200 img-responsive border-1" src='{% thumbor_url photo.get_large_url smart=True height=300 width=300 %}'></a>
-                    {{ photo.description|markdown }}
+                    {{ photo.description|markdownify }}
                 </div>
-                {% if forloop.counter|divisibleby:4 %}</div><div class="flex flex-wrap ">{% endif %}
+                {% if forloop.counter|divisibleby:4 %}</div><div class="flex flex-auto">{% endif %}
             {% endfor %}
         </div>
 
         {% if is_paginated %}
-            <div class="flex flex-wrap ">
+            <div class="flex flex-auto">
                 <ul class="pager">
                     {% if page_obj.has_previous %}
                         <li class="py-3 px-4 text-xl leading-tight previous"><a href="{% url 'photo_list' %}?page={{ page_obj.previous_page_number }}">&laquo; Previous</a></li>
@@ -47,8 +47,8 @@
             </div>
         {% endif %}
 
-        <div class="flex flex-wrap ">
-            <div class="pr-4 pl-4 md:w-full">
+        <div class="flex flex-auto">
+            <div class=" md:w-full">
                 <p class="text-center"><a class="inline-block py-3 px-4 text-xl font-normal leading-tight text-center no-underline align-middle rounded border select-none whitespace-no-wrap  btn-default" href="https://www.flickr.com/photos/trailhawks">Check out our <i class="icon-flickr"></i> Flickr page for more photos.</a></p>
             </div>
         </div>
