@@ -19,7 +19,8 @@
 
 
 {% block content %}
-    <div class="flex flex-auto border-2 border-blue-900">
+    {% comment %}
+    <div class="flex flex-auto">
         <div class="md:w-full">
             {% cache 60 homepage-carousel %}
                 {% get_random_photos 5 as photos %}
@@ -60,95 +61,24 @@
             {% endcache %}
         </div>
     </div>
+    {% endcomment %}
 
-    <div class="flex flex-auto border-2 border-blue-900">
-        <div class="md:w-1/3 border-2 border-blue-900">
+    <section class="flex flex-auto divide-solid divide-y gap-16">
+        <div class="md:w-1/3">
             <h2 class="font-bold text-4xl py-2">Latest updates</h2>
-            <div class="panel-body">
+            <div class="flex flex-col gap-4 divide-y divide-gray-200">
                 {% get_latest_news num=4 as latest_news %}
                 {% for news in latest_news %}
-                    <div class="{% if news.alert_status %}relative px-3 py-3 mb-4 border rounded alert-{{ news.alert_status }}{% endif %}">
-                        <h4 class="text-xl">{{ news.pub_date|date }}</h4>
+                    <section class="">
+                        <h4 class="font-medium text-xl py-2">{{ news.pub_date|date }}</h4>
                         {{ news.body|markdownify|truncatewords_html:"100" }}
-                    </div>
-                    <hr>
+                    </section>
                 {% endfor %}
                 <a class="block inline-block py-1 px-3 w-full font-normal leading-normal text-center text-white no-underline align-middle bg-blue-600 rounded border select-none whitespace-no-wrap hover:bg-blue-600" href="{% url 'news_list' %}">More news &#187;</a>
             </div>
         </div>
 
-        {% get_todays_runs as runs %}
-        {% if runs.todays_run %}
-            <div class="md:w-1/3 border-2 border-blue-900">
-                <h2 class="font-bold text-4xl py-2">Today's run</h2>
-                {% for run in runs.todays_run %}
-                    <h3 class="text-2xl"><a href="{{ run.get_absolute_url }}">{{ run.name }}</a></h3>
-
-                    {% get_news_for_object run as news_list %}
-                    {% for news in latest_news|slice:"1" %}
-                        <div class="{% if news.alert_status %}relative px-3 py-3 mb-4 border rounded alert-{{ news.alert_status }}{% endif %}">
-                            <h4 class="text-xl">{{ news.pub_date|date }}</h4>
-                            {{ news.body|markdownify|truncatewords_html:"100" }}
-                        </div>
-                        <hr>
-                    {% endfor %}
-
-                    {% if run.get_run_news %}
-                        <h4 class="text-xl">Latest updates:</h4>
-                        {% for item in run.get_run_news|slice:":3" %}
-                            <div>{{ item.body }} - ({{ item.pub_date|timesince }} ago)</div>
-                        {% endfor %}
-
-                    {% endif %}
-
-                    <dl class="dl-horizontal">
-                        <dt>When: </dt>
-                        <dd>{{ run.get_day_of_week_display }} at {{ run.run_time }}</dd>
-                        {% if run.location %}
-                            <dt>Where: </dt>
-                            <dd>{{ run.location }} {% if run.map_link %}<a href="{{ run.map_link }}">(Directions)</a>{% endif %}</dd>
-                        {% endif %}
-                        <dt>What: </dt>
-                        <dd>{{ run.details }}</dd>
-                        <dt>Contact: </dt>
-                        <dd><a href="mailto:{{ run.contact.email }}">{{ run.contact.full_hawk_name }}</a></dd>
-                    </dl>
-                {% endfor %}
-            </div>
-        {% endif %}
-
-        <div class="md:w-1/3 border-2 border-blue-900">
-            <h2 class="font-bold text-4xl py-2">Next run</h2>
-            <div class="panel-body">
-                {% for run in runs.next_run %}
-                    <h3 class="text-2xl"><a href="{{ run.get_absolute_url }}">{{ run.name }}</a></h3>
-
-                    {% if run.get_run_news %}
-                        <h4 class="text-xl">Latest updates:</h4>
-                        {% for item in run.get_run_news|slice:":3" %}
-                            <div>{{ item.body }} - ({{ item.pub_date|timesince }} ago)</div>
-                        {% endfor %}
-                    {% endif %}
-
-                    <div class="grid grid-cols-2 divide-x">
-                        <div>When: </div>
-                        <div>{{ run.get_day_of_week_display }} at {{ run.run_time }}</div>
-                        {% if run.location %}
-                            <div>Where: </div>
-                            <div>{{ run.location }} {% if run.map_link %}<a href="{{ run.map_link }}">(Directions)</a>{% endif %}</div>
-                        {% endif %}
-                        <div>What: </div>
-                        <div>{{ run.details }}</div>
-                        <div>Contact: </div>
-                        <div><a href="mailto:{{ run.contact.email }}">{{ run.contact.full_hawk_name }}</a></div>
-                    </div>
-                {% empty %}
-                    <p class="quiet large">No upcoming scheduled runs</p>
-                {% endfor %}
-            </div>
-        </div>
-
-        <div class="md:w-1/3 border-2 border-blue-900">
+        <div class="md:w-2/3">
             {% get_latest_race as latest_race %}
             {% if latest_race %}
                 <h2 class="font-bold text-4xl py-2">Next event</h2>
@@ -157,27 +87,16 @@
                     {% if latest_race.logo %}
                         <p><a href="{{ latest_race.get_absolute_url }}"><img class="img-responsive" src="{{ latest_race.logo.url }}"></a></p>
                     {% endif %}
-                    <h4 class="text-2xl">{{ latest_race.slogan }}</h4>
-                    {% if latest_race.get_race_news %}
-                        <p><strong>Latest updates:</strong>
-                            {% for item in latest_race.get_race_news|slice:":3" %}
-                                {{ item.body|markdownify }}
-                            {% endfor %}
-                        </p>
+
+                    {% if latest_race.slogan %}
+                        <h4 class="text-2xl">{{ latest_race.slogan }}</h4>
                     {% endif %}
 
-                    <div class="grid grid-cols-2 divide-x">
-                        <div>When:</div>
-                        <div>{{ latest_race.start_datetime|date }} at {{ latest_race.start_datetime|time }} </div>
-                        {% if latest_race.location %}
-                            <div>Where: </div>
-                            <div>{{ latest_race.location }} {% if latest_race.map_link %}<a href="{{ latest_race.map_link }}">(Directions)</a>{% endif %}</div>
-                        {% endif %}
+                    <div class="flex flex-col divide-y divide-gray-300 py-4 text-xl">
+                        <div><strong>Race date:</strong> {{ latest_race.start_datetime|date:"F j, Y" }}</div>
+                        <div><strong>Start time:</strong> {{ latest_race.start_datetime|time:"h:i A" }}</div>
+                        <div><strong>Race distance:</strong> {{ latest_race.distance }}</div>
                     </div>
-
-                    {{ latest_race.description|markdownify }}
-
-                    {# latest_race.description|oembed:"600x600"|markdownify #}
 
                     <p><a class="block inline-block py-1 px-3 w-full font-normal leading-normal text-center text-white no-underline align-middle bg-blue-600 rounded border select-none whitespace-no-wrap hover:bg-blue-600" href="{{ latest_race.get_absolute_url }}">More information &#187;</a></p>
                 </div>
@@ -193,11 +112,32 @@
                 </div>
             {% endif %}
         </div>
-    </div>
+    </section>
 
-    <section id="events" class="border-2 border-blue-900 py-4">
+    <section id="events">
+        <h2 class="font-bold text-4xl py-4">Weekly runs</h2>
+        <div class="grid grid-cols-1 gap-x-2 divide-solid divide-y">
+            {% for run in runs %}
+                <div class="text-2xl py-3 hover:bg-yellow-400">
+                    <a class="flex" href="{{ run.get_absolute_url }}">
+                        <span class="w-1/3 font-bold">
+                            {{ run.get_day_of_week_display }}s
+                        </span>
+                        <span class="w-1/3 text-center underline">
+                            {{ run.name }}
+                        </span>
+                        <span class="w-1/3 text-right">
+                            {{ run.location }}
+                        </span>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section id="events">
         <h2 class="font-bold text-4xl py-4">Upcoming races</h2>
-        <div class="grid grid-cols-3 gap-x-2 gap-y-3 border-2 border-blue-900">
+        <div class="grid grid-cols-3 gap-x-2 gap-y-3">
             {% get_latest_races as races %}
             {% for race in races %}
                 {% include 'includes/_race.html' with race=race %}
@@ -205,9 +145,9 @@
         </div>
     </section>
 
-    <section id="races" class="border-2 border-blue-900 py-4">
+    <section id="races">
         <h2 class="font-bold text-4xl py-4">Past races</h2>
-        <div class="grid grid-cols-3 gap-x-2 gap-y-3 border-2 border-blue-900">
+        <div class="grid grid-cols-3 gap-x-2 gap-y-3">
             {% get_past_races as past_races %}
             {% for past_race in past_races reversed %}
                 <a class="underline" href="{{ past_race.get_absolute_url }}">{{ past_race }}</a>
@@ -217,7 +157,7 @@
 
     {% get_homepage_sponsors as homepage_sponsors %}
     {% if homepage_sponsors %}
-        <section id="sponsors" class="border-2 border-blue-900 py-4">
+        <section id="sponsors">
             <h2 class="font-bold text-4xl py-4">Sponsors</h2>
             <div class="flex flex-auto">
                 {% for sponsor in homepage_sponsors %}

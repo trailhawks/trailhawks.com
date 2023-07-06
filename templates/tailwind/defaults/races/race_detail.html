@@ -73,41 +73,21 @@
     {% get_race_types_for_race object as race_types %}
 
     <header class="masthead">
-        <h1 class="font-bold text-6xl">{{ object.title }}</h1>
+        <h1 class="font-bold text-6xl py-4">{{ object.title }}</h1>
         {% if object.slogan %}
-            <h2 class="text-4xl font-bold">{{ object.slogan }}</h2>
+            <h2 class="font-bold text-2xl py-2">{{ object.slogan }}</h2>
         {% endif %}
     </header>
 
-    <div class="flex flex-auto">
-        <div class="md:w-2/3">
+    <div class="flex flex-auto gap-8">
+        <div class="md:w-2/3 flex flex-col gap-16">
 
             {% if object.logo %}
-                <div class="flex flex-auto">
-                    <div class=" md:w-full">
-                        <img class="img-response" src="{{ object.logo.url }}">
-                    </div>
-                </div>
+                <img class="img-response" src="{{ object.logo.url }}">
             {% endif %}
 
-            {% comment %}
-
-        <div class="relative py-3 px-3 mb-4 text-red-800 bg-red-200 rounded border border-red-300">
-            <button type="button" class="absolute top-0 right-0 bottom-0 py-3 px-4" data-dismiss="alert">&times;</button>
-            <h4>Warning!</h4>
-            Best check yo self, you're not...`
-        </div>
-
-        <div class="relative py-3 px-3 mb-4 text-orange-800 bg-orange-200 rounded border border-orange-300">
-            <button type="button" class="absolute top-0 right-0 bottom-0 py-3 px-4" data-dismiss="alert">&times;</button>
-            <h4>Warning!</h4>
-            Best check yo self, you're not...
-        </div>
-
-        {% endcomment %}
-
             {% if not object.is_finished %}
-                {% if object.registration_set.count %}
+                {% if object.registration_set.exists %}
                     <table class="mb-4 w-full max-w-full bg-transparent table-hover table-striped">
                         <thead>
                             <tr>
@@ -132,98 +112,100 @@
             {% endif %}
 
             {% if object.get_race_news %}
-                <a name="news"></a>
-                <h3 class="text-2xl">Latest News</h3>
-                {% for item in object.get_race_news|slice:":3" %}
-                    <p>&nbsp;&nbsp;{{ item.body|markdownify }}</p>
-                {% endfor %}
+                <section>
+                    <a name="news"></a>
+                    <h3 class="text-2xl">Latest News</h3>
+                    {% for item in object.get_race_news|slice:":3" %}
+                        <p>&nbsp;&nbsp;{{ item.body|markdownify }}</p>
+                    {% endfor %}
+                </section>
             {% endif %}
 
-            {{ object.description|markdownify }}
-
-            <dl class="dl-horizontal">
-                <dt>Race date:</dt>
-                <dd>{{ object.start_datetime|date:"F j, Y" }}</dd>
-
-                <dt>Start time:</dt>
-                <dd>{{ object.start_datetime|time:"h:i A" }}</dd>
-
-                <dt>Race distance:</dt>
-                <dd>{{ object.distance }} {# object.get_unit_display #}</dd>
+            <section class="flex flex-col divide-y divide-gray-300 py-8 text-xl border-2">
+                <div><strong>Race date:</strong> {{ object.start_datetime|date:"F j, Y" }}</div>
+                <div><strong>Start time:</strong> {{ object.start_datetime|time:"h:i A" }}</div>
+                <div><strong>Race distance:</strong> {{ object.distance }}</div>
 
                 {% if object.cut_off %}
-                    <dt>Cut off time:</dt>
-                    <dd>{{ object.cut_off }}</dd>
+                    <div>Cut off time: {{ object.cut_off }}</div>
                 {% endif %}
-            </dl>
+            </section>
 
-            <hr>
+            <section class="prose-lg prose-a:underline prose-a:bg-yellow-300 prose-a:px-1 border-2">
+                {{ object.description|markdownify }}
+            </section>
 
-            <h2 class="text-4xl font-bold">Event Information</h2>
+            <section class="border-2">
+                <h2 class="text-4xl font-bold py-8">Event Information</h2>
+            </section>
 
-            {% if object.location %}
-                <h3 class="text-2xl">Location</h3>
-                <div id="map-canvas"></div>
-                <p>{{ object.location.description|markdownify }}</p>
-            {% endif %}
+            <section class="border-2">
+                {% if object.location %}
+                    <h3 class="font-bold text-2xl py-4">Location</h3>
+                    <div id="map-canvas"></div>
+                    <p>{{ object.location.description|markdownify }}</p>
+                {% endif %}
 
-            {% if object.course_map %}
-                <p>Click <a href="{{ object.course_map }}">here</a> for a course map.</p>
-            {% endif %}
+                {% if object.course_map %}
+                    <p>Click <a href="{{ object.course_map }}">here</a> for a course map.</p>
+                {% endif %}
+            </section>
 
             {% if object.awards %}
-                <hr>
-                <a name="awards"></a>
-                <h3 class="text-2xl">Awards</h3>
-                <p>{{ object.awards|markdownify }}</p>
+                <section class="border-2" id="awards">
+                    <h3 class="font-bold text-2xl py-2">Awards</h3>
+                    <div class="prose">{{ object.awards|markdownify }}</div>
+                </section>
             {% endif %}
 
-            {% if object.race_directors.count %}
-                <hr>
-                <a name="rds"></a>
-                <h3 class="text-2xl">Race Director{{ object.race_directors.count|pluralize }}</h3>
-                <ul>
-                    {% for race_directory in object.race_directors.all %}
-                        <li><a href="{% url 'member_detail' pk=race_directory.pk %}">{{ race_directory.full_hawk_name }}</a> - <a href="mailto:{{ race_directory.email }}">contact</a></li>
-                    {% endfor %}
-                </ul>
+            {% if object.race_directors.exists %}
+                <section class="py-2 border-2" id="rds">
+                    <h3 class="text-2xl">Race Director{{ object.race_directors.count|pluralize }}</h3>
+                    <ul>
+                        {% for race_directory in object.race_directors.all %}
+                            <li><a href="{% url 'member_detail' pk=race_directory.pk %}">{{ race_directory.full_hawk_name }}</a> - <a href="mailto:{{ race_directory.email }}">contact</a></li>
+                        {% endfor %}
+                    </ul>
+                </section>
             {% endif %}
 
             {% if not object.get_overall_results %}
-                <hr>
-                <h3 class="text-2xl">Registration</h3>
+                <section class="py-2 border-2">
+                    <h3 class="text-2xl">Registration</h3>
 
-                {{ object.reg_description|markdownify }}<br />
+                    <div class="prose">
+                        {{ object.reg_description|markdownify }}
+                    </div>
 
-                {% if object.entry_form %}
-                    <hr>
-                    <h3 class="text-2xl">Entry Form</h3>
-                    <p>Prefer to print and mail in your entry form?</p>
-                    <p>Make Checks Payable to: <em>Lawrence Trail Hawks</em></p>
-                    <p>Mail to: <br>Lawrence Trail Hawks<br>PO Box 442548<br>Lawrence, KS 66044</p>
-                    <p><a class="block inline-block py-1 px-3 w-full font-normal leading-normal text-center text-white no-underline align-middle bg-teal-500 rounded border select-none whitespace-no-wrap hover:bg-teal-600" href="{{ object.entry_form.url }}">Download Entry Form</a></p>
-                {% endif %}
+                    {% if object.entry_form %}
+                        <h3 class="text-2xl">Entry Form</h3>
+                        <p>Prefer to print and mail in your entry form?</p>
+                        <p>Make Checks Payable to: <em>Lawrence Trail Hawks</em></p>
+                        <p>Mail to: <br>Lawrence Trail Hawks<br>PO Box 442548<br>Lawrence, KS 66044</p>
+                        <p><a class="block inline-block py-1 px-3 w-full font-normal leading-normal text-center text-white no-underline align-middle bg-teal-500 rounded border select-none whitespace-no-wrap hover:bg-teal-600" href="{{ object.entry_form.url }}">Download Entry Form</a></p>
+                    {% endif %}
 
-                {% if not object.is_finished %}
-                    <hr>
-                    <p><a class="block inline-block py-3 px-4 w-full text-xl font-normal leading-tight text-center text-white no-underline align-middle bg-blue-600 rounded border select-none whitespace-no-wrap  hover:bg-blue-600" href="{{ object.reg_url }}">REGISTER TODAY</a></p>
-                {% endif %}
+                    {% if not object.is_finished %}
+                        <hr>
+                        <p><a class="block inline-block py-3 px-4 w-full text-xl font-normal leading-tight text-center text-white no-underline align-middle bg-blue-600 rounded border select-none whitespace-no-wrap  hover:bg-blue-600" href="{{ object.reg_url }}">REGISTER TODAY</a></p>
+                    {% endif %}
 
-                {% if object.get_reg_dates %}
-                    <p><strong><em>Entry fee:</em></strong></p>
-                    <ul>
-                        {% for reg in object.get_reg_dates %}
-                            <li>${{ reg.reg_cost }} until {{ reg.reg_date|date:"M d" }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
+                    {% if object.get_reg_dates %}
+                        <p><strong><em>Entry fee:</em></strong></p>
+                        <ul>
+                            {% for reg in object.get_reg_dates %}
+                                <li>${{ reg.reg_cost }} until {{ reg.reg_date|date:"M d" }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
 
-                {{ object.discounts|markdownify }}
+                    {{ object.discounts|markdownify }}
 
-                {% if object.packet_pickup %}
-                    <h3 class="text-2xl">Packet Pickup</h3>
-                    {{ object.packet_pickup|markdownify }}
-                {% endif %}
+                    {% if object.packet_pickup %}
+                        <h3 class="text-2xl">Packet Pickup</h3>
+                        {{ object.packet_pickup|markdownify }}
+                    {% endif %}
+                </section>
             {% endif %}
 
             {% if object.lodging %}
@@ -237,16 +219,19 @@
             {% endif %}
 
             {% if race_types %}
-                <hr>
-                <a name="results"></a>
-                <h3 class="text-2xl">Race Results</h3>
-                <ul>
-                    {% for race_type in race_types %}
-                        <li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-overallresults">{{ race_type.name }} Overall Results</a></li>
-                        <li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-mensresults">{{ race_type.name }} Men&apos;s Results</a></li>
-                        <li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-womensresults">{{ race_type.name }} Women&apos;s Results</a></li>
-                    {% endfor %}
-                </ul>
+                <section class="py-2 border-2">
+                    <h3 class="font-bold text-2xl py-4">
+                        <a name="results"></a>
+                        Race Results
+                    </h3>
+                    <ul>
+                        {% for race_type in race_types %}
+                            <li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-overallresults">{{ race_type.name }} Overall Results</a></li>
+                            <li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-mensresults">{{ race_type.name }} Men&apos;s Results</a></li>
+                            <li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-womensresults">{{ race_type.name }} Women&apos;s Results</a></li>
+                        {% endfor %}
+                    </ul>
+                </section>
             {% endif %}
 
             {% render_facebook_like obj=object %}
@@ -307,7 +292,7 @@
                         <li><a href="#awards">Awards</a></li>
                     {% endif %}
 
-                    {% if object.race_directors.count %}
+                    {% if object.race_directors.exists %}
                         <li><a href="#rds">Race Directors</a></li>
                     {% endif %}
 
@@ -315,7 +300,7 @@
                         <li><a href="#results">Results</a></li>
                     {% endif %}
 
-                    {% if object.sponsors.count %}
+                    {% if object.sponsors.exists %}
                         <li><a href="#sponsors">Sponsors</a></li>
                     {% endif %}
                 </ul>
@@ -324,7 +309,7 @@
             {% if object.get_overall_results %}
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Race Results</h3>
+                        <h3 class="text-2xl font-bold py-2">Race Results</h3>
                     </div>
                     <ul class="flex flex-col pl-0 mb-0 rounded border border-gray-300">
                         {% for race_type in race_types %}

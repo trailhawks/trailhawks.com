@@ -5,10 +5,10 @@
 
 
 {% block content %}
-    <div class="flex flex-auto">
+    <div class="flex flex-auto gap-8">
         <div class="md:w-2/3 text-lg">
             <section class="py-4">
-                <h2 class="font-bold text-6xl py-4">Weekly runs</h2>
+                <h1 class="font-bold text-6xl py-4">Weekly runs</h1>
 
                 <p class="text-xl font-light">The Trailhawks have multiple runs per week. All with varying levels of distance and difficulty.</p>
 
@@ -16,13 +16,15 @@
             </section>
 
             <section class="py-4">
-                <h2 class="font-bold text-6xl py-4">Our run schedule</h2>
+                <h2 class="font-bold text-6xl py-2">Our run schedule</h2>
 
-                <ul>
-                    {% for object in object_list %}
-                        <li><a class="underline" href="{{ object.get_absolute_url }}">{{ object.get_day_of_week_display }}: {{ object.name }} at {{ object.run_time }}</a></li>
-                    {% endfor %}
-                </ul>
+                {% for object in object_list %}
+                    <h3 class="font-bold text-2xl py-4">
+                        <a class="underline bg-yellow-300" href="{{ object.get_absolute_url }}">{{ object.get_day_of_week_display }}: {{ object.name }}</a>
+                        {% if object.run_time %}at {{ object.run_time }}{% endif %}
+                        {% if object.location %}at <a class="underline" href="#">{{ object.location }}</a>{% endif %}
+                    </h3>
+                {% endfor %}
             </section>
         </div>
 

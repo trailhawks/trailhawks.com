@@ -21,24 +21,19 @@
 
 
 {% block content %}
-    <div class="flex flex-auto">
-        <div class="md:w-2/3 border-2 border-blue-900 text-lg">
+    <div class="flex flex-auto gap-8">
+        <div class="md:w-2/3 text-lg">
 
             <h1 class="font-bold text-6xl">{{ object.name }}</h1>
 
-            <div class="font-light text-xl">
+            <div class="prose-slate prose-xl py-4">
                 {{ object.details|markdownify }}
             </div>
 
-            <hr>
-
-            <div class="grid grid-cols-2 divide-x">
-                <div>When:</div>
-                <div>{{ object.get_day_of_week_display }} at {{ object.run_time }}</div>
-                <div>Where:</div>
-                <div>{{ object.location }}</div>
-                <div>Run Leader:</div>
-                <div><a href="mailto:{{ object.contact.email }}">{{ object.contact.full_name }}</a></div>
+            <div class="flex flex-col gap-2 divide-y divide-gray-300 py-4 text-xl">
+                <div><strong>When:</strong> {{ object.get_day_of_week_display }} at {{ object.run_time }}</div>
+                <div><strong>Where:</strong> {{ object.location }}</div>
+                <div><strong>Run Leader:</strong> <a href="mailto:{{ object.contact.email }}">{{ object.contact.full_name }}</a></div>
             </div>
 
             {% get_latest_news_for_object object as news_list %}
@@ -54,19 +49,14 @@
                 {% endfor %}
             {% endif %}
 
-            {% if object.location %}
-                <h3 class="text-2xl">Location</h3>
-                <div id="map-canvas"></div>
-            {% endif %}
-
             <hr>
 
             {% get_faqs_for_object object as faq_list %}
             {% if faq_list %}
-                <h3 class="font-bold text-2xl">Frequently Asked Questions</h3>
+                <h2 class="font-bold text-4xl py-4">Frequently Asked Questions</h2>
                 {% for faq in faq_list %}
-                    <h4 class="font-bold text-2xl">{{ faq.question }}</h4>
-                    {{ faq.answer|markdownify }}
+                    <h4 class="font-bold text-2xl py-4">{{ faq.question }}</h4>
+                    <div class="prose prose-md">{{ faq.answer|markdownify }}</div>
                 {% endfor %}
             {% endif %}
         </div>

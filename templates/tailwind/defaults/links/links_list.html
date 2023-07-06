@@ -8,13 +8,18 @@
 
 
 {% block content %}
-    <div class="flex flex-auto">
+    <div class="flex flex-auto gap-8">
         <div class="md:w-2/3">
-            <h1 class="font-bold text-6xl">Links</h1>
-
+            <section class="py-4">
+                <h1 class="font-bold text-6xl py-4">Links</h1>
+            </section>
             {% for link in object_list %}
-                <h3 class="text-2xl"><a href="{{ link.link }}">{{ link.name }}</a></h3>
-                {{ link.description|markdownify }}
+                <section class="pb-2">
+                    <h2 class="font-bold text-4xl py-2"><a class="underline hover:bg-yellow-300" href="{{ link.link }}">{{ link.name }}</a></h2>
+                    <div class="prose-lg prose-a:underline prose-a:bg-yellow-300 prose-a:px-1">
+                        {{ link.description|markdownify }}
+                    </div>
+                </section>
             {% endfor %}
         </div>
 

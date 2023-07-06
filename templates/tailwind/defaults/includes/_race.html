@@ -1,12 +1,13 @@
 {% load thumbor_tags %}
 
-<a class="underline" href="{{ race.get_absolute_url }}">
-    <div
-         {% if race.background %}style="background-image: url({% thumbor_url race.background.get_large_url height=180 width=240 smart=True %})"{% endif %}
-    >
-        <div class="overlay">
-            <h4 class="font-bold text-md">{{ race.title }}</h4>
-            <span class="font-lighter">{{ race.start_datetime|date:"F d, Y" }}</span>
-        </div>
+<div
+    {% if race.background %}style="background-image: url({% thumbor_url race.background.get_large_url height=180 width=240 smart=True %})"{% endif %}
+>
+    <div class="overlay">
+        <h4 class="font-bold text-md">
+            <a class="underline" href="{{ race.get_absolute_url }}">
+                {{ race.title }}</h4>
+        </a>
+        <span class="font-lighter">{{ race.start_datetime|date:"F d, Y" }}</span>
     </div>
-</a>
+</div>

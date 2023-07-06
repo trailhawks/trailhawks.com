@@ -18,29 +18,40 @@
 
 
 {% block content %}
-    <div class="flex flex-auto">
+    <div class="flex flex-auto gap-8">
         <div class="md:w-2/3">
-            <h2 class="text-4xl font-bold">{{ object.title }}</h2>
+            <section class="py-4">
+                <h1 class="font-bold text-6xl py-4">{{ object.title }}</h1>
+            </section>
 
-            <h4>{{ object.publish|date}} <small>by <a href="{{ object.author.get_absolute_url }}">{{ object.author}}</a></small></h4>
+            <h4>
+                {{ object.publish|date}} by
+                <a class="underline hover:bg-yellow-300" href="{{ object.author.get_absolute_url }}">{{ object.author}}</a>
+            </h4>
 
             {% if object.repost_url and object.repost_date %}
                 <div class='original-post'>
-                    <p>Originally published on <a href="{{ object.repost_url }}">{% firstof object.repost_date|date 'unknown' %}</a></p>
+                    <p>Originally published on <a class="underline hover:bg-yellow-300" href="{{ object.repost_url }}">{% firstof object.repost_date|date 'unknown' %}</a></p>
                 </div>
             {% endif %}
 
-            {{ object.body|markdownify }}
+            <div class="prose-xl">
+                {{ object.body|markdownify }}
+            </div>
 
-            {% render_facebook_like obj=object %}
+            {# render_facebook_like obj=object #}
 
             <ul class="pager">
                 {% if object.get_previous_by_publish %}
-                    <li class="previous"><a href="{{ object.get_previous_post.get_absolute_url }}">&larr; Older</a></li>
+                    <li class="underline hover:bg-yellow-300">
+                        <a href="{{ object.get_previous_post.get_absolute_url }}">&larr; Older</a>
+                    </li>
                 {% endif %}
 
                 {% if object.get_next_by_publish %}
-                    <li class="next"><a href="{{ object.get_next_post.get_absolute_url }}">Newer &rarr;</a></li>
+                    <li class="underline hover:bg-yellow-300">
+                        <a href="{{ object.get_next_post.get_absolute_url }}">Newer &rarr;</a>
+                    </li>
                 {% endif %}
             </ul>
         </div>

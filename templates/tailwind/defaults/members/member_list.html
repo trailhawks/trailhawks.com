@@ -5,47 +5,60 @@
 
 
 {% block content %}
-    <div class="flex flex-auto">
-        <div class="md:w-2/3 border-2 border-blue-900 text-lg">
-            <h1 class="font-bold text-6xl py-4">Club Members and Info</h1>
-
-            <p class="text-xl font-light">brought to you by viewers like you</p>
-
-            <p><a class="inline-block py-3 px-4 text-xl font-normal leading-tight text-center text-white no-underline align-middle bg-blue-600 rounded border select-none whitespace-no-wrap  hover:bg-blue-600" href="/signup/">Become a member!</a></p>
-
+    <div class="flex flex-auto gap-8">
+        <div class="md:w-2/3 text-lg">
             <section class="py-4">
+                <h1 class="font-bold text-6xl py-4">Club Members and Info</h1>
+
+                <p class="text-2xl font-light py-2">
+                    Brought to you by runners,
+                    <a class="hover:bg-yellow-400 underline" href="#members">members</a>,
+                    and
+                    <a class="hover:bg-yellow-400 underline" href="#officers">officers</a>
+                    like you!
+                </p>
+
+                <p class="py-8">
+                    <a class="py-2 px-3 text-2xl font-normal leading-tight text-center text-white align-middle bg-blue-600 rounded border select-none whitespace-no-wrap hover:bg-blue-900 hover:text-yellow-100" href="/signup/">Become a member!</a>
+                </p>
+            </section>
+
+            <section class="py-4" id="members">
                 <h2 class="text-4xl font-bold py-4">Members</h2>
-                <div class="grid grid-cols-4 gap-x-1 gap-y-1 divide-y">
+                <div class="grid grid-cols-2 gap-x-4 gap-y-1">
                     {% for member in object_list %}
-                        <a href="{{ member.get_absolute_url }}">{{ member.full_hawk_name }}</a>
+                        <a class="hover:bg-yellow-400 underline" href="{{ member.get_absolute_url }}">{{ member.full_hawk_name }}</a>
                     {% endfor %}
                 </div>
                 {% block member_detail %}{% endblock %}
             </section>
 
-            <section class="py-4">
+            <section class="py-4" id="officers">
                 <h2 class="text-4xl font-bold py-4">Officers</h2>
-                <div class="grid grid-cols-4 gap-x-1 gap-y-1 divide-y">
+                <div class="grid grid-cols-2 gap-x-4 gap-y-1">
                     {% for term in current_officers %}
-                        <div>{{ term.office.name }}</div>
-                        <div><a href="{{ term.member.get_absolute_url }}">{{ term.member }}</a></div>
+                        <div class="font-bold">{{ term.office.name }}</div>
+                        <div><a class="hover:bg-yellow-400 underline" href="{{ term.member.get_absolute_url }}">{{ term.member }}</a></div>
                     {% endfor %}
                 </div>
             </section>
 
+            {% comment %}
             <section class="py-4">
                 <h2 class="text-4xl font-bold py-4">Run Leaders</h2>
-                <div class="grid grid-cols-2 gap-x-1 gap-y-1 divide-y">
+                <div class="grid grid-cols-2 gap-x-4 gap-y-1 divide-y">
                     {% for run in run_leaders %}
                         <div>{{ run.name }}</div>
                         <div><a href="{{ run.contact.get_absolute_url }}">{{ run.contact }}</a></div>
                     {% endfor %}
                 </div>
             </section>
+            {% endcomment %}
 
+            {% comment %}
             <section class="py-4">
                 <h2 class="text-4xl font-bold py-4">Race Directors</h2>
-                <div class="grid grid-cols-2 gap-x-1 gap-y-1 divide-y">
+                <div class="grid grid-cols-2 gap-x-4 gap-y-1 divide-y">
                     {% for race in race_leaders %}
                         <div>{{ race }}</div>
                         {% for rd in race.race_directors.all %}
@@ -54,7 +67,9 @@
                     {% endfor %}
                 </div>
             </section>
+            {% endcomment %}
 
+            {% comment %}
             <section class="py-4">
                 <h2 class="text-4xl font-bold py-4">Previous Officers</h2>
                 <div class="grid grid-cols-2 divide-x">
@@ -64,9 +79,10 @@
                     {% endfor %}
                 </div>
             </section>
+            {% endcomment %}
         </div>
 
-        <div class="md:w-1/3 border-2 border-blue-900">
+        <div class="md:w-1/3">
             {% include "includes/flickr_photos.html" %}
         </div>
     </div>

@@ -17,9 +17,6 @@
             </a>
         {% endif %}
         <div class="flex-1">
-            {% comment %}
-    <h4 class="media-heading">Media heading</h4>
-    {% endcomment %}
             <dl {% comment %}class="dl-horizontal"{% endcomment %}>
                 <dt>Hawk Name:</dt>
                 <dd>{{ object.hawk_name }}</dd>
@@ -35,21 +32,17 @@
         </div>
     </div>
 
-    {% if object.get_blog_posts %}
-        <h3 class="text-2xl">Blog Posts</h3>
-        <ul>
-            {% for post in object.get_blog_posts %}
-                <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a> on {{ post.publish|date }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-
     {% if object.get_race_results %}
         <h3 class="text-2xl">Race Results</h3>
         {{ object.racer_set.results_set }}
         <ul>
             {% for result in object.get_race_results %}
-                <li>Ran <a href="{{ result.race.get_absolute_url }}">{{ result.race.title }}</a> in {{ result.time }} on {{ result.race.start_datetime|date }}</li>
+                <li>
+                    Ran
+                    <a class="hover:bg-yellow-400 underline" href="{{ result.race.get_absolute_url }}">{{ result.race.title }}</a>
+                    in {{ result.time }}
+                    on {{ result.race.start_datetime|date }}
+                </li>
             {% endfor %}
         </ul>
     {% endif %}
@@ -58,7 +51,24 @@
         <h3 class="text-2xl">Race Reports</h3>
         <ul>
             {% for result in object.get_race_reports %}
-                <li><a href="{{ result.report }}">{{ result.title }}</a> for <a href="{{ result.race.get_absolute_url }}">{{ result.race.title }}</a> on {{ result.race.start_datetime|date }}</li>
+                <li>
+                    <a class="hover:bg-yellow-400 underline" href="{{ result.report }}">{{ result.title }}</a>
+                    for
+                    <a class="hover:bg-yellow-400 underline" href="{{ result.race.get_absolute_url }}">{{ result.race.title }}</a>
+                    on {{ result.race.start_datetime|date }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if object.get_blog_posts %}
+        <h3 class="text-2xl">Blog Posts</h3>
+        <ul>
+            {% for post in object.get_blog_posts %}
+                <li>
+                    <a class="hover:bg-yellow-400 underline" href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                    on {{ post.publish|date }}
+                </li>
             {% endfor %}
         </ul>
     {% endif %}

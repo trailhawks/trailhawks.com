@@ -10,26 +10,25 @@
 {% block content %}
     <section id="faqs">
 
-        <div class="flex flex-auto">
-            <div class=" md:w-full">
-                <h1 class="font-bold text-6xl">Frequently Asked Questions</h1>
-            </div>
+        <div class="flex flex-auto py-4">
+            <h1 class="font-bold text-6xl py-4">Frequently Asked Questions</h1>
         </div>
 
         {% regroup object_list by content_type as obj_list %}
         {% for obj in obj_list %}
             <div class="flex flex-auto">
-                <div class=" md:w-full">
-                    <h2 class="text-4xl font-bold">{{ obj.grouper|default:"Club"|title }} Questions</h2>
+                <div class="md:w-full">
+                    <h2 class="font-bold text-4xl py-2">{{ obj.grouper|default:"Club"|title }} Questions</h2>
                 </div>
             </div>
-            <div class="flex flex-auto">
+            <div class="grid grid-cols-2 gap-4">
                 {% for faq in obj.list %}
-                    <div class="md:w-1/2">
-                        <h3 class="text-2xl">{{ faq.question }}</h3>
-                        {{ faq.answer|markdownify }}
+                    <div class="">
+                        <h2 class="font-bold text-2xl py-2">{{ faq.question }}</h3>
+                        <div class="prose">
+                            {{ faq.answer|markdownify }}
+                        </div>
                     </div>
-                    {% if forloop.counter|divisibleby:2 %}</div><div class="flex flex-auto">{% endif %}
                 {% endfor %}
             </div>
         {% endfor %}

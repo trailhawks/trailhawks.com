@@ -1,4 +1,4 @@
-{% extends "base_tailwind.html" %}
+{% extends "layouts/tailwind.html" %}
 
 {% load core_tags %}
 {% load humanize %}
@@ -8,38 +8,37 @@
 {% load static %}
 
 {% block navbar %}
-    <div class="border-2 border-red-900 p-2">
-        <div class="container border-2 border-red-900">
-            <nav class="flex flex-auto content-between items-center" role="navigation">
-                <div class="container p-2">
-                    <div class="border-2 border-blue-800">
-                        <a class="pt-1 pb-1 mr-4 text-lg whitespace-no-wrap" href="/"><img src="{% static 'img/hawk-head-24.png' %}" height="22"> Lawrence Trail Hawks</a>
-                    </div>
-                    <div class="border-2 border-blue-800 flex flex-auto gap-3">
-                        <span><a class="underline" href="{% url 'race_index' %}">Races &amp; Events</a></span>
-                        <span><a class="underline" href="{% url 'run_list' %}">Group Runs</a></span>
-                        <span><a class="underline" href="{% url 'blog_list' %}">Blog</a></span>
-                        <span><a class="underline" href="{% url 'link_list' %}">Links</a></span>
-                        <span><a class="underline" href="{% url 'member_list' %}">Members</a></span>
-                        <span><a class="underline" href="{% url 'sponsor_list' %}">Sponsors</a></span>
-                        <span><a class="underline" href="/brochure/">Tri-Fold Brochure</a></span>
-                        <span><a class="underline" href="/static/docs/Lawrence-Trail-Hawks-Guide-to-Running-Clinton-Lake.pdf">Guide to Running Clinton Lake</a></span>
-                        <span><a class="underline" href="/signup/"><i class="fa fa-plus-circle"></i> Join Us</a></span>
-                        <span><a class="underline" href="/contact/"><i class="fa fa-envelope"></i> Contact us</a></span>
-                        <span><a class="underline" href="{% url 'about' %}">About</a></span>
-                        <span><a class="underline" href="https://www.facebook.com/home.php#/group.php?gid=91186762641&amp;ref=ts"><i class="fa fa-facebook"></i></a></span>
-                        <span><a class="underline" href="https://www.flickr.com/photos/trailhawks"><i class="fa fa-flickr"></i></a></span>
-                        <span><a class="underline" href="https://github.com/organizations/TrailHawks"><i class="fa fa-github"></i></a></span>
-                    </div>
-                </div>
-            </nav>
-        </div>
+    <div class="p-2">
+        <nav class="flex flex-col gap-2 content-between items-start" role="navigation">
+            <div class="flex flex-row">
+                <img class="h-20" src="{% static 'img/hawk-head.png' %}">
+                <a href="/">
+                    <span class="font-bold text-7xl text-red-950">Lawrence Trail Hawks</span>
+                </a>
+            </div>
+            <div class="flex flex-auto gap-4 text-red-950">
+                <span><a class="underline" href="{% url 'race_index' %}">Races &amp; Events</a></span>
+                <span><a class="underline" href="{% url 'run_list' %}">Group Runs</a></span>
+                <span><a class="underline" href="{% url 'blog_list' %}">Blog</a></span>
+                <span><a class="underline" href="{% url 'link_list' %}">Links</a></span>
+                <span><a class="underline" href="{% url 'member_list' %}">Members</a></span>
+                <span><a class="underline" href="{% url 'sponsor_list' %}">Sponsors</a></span>
+                <span><a class="underline" href="/brochure/">Tri-Fold Brochure</a></span>
+                <span><a class="underline" href="/static/docs/Lawrence-Trail-Hawks-Guide-to-Running-Clinton-Lake.pdf">Guide to Running Clinton Lake</a></span>
+                <span><a class="underline" href="/signup/"><i class="fa fa-plus-circle"></i> Join Us</a></span>
+                <span><a class="underline" href="/contact/"><i class="fa fa-envelope"></i> Contact us</a></span>
+                <span><a class="underline" href="{% url 'about' %}">About</a></span>
+                <span><a class="underline" href="https://www.facebook.com/home.php#/group.php?gid=91186762641&amp;ref=ts"><i class="fa fa-facebook"></i></a></span>
+                <span><a class="underline" href="https://www.flickr.com/photos/trailhawks"><i class="fa fa-flickr"></i></a></span>
+                <span><a class="underline" href="https://github.com/organizations/TrailHawks"><i class="fa fa-github"></i></a></span>
+            </div>
+        </nav>
     </div>
 {% endblock navbar %}
 
 
 {% block content-wrapper %}
-    <div class="container border-2 border-red-900 p-2">
+    <div class="container p-2 divide-y divide-red-950 flex flex-col gap-8">
         {% block content %}
         {% endblock content %}
     </div>
@@ -47,7 +46,7 @@
 
 
 {% block footer %}
-    <div class="flex flex-auto gap-2">
+    <div class="flex flex-auto gap-4 border-t-2 border-red-950 py-8">
         <div class="w-1/3">
             <ul class="list-unstyled">
                 <li><a class="underline" href="/signup/"><i class="fa fa-plus-circle"></i> Join Us</a></li>
@@ -56,7 +55,7 @@
                 <li><a class="underline" href="https://www.facebook.com/home.php#/group.php?gid=91186762641&amp;ref=ts"><i class="fa fa-facebook"></i> Facebook</a></li>
                 <li><a class="underline" href="https://www.instagram.com/trail.hawks/"><i class="fa fa-instagram"></i> Instagram</a></li>
                 <li><a class="underline" href="https://www.flickr.com/photos/trailhawks"><i class="fa fa-flickr"></i> Flickr</a></li>
-                <li><a class="underline" href="https://github.com/organizations/TrailHawks"><i class="fa fa-github"></i> Github</a></li>
+                <li><a class="underline" href="https://github.com/organizations/TrailHawks"><i class="fa fa-github"></i> GitHub</a></li>
             </ul>
         </div>
         <div class="w-1/3">
@@ -82,12 +81,8 @@
                 <li><strong>{{ results.count|intcomma }}</strong> results</li>
             </ul>
         </div>
-        <div class="w-1/3">
-            <a class="underline" href="https://www.djangoproject.com/"><img src="https://www.djangoproject.com/m/img/badges/djangopowered126x54.gif" border="0" alt="Powered by Django." title="Powered by Django."></a>
-            <a class="underline" href="https://www.rrca.org"><img src="https://www.rrca.org/images/hero/2010_RRCA_Logo_small.jpg" border="0" alt="RRCA" class="right" height="80"></a>
-        </div>
     </div>
-    <div class="flex flex-auto">
+    <div class="flex flex-auto py-8 border-t-2 border-red-950">
         <div class="w-full text-center">
             <p>&copy; 2009-{% now "Y" %} <a class="underline" href="https://trailhawks.com/">Lawrence Trail Hawks</a>. All rights reserved. v{% get_version %}</p>
         </div>
