@@ -11,16 +11,16 @@
     <div class="grid grid-cols-1 gap-8">
         {% for photo in photos %}
             <div class="sm:w-full md:w-full bg-gray-200 p-2 border-2 border-black rounded-lg border-gray-200">
-                    <a href="{{ photo.photopage_url }}">
-                        <img class="p-1 max-w-full h-auto rounded-lg"
-                            src='{% thumbor_url photo.get_medium_url height=400 width=400 smart=True %}'
-                            onerror="this.onerror=null; this.src='{{ photo.get_medium_url }}';">
-                    </a>
-                    {% if photo.description %}
-                        <div class="text-center font-medium">
-                            <h4>{{ photo.description|safe }}</h4>
-                        </div>
-                    {% endif %}
+                <a href="{{ photo.photopage_url }}">
+                    <img class="p-1 max-w-full h-auto rounded-lg"
+                         src='{% thumbor_url photo.get_medium_url height=400 width=400 smart=True %}'
+                         onerror="this.onerror=null; this.src='{{ photo.get_medium_url }}';">
+                </a>
+                {% if photo.description %}
+                    <div class="text-center font-medium">
+                        <h4>{{ photo.description|safe }}</h4>
+                    </div>
+                {% endif %}
             </div>
         {% endfor %}
     </div>
