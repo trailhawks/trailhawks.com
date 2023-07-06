@@ -138,6 +138,9 @@ dmypy.json
 cython_debug/
 
 # our list of things to ignore
+*.db
+_results/
+_scrapes/
 backups
 bin
 conf/
