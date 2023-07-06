@@ -28,5 +28,23 @@ services:
       - ./media_root:/src/media_root
       - ./static_root:/src/static_root
 
+  qcluster:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+    command: python manage.py qcluster
+    depends_on:
+      - db
+    env_file:
+      - ".env"
+    environment:
+      - "DJANGO_SETTINGS_MODULE=config.settings"
+      # - "DJANGO_SETTINGS_MODULE=config.settings_tailwind"
+    init: true
+    volumes:
+      - .:/src
+      - ./media_root:/src/media_root
+      - ./static_root:/src/static_root
+
 volumes:
   postgres-data:
