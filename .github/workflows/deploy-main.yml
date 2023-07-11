@@ -35,7 +35,7 @@ jobs:
         run: |
           bumpver update
           eval $(bumpver show --env)
-          echo "name=current_version" >> $CURRENT_VERSION
+          echo "{current_version}=$CURRENT_VERSION" >> $GITHUB_OUTPUT
 
       - name: Set up Docker Buildx
         id: buildx
