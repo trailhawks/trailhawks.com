@@ -1,7 +1,7 @@
 {% extends base_template_name|default:"base.html" %}
 
 
-{% load markup %}
+{% load markdownify %}
 {% load thumbor_tags %}
 
 
@@ -23,7 +23,7 @@
             {% for photo in object_list %}
                 <div class="col-md-3">
                     <a href="{{ photo.photopage_url }}"><img class="img-responsive img-thumbnail" src='{% thumbor_url photo.get_large_url smart=True height=300 width=300 %}'></a>
-                    {{ photo.description|markdown }}
+                    {{ photo.description|markdownify }}
                 </div>
                 {% if forloop.counter|divisibleby:4 %}</div><div class="row">{% endif %}
             {% endfor %}

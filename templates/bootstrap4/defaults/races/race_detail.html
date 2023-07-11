@@ -6,7 +6,7 @@
 {% load faq_tags %}
 {% load flickr %}
 {% load links_tags %}
-{% load markup %}
+{% load markdownify %}
 {% load news_tags %}
 {% load photo_tags %}
 {% load race_tags %}
@@ -21,7 +21,7 @@
 
 
 {% block opengraph %}
-    {% with object.description|markdown|striptags|truncatechars:300 as og_description %}
+    {% with object.description|markdownify|striptags|truncatechars:300 as og_description %}
         {% if object.logo %}
             {% opengraph_meta "type='article', url=object.get_absolute_url, title=object.title, image=object.logo.url, description=og_description" %}
         {% else %}
@@ -135,11 +135,11 @@
                 <a name="news"></a>
                 <h3>Latest News</h3>
                 {% for item in object.get_race_news|slice:":3" %}
-                    <p>&nbsp;&nbsp;{{ item.body|markdown }}</p>
+                    <p>&nbsp;&nbsp;{{ item.body|markdownify }}</p>
                 {% endfor %}
             {% endif %}
 
-            {{ object.description|markdown }}
+            {{ object.description|markdownify }}
 
             <dl class="dl-horizontal">
                 <dt>Race date:</dt>
@@ -164,7 +164,7 @@
             {% if object.location %}
                 <h3>Location</h3>
                 <div id="map-canvas"></div>
-                <p>{{ object.location.description|markdown }}</p>
+                <p>{{ object.location.description|markdownify }}</p>
             {% endif %}
 
             {% if object.course_map %}
@@ -175,7 +175,7 @@
                 <hr>
                 <a name="awards"></a>
                 <h3>Awards</h3>
-                <p>{{ object.awards|markdown }}</p>
+                <p>{{ object.awards|markdownify }}</p>
             {% endif %}
 
             {% if object.race_directors.count %}
@@ -193,7 +193,7 @@
                 <hr>
                 <h3>Registration</h3>
 
-                {{ object.reg_description|markdown }}<br />
+                {{ object.reg_description|markdownify }}<br />
 
                 {% if object.entry_form %}
                     <hr>
@@ -218,11 +218,11 @@
                     </ul>
                 {% endif %}
 
-                {{ object.discounts|markdown }}
+                {{ object.discounts|markdownify }}
 
                 {% if object.packet_pickup %}
                     <h3>Packet Pickup</h3>
-                    {{ object.packet_pickup|markdown }}
+                    {{ object.packet_pickup|markdownify }}
                 {% endif %}
             {% endif %}
 
@@ -257,7 +257,7 @@
                 <h3>Links</h3>
                 {% for link in link_list %}
                     <h4>{{ link.name }}</h4>
-                    {{ link.description|markdown }}
+                    {{ link.description|markdownify }}
                 {% endfor %}
             {% endif %}
 
@@ -268,7 +268,7 @@
                 <h3>Frequently Asked Questions</h3>
                 {% for faq in faq_list %}
                     <h4>{{ faq.question }}</h4>
-                    {{ faq.answer|markdown }}
+                    {{ faq.answer|markdownify }}
                 {% endfor %}
             {% endif %}
 

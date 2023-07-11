@@ -3,7 +3,7 @@
 
 {% load core_tags %}
 {% load faq_tags %}
-{% load markup %}
+{% load markdownify %}
 {% load news_tags %}
 {% load photo_tags %}
 {% load simple_open_graph %}
@@ -14,7 +14,7 @@
 
 {% block metas %}
     {{ block.super }}
-    {% with object.details|markdown|striptags|truncatechars:300 as og_description %}
+    {% with object.details|markdownify|striptags|truncatechars:300 as og_description %}
         {% opengraph_meta "type='article', url=object.get_absolute_url, title=object.name, description=og_description" %}
     {% endwith %}
 {% endblock metas %}
@@ -52,7 +52,7 @@
             <h2>{{ object.name }}</h2>
 
             <div class="lead">
-                {{ object.details|markdown }}
+                {{ object.details|markdownify }}
             </div>
 
             <hr>
@@ -74,7 +74,7 @@
                 {% for news in news_list|slice:":3" %}
                     <div class="{% if news.alert_status %}alert alert-{{ news.alert_status }}{% endif %}">
                         <h4>{{ news.pub_date|date }} - {{ news.title }}</h4>
-                        {{ news.body|markdown }}
+                        {{ news.body|markdownify }}
                     </div>
                 {% endfor %}
             {% endif %}
@@ -93,7 +93,7 @@
                 <h3>Frequently Asked Questions</h3>
                 {% for faq in faq_list %}
                     <h4>{{ faq.question }}</h4>
-                    {{ faq.answer|markdown }}
+                    {{ faq.answer|markdownify }}
                 {% endfor %}
             {% endif %}
         </div>

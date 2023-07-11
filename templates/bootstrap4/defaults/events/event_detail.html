@@ -2,7 +2,7 @@
 
 {% load core_tags %}
 {% load faq_tags %}
-{% load markup %}
+{% load markdownify %}
 {% load photo_tags %}
 {% load micawber_tags %}
 
@@ -15,7 +15,7 @@
 
             <h1>{{ object.title }}</h1>
 
-            <div class="lead">{{ object.body|oembed:"600x600"|markdown }}</div>
+            <div class="lead">{{ object.body|oembed:"600x600"|markdownify }}</div>
 
             {% if object.races.upcoming.count %}
                 <h3>Upcoming races</h3>
@@ -41,8 +41,8 @@
             {% if faq_list %}
                 <h3>Frequently Asked Questions</h3>
                 {% for faq in faq_list %}
-                    <h4>{{ faq.question|oembed:"600x600"|markdown }}</h4>
-                    {{ faq.answer|oembed:"600x600"|markdown }}
+                    <h4>{{ faq.question|oembed:"600x600"|markdownify }}</h4>
+                    {{ faq.answer|oembed:"600x600"|markdownify }}
                 {% endfor %}
             {% endif %}
         </div>

@@ -1,7 +1,7 @@
 {% extends base_template_name|default:"base.html" %}
 
 
-{% load markup %}
+{% load markdownify %}
 
 
 {% block title %}Links{% endblock title %}
@@ -14,7 +14,7 @@
 
             {% for link in object_list %}
                 <h3><a href="{{ link.link }}">{{ link.name }}</a></h3>
-                {{ link.description|markdown }}
+                {{ link.description|markdownify }}
             {% endfor %}
         </div>
 

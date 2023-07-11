@@ -2,7 +2,7 @@
 
 
 {% load core_tags %}
-{% load markup %}
+{% load markdownify %}
 {% load simple_open_graph %}
 
 
@@ -11,7 +11,7 @@
 
 {% block metas %}
     {{ block.super }}
-    {% with object.body|markdown|striptags|truncatechars:300 as og_description %}
+    {% with object.body|markdownify|striptags|truncatechars:300 as og_description %}
         {% opengraph_meta "type='article', url=object.get_absolute_url, title=object.title, description=og_description" %}
     {% endwith %}
 {% endblock metas %}
@@ -30,7 +30,7 @@
                 </div>
             {% endif %}
 
-            {{ object.body|markdown }}
+            {{ object.body|markdownify }}
 
             {% render_facebook_like obj=object %}
 

@@ -6,7 +6,7 @@
 {% load core_tags %}
 {% load faq_tags %}
 {% load flickr %}
-{% load markup %}
+{% load markdownify %}
 {% load micawber_tags %}
 {% load news_tags %}
 {% load photo_tags %}
@@ -72,7 +72,7 @@
                     {% for news in latest_news %}
                         <div class="{% if news.alert_status %}alert alert-{{ news.alert_status }}{% endif %}">
                             <h4 class="">{{ news.pub_date|date }}</h4>
-                            {{ news.body|markdown|truncatewords_html:"100" }}
+                            {{ news.body|markdownify|truncatewords_html:"100" }}
                         </div>
                         <hr>
                     {% endfor %}
@@ -92,7 +92,7 @@
                     {% for news in latest_news|slice:"1" %}
                         <div class="{% if news.alert_status %}alert alert-{{ news.alert_status }}{% endif %}">
                             <h4 class="">{{ news.pub_date|date }}</h4>
-                            {{ news.body|markdown|truncatewords_html:"100" }}
+                            {{ news.body|markdownify|truncatewords_html:"100" }}
                         </div>
                         <hr>
                     {% endfor %}
@@ -172,7 +172,7 @@
                         {% if latest_race.get_race_news %}
                             <p><strong>Latest updates:</strong>
                                 {% for item in latest_race.get_race_news|slice:":3" %}
-                                    {{ item.body|markdown }}
+                                    {{ item.body|markdownify }}
                                 {% endfor %}
                             </p>
                         {% endif %}
@@ -186,9 +186,9 @@
                             {% endif %}
                         </dl>
 
-                        {{ latest_race.description|markdown }}
+                        {{ latest_race.description|markdownify }}
 
-                        {# latest_race.description|oembed:"600x600"|markdown #}
+                        {# latest_race.description|oembed:"600x600"|markdownify #}
 
                         <p><a class="btn btn-block btn-primary" href="{{ latest_race.get_absolute_url }}">More information &#187;</a></p>
                     </div>
@@ -210,7 +210,7 @@
                         <div class="post-title"><h2><a href="{{ latest_post.get_absolute_url }}">{{ latest_post.title }}</a></h2></div>
                         <div class="post-date">{{ latest_post.publish|date:"D d M, Y" }} by <a href="{{ latest_post.author.get_absolute_url }}">{{ latest_post.author}}</a></div>
                         <div class="post-body">
-                            {{ latest_post.body|markdown|truncatewords:"400" }}
+                            {{ latest_post.body|markdownify|truncatewords:"400" }}
                             <p><a href="{{ latest_post.get_absolute_url }}">Read more...</a></p>
                         </div>
                     </div>

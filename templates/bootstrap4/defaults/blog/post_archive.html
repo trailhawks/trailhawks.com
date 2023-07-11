@@ -1,7 +1,7 @@
 {% extends base_template_name|default:"base.html" %}
 
 
-{% load markup %}
+{% load markdownify %}
 
 
 {% block title %}Blog{% endblock title %}
@@ -13,7 +13,7 @@
             {% for post in latest %}
                 <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
                 <h4>{{ post.publish|date }} <small>by <a href="{{post.author.get_absolute_url}}">{{post.author.full_hawk_name}}</a></small></h4>
-                {% firstof post.tease|markdown post.body|markdown|truncatewords_html:100 %}
+                {% firstof post.tease|markdownify post.body|markdownify|truncatewords_html:100 %}
             {% endfor %}
 
             {% if is_paginated %}

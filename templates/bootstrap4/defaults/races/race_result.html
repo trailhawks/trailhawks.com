@@ -1,13 +1,13 @@
 {% extends base_template_name|default:"base.html" %}
 
 
-{% load markup %}
+{% load markdownify %}
 {% load race_tags %}
 {% load simple_open_graph %}
 
 
 {% block opengraph %}
-    {% with object.description|markdown|striptags|truncatechars:300 as og_description %}
+    {% with object.description|markdownify|striptags|truncatechars:300 as og_description %}
         {% if object.logo %}
             {% opengraph_meta "type='article', url=object.get_absolute_url, title=object.title, image=object.logo.url, description=og_description" %}
         {% else %}

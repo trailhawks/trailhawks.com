@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
-{% load markup %}
+{% load markdownify %}
 
 {% block content %}
 
     <h1>Sign Up</h1>
 
-    {{ request.race.reg_description|markdown }}
+    {{ request.race.reg_description|markdownify }}
 
 {% endblock content %}

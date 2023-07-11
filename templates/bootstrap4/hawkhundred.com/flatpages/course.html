@@ -1,6 +1,6 @@
 {% extends "flatpages/default.html" %}
 
-{% load markup %}
+{% load markdownify %}
 {% load race_tags %}
 
 {% block content %}
@@ -9,6 +9,6 @@
 
     {% get_race_by_slug slug='the-hawk-thirteenth-annual' as race %}
 
-    {{ race.description|markdown }}
+    {{ race.description|markdownify }}
 
 {% endblock content %}
