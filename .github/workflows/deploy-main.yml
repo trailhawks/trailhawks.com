@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 1
 
@@ -53,12 +53,14 @@ jobs:
       - name: Build and Push Production Docker image
         uses: docker/build-push-action@v2
         with:
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           context: .
-          file: ./.docker/Dockerfile
+          file: .docker/Dockerfile
           push: true
           tags: |
             ghcr.io/${{ github.repository }}:latest
 
-      # - name: Push Release Build to GitHub
-      #   run: |
-      #     git push
+      - name: Push Release Build to GitHub
+        run: |
+          git push
