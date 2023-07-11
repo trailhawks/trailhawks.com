@@ -1,4 +1,5 @@
 from django.views.generic import TemplateView
+from runs.models import Run
 
 
 class AboutView(TemplateView):
@@ -11,8 +12,10 @@ class HomepageView(TemplateView):
     navitem = "home"
 
     def get_context_data(self, **kwargs):
+        runs = Run.objects.active().order_by("day_of_week")
         context = super().get_context_data(**kwargs)
         context["use_bootstrap"] = True if self.request.GET.get("bootstrap") else False
+        context["runs"] = runs
         return context
 
 
