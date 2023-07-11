@@ -39,7 +39,9 @@ def command():
             )
             if created:
                 print(
-                    "[yellow]{} {}[/yellow] was imported".format(user['first_name'], user['last_name'])
+                    "[yellow]{} {}[/yellow] was imported".format(
+                        user["first_name"], user["last_name"]
+                    )
                 )
                 # member.member_since = parse(result["Registration Date"].split(" ")[0])
                 # member.notes = f"{result['Price Option']}"

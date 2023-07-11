@@ -130,6 +130,7 @@ class RaceResultDetail(HtmlPage):
                 cancellation=cancellation,
                 date=event_date,
                 distance=distance,
+                # slug=slugify(title.text),
                 title=title.text,
                 virtual=virtual,
                 website=website,
@@ -149,6 +150,7 @@ class ResultJsonListPage(JsonListPage):
     source = NullSource()
 
     def process_item(self, item):
+        # print(item)
         return dict(**self.input, **item)
 
 
