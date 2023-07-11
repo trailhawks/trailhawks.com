@@ -95,17 +95,18 @@ INSTALLED_APPS = [
 ]
 
 INSTALLED_APPS += [
-    "ajaximage",
     # "dbbackup",
+    # "storages",
+    "ajaximage",
+    "django_q",
     "django_thumbor",
     "favicon",
-    "markup_deprecated",
+    "markdownify.apps.MarkdownifyConfig",
     "micawber.contrib.mcdjango",
     "pagedown.apps.PagedownConfig",
     "rest_framework",
     "robots",
     "simple_open_graph",
-    # "storages",
     "syncr.flickr",
     "syncr.twitter",
     "taggit",
@@ -216,3 +217,33 @@ RUNSIGNUP_URL = env("RUNSIGNUP_URL", default="")
 SERVER_EMAIL = env("SERVER_EMAIL", default="")
 THUMBOR_SECURITY_KEY = env("THUMBOR_SECURITY_KEY", default="")
 THUMBOR_SERVER = env("THUMBOR_SERVER", default="")
+
+# Django-Q settings
+
+Q_CLUSTER = {
+    "bulk": 10,
+    "name": "DjangORM",
+    "orm": "default",
+    "queue_limit": 50,
+    "retry": 120,
+    "timeout": 90,
+    "workers": 4,
+}
+
+
+MARKDOWNIFY = {
+    "default": {
+        "WHITELIST_TAGS": [
+            "a",
+            "p",
+            "h1",
+            "h2",
+            "h3",
+            "h4",
+            "h5",
+            "h6",
+            "strong",
+            "img",
+        ],
+    },
+}
