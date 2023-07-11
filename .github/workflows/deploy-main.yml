@@ -59,7 +59,6 @@ jobs:
           tags: |
             ghcr.io/${{ github.repository }}:latest
             ghcr.io/${{ github.repository }}:${{ steps.vars.outputs.current_version }}
-            # ghcr.io/${{ github.repository }}:${{ env.current_version }}
 
       - name: Push Release Build to GitHub
         run: |
