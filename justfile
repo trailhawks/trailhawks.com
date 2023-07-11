@@ -14,8 +14,8 @@ TAILWIND_CSS_VERSION := "latest"
     bumpver update --allow-dirty
     git push origin main
 
-@build:
-    docker-compose build
+@build *ARGS:
+    docker-compose build {{ ARGS }}
 
 @check:
     {{ manage }} check --deploy
