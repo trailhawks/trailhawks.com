@@ -10,6 +10,11 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK 1
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
+# Update the package list and install git
+RUN --mount=type=cache,target=/var/cache/apt,rw \
+    --mount=type=cache,target=/var/lib/apt,rw \
+    apt-get update && apt-get install -y git
+
 RUN --mount=type=cache,target=/root/.cache \
     pip install --upgrade pip pip-tools
 
