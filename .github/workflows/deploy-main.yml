@@ -35,7 +35,7 @@ jobs:
         run: |
           bumpver update
           eval $(bumpver show --env)
-          echo "::set-output name=current_version::$CURRENT_VERSION"
+          echo "name=current_version" >> $CURRENT_VERSION
 
       - name: Set up Docker Buildx
         id: buildx
@@ -58,8 +58,8 @@ jobs:
           push: true
           tags: |
             ghcr.io/${{ github.repository }}:latest
-            ghcr.io/${{ github.repository }}:${{ steps.vars.outputs.current_version }}
+            ghcr.io/${{ github.repository }}:${{ env.current_version }}
 
-      - name: Push Release Build to GitHub
-        run: |
-          git push
+      # - name: Push Release Build to GitHub
+      #   run: |
+      #     git push
