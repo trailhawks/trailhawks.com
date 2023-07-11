@@ -1,7 +1,7 @@
 from dateutil.relativedelta import relativedelta
 from django.contrib import admin
 from django.db import models
-from django.template.defaultfilters import slugify
+from django.utils.text import slugify
 from django.urls import reverse
 from django.utils.html import format_html
 from num2words import num2words
@@ -14,6 +14,13 @@ from news.admin import NewsInline
 from sponsors.admin import SponsorInline
 
 from .models import Race, Racer, RaceType, Registration, Report, Result, Series
+
+
+@admin.action(description="Fix slug fields")
+def fix_slug_fields(modeladmin, request, queryset):
+    for race in queryset.all():
+        race.slug = slugify(f"{race.slug}")
+        race.save(update_fields=["slug"])
 
 
 @admin.action(description="Duplicate the race for the next year")
@@ -88,6 +95,7 @@ class RaceAdmin(admin.ModelAdmin):
     save_on_top = True
     search_fields = ["title", "slogan", "description", "slogan"]
     actions = [
+        fix_slug_fields,
         migrate_race,
         set_location_to_clinton,
         set_location_to_river_trails,

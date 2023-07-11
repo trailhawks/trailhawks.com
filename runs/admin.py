@@ -13,11 +13,9 @@ class RunAdmin(admin.ModelAdmin):
     formfield_overrides = {
         models.TextField: {"widget": AdminPagedownWidget},
     }
-    prepopulated_fields = {"slug": ["name"]}
-    list_display = ["name", "day_of_week", "active", "run_time"]
+    inlines = [NewsInline, FaqInline]
+    list_display = ["name", "day_of_week", "run_time", "active", "location"]
     list_filter = ["day_of_week", "run_time", "location"]
+    ordering = ["day_of_week"]
+    prepopulated_fields = {"slug": ["name"]}
     raw_id_fields = ["contact"]
-    inlines = (
-        NewsInline,
-        FaqInline,
-    )
