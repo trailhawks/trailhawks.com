@@ -13,7 +13,7 @@ ENV PYTHONUNBUFFERED 1
 # Update the package list and install git
 RUN --mount=type=cache,target=/var/cache/apt,rw \
     --mount=type=cache,target=/var/lib/apt,rw \
-    apt-get update && apt-get install -y git
+    apt-get update && apt-get install -y build-essential git
 
 RUN --mount=type=cache,target=/root/.cache \
     pip install --upgrade pip pip-tools
