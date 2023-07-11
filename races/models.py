@@ -1,9 +1,10 @@
 from ajaximage.fields import AjaxImageField
 from django.db import models
-from django.template.defaultfilters import slugify, title
+from django.template.defaultfilters import title
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.functional import cached_property
+from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from num2words import num2words
 
@@ -120,7 +121,13 @@ class Race(MachineTagMixin):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(f"{self.title} {self.start_datetime.strftime('%Y')}")
+            year = self.start_datetime.strftime("%Y")
+            if self.title.endswith(year):
+                self.slug = slugify(self.title)
+            else:
+                self.slug = slugify(f"{self.title} {year}")
+        else:
+            self.slug = slugify(self.slug)
         return super().save(*args, **kwargs)
 
     def __str__(self):
