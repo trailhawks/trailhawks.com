@@ -81,7 +81,6 @@ pip-compile *ARGS:
         --rm web \
             bash -c "pip-compile {{ ARGS }} ./requirements.in \
                 --resolver=backtracking \
-                # --generate-hashes \
                 --output-file ./requirements.txt"
 
 # Upgrade existing Python dependencies to their latest versions
