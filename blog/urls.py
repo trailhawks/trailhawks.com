@@ -1,11 +1,11 @@
-from django.urls import path, re_path
+from django.urls import path
 
 from . import views
 
 urlpatterns = [
     path("", views.PostArchive.as_view(), name="blog_list"),
-    re_path(
-        r"^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{2})/(?P<slug>[-\w]+)/$",
+    path(
+        "<int:year>/<str:month>/<int:day>/<slug:slug>/",
         views.PostDateDetail.as_view(),
         name="blog_detail",
     ),

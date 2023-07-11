@@ -1,29 +1,27 @@
-from django.urls import path, re_path
+from django.urls import path
 
-from . import views
-from .feeds import RaceFeed
+from races import feeds
+from races import views
 
 urlpatterns = [
     path("", views.RaceIndex.as_view(), name="race_index"),
-    re_path(
-        r"^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{2})/(?P<slug>[-\w]+)/$",
+    path(
+        "<int:year>/<str:month>/<int:day>/<slug:slug>/",
         views.RaceDateDetail.as_view(),
         name="race_detail",
     ),
-    re_path(
-        r"^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{2})/(?P<slug>[-\w]+)/results/$",
+    path(
+        "<int:year>/<str:month>/<int:day>/<slug:slug>/results/",
         views.RaceResultDetail.as_view(),
         name="race_result_detail",
     ),
-    re_path(
-        r"^(?P<year>\d{4})/(?P<month>\w{3})/(?P<day>\d{2})/(?P<slug>[-\w]+)/results/csv/$",
+    path(
+        "<int:year>/<str:month>/<int:day>/<slug:slug>/results/csv/",
         views.RaceResultCsvDetail.as_view(),
         name="race_result_csv_detail",
     ),
-    path("ical/", RaceFeed(), name="race_ical"),
-    re_path(
-        r"^racers/(?P<pk>[-\w]+)/$", views.RacerDetail.as_view(), name="racer_detail"
-    ),
+    path("ical/", feeds.RaceFeed(), name="race_ical"),
+    path("racers/<int:pk>/", views.RacerDetail.as_view(), name="racer_detail"),
     path(
         "series/<slug:slug>/csv/",
         views.SeriesResultCsvDetail.as_view(),
