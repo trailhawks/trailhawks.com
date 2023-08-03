@@ -9,7 +9,9 @@
                     <div class="flex flex-auto gap-4 text-red-950">
                         <span><a href="/course/">Course</a></span>
                         <span><a href="/calendar/">Calendar</a></span>
-                        <span><a href="{% url 'race_faqs' %}">FAQs</a></span>
+                        {% comment %}
+                        <li><a href="{% url 'race_faqs' %}">FAQs</a></li>
+                        {% endcomment %}
                         <span><a href="/travel/">Travel</a></span>
                         <span><a href="/maps/">Interactive Maps</a></span>
                         <span><a href="{% url 'race_gallery' %}">Gallery</a></span>
