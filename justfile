@@ -1,7 +1,7 @@
 set dotenv-load := false
 
 compose := "docker-compose run --rm --no-deps web"
-manage := compose + " python manage.py"
+manage := compose + " python -m manage"
 TAILWIND_CSS_VERSION := "latest"
 
 @_default:
@@ -76,16 +76,12 @@ TAILWIND_CSS_VERSION := "latest"
     {{ manage }} migrate
 
 # Compile new python dependencies
-pip-compile *ARGS:
+@lock *ARGS:
     docker-compose run \
         --rm web \
-            bash -c "pip-compile {{ ARGS }} ./requirements.in \
+            bash -c "uv pip compile {{ ARGS }} ./requirements.in \
                 --resolver=backtracking \
                 --output-file ./requirements.txt"
-
-# Upgrade existing Python dependencies to their latest versions
-@pip-compile-upgrade:
-    just pip-compile --upgrade
 
 # Python linting
 @pre-commit *ARGS:
@@ -123,6 +119,10 @@ pip-compile *ARGS:
 @up *ARGS:
     docker-compose up {{ ARGS }}
 
+# Upgrade existing Python dependencies to their latest versions
+@upgrade:
+    just lock --upgrade
+
 # new...
 
 # Remove current application services
@@ -147,3 +147,29 @@ pip-compile *ARGS:
 # Tail service logs
 @tail:
     just logs --follow
+
+db-backup POSTGRES_DB="postgres" POSTGRES_HOST="db" POSTGRES_PASSWORD="" POSTGRES_USER="postgres":
+    #!/bin/bash
+    set -e
+
+    echo "Backing up..."
+
+    docker-compose exec --no-TTY {{ POSTGRES_HOST }} pg_dump -h {{ POSTGRES_HOST }} -U {{ POSTGRES_USER }} -d {{ POSTGRES_DB }} > ../backups/default-`date +%Y-%d-%m"-"%H%M%S`.pgsql
+    # docker-compose exec --no-TTY {{ POSTGRES_HOST }} pg_dump -h {{ POSTGRES_HOST }} -U {{ POSTGRES_USER }} -d {{ POSTGRES_DB }} | gzip > ../backups/default-`date +%Y-%d-%m"-"%H%M%S`.pgsql.gz
+
+    echo "Backup completed!"
+
+db-restore filename="/backup/do-trailhawks.tar":
+    #!/bin/bash
+    set -e
+
+    echo "Restoring... {{ filename }}"
+
+    docker-compose run --rm --no-deps db pg_restore \
+        --dbname=postgres \
+        --format=t \
+        --host=db \
+        --username=postgres \
+        /backup/do-trailhawks.tar
+
+    echo "Restore completed!"
