@@ -29,17 +29,11 @@ class News(models.Model):
     title = models.CharField(max_length=250)
     slug = models.SlugField(blank=True, null=True)
     body = models.TextField()
-    status = models.IntegerField(
-        _("status"), choices=STATUS_CHOICES, default=STATUS_PUBLIC
-    )
-    alert_status = models.CharField(
-        max_length=50, choices=ALERT_CHOICES, default="", blank=True
-    )
+    status = models.IntegerField(_("status"), choices=STATUS_CHOICES, default=STATUS_PUBLIC)
+    alert_status = models.CharField(max_length=50, choices=ALERT_CHOICES, default="", blank=True)
 
     # show in main news feed? handy for race results...
-    content_type = models.ForeignKey(
-        "contenttypes.ContentType", on_delete=models.CASCADE, blank=True, null=True
-    )
+    content_type = models.ForeignKey("contenttypes.ContentType", on_delete=models.CASCADE, blank=True, null=True)
     object_id = models.PositiveIntegerField(blank=True, null=True)
     content_object = GenericForeignKey("content_type", "object_id")
 

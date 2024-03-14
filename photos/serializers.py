@@ -69,6 +69,4 @@ class PhotoSerializer(serializers.HyperlinkedModelSerializer):
         return SIDEBAR_WIDTH
 
     def get_sidebar_url(self, obj):
-        return generate_url(
-            obj.get_medium_url(), smart=True, width=SIDEBAR_WIDTH, height=SIDEBAR_HEIGHT
-        )
+        return generate_url(obj.get_medium_url(), smart=True, width=SIDEBAR_WIDTH, height=SIDEBAR_HEIGHT)

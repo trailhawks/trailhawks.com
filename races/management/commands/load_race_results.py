@@ -44,9 +44,7 @@ def command(race, csv_filename, update):
         else:
             gender = 2
 
-        racer, _ = Racer.objects.get_or_create(
-            first_name=first_name, last_name=last_name, gender=gender
-        )
+        racer, _ = Racer.objects.get_or_create(first_name=first_name, last_name=last_name, gender=gender)
 
         if len(distance):
             race_type, _ = RaceType.objects.get_or_create(name=distance)

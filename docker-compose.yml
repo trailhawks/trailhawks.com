@@ -1,50 +1,47 @@
+x-common-settings: &common-settings
+  build:
+    context: .
+    dockerfile: .dockerfiles/Dockerfile
+  depends_on:
+    - db
+  env_file:
+    - ".env"
+  init: true
+  volumes:
+    - ./media_root:/src/media_root
+    - ./static_root:/src/static_root
+    - .:/src
+
 services:
 
   db:
-    image: "postgres:13"
+    image: "pgautoupgrade/pgautoupgrade:latest"
     environment:
       - "POSTGRES_HOST_AUTH_METHOD=trust"
     volumes:
       - postgres-data:/var/lib/postgresql/data/
+      - .:/src
+
+  hawkhundred:
+    <<: *common-settings
+    environment:
+      - "DJANGO_SETTINGS_MODULE=config.settings_hawkhundred"
+    ports:
+      - 8010:8000
 
   web:
-    container_name: trailhawks
-    build:
-      context: .
-      dockerfile: .docker/Dockerfile
-    # command: python manage.py runserver 0.0.0.0:8000
-    depends_on:
-      - db
-    env_file:
-      - ".env"
-    environment:
-      - "DJANGO_SETTINGS_MODULE=config.settings"
-      # - "DJANGO_SETTINGS_MODULE=config.settings_tailwind"
-    init: true
+    <<: *common-settings
+    # command: ["python", "-m", "manage", "tailwind", "runserver", "--skip-checks", "0.0.0.0:8000"]
+    # command: ["python", "-m", "manage", runserver", "--skip-checks", "0.0.0.0:8000"]
+    # environment:
+    #   - "DJANGO_SETTINGS_MODULE=config.settings_trailhawks"
     ports:
       - 8000:8000
-    volumes:
-      - .:/src
-      - ./media_root:/src/media_root
-      - ./static_root:/src/static_root
 
-  qcluster:
-    build:
-      context: .
-      dockerfile: .docker/Dockerfile
-    command: python manage.py qcluster
-    depends_on:
-      - db
-    env_file:
-      - ".env"
-    environment:
-      - "DJANGO_SETTINGS_MODULE=config.settings"
-      # - "DJANGO_SETTINGS_MODULE=config.settings_tailwind"
-    init: true
-    volumes:
-      - .:/src
-      - ./media_root:/src/media_root
-      - ./static_root:/src/static_root
+  # qcluster:
+  #   <<: *common-settings
+  #   # command: ["python", "manage.py", "qcluster"]
+  #   command: ["python", "-m", "manage", "qcluster", "--skip-checks"]
 
 volumes:
   postgres-data:

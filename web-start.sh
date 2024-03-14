@@ -5,7 +5,8 @@
 # not necessarily use this exact setup.
 #
 
-python manage.py collectstatic --noinput
+python -m manage collectstatic --noinput
 
 # gunicorn -c config/gunicorn.conf.py --log-level INFO -b 0.0.0.0:8000 config.wsgi
-python manage.py runserver 0.0.0.0:8000
+# python -m manage runserver --skip-checks 0.0.0.0:8000
+python -m manage runserver 0.0.0.0:8000

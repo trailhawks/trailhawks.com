@@ -1,6 +1,4 @@
 from django.contrib import admin
-from django.db import models
-from pagedown.widgets import AdminPagedownWidget
 
 from faq.admin import FaqInline
 from news.admin import NewsInline
@@ -10,9 +8,6 @@ from .models import Run
 
 @admin.register(Run)
 class RunAdmin(admin.ModelAdmin):
-    formfield_overrides = {
-        models.TextField: {"widget": AdminPagedownWidget},
-    }
     inlines = [NewsInline, FaqInline]
     list_display = ["name", "day_of_week", "run_time", "active", "location"]
     list_filter = ["day_of_week", "run_time", "location"]

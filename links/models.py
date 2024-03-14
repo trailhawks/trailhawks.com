@@ -9,9 +9,7 @@ class Links(models.Model):
     link = models.URLField(help_text="URL to link")
     description = models.TextField()
 
-    content_type = models.ForeignKey(
-        "contenttypes.ContentType", on_delete=models.CASCADE, blank=True, null=True
-    )
+    content_type = models.ForeignKey("contenttypes.ContentType", on_delete=models.CASCADE, blank=True, null=True)
     object_id = models.PositiveIntegerField(blank=True, null=True)
     content_object = GenericForeignKey("content_type", "object_id")
 

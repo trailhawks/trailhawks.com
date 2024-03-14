@@ -69,13 +69,9 @@ class RaceResultCsvDetail(RaceMixin, dates.DateDetailView):
             response = HttpResponse(content_type="text/plain")
         else:
             response = HttpResponse(content_type="text/csv")
-            response[
-                "Content-Disposition"
-            ] = f"attachment; filename={race.slug}_{race.start_datetime.year}_results.csv"
+            response["Content-Disposition"] = f"attachment; filename={race.slug}_{race.start_datetime.year}_results.csv"
 
-        results = Result.objects.filter(race=race).order_by(
-            "race_type__name", "dq", "dnf", "dns", "time"
-        )
+        results = Result.objects.filter(race=race).order_by("race_type__name", "dq", "dnf", "dns", "time")
 
         result_list = csv.writer(response)
         result_list.writerow(
@@ -137,9 +133,7 @@ class SeriesResultCsvDetail(DetailView):
             response = HttpResponse(content_type="text/plain")
         else:
             response = HttpResponse(content_type="text/csv")
-            response[
-                "Content-Disposition"
-            ] = f"attachment; filename={series.slug}_results.csv"
+            response["Content-Disposition"] = f"attachment; filename={series.slug}_results.csv"
 
         results = Result.objects.filter(race__in=series.races.all()).order_by(
             "race__name",

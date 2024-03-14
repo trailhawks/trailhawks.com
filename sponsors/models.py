@@ -24,9 +24,7 @@ class Sponsor(models.Model):
     active = models.BooleanField(default=False)
     homepage = models.BooleanField("Show on homepage?", default=False)
 
-    content_type = models.ForeignKey(
-        "contenttypes.ContentType", on_delete=models.CASCADE, blank=True, null=True
-    )
+    content_type = models.ForeignKey("contenttypes.ContentType", on_delete=models.CASCADE, blank=True, null=True)
     object_id = models.PositiveIntegerField(blank=True, null=True)
     content_object = GenericForeignKey("content_type", "object_id")
 

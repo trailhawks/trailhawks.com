@@ -1,5 +1,5 @@
 {% block doc %}
-    <!DOCTYPE html>{% load static %}
+    <!DOCTYPE html>{% load static %}{% load tailwind_cli %}
     <html{% block html_attribs %}{% endblock html_attribs %}>
         {% block html %}
             <head>
@@ -18,8 +18,9 @@
                     {% endblock opengraph %}
 
                     {% block styles %}
-                        <link href="{% static 'css/tailwind.css' %}" rel="stylesheet" media="screen">
+                        {% tailwind_css %}
                         <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" media="screen">
+                        {# <link href="{% static 'css/tailwind.css' %}" rel="stylesheet" media="screen"> #}
                         {# <link href="{% static 'css/fluidity.css' %}" rel="stylesheet" media="screen"> #}
                         {# <link href="{% static 'css/bootstrap-social.css' %}" rel="stylesheet" media="screen"> #}
                         {# <link href="{% static 'css/app.css' %}" rel="stylesheet" media="screen"> #}

@@ -14,131 +14,26 @@
     {% endwith %}
 {% endblock opengraph %}
 
-{% block post_style %}
-    <style>
-        /* Space out content a bit */
-        body {
-            padding-top: 20px;
-            padding-bottom: 20px;
-        }
-
-        .masthead {
-            height: 596px;
-            width: 992px;
-            background-image: url("https://trailhawks.com/static/img/header-hawk-2023.png");
-            background-repeat: no-repeat;
-        }
-
-        /* Everything but the jumbotron gets side spacing for mobile first views */
-        .header,
-        .marketing,
-        .footer {
-            padding-right: 15px;
-            padding-left: 15px;
-        }
-
-        /* Custom page header */
-        .header {
-            border-bottom: 1px solid #e5e5e5;
-        }
-        /* Make the masthead heading the same height as the navigation */
-        .header h3 {
-            padding-bottom: 19px;
-            margin-top: 0;
-            margin-bottom: 0;
-            line-height: 40px;
-        }
-
-        /* Custom page footer */
-        .footer {
-            padding-top: 19px;
-            color: #777;
-            border-top: 1px solid #e5e5e5;
-        }
-
-        /* Customize container */
-        /*
-@media (min-width: 768px) {
-  .container {
-    max-width: 730px;
-  }
-}
-    */
-        @media (min-width: 992px) {
-            .container {
-                max-width: 970px;
-            }
-        }
-
-        .container-narrow > hr {
-            margin: 30px 0;
-        }
-
-        /* Main marketing message and sign up button */
-        .jumbotron {
-            /* text-align: center; */
-            border-bottom: 1px solid #e5e5e5;
-        }
-        .jumbotron .btn {
-            padding: 14px 24px;
-            font-size: 21px;
-        }
-
-        /* Supporting marketing content */
-        .marketing {
-            margin: 40px 0;
-        }
-        .marketing p + h4 {
-            margin-top: 28px;
-        }
-
-        /* Responsive: Portrait tablets and up */
-        /* 992px): width: 970 */
-        /*
-@media screen and (min-width: 768px) {
-    */
-        @media screen and (min-width: 992px) {
-            /* Remove the padding we set earlier */
-            .header,
-            .marketing,
-            .footer {
-                padding-right: 0;
-                padding-left: 0;
-            }
-            /* Space out the masthead */
-            .header {
-                margin-bottom: 30px;
-            }
-            /* Remove the bottom border on the jumbotron for visual effect */
-            .jumbotron {
-                border-bottom: 0;
-            }
-        }
-    </style>
-{% endblock post_style %}
-
 {% block navbar %}
     {% include "menu.html" %}
 {% endblock navbar %}
 
 {% block content-wrapper %}
-    <div class="container mx-auto sm:px-4">
-        <div class="flex flex-auto">
-            <div class="border-2 border-red-900">
-                {% block content %}
-                {% endblock content %}
-            </div>
+    <div class="mx-auto">
+        <div class="">
+            {% block content %}
+            {% endblock content %}
         </div>
     </div>
 {% endblock content-wrapper %}
 
 {% block footer %}
-    <div class="container mx-auto sm:px-4 border-2 border-red-900">
-        <div class="flex flex-col gap-4">
+    <div class="mx-auto">
+        <div class="flex flex-col gap-2">
             <div class="flex flex-auto gap-4">
-                <span><a class="underline hover:bg-yellow-300" href="/signup/"><i class="fa fa-plus-circle"></i> Join Us</a></span>
-                <span><a class="underline hover:bg-yellow-300" href="https://www.facebook.com/groups/hawkhundred/"><i class="fa fa-facebook"></i> Facebook</a></span>
-                <span><a class="underline hover:bg-yellow-300" href="https://www.flickr.com/photos/trailhawks"><i class="fa fa-flickr"></i> Flickr</a></span>
+                <a class="underline hover:bg-yellow-300" href="/signup/"><i class="fa fa-plus-circle"></i> Join Us</a>
+                <a class="underline hover:bg-yellow-300" href="https://www.facebook.com/groups/hawkhundred/"><i class="fa fa-facebook"></i> Facebook</a>
+                <a class="underline hover:bg-yellow-300" href="https://www.flickr.com/photos/trailhawks"><i class="fa fa-flickr"></i> Flickr</a>
             </div>
             <div>&copy; 2009-{% now "Y" %} <a class="underline hover:bg-yellow-300" href="https://trailhawks.com/">Lawrence Trail Hawks</a>. All rights reserved. v{% get_version %}</div>
         </div>

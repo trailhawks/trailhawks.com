@@ -4,6 +4,8 @@ SITE_ID = 2
 
 ROOT_URLCONF = "config.urls_hawkhundred"
 
+TEMPLATE_ROOT = BASE_DIR.joinpath("templates", "tailwind")
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",

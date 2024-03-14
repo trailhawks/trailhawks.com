@@ -21,15 +21,9 @@ class Event(MachineTagMixin):
     title = models.CharField(max_length=250)
     slug = models.SlugField(blank=True, null=True)
     body = models.TextField(blank=True)
-    status = models.IntegerField(
-        _("status"), choices=STATUS_CHOICES, default=STATUS_PUBLIC
-    )
-    facebook_url = models.URLField(
-        blank=True, null=True, help_text="Link to Facebook page"
-    )
-    facebook_event_url = models.URLField(
-        blank=True, null=True, help_text="Link to Facebook Event page"
-    )
+    status = models.IntegerField(_("status"), choices=STATUS_CHOICES, default=STATUS_PUBLIC)
+    facebook_url = models.URLField(blank=True, null=True, help_text="Link to Facebook page")
+    facebook_event_url = models.URLField(blank=True, null=True, help_text="Link to Facebook Event page")
     races = models.ManyToManyField("races.Race", related_name="events")
 
     objects = EventManager()

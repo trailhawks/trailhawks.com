@@ -28,9 +28,7 @@ USE_ETAGS = True
 TIME_ZONE = "America/Chicago"
 LANGUAGE_CODE = "en-us"
 
-DATABASES = {
-    "default": env.dj_db_url("DATABASE_URL", default="postgres://postgres@db/postgres")
-}
+DATABASES = {"default": env.dj_db_url("DATABASE_URL", default="postgres://postgres@db/postgres")}
 
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
@@ -55,12 +53,15 @@ TEMPLATES = [
         "DIRS": [str(TEMPLATE_ROOT.joinpath("defaults"))],
         "APP_DIRS": True,
         "OPTIONS": {
+            "builtins": [
+                "heroicons.templatetags.heroicons",
+            ],
             "context_processors": [
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-            ]
+            ],
         },
     }
 ]
@@ -95,15 +96,15 @@ INSTALLED_APPS = [
 ]
 
 INSTALLED_APPS += [
-    # "dbbackup",
     # "storages",
     "ajaximage",
     "django_q",
+    "django_tailwind_cli",
     "django_thumbor",
     "favicon",
+    "heroicons",
     "markdownify.apps.MarkdownifyConfig",
     "micawber.contrib.mcdjango",
-    "pagedown.apps.PagedownConfig",
     "rest_framework",
     "robots",
     "simple_open_graph",
@@ -198,19 +199,14 @@ FLICKR = {
     "username": env("FLICKR_USERNAME", default=""),
 }
 
-DBBACKUP_STORAGE = "django.core.files.storage.FileSystemStorage"
-DBBACKUP_STORAGE_OPTIONS = {
-    "location": env("DBBACKUP_STORAGE_OPTIONS_LOCATION", default="/src")
-}
-
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="")
 EMAIL_HOST = env("EMAIL_HOST", default="")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", default="")
 EMAIL_HOST_USER = env("EMAIL_HOST_USER", default="")
 EMAIL_PORT = env("EMAIL_PORT", default="")
 EMAIL_USE_TLS = env("EMAIL_USE_TLS", default="")
-PAGEDOWN_IMAGE_UPLOAD_ENABLED = env.bool("PAGEDOWN_IMAGE_UPLOAD_ENABLED", default=True)
-PAGEDOWN_IMAGE_UPLOAD_UNIQUE = env.bool("PAGEDOWN_IMAGE_UPLOAD_UNIQUE", default=True)
+# PAGEDOWN_IMAGE_UPLOAD_ENABLED = env.bool("PAGEDOWN_IMAGE_UPLOAD_ENABLED", default=True)
+# PAGEDOWN_IMAGE_UPLOAD_UNIQUE = env.bool("PAGEDOWN_IMAGE_UPLOAD_UNIQUE", default=True)
 RUNSIGNUP_KEY = env("RUNSIGNUP_KEY", default="")
 RUNSIGNUP_SECRET = env("RUNSIGNUP_SECRET", default="")
 RUNSIGNUP_URL = env("RUNSIGNUP_URL", default="")
@@ -230,20 +226,24 @@ Q_CLUSTER = {
     "workers": 4,
 }
 
-
 MARKDOWNIFY = {
     "default": {
         "WHITELIST_TAGS": [
             "a",
-            "p",
             "h1",
             "h2",
             "h3",
             "h4",
             "h5",
             "h6",
-            "strong",
             "img",
+            "p",
+            "strong",
         ],
     },
 }
+
+TAILWIND_CLI_CONFIG_FILE = "frontend/tailwind.config.js"
+TAILWIND_CLI_DIST_CSS = "css/tailwind.css"
+TAILWIND_CLI_SRC_CSS = "frontend/index.css"
+# "assets/css/tailwind.css"

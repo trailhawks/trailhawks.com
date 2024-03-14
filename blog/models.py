@@ -18,9 +18,7 @@ class Post(models.Model):
     )
     title = models.CharField(_("title"), max_length=200)
     slug = models.SlugField(_("slug"), unique_for_date="publish")
-    author = models.ForeignKey(
-        "members.Member", on_delete=models.CASCADE, blank=True, null=True
-    )
+    author = models.ForeignKey("members.Member", on_delete=models.CASCADE, blank=True, null=True)
     body = models.TextField(
         _("body"),
         help_text="The body supports Textile markup. Please use http://textile.thresholdstate.com/ to markup the blog post and get the right formatting.",
@@ -30,9 +28,7 @@ class Post(models.Model):
         blank=True,
         help_text=_("Concise text suggested. Does not appear in RSS feed."),
     )
-    status = models.IntegerField(
-        _("status"), choices=STATUS_CHOICES, default=STATUS_PUBLIC
-    )
+    status = models.IntegerField(_("status"), choices=STATUS_CHOICES, default=STATUS_PUBLIC)
     publish = models.DateTimeField(_("publish"), default=timezone.now)
     created = models.DateTimeField(_("created"), auto_now_add=True)
     modified = models.DateTimeField(_("modified"), auto_now=True)

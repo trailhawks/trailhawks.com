@@ -16,9 +16,7 @@ class Member(MachineTagMixin):
         (2, "Woman"),
     )
 
-    username = models.ForeignKey(
-        "auth.User", on_delete=models.CASCADE, null=True, blank=True
-    )
+    username = models.ForeignKey("auth.User", on_delete=models.CASCADE, null=True, blank=True)
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
     hawk_name = models.CharField(max_length=50, blank=True, null=True)
@@ -55,11 +53,7 @@ class Member(MachineTagMixin):
 
     def get_machine_tags(self):
         machine_tags = super().get_machine_tags()
-        machine_tags += [
-            "trailhawk:member={}".format(
-                "-".join([self.first_name, self.last_name]).lower()
-            )
-        ]
+        machine_tags += ["trailhawk:member={}".format("-".join([self.first_name, self.last_name]).lower())]
         return machine_tags
 
     def active(self):
@@ -106,9 +100,7 @@ class Member(MachineTagMixin):
     def get_race_results(self):
         from races.models import Result
 
-        return Result.objects.filter(racer__trailhawk=self).order_by(
-            "-race__start_datetime"
-        )
+        return Result.objects.filter(racer__trailhawk=self).order_by("-race__start_datetime")
 
     @property
     def get_race_reports(self):
@@ -131,12 +123,8 @@ class Office(models.Model):
 
 
 class Term(models.Model):
-    office = models.ForeignKey(
-        "members.Office", on_delete=models.CASCADE, blank=True, null=True
-    )
-    member = models.ForeignKey(
-        "members.Member", on_delete=models.CASCADE, blank=True, null=True
-    )
+    office = models.ForeignKey("members.Office", on_delete=models.CASCADE, blank=True, null=True)
+    member = models.ForeignKey("members.Member", on_delete=models.CASCADE, blank=True, null=True)
     start = models.DateField()
     end = models.DateField(blank=True, null=True)
 

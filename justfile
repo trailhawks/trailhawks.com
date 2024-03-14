@@ -148,28 +148,28 @@ TAILWIND_CSS_VERSION := "latest"
 @tail:
     just logs --follow
 
-db-backup POSTGRES_DB="postgres" POSTGRES_HOST="db" POSTGRES_PASSWORD="" POSTGRES_USER="postgres":
-    #!/bin/bash
-    set -e
+# dump database to file
+pg_dump file='db.dump':
+    docker compose run \
+        --no-deps \
+        --rm \
+        db \
+        pg_dump \
+            --dbname "${DATABASE_URL:=postgres://postgres@db/postgres}" \
+            --file /src/{{ file }} \
+            --format=c \
+            --verbose
 
-    echo "Backing up..."
-
-    docker-compose exec --no-TTY {{ POSTGRES_HOST }} pg_dump -h {{ POSTGRES_HOST }} -U {{ POSTGRES_USER }} -d {{ POSTGRES_DB }} > ../backups/default-`date +%Y-%d-%m"-"%H%M%S`.pgsql
-    # docker-compose exec --no-TTY {{ POSTGRES_HOST }} pg_dump -h {{ POSTGRES_HOST }} -U {{ POSTGRES_USER }} -d {{ POSTGRES_DB }} | gzip > ../backups/default-`date +%Y-%d-%m"-"%H%M%S`.pgsql.gz
-
-    echo "Backup completed!"
-
-db-restore filename="/backup/do-trailhawks.tar":
-    #!/bin/bash
-    set -e
-
-    echo "Restoring... {{ filename }}"
-
-    docker-compose run --rm --no-deps db pg_restore \
-        --dbname=postgres \
-        --format=t \
-        --host=db \
-        --username=postgres \
-        /backup/do-trailhawks.tar
-
-    echo "Restore completed!"
+# restore database dump from file
+pg_restore file='db.dump':
+    docker compose run \
+        --no-deps \
+        --rm \
+        db \
+        pg_restore \
+            --clean \
+            --dbname "${DATABASE_URL:=postgres://postgres@db/postgres}" \
+            --if-exists \
+            --no-owner \
+            --verbose \
+            /src/{{ file }}
