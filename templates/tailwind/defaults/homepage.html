@@ -6,6 +6,7 @@
 {% load core_tags %}
 {% load faq_tags %}
 {% load flickr %}
+{% load heroicons %}
 {% load markdownify %}
 {% load micawber_tags %}
 {% load news_tags %}
@@ -62,6 +63,11 @@
         </div>
     </div>
     {% endcomment %}
+    <section class="bg-yellow-300 p-4 border-4 border-gray-900 flex flex-row text-xl gap-2 rounded-2xl">
+      {% heroicon_outline "exclamation-triangle" class="size-8" %}
+      <span class="font-medium">UNDER CONSTRUCTION</span>
+      <span>The Lawrence Trail Hawks website is undergoing maintenance.</span>
+    </section>
 
     <section class="flex flex-auto divide-solid divide-y gap-16">
         <div class="md:w-1/3">
