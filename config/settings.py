@@ -201,11 +201,6 @@ FLICKR = {
     "username": env("FLICKR_USERNAME", default=""),
 }
 
-DBBACKUP_STORAGE = "django.core.files.storage.FileSystemStorage"
-DBBACKUP_STORAGE_OPTIONS = {
-    "location": env("DBBACKUP_STORAGE_OPTIONS_LOCATION", default="/src")
-}
-
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="")
 EMAIL_HOST = env("EMAIL_HOST", default="")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", default="")
@@ -238,15 +233,15 @@ MARKDOWNIFY = {
     "default": {
         "WHITELIST_TAGS": [
             "a",
-            "p",
             "h1",
             "h2",
             "h3",
             "h4",
             "h5",
             "h6",
-            "strong",
             "img",
+            "p",
+            "strong",
         ],
     },
 }
