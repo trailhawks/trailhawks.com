@@ -53,13 +53,9 @@ def gather_information(race_id, number):
             "What is the number of the race? If this is a second race, write 2. If third, then 3. You got it"
         )
 
-    date = prepare_date(
-        click.prompt("What is the date of this new race? (Format: MM/DD/YYYY)")
-    )
+    date = prepare_date(click.prompt("What is the date of this new race? (Format: MM/DD/YYYY)"))
     while not date:
-        date = prepare_date(
-            click.prompt("Wrong format! Provide a date in format: MM/DD/YYYY)")
-        )
+        date = prepare_date(click.prompt("Wrong format! Provide a date in format: MM/DD/YYYY)"))
 
     return (race, number, date)
 
@@ -93,9 +89,7 @@ def command(number, race_id):
         new_race.race_directors.add(race_director)
 
     # copy FAQs
-    faqs = FAQ.objects.filter(
-        content_type__app_label=race._meta.app_label, object_id=race.pk
-    )
+    faqs = FAQ.objects.filter(content_type__app_label=race._meta.app_label, object_id=race.pk)
     for faq in faqs:
         faq.pk = None
         faq.id = None

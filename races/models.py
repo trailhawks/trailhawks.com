@@ -62,27 +62,17 @@ class Race(MachineTagMixin):
         help_text="The background image is used on the homepage. If a background image is not provided, the logo image will be used.",
     )
 
-    race_type = models.IntegerField(
-        choices=DISCIPLINE_CHOICES, default=RUN, blank=True, null=True
-    )
+    race_type = models.IntegerField(choices=DISCIPLINE_CHOICES, default=RUN, blank=True, null=True)
     sponsors = models.ManyToManyField("sponsors.Sponsor", related_name="sponsors")
     race_directors = models.ManyToManyField("members.Member")
     awards = models.TextField(blank=True, null=True)
-    distance = models.CharField(
-        max_length=100, blank=True, null=True, help_text="eg 26.2"
-    )
+    distance = models.CharField(max_length=100, blank=True, null=True, help_text="eg 26.2")
     unit = models.IntegerField(choices=UNIT_CHOICES, default=KM, blank=True, null=True)
     start_datetime = models.DateTimeField(verbose_name="Start Date and Time")
     description = models.TextField(blank=True)
-    location = models.ForeignKey(
-        "locations.Location", on_delete=models.CASCADE, blank=True, null=True
-    )
-    course_map = models.URLField(
-        blank=True, null=True, help_text="Link to course map if avail."
-    )
-    cut_off = models.CharField(
-        max_length=75, null=True, blank=True, help_text="eg: 13 hours"
-    )
+    location = models.ForeignKey("locations.Location", on_delete=models.CASCADE, blank=True, null=True)
+    course_map = models.URLField(blank=True, null=True, help_text="Link to course map if avail.")
+    cut_off = models.CharField(max_length=75, null=True, blank=True, help_text="eg: 13 hours")
     reg_url = models.URLField(
         blank=True,
         null=True,
@@ -101,16 +91,10 @@ class Race(MachineTagMixin):
         null=True,
         help_text="Describe discounts for the race if they exist.",
     )
-    lodging = models.URLField(
-        blank=True, null=True, help_text="Link to lodging information"
-    )
+    lodging = models.URLField(blank=True, null=True, help_text="Link to lodging information")
     packet_pickup = models.TextField(blank=True, null=True)
-    facebook_url = models.URLField(
-        blank=True, null=True, help_text="Link to Facebook page"
-    )
-    facebook_event_url = models.URLField(
-        blank=True, null=True, help_text="Link to Facebook Event page"
-    )
+    facebook_url = models.URLField(blank=True, null=True, help_text="Link to Facebook page")
+    facebook_event_url = models.URLField(blank=True, null=True, help_text="Link to Facebook Event page")
 
     objects = RaceManager()
 

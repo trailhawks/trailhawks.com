@@ -71,9 +71,7 @@ def officer_list(request):
                 {"body": message, "sender": sender, "subject": subject},
             )
 
-            msg = EmailMultiAlternatives(
-                subject, message_text, "no-reply@trailhawks.com", recipients
-            )
+            msg = EmailMultiAlternatives(subject, message_text, "no-reply@trailhawks.com", recipients)
             msg.attach_alternative(message_html, "text/html")
             msg.send()
 
@@ -81,9 +79,7 @@ def officer_list(request):
     else:
         form = ContactForm()
 
-    return render(
-        None, "contact.html", {"form": form}, context_instance=RequestContext(request)
-    )
+    return render(None, "contact.html", {"form": form}, context_instance=RequestContext(request))
 
 
 class MemberExport(TemplateView):
@@ -143,9 +139,7 @@ def member_list(request):
                 member.date_paid,
                 member.member_since,
                 member.date_expires,
-                "http://"
-                + current_site.domain
-                + reverse("admin:members_member_change", args=[member.pk]),
+                "http://" + current_site.domain + reverse("admin:members_member_change", args=[member.pk]),
             ]
         )
 

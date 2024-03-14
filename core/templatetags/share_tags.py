@@ -35,8 +35,6 @@ def render_share_link(context, network, url, text=None, description=None):
 def render_share_group(context, url, text=None, description=None):
     data = []
     for network in NETWORK_TEMPLATES:
-        cmd = render_share_link(
-            context, network, url, text=text, description=description
-        )
+        cmd = render_share_link(context, network, url, text=text, description=description)
         data.append(cmd)
     return data

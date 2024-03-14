@@ -26,9 +26,7 @@ class Run(MachineTagMixin):
     )
     day_of_week = models.IntegerField(choices=DAY_OF_WEEK, default=0)
     run_time = models.CharField(max_length=25, help_text="Time of run (ex. 6:30 PM)")
-    location = models.ForeignKey(
-        "locations.Location", on_delete=models.CASCADE, blank=True, null=True
-    )
+    location = models.ForeignKey("locations.Location", on_delete=models.CASCADE, blank=True, null=True)
     details = models.TextField()
     contact = models.ForeignKey("members.Member", on_delete=models.CASCADE)
     active = models.BooleanField(default=True)

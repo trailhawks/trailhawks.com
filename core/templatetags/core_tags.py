@@ -11,9 +11,7 @@ register = Library()
 @register.simple_tag(takes_context=True)
 def get_latest_tweets(context):
     try:
-        d = feedparser.parse(
-            "https://api.twitter.com/1/statuses/user_timeline.rss?screen_name=trailhawks"
-        )
+        d = feedparser.parse("https://api.twitter.com/1/statuses/user_timeline.rss?screen_name=trailhawks")
         raw_tweets = d["entries"][:4]
         tweets = []
         for tweet in raw_tweets:

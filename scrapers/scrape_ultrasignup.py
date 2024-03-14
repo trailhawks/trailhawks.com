@@ -25,9 +25,7 @@ class RaceListFromDjango(Page):
     def process_page(self):
         races = Race.objects.exclude(ultrasignup_id=None)
         for race in races:
-            source = (
-                f"https://ultrasignup.com/results_event.aspx?did={race.ultrasignup_id}"
-            )
+            source = f"https://ultrasignup.com/results_event.aspx?did={race.ultrasignup_id}"
             yield RaceResultListPage(
                 dict(
                     did=race.ultrasignup_id,
@@ -44,9 +42,7 @@ class RaceResultListPage(HtmlListPage):
     race number.
     """
 
-    selector = XPath(
-        "//a[@class='event_link' or @class='event_selected_link']", min_items=None
-    )
+    selector = XPath("//a[@class='event_link' or @class='event_selected_link']", min_items=None)
     source = NullSource()
 
     def process_error_response(self, exception):
@@ -57,9 +53,7 @@ class RaceResultListPage(HtmlListPage):
         if not href.startswith("http"):
             href = f"https://ultrasignup.com{href}"
         race_id = href.split("=")[-1]
-        return RaceResultDetail(
-            dict(race_id=race_id, race_results_url=href, **self.input), source=href
-        )
+        return RaceResultDetail(dict(race_id=race_id, race_results_url=href, **self.input), source=href)
 
 
 class RaceResultDetail(HtmlPage):
@@ -75,27 +69,18 @@ class RaceResultDetail(HtmlPage):
 
     def process_page(self):
         try:
-            cancellation = XPath(
-                "//span[contains(@class,'cancellation_text')]"
-            ).match_one(self.root)
+            cancellation = XPath("//span[contains(@class,'cancellation_text')]").match_one(self.root)
             cancellation = True
         except SelectorError:
             cancellation = False
 
         try:
-            did = (
-                XPath("//a[@class='event_selected_link']")
-                .match_one(self.root)
-                .get("href")
-                .split("=")[-1]
-            )
+            did = XPath("//a[@class='event_selected_link']").match_one(self.root).get("href").split("=")[-1]
         except SelectorError:
             did = ""
 
         try:
-            distance = (
-                XPath("//a[@class='event_selected_link']").match_one(self.root).text
-            )
+            distance = XPath("//a[@class='event_selected_link']").match_one(self.root).text
         except SelectorError:
             distance = ""
 
@@ -115,9 +100,7 @@ class RaceResultDetail(HtmlPage):
             event_date = ""
 
         try:
-            virtual = XPath("//span[contains(@class,'virtual_text')]").match_one(
-                self.root
-            )
+            virtual = XPath("//span[contains(@class,'virtual_text')]").match_one(self.root)
             virtual = True
         except SelectorError:
             virtual = False

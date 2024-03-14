@@ -28,9 +28,7 @@ USE_ETAGS = True
 TIME_ZONE = "America/Chicago"
 LANGUAGE_CODE = "en-us"
 
-DATABASES = {
-    "default": env.dj_db_url("DATABASE_URL", default="postgres://postgres@db/postgres")
-}
+DATABASES = {"default": env.dj_db_url("DATABASE_URL", default="postgres://postgres@db/postgres")}
 
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
@@ -63,7 +61,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-            ]
+            ],
         },
     }
 ]
