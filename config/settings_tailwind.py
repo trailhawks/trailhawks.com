@@ -9,7 +9,11 @@ TEMPLATE_ROOT = BASE_DIR.joinpath("templates", "tailwind")
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [str(TEMPLATE_ROOT.joinpath("defaults"))],
+        "DIRS": [
+            # str(TEMPLATE_ROOT.joinpath("hawkhundred.com")),
+            str(TEMPLATE_ROOT.joinpath("race_defaults")),
+            str(TEMPLATE_ROOT.joinpath("defaults")),
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
