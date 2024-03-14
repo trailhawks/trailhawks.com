@@ -36,11 +36,6 @@ repos:
   #     - id: django-upgrade
   #       args: [--target-version, "3.2"]
   #       alias: autoformat
-  - repo: https://github.com/psf/black
-    rev: 24.2.0
-    hooks:
-      - id: black
-        alias: autoformat
   - repo: https://github.com/asottile/blacken-docs
     rev: 1.16.0
     hooks:
@@ -49,6 +44,7 @@ repos:
   - repo: https://github.com/charliermarsh/ruff-pre-commit
     rev: 'v0.3.2'
     hooks:
+    hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
-        alias: autoformat
+      - id: ruff-format
