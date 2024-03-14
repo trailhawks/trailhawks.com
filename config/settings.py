@@ -55,6 +55,9 @@ TEMPLATES = [
         "DIRS": [str(TEMPLATE_ROOT.joinpath("defaults"))],
         "APP_DIRS": True,
         "OPTIONS": {
+            "builtins": [
+                "heroicons.templatetags.heroicons",
+            ],
             "context_processors": [
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
@@ -95,12 +98,13 @@ INSTALLED_APPS = [
 ]
 
 INSTALLED_APPS += [
-    # "dbbackup",
     # "storages",
     "ajaximage",
     "django_q",
+    # "django_tailwind_cli",
     "django_thumbor",
     "favicon",
+    "heroicons",
     "markdownify.apps.MarkdownifyConfig",
     "micawber.contrib.mcdjango",
     "rest_framework",
