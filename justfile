@@ -80,7 +80,6 @@ TAILWIND_CSS_VERSION := "latest"
     docker-compose run \
         --rm web \
             bash -c "uv pip compile {{ ARGS }} ./requirements.in \
-                --resolver=backtracking \
                 --output-file ./requirements.txt"
 
 # Python linting
