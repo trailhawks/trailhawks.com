@@ -1,11 +1,9 @@
 from dateutil.relativedelta import relativedelta
 from django.contrib import admin
-from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
 from django.utils.html import format_html
 from num2words import num2words
-from pagedown.widgets import AdminPagedownWidget
 from titlecase import titlecase
 
 from faq.admin import FaqInline
@@ -74,9 +72,6 @@ class RegistrationInline(admin.TabularInline):
 
 @admin.register(Race)
 class RaceAdmin(admin.ModelAdmin):
-    formfield_overrides = {
-        models.TextField: {"widget": AdminPagedownWidget},
-    }
     prepopulated_fields = {"slug": ["title", "annual"]}
     list_display = [
         "title",

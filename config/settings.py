@@ -103,7 +103,6 @@ INSTALLED_APPS += [
     "favicon",
     "markdownify.apps.MarkdownifyConfig",
     "micawber.contrib.mcdjango",
-    "pagedown.apps.PagedownConfig",
     "rest_framework",
     "robots",
     "simple_open_graph",
@@ -209,8 +208,8 @@ EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", default="")
 EMAIL_HOST_USER = env("EMAIL_HOST_USER", default="")
 EMAIL_PORT = env("EMAIL_PORT", default="")
 EMAIL_USE_TLS = env("EMAIL_USE_TLS", default="")
-PAGEDOWN_IMAGE_UPLOAD_ENABLED = env.bool("PAGEDOWN_IMAGE_UPLOAD_ENABLED", default=True)
-PAGEDOWN_IMAGE_UPLOAD_UNIQUE = env.bool("PAGEDOWN_IMAGE_UPLOAD_UNIQUE", default=True)
+# PAGEDOWN_IMAGE_UPLOAD_ENABLED = env.bool("PAGEDOWN_IMAGE_UPLOAD_ENABLED", default=True)
+# PAGEDOWN_IMAGE_UPLOAD_UNIQUE = env.bool("PAGEDOWN_IMAGE_UPLOAD_UNIQUE", default=True)
 RUNSIGNUP_KEY = env("RUNSIGNUP_KEY", default="")
 RUNSIGNUP_SECRET = env("RUNSIGNUP_SECRET", default="")
 RUNSIGNUP_URL = env("RUNSIGNUP_URL", default="")
