@@ -99,7 +99,7 @@ INSTALLED_APPS += [
     # "storages",
     "ajaximage",
     "django_q",
-    # "django_tailwind_cli",
+    "django_tailwind_cli",
     "django_thumbor",
     "favicon",
     "heroicons",
@@ -226,7 +226,6 @@ Q_CLUSTER = {
     "workers": 4,
 }
 
-
 MARKDOWNIFY = {
     "default": {
         "WHITELIST_TAGS": [
@@ -243,3 +242,8 @@ MARKDOWNIFY = {
         ],
     },
 }
+
+TAILWIND_CLI_CONFIG_FILE = "frontend/tailwind.config.js"
+TAILWIND_CLI_DIST_CSS = "css/tailwind.css"
+TAILWIND_CLI_SRC_CSS = "frontend/index.css"
+# "assets/css/tailwind.css"
