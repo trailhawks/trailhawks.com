@@ -1,6 +1,6 @@
 import feedparser
-from dateutil.parser import *
-from dateutil.tz import *
+from dateutil.parser import parse
+from dateutil.tz import gettz
 from django.template import Library
 
 from core import __version__

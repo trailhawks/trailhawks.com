@@ -7,6 +7,7 @@ env = environs.Env()
 BASE_DIR = environs.Path(__file__).parent.parent
 
 TEMPLATE_ROOT = BASE_DIR.joinpath("templates", "bootstrap4")
+# TEMPLATE_ROOT = BASE_DIR.joinpath("templates", "tailwind")
 
 DEBUG = env.bool("DJANGO_DEBUG", default=False)
 

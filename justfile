@@ -24,9 +24,6 @@ TAILWIND_CSS_VERSION := "latest"
 @console:
     {{ compose }} /bin/bash
 
-@djcodemod:
-    djcodemod run --deprecated-in 3.1 .
-
 @down:
     docker-compose down
 
@@ -80,7 +77,6 @@ TAILWIND_CSS_VERSION := "latest"
     docker-compose run \
         --rm web \
             bash -c "uv pip compile {{ ARGS }} ./requirements.in \
-                --resolver=backtracking \
                 --output-file ./requirements.txt"
 
 # Python linting

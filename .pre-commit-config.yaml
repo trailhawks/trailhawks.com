@@ -30,12 +30,16 @@ repos:
       #   alias: autoformat
       # - id: djjs
       #   alias: autoformat
-  # - repo: https://github.com/adamchainz/django-upgrade
-  #   rev: 1.13.0
-  #   hooks:
-  #     - id: django-upgrade
-  #       args: [--target-version, "3.2"]
-  #       alias: autoformat
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.15.1
+    hooks:
+      - id: pyupgrade
+  - repo: https://github.com/adamchainz/django-upgrade
+    rev: 1.16.0
+    hooks:
+      - id: django-upgrade
+        args: [--target-version, "4.2"]
+        alias: autoformat
   - repo: https://github.com/asottile/blacken-docs
     rev: 1.16.0
     hooks:
