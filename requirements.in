@@ -19,7 +19,7 @@ django-storages
 django-taggit
 django-tailwind-cli
 django-thumbor==0.5
-Django<4.0
+Django<5.0
 djangorestframework<3.13
 environs[django]
 feedparser
