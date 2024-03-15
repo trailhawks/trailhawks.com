@@ -20,7 +20,7 @@ django-taggit
 django-tailwind-cli
 django-thumbor==0.5
 Django<5.0
-djangorestframework<3.13
+djangorestframework<3.15
 environs[django]
 feedparser
 flickrapi==2.0
@@ -49,5 +49,5 @@ pre-commit
 
 # git+https://github.com/vikingco/django-storage-migration.git#egg=django-storage-migration-git
 # git+https://gitlab.com/jeff.triplett/django-syncr.git#egg=django-syncr-git
-django-ajaximage @ git+https://github.com/trailhawks/django-ajaximage.git@ab4ceca0bed93216d317d5576be9ce41c45e657b
-django-syncr @ git+https://github.com/trailhawks/django-syncr.git@2fac989f3538b2c28483e4a71ae713fafb5cf8b9
+django-ajaximage @ git+https://github.com/trailhawks/django-ajaximage.git
+django-syncr @ git+https://github.com/trailhawks/django-syncr.git

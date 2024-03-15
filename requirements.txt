@@ -53,7 +53,7 @@ django==4.2.11
     #   django-typer
     #   djangorestframework
     #   heroicons
-django-ajaximage @ git+https://github.com/trailhawks/django-ajaximage.git@ab4ceca0bed93216d317d5576be9ce41c45e657b
+django-ajaximage @ git+https://github.com/trailhawks/django-ajaximage.git@9a3431ef499cb48d7a1273b099df0457dff6888b
 django-braces==1.15.0
 django-cache-url==3.4.5
     # via environs
@@ -73,13 +73,13 @@ django-robots==6.1
 django-shorturls==2.0.0
 django-simple-open-graph==0.3
 django-storages==1.14.2
-django-syncr @ git+https://github.com/trailhawks/django-syncr.git@2fac989f3538b2c28483e4a71ae713fafb5cf8b9
+django-syncr @ git+https://github.com/trailhawks/django-syncr.git@4b3fad29caf8c87fb10234fba66ee8bc4770c87a
 django-taggit==5.0.1
 django-tailwind-cli==2.9.0
 django-thumbor==0.5
 django-typer==1.0.5
     # via django-tailwind-cli
-djangorestframework==3.12.4
+djangorestframework==3.14.0
 docopt==0.6.2
     # via num2words
 environs==11.0.0
@@ -170,6 +170,7 @@ python-slugify==8.0.4
 pytz==2024.1
     # via
     #   dateutils
+    #   djangorestframework
     #   icalendar
     #   pandas
 pyyaml==6.0.1
