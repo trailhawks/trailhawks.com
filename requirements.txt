@@ -73,7 +73,7 @@ django-robots==6.1
 django-shorturls==2.0.0
 django-simple-open-graph==0.3
 django-storages==1.14.2
-django-syncr @ git+https://github.com/trailhawks/django-syncr.git@4b3fad29caf8c87fb10234fba66ee8bc4770c87a
+django-syncr @ git+https://github.com/trailhawks/django-syncr.git@3efeace192ca5626f73d68534f7be0717a253809
 django-taggit==5.0.1
 django-tailwind-cli==2.9.0
 django-thumbor==0.5
