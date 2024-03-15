@@ -24,9 +24,6 @@ TAILWIND_CSS_VERSION := "latest"
 @console:
     {{ compose }} /bin/bash
 
-@djcodemod:
-    djcodemod run --deprecated-in 3.1 .
-
 @down:
     docker-compose down
 
