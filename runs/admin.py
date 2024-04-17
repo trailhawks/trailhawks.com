@@ -8,6 +8,7 @@ from .models import Run
 
 @admin.register(Run)
 class RunAdmin(admin.ModelAdmin):
+    filter_horizontal = ["leaders"]
     inlines = [NewsInline, FaqInline]
     list_display = ["name", "day_of_week", "run_time", "active", "location"]
     list_filter = ["day_of_week", "run_time", "location"]

@@ -36,7 +36,9 @@
                     <dl>
                         {% for run in run_leaders %}
                             <dt>{{ run.name }}</dt>
-                            <dd><a href="{{ run.contact.get_absolute_url }}">{{ run.contact }}</a></dd>
+                            {% for contact in run.leaders.all %}
+                                <dd><a href="{{ contact.get_absolute_url }}">{{ contact }}</a></dd>
+                            {% endfor %}
                         {% endfor %}
                     </dl>
 

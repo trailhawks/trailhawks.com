@@ -115,7 +115,9 @@
                         <dt>What: </dt>
                         <dd>{{ run.details }}</dd>
                         <dt>Contact: </dt>
-                        <dd><a href="mailto:{{ run.contact.email }}">{{ run.contact.full_hawk_name }}</a></dd>
+                        {% for contact in run.leaders.all %}
+                            <dd><a href="mailto:{{ contact.email }}">{{ contact.full_hawk_name }}</a></dd>
+                        {% endfor %}
                     </dl>
                 {% endfor %}
             </div>
@@ -147,7 +149,9 @@
                             <dt>What: </dt>
                             <dd>{{ run.details }}</dd>
                             <dt>Contact: </dt>
-                            <dd><a href="mailto:{{ run.contact.email }}">{{ run.contact.full_hawk_name }}</a></dd>
+                            {% for contact in run.leaders.all %}
+                                <dd><a href="mailto:{{ contact.email }}">{{ contact.full_hawk_name }}</a></dd>
+                            {% endfor %}
                         </dl>
                     {% empty %}
                         <p class="quiet large">No upcoming scheduled runs</p>
