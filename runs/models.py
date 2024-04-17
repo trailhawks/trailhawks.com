@@ -28,8 +28,6 @@ class Run(MachineTagMixin):
     run_time = models.CharField(max_length=25, help_text="Time of run (ex. 6:30 PM)")
     location = models.ForeignKey("locations.Location", on_delete=models.CASCADE, blank=True, null=True)
     details = models.TextField()
-    # TODO: Remove `contact`
-    contact = models.ForeignKey("members.Member", on_delete=models.CASCADE)
     leaders = models.ManyToManyField("members.Member", blank=True, related_name="runs")
     active = models.BooleanField(default=True)
 
