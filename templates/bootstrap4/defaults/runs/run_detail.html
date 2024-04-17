@@ -63,7 +63,9 @@
                 <dt>Where:</dt>
                 <dd>{{ object.location }}</dd>
                 <dt>Run Leader:</dt>
-                <dd><a href="mailto:{{ object.contact.email }}">{{ object.contact.full_name }}</a></dd>
+                {% for contact in object.leaders.all %}
+                    <dd><a href="mailto:{{ contact.email }}">{{ contact.full_name }}</a></dd>
+                {% endfor %}
             </dl>
 
             {% get_latest_news_for_object object as news_list %}

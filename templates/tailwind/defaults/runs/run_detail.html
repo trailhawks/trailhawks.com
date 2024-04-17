@@ -33,7 +33,9 @@
             <div class="flex flex-col gap-2 divide-y divide-gray-300 py-4 text-xl">
                 <div><strong>When:</strong> {{ object.get_day_of_week_display }} at {{ object.run_time }}</div>
                 <div><strong>Where:</strong> {{ object.location }}</div>
-                <div><strong>Run Leader:</strong> <a href="mailto:{{ object.contact.email }}">{{ object.contact.full_name }}</a></div>
+                {% for contact in object.leaders.all %}
+                    <div><strong>Run Leader:</strong> <a href="mailto:{{ contact.email }}">{{ contact.full_name }}</a></div>
+                {% endfor %}
             </div>
 
             {% get_latest_news_for_object object as news_list %}
