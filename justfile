@@ -55,13 +55,7 @@ TAILWIND_CSS_VERSION := "latest"
     # just run import_from_ultrasignup 36685
 
 @lint *ARGS:
-    just pre-commit {{ ARGS }}
-    # -black --check --diff .
-    # -isort --check --diff --project=black .
-    # -unimport --check --diff .
-    # -vulture --min-confidence=80 .
-    # -curlylint templates
-    # -rustywind --dry-run ./templates/tailwind/
+    just pre-commit run --all-files {{ ARGS }}
 
 @logs +ARGS="":
     docker-compose logs {{ ARGS }}
@@ -81,7 +75,7 @@ TAILWIND_CSS_VERSION := "latest"
 
 # Python linting
 @pre-commit *ARGS:
-    pre-commit run --all-files {{ ARGS }}
+    pre-commit {{ ARGS }}
 
 @run +ARGS="--help":
     {{ manage }} {{ ARGS }}
