@@ -43,29 +43,29 @@
                 <h2 class="text-3xl md:text-4xl font-bold py-2" id="{{ race_type.slug }}">
                     {{ race_type.name }} Results
                 </h2>
-                
+
                 <!-- Mobile-friendly tabs -->
                 <div class="py-2 flex flex-wrap gap-2 mb-4" id="{{ race_type.slug }}-tabs">
-                    <a class="px-3 py-2 border border-red-800 text-red-900 rounded bg-white hover:bg-yellow-100 transition-colors duration-200" 
-                       href="#{{ race_type.slug }}-overall-results" 
+                    <a class="px-3 py-2 border border-red-800 text-red-900 rounded bg-white hover:bg-yellow-100 transition-colors duration-200"
+                       href="#{{ race_type.slug }}-overall-results"
                        data-toggle="tab"
                        onclick="showTab('{{ race_type.slug }}-overall-results', '{{ race_type.slug }}')">
-                       Overall Results
+                        Overall Results
                     </a>
-                    <a class="px-3 py-2 border border-red-800 text-red-900 rounded bg-white hover:bg-yellow-100 transition-colors duration-200" 
-                       href="#{{ race_type.slug }}-womens-results" 
+                    <a class="px-3 py-2 border border-red-800 text-red-900 rounded bg-white hover:bg-yellow-100 transition-colors duration-200"
+                       href="#{{ race_type.slug }}-womens-results"
                        data-toggle="tab"
                        onclick="showTab('{{ race_type.slug }}-womens-results', '{{ race_type.slug }}')">
-                       Women's Results
+                        Women's Results
                     </a>
-                    <a class="px-3 py-2 border border-red-800 text-red-900 rounded bg-white hover:bg-yellow-100 transition-colors duration-200" 
-                       href="#{{ race_type.slug }}-mens-results" 
+                    <a class="px-3 py-2 border border-red-800 text-red-900 rounded bg-white hover:bg-yellow-100 transition-colors duration-200"
+                       href="#{{ race_type.slug }}-mens-results"
                        data-toggle="tab"
                        onclick="showTab('{{ race_type.slug }}-mens-results', '{{ race_type.slug }}')">
-                       Men's Results
+                        Men's Results
                     </a>
                 </div>
-                
+
                 <!-- Tab content -->
                 <div class="tab-content mb-8">
                     <div class="py-4 tab-pane" id="{{ race_type.slug }}-overall-results">
@@ -114,7 +114,7 @@
             </div>
             {% endcomment %}
 
-            {% include "includes/flickr_photos.html" %}
+                {% include "includes/flickr_photos.html" %}
+            </div>
         </div>
-    </div>
 {% endblock content %}

@@ -21,7 +21,8 @@ def get_sponsors_for_object(context, obj):
         query = Q(content_type__app_label=obj._meta.app_label, object_id=obj.pk)
         query = query | Q(content_type__app_label=obj._meta.app_label, object_id__isnull=True)
         queryset = Sponsor.objects.active().filter(query)
-    except:
+    except Exception as e:
+        print(f"{e=}")
         queryset = Sponsor.objects.none()
 
     return queryset

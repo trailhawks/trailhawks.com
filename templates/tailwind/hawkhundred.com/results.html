@@ -16,26 +16,26 @@
         {% for race_type in race_types %}
             <div class="mb-12">
                 <h2 class="text-4xl font-bold mb-4" id="{{ race_type.slug }}">{{ race_type.name }} Results</h2>
-                
+
                 <div class="mb-6">
                     <div class="border-b border-gray-200 mb-4">
                         <nav class="flex -mb-px space-x-8" aria-label="Tabs">
-                            <button class="tab-btn text-red-950 border-red-800 border-b-2 py-2 px-1 font-medium text-sm" 
-                                    data-target="{{ race_type.slug }}-overall-results" 
+                            <button class="tab-btn text-red-950 border-red-800 border-b-2 py-2 px-1 font-medium text-sm"
+                                    data-target="{{ race_type.slug }}-overall-results"
                                     aria-selected="true">
                                 Overall Results
                             </button>
-                            <button class="tab-btn text-gray-500 hover:text-gray-700 hover:border-gray-300 py-2 px-1 font-medium text-sm" 
+                            <button class="tab-btn text-gray-500 hover:text-gray-700 hover:border-gray-300 py-2 px-1 font-medium text-sm"
                                     data-target="{{ race_type.slug }}-womens-results">
                                 Women's Results
                             </button>
-                            <button class="tab-btn text-gray-500 hover:text-gray-700 hover:border-gray-300 py-2 px-1 font-medium text-sm" 
+                            <button class="tab-btn text-gray-500 hover:text-gray-700 hover:border-gray-300 py-2 px-1 font-medium text-sm"
                                     data-target="{{ race_type.slug }}-mens-results">
                                 Men's Results
                             </button>
                         </nav>
                     </div>
-                    
+
                     <div class="tab-content">
                         <div class="tab-pane block" id="{{ race_type.slug }}-overall-results">
                             {% get_results_for_race race=object race_type=race_type as race_results %}
@@ -59,39 +59,39 @@
 {% endblock content %}
 
 {% block post_script %}
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const tabButtons = document.querySelectorAll('.tab-btn');
-        
-        tabButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const targetId = this.getAttribute('data-target');
-                const tabGroup = this.closest('nav').parentElement.nextElementSibling;
-                
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tab-btn');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    const tabGroup = this.closest('nav').parentElement.nextElementSibling;
+
                 // Hide all tabs in this group
-                tabGroup.querySelectorAll('.tab-pane').forEach(tab => {
-                    tab.classList.add('hidden');
-                    tab.classList.remove('block');
-                });
-                
+                    tabGroup.querySelectorAll('.tab-pane').forEach(tab => {
+                        tab.classList.add('hidden');
+                        tab.classList.remove('block');
+                    });
+
                 // Show the target tab
-                const targetTab = document.getElementById(targetId);
-                targetTab.classList.remove('hidden');
-                targetTab.classList.add('block');
-                
+                    const targetTab = document.getElementById(targetId);
+                    targetTab.classList.remove('hidden');
+                    targetTab.classList.add('block');
+
                 // Update button styles
-                const buttons = this.closest('nav').querySelectorAll('.tab-btn');
-                buttons.forEach(btn => {
-                    btn.classList.remove('text-red-950', 'border-red-800', 'border-b-2');
-                    btn.classList.add('text-gray-500');
-                    btn.setAttribute('aria-selected', 'false');
+                    const buttons = this.closest('nav').querySelectorAll('.tab-btn');
+                    buttons.forEach(btn => {
+                        btn.classList.remove('text-red-950', 'border-red-800', 'border-b-2');
+                        btn.classList.add('text-gray-500');
+                        btn.setAttribute('aria-selected', 'false');
+                    });
+
+                    this.classList.remove('text-gray-500');
+                    this.classList.add('text-red-950', 'border-red-800', 'border-b-2');
+                    this.setAttribute('aria-selected', 'true');
                 });
-                
-                this.classList.remove('text-gray-500');
-                this.classList.add('text-red-950', 'border-red-800', 'border-b-2');
-                this.setAttribute('aria-selected', 'true');
             });
         });
-    });
-</script>
+    </script>
 {% endblock post_script %}
