@@ -1,36 +1,51 @@
 {% extends "base.html" %}
 
-
 {% load faq_tags %}
 {% load markdownify %}
 {% load race_tags %}
-
 
 {% block title %}Frequently Asked Questions{% endblock title %}
 
 {% block content %}
     <section id="faqs">
-
         {% get_race_by_slug slug='the-hawk-fifteenth-annual' as race %}
 
-        <div class="flex flex-auto">
-            <div class=" md:w-full">
-                <h1 class="font-bold text-6xl">Frequently Asked Questions</h1>
-            </div>
-        </div>
+        <h1 class="font-bold text-6xl mb-8">Frequently Asked Questions</h1>
 
         {% get_faqs_for_object race as faq_list %}
         {% if faq_list %}
-            <div class="flex flex-auto">
+            <div class="space-y-8">
                 {% for faq in faq_list %}
-                    <div class="md:w-1/2">
-                        <h3 class="text-2xl">{{ faq.question }}</h3>
-                        {{ faq.answer|markdownify }}
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                        <h3 class="text-xl font-bold text-red-950 mb-3">{{ faq.question }}</h3>
+                        <div class="prose">
+                            {{ faq.answer|markdownify }}
+                        </div>
                     </div>
-                    {% if forloop.counter|divisibleby:2 %}</div><div class="flex flex-auto">{% endif %}
                 {% endfor %}
+            </div>
+        {% else %}
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <i class="fa fa-info-circle text-yellow-400"></i>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-yellow-700">
+                            No FAQs are available yet. Please check back later or contact us with your questions.
+                        </p>
+                    </div>
+                </div>
             </div>
         {% endif %}
 
+        <div class="mt-8 p-6 bg-gray-100 rounded-lg">
+            <h2 class="text-2xl font-bold mb-3">Have more questions?</h2>
+            <p class="mb-4">If you have a question that isn't answered here, please feel free to reach out:</p>
+            <ul class="list-disc list-inside space-y-2 ml-4">
+                <li><a href="mailto:trailhawks@gmail.com" class="text-red-950 hover:underline">Email us at trailhawks@gmail.com</a></li>
+                <li><a href="https://www.facebook.com/groups/hawkhundred/" class="text-red-950 hover:underline">Ask in our Facebook group</a></li>
+            </ul>
+        </div>
     </section>
 {% endblock content %}

@@ -2,27 +2,24 @@
 
 {% block navbar %}
     <nav class="flex flex-col gap-2 content-between items-start" role="navigation">
-        <img class="w-full object-fill " src="https://trailhawks.com/static/img/header-hawk-2023.png">
-        <nav class="flex relative flex-auto content-between items-center py-3 px-4 navbar-default navbar-static-top" role="navigation">
+        <img class="w-full object-fill" src="{% static 'img/header-hawk-2023.png' %}">
+        <div class="flex relative flex-auto content-between items-center py-3 px-4" role="navigation">
             <div class="flex-grow items-center">
                 <div class="flex flex-auto gap-8 text-red-950">
-                    <a href="/">Home</a>
-                    <a href="/course/">Course</a>
-                    <a href="/calendar/">Calendar</a>
-                    {% comment %}
-                    <li><a href="{% url 'race_faqs' %}">FAQs</a></li>
-                    {% endcomment %}
-                    <a href="/travel/">Travel</a>
-                    <a href="/maps/">Interactive Maps</a>
-                    <a href="{% url 'race_gallery' %}">Gallery</a>
-                    <a href="https://ultrasignup.com/results_event.aspx?did=61389">Results</a>
-                    <a href="/signup/">SIGN UP!</a>
-                </ul>
-                <ul class="flex flex-auto pl-0 mb-0 list-none list-reset navbar-right">
-                    <a href="https://www.facebook.com/groups/hawkhundred/"><i class="fa fa-facebook"></i></a>
-                    <a href="https://www.flickr.com/photos/trailhawks"><i class="fa fa-flickr"></i></a>
-                </ul>
-            </div><!--/.nav-collapse -->
-        </nav>
-    </div>
+                    <a href="/" class="hover:underline">Home</a>
+                    <a href="/course/" class="hover:underline">Course</a>
+                    <a href="/calendar/" class="hover:underline">Calendar</a>
+                    <a href="/travel/" class="hover:underline">Travel</a>
+                    <a href="/maps/" class="hover:underline">Interactive Maps</a>
+                    <a href="{% url 'race_gallery' %}" class="hover:underline">Gallery</a>
+                    <a href="https://ultrasignup.com/results_event.aspx?did=111695" class="hover:underline">Results</a>
+                    <a href="/signup/" class="font-bold hover:underline">SIGN UP!</a>
+                </div>
+                <div class="flex flex-auto gap-4 mt-2">
+                    <a href="https://www.facebook.com/groups/hawkhundred/" class="text-lg"><i class="fa fa-facebook"></i></a>
+                    <a href="https://www.flickr.com/photos/trailhawks" class="text-lg"><i class="fa fa-flickr"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
 {% endblock navbar %}

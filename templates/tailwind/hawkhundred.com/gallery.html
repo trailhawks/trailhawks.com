@@ -8,8 +8,33 @@
 
     {% get_race_by_slug slug='the-hawk-fifteenth-annual' as race %}
 
-    <h1 class="font-bold text-6xl">Gallery</h1>
+    <h1 class="font-bold text-6xl mb-8">Gallery</h1>
 
-    <img class="p-1 max-w-full h-auto rounded border-gray-200 img-responsive border-1" src="{% static 'img/hawk100/Hawk-2016-4559.jpg' %}">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <!-- Sample gallery images - update with actual race images -->
+        <div>
+            <img class="rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 w-full h-auto" 
+                 src="{% static 'img/hawk100/Hawk-2016-4559.jpg' %}" 
+                 alt="Hawk 100 Race">
+        </div>
+        <div>
+            <img class="rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 w-full h-auto" 
+                 src="{% static 'img/races/Hawk-2023-KM-2349-X5.jpg' %}" 
+                 alt="Hawk Race">
+        </div>
+        <div>
+            <img class="rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 w-full h-auto" 
+                 src="{% static 'img/races/Hawk-2023-RM-7805-X5.jpg' %}" 
+                 alt="Hawk Race">
+        </div>
+    </div>
+
+    <div class="bg-gray-100 p-6 rounded-lg mb-8">
+        <h2 class="text-2xl font-bold mb-4">View More Photos</h2>
+        <p class="mb-4">Check out our full collection of race photos on our Flickr page:</p>
+        <a href="https://www.flickr.com/photos/trailhawks" class="inline-flex items-center px-4 py-2 bg-red-900 text-white font-medium rounded-md hover:bg-red-800">
+            <i class="fa fa-flickr mr-2"></i> Flickr Photo Gallery
+        </a>
+    </div>
 
 {% endblock content %}

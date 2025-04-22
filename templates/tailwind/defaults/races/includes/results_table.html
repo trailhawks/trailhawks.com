@@ -1,39 +1,41 @@
 {% load race_tags %}
 
-<table class="table table-auto border-slate-400 border-spacing-1 min-w-full divide-y divide-gray-300">
-    <thead>
-        <tr>
-            <th class="font-semibold">Place</th>
-            <th class="font-semibold">Bib</th>
-            <th class="font-semibold">Name</th>
-            <th class="font-semibold">Time</th>
-            <th class="font-semibold">Award</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for result in race_results %}
-            <tr class="even:bg-gray-200 {% if result.course_record %}bg-yellow-300{% endif %} {% if result.dq or result.dns or result.dnf %}{% comment %} danger{% endcomment %}{% endif %}">
-                <td class="p-2">
-                    {% if result.dq or result.dns or result.dnf %}
-                        &mdash;
-                    {% else %}
-                        {% ifchanged result.time %}{{ forloop.counter }}{% else %}&ndash;{% endifchanged %}
-                    {% endif %}
-                </td>
-                <td class="p-2">{{ result.bib_number }}</td>
-                <td class="p-2">
-                    <a name="#racer-{{ result.racer.pk }}"></a>
-                    <a class="underline" href="{{ result.racer.get_absolute_url }}">{{ result.racer.full_name }}</a>
-                </td>
-                <td class="p-2">
-                    {% if result.dq or result.dns or result.dnf %}
-                        {% if result.dq %}DQ{% else %}{{ result.time }}{% endif %}
-                    {% else %}
-                        {{ result.time|replace_char:",:" }}
-                    {% endif %}
-                </td>
-                <td class="p-2">{{ result.place }}</td>
+<div class="overflow-x-auto">
+    <table class="min-w-full divide-y divide-gray-300">
+        <thead>
+            <tr>
+                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">Place</th>
+                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Bib</th>
+                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Name</th>
+                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Time</th>
+                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Award</th>
             </tr>
-        {% endfor %}
-    </tbody>
-</table>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+            {% for result in race_results %}
+                <tr class="{% cycle 'bg-white' 'bg-gray-50' %} {% if result.course_record %}bg-yellow-200{% endif %} {% if result.dq or result.dns or result.dnf %}text-gray-500{% endif %}">
+                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm">
+                        {% if result.dq or result.dns or result.dnf %}
+                            &mdash;
+                        {% else %}
+                            {% ifchanged result.time %}{{ forloop.counter }}{% else %}&ndash;{% endifchanged %}
+                        {% endif %}
+                    </td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm">{{ result.bib_number }}</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm">
+                        <span id="racer-{{ result.racer.pk }}"></span>
+                        <a class="text-red-950 hover:underline" href="{{ result.racer.get_absolute_url }}">{{ result.racer.full_name }}</a>
+                    </td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm">
+                        {% if result.dq or result.dns or result.dnf %}
+                            {% if result.dq %}DQ{% else %}{{ result.time }}{% endif %}
+                        {% else %}
+                            {{ result.time|replace_char:",:" }}
+                        {% endif %}
+                    </td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm">{{ result.place }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
