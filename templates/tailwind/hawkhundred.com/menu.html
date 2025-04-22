@@ -5,7 +5,7 @@
         <img class="w-full object-fill" src="{% static 'img/header-hawk-2023.png' %}">
         <div class="flex relative flex-auto content-between items-center py-3 px-4" role="navigation">
             <div class="flex-grow items-center">
-                <div class="flex flex-auto gap-8 text-red-950">
+                <div class="flex flex-auto gap-8 text-red-950 items-center">
                     <a href="/" class="hover:underline">Home</a>
                     <a href="/course/" class="hover:underline">Course</a>
                     <a href="/calendar/" class="hover:underline">Calendar</a>
@@ -14,10 +14,10 @@
                     <a href="{% url 'race_gallery' %}" class="hover:underline">Gallery</a>
                     <a href="https://ultrasignup.com/results_event.aspx?did=111695" class="hover:underline">Results</a>
                     <a href="/signup/" class="font-bold hover:underline">SIGN UP!</a>
-                </div>
-                <div class="flex flex-auto gap-4 mt-2">
-                    <a href="https://www.facebook.com/groups/hawkhundred/" class="text-lg"><i class="fa fa-facebook"></i></a>
-                    <a href="https://www.flickr.com/photos/trailhawks" class="text-lg"><i class="fa fa-flickr"></i></a>
+                    <div class="flex gap-4 ml-4">
+                        <a href="https://www.facebook.com/groups/hawkhundred/" class="text-lg"><i class="fa fa-facebook"></i></a>
+                        <a href="https://www.flickr.com/photos/trailhawks" class="text-lg"><i class="fa fa-flickr"></i></a>
+                    </div>
                 </div>
             </div>
         </div>

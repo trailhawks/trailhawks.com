@@ -19,23 +19,21 @@
 {% endblock navbar %}
 
 {% block content-wrapper %}
-    <div class="mx-auto">
-        <div class="">
-            {% block content %}
-            {% endblock content %}
-        </div>
-    </div>
+    <main class="mx-auto">
+        {% block content %}
+        {% endblock content %}
+    </main>
 {% endblock content-wrapper %}
 
 {% block footer %}
-    <div class="mx-auto">
-        <div class="flex flex-col gap-2">
-            <div class="flex flex-auto gap-4">
+    <div class="mx-auto mt-8 border-t pt-4">
+        <div class="flex flex-col gap-2 items-center text-center">
+            <div class="flex flex-auto gap-4 justify-center">
                 <a class="underline hover:bg-yellow-300" href="/signup/"><i class="fa fa-plus-circle"></i> Join Us</a>
                 <a class="underline hover:bg-yellow-300" href="https://www.facebook.com/groups/hawkhundred/"><i class="fa fa-facebook"></i> Facebook</a>
                 <a class="underline hover:bg-yellow-300" href="https://www.flickr.com/photos/trailhawks"><i class="fa fa-flickr"></i> Flickr</a>
             </div>
-            <div>&copy; 2009-{% now "Y" %} <a class="underline hover:bg-yellow-300" href="https://trailhawks.com/">Lawrence Trail Hawks</a>. All rights reserved. v{% get_version %}</div>
+            <div class="text-center">&copy; 2009-{% now "Y" %} <a class="underline hover:bg-yellow-300" href="https://trailhawks.com/">Lawrence Trail Hawks</a>. All rights reserved. v{% get_version %}</div>
         </div>
     </div>
 {% endblock footer %}

@@ -30,7 +30,7 @@
                 {% block post_head %}
                 {% endblock post_head %}
             </head>
-            <body{% block body_attribs %}{% endblock body_attribs %} class="mx-auto max-w-6xl flex flex-col gap-8">
+            <body{% block body_attribs %}{% endblock body_attribs %} class="{% block body_class %}mx-auto max-w-6xl flex flex-col gap-4{% endblock body_class %} {% block body_class_extras %}{% endblock body_class_extras %}">
                 {% block body %}
                     {% block navbar %}
                     {% endblock navbar %}

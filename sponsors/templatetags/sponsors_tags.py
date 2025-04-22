@@ -17,9 +17,13 @@ def get_sponsors_by_content_type(context, content_type):
 @register.simple_tag(takes_context=True)
 def get_sponsors_for_object(context, obj):
     """Find Sponsors for an object and all model types."""
-    query = Q(content_type__app_label=obj._meta.app_label, object_id=obj.pk)
-    query = query | Q(content_type__app_label=obj._meta.app_label, object_id__isnull=True)
-    queryset = Sponsor.objects.active().filter(query)
+    try:
+        query = Q(content_type__app_label=obj._meta.app_label, object_id=obj.pk)
+        query = query | Q(content_type__app_label=obj._meta.app_label, object_id__isnull=True)
+        queryset = Sponsor.objects.active().filter(query)
+    except:
+        queryset = Sponsor.objects.none()
+
     return queryset
 
 
