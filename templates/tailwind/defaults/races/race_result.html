@@ -30,54 +30,78 @@
 
 
 {% block content %}
-    <div class="flex flex-auto gap-8">
-        <h1 class="font-bold text-6xl py-6">
+    <div class="w-full mb-6">
+        <h1 class="font-bold text-4xl md:text-6xl py-4">
             {{ object.annual|default:""|capfirst }} {{ object.title }} Results
         </h1>
     </div>
 
-    <div class="flex flex-auto gap-4">
-        <div class="md:w-3/4">
+    <div class="flex flex-col md:flex-row gap-6">
+        <div class="w-full md:w-3/4 order-2 md:order-1">
             {% get_race_types_for_race object as race_types %}
             {% for race_type in race_types %}
-                <h2 class="text-4xl font-bold py-2">
-                    <a name="{{ race_type.slug }}"></a>{{ race_type.name }} Results
+                <h2 class="text-3xl md:text-4xl font-bold py-2" id="{{ race_type.slug }}">
+                    {{ race_type.name }} Results
                 </h2>
-                <div class="py-2 flex flex-row gap-2" id="{{ race_type.slug }}-tabs">
-                    <a class="px-2 py-1 border-2 border-black rounded-2xl" href="#{{ race_type.slug }}-overall-results" data-toggle="tab">Overall Results</a>
-                    <a class="px-2 py-1 border-2 border-black rounded-2xl" href="#{{ race_type.slug }}-womens-results" data-toggle="tab">Women&apos;s Results</a>
-                    <a class="px-2 py-1 border-2 border-black rounded-2xl" href="#{{ race_type.slug }}-mens-results" data-toggle="tab">Men&apos;s Results</a>
+                
+                <!-- Mobile-friendly tabs -->
+                <div class="py-2 flex flex-wrap gap-2 mb-4" id="{{ race_type.slug }}-tabs">
+                    <a class="px-3 py-2 border border-red-800 text-red-900 rounded bg-white hover:bg-yellow-100 transition-colors duration-200" 
+                       href="#{{ race_type.slug }}-overall-results" 
+                       data-toggle="tab"
+                       onclick="showTab('{{ race_type.slug }}-overall-results', '{{ race_type.slug }}')">
+                       Overall Results
+                    </a>
+                    <a class="px-3 py-2 border border-red-800 text-red-900 rounded bg-white hover:bg-yellow-100 transition-colors duration-200" 
+                       href="#{{ race_type.slug }}-womens-results" 
+                       data-toggle="tab"
+                       onclick="showTab('{{ race_type.slug }}-womens-results', '{{ race_type.slug }}')">
+                       Women's Results
+                    </a>
+                    <a class="px-3 py-2 border border-red-800 text-red-900 rounded bg-white hover:bg-yellow-100 transition-colors duration-200" 
+                       href="#{{ race_type.slug }}-mens-results" 
+                       data-toggle="tab"
+                       onclick="showTab('{{ race_type.slug }}-mens-results', '{{ race_type.slug }}')">
+                       Men's Results
+                    </a>
                 </div>
-                <div class="tab-content">
-                    <div class="py-8" id="{{ race_type.slug }}-overall-results">
+                
+                <!-- Tab content -->
+                <div class="tab-content mb-8">
+                    <div class="py-4 tab-pane" id="{{ race_type.slug }}-overall-results">
                         {% get_results_for_race race=object race_type=race_type as race_results %}
                         {% render_results race_results %}
                     </div>
-                    <div class="py-8" id="{{ race_type.slug }}-womens-results">
+                    <div class="py-4 tab-pane hidden" id="{{ race_type.slug }}-womens-results">
                         {% get_results_for_race race=object race_type=race_type gender=2 as race_results %}
                         {% render_results race_results %}
                     </div>
-                    <div class="py-8" id="{{ race_type.slug }}-mens-results">
+                    <div class="py-4 tab-pane hidden" id="{{ race_type.slug }}-mens-results">
                         {% get_results_for_race race=object race_type=race_type gender=1 as race_results %}
                         {% render_results race_results %}
                     </div>
                 </div>
-                <hr>
+                <hr class="my-8 border-t border-gray-300">
             {% endfor %}
         </div>
 
-        <div class="md:w-1/4">
-            <h3 class="text-2xl font-bold py-2">Race Results</h3>
+        <div class="w-full md:w-1/4 order-1 md:order-2 mb-6 md:mb-0">
+            <div class="sticky top-4">
+                <h3 class="text-xl font-bold py-2 mb-2">Quick Links</h3>
 
-            {% get_race_types_for_race object as race_types %}
-            <div class="flex flex-col gap-2 rounded-2xl border-2 border-gray-300 p-2">
-                {% for race_type in race_types %}
-                    <a class="underline rounded-2xl border-2 border-gray-300 p-2" href="#{{ race_type.slug }}"><h4 class="list-group-item-heading">{{ race_type.name }}</h4></a>
-                    <a class="underline rounded-2xl border-2 border-gray-300 p-2" href="#{{ race_type.slug }}-overall-results">Overall Results</a>
-                    <a class="underline rounded-2xl border-2 border-gray-300 p-2" href="#{{ race_type.slug }}-mens-results">Men&apos;s Results</a>
-                    <a class="underline rounded-2xl border-2 border-gray-300 p-2" href="#{{ race_type.slug }}-womens-results">Women&apos;s Results</a>
-                {% endfor %}
-            </div>
+                {% get_race_types_for_race object as race_types %}
+                <div class="flex flex-col gap-2 rounded border border-gray-300 p-3 bg-gray-50">
+                    {% for race_type in race_types %}
+                        <div class="mb-3">
+                            <h4 class="font-bold mb-2">{{ race_type.name }}</h4>
+                            <div class="flex flex-col gap-1 pl-3">
+                                <a class="text-sm underline hover:bg-yellow-100 py-1" href="#{{ race_type.slug }}-overall-results">Overall Results</a>
+                                <a class="text-sm underline hover:bg-yellow-100 py-1" href="#{{ race_type.slug }}-mens-results">Men's Results</a>
+                                <a class="text-sm underline hover:bg-yellow-100 py-1" href="#{{ race_type.slug }}-womens-results">Women's Results</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
 
 
             {% comment %}

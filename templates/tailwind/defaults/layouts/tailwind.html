@@ -23,6 +23,39 @@
                         <link href="{% static 'css/tailwind.css' %}" rel="stylesheet" media="screen">
                         {% endcomment %}
                         <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" media="screen">
+                        <style>
+                            /* Fix for navigation on smaller screens */
+                            @media (min-width: 768px) and (max-width: 1199px) {
+                                .desktop-menu-container {
+                                    flex-direction: column;
+                                    align-items: start;
+                                }
+                                
+                                .menu-section {
+                                    margin-bottom: 0.5rem;
+                                }
+                            }
+                            
+                            /* Additional mobile styles */
+                            @media (max-width: 768px) {
+                                /* Improve tap targets */
+                                a, button {
+                                    padding: 0.5rem;
+                                }
+                                
+                                /* Ensure images don't overflow on mobile */
+                                img {
+                                    max-width: 100%;
+                                    height: auto;
+                                }
+                                
+                                /* Better spacing for mobile content */
+                                .container {
+                                    padding-left: 1rem;
+                                    padding-right: 1rem;
+                                }
+                            }
+                        </style>
                     {% endblock styles %}
                     {% block post_style %}
                     {% endblock post_style %}

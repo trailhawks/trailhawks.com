@@ -8,16 +8,17 @@
 {% endif %}
 
 {% if photos %}
-    <div class="grid grid-cols-1 gap-8">
+    <div class="grid grid-cols-2 md:grid-cols-1 gap-4">
         {% for photo in photos %}
-            <div class="sm:w-full md:w-full bg-gray-200 p-2 border-2 border-black rounded-lg border-gray-200">
+            <div class="bg-gray-200 p-2 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                 <a href="{{ photo.photopage_url }}">
-                    <img class="p-1 max-w-full h-auto rounded-lg"
-                         src='{% thumbor_url photo.get_medium_url height=400 width=400 smart=True %}'
+                    <img class="w-full h-auto object-cover aspect-square rounded-lg lazy-load"
+                         data-src='{% thumbor_url photo.get_medium_url height=400 width=400 smart=True %}'
+                         src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
                          onerror="this.onerror=null; this.src='{{ photo.get_medium_url }}';">
                 </a>
                 {% if photo.description %}
-                    <div class="text-center font-medium">
+                    <div class="text-center font-medium mt-2 text-sm md:text-base">
                         <h4>{{ photo.description|safe }}</h4>
                     </div>
                 {% endif %}

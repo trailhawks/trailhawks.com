@@ -79,11 +79,11 @@
         {% endif %}
     </header>
 
-    <div class="flex flex-auto gap-8">
-        <div class="md:w-2/3 flex flex-col gap-16">
+    <div class="flex flex-col md:flex-row gap-8">
+        <div class="w-full md:w-2/3 flex flex-col gap-8 md:gap-16">
 
             {% if object.logo %}
-                <img class="img-response" src="{{ object.logo.url }}">
+                <img class="w-full h-auto object-contain max-h-80" src="{{ object.logo.url }}">
             {% endif %}
 
             {% if not object.is_finished %}
