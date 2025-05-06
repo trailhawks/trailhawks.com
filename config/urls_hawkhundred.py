@@ -30,6 +30,11 @@ urlpatterns = [
         name="race_gallery",
     ),
     path(
+        "maps/",
+        TemplateView.as_view(template_name="maps.html"),
+        name="maps",
+    ),
+    path(
         "results/",
         TemplateView.as_view(template_name="results.html"),
         name="race_results",
