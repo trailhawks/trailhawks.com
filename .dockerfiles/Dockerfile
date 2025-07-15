@@ -1,10 +1,15 @@
-# our chamber image
+# syntax = docker/dockerfile:experimental
+# Uses Docker BuildKit for improved caching and build performance
 
-FROM segment/chamber:2.8.2 AS chamber
+# ------------------------------------------------------------
+# Stage 1: Import chamber (secrets management tool)
+# ------------------------------------------------------------
+FROM segment/chamber:2.14 AS chamber
 
-# our build image
-
-FROM python:3.10-slim-buster AS builder
+# ------------------------------------------------------------
+# Stage 2: Base/builder layer - Setup Python environment
+# ------------------------------------------------------------
+FROM python:3.12-slim-bookworm AS builder
 
 ENV PIP_DISABLE_PIP_VERSION_CHECK 1
 ENV PYTHONDONTWRITEBYTECODE 1
