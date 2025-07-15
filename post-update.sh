@@ -2,5 +2,6 @@
 
 set -eo pipefail
 
-python manage.py collectstatic --noinput
-python manage.py migrate --noinput
+python -m manage showmigrations --plan --skip-checks
+python -m manage migrate --noinput --skip-checks
+python -m manage collectstatic --noinput --skip-checks
