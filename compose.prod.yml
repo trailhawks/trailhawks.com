@@ -5,7 +5,7 @@ x-common-settings: &common-settings
     target: release
   env_file:
     - .env
-  entrypoint: /bin/chamber exec trailhawks/production --
+  entrypoint: /bin/chamber exec trailhawks/production -- /src/compose-entrypoint.sh
   volumes:
     - django-media:/src/media
     - django-static:/src/static
