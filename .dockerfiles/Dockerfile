@@ -17,10 +17,10 @@ ENV PYTHONPATH /src
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONWARNINGS ignore
 
-# Update the package list and install git
+# Update the package list and install git and curl
 RUN --mount=type=cache,target=/var/cache/apt,rw \
     --mount=type=cache,target=/var/lib/apt,rw \
-    apt-get update && apt-get install -y build-essential git
+    apt-get update && apt-get install -y build-essential git curl
 
 RUN --mount=type=cache,target=/root/.cache,id=pip \
     pip install --upgrade pip uv

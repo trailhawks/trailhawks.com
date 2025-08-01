@@ -21,6 +21,11 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data/
       - .:/src
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   hawkhundred:
     <<: *common-settings
@@ -28,6 +33,12 @@ services:
       - "DJANGO_SETTINGS_MODULE=config.settings_hawkhundred"
     ports:
       - 8010:8000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
   web:
     <<: *common-settings
@@ -37,6 +48,12 @@ services:
     #   - "DJANGO_SETTINGS_MODULE=config.settings_trailhawks"
     ports:
       - 8000:8000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
   # qcluster:
   #   <<: *common-settings
