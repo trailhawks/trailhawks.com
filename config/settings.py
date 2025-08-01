@@ -111,6 +111,11 @@ INSTALLED_APPS += [
     "syncr.flickr",
     "syncr.twitter",
     "taggit",
+    # Health checks
+    "health_check",
+    "health_check.db",
+    "health_check.storage",
+    "health_check.contrib.migrations",
 ]
 
 INSTALLED_APPS += [

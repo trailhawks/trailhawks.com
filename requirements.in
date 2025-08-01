@@ -8,6 +8,7 @@ django-click
 django-contrib-comments  # to remove
 django-favicon
 django-filter
+django-health-check
 django-ical
 django-markdownify
 django-markup-deprecated

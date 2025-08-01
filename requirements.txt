@@ -7,9 +7,11 @@ asttokens==2.4.1
     #   friendly-traceback
     #   stack-data
 beautifulsoup4==4.12.3
+    # via -r ./requirements.in
 bleach==6.1.0
     # via django-markdownify
 bumpver==2023.1129
+    # via -r ./requirements.in
 certifi==2024.2.2
     # via
     #   django-tailwind-cli
@@ -27,6 +29,7 @@ click==8.1.7
 colorama==0.4.6
     # via bumpver
 dateutils==0.6.12
+    # via -r ./requirements.in
 distlib==0.3.8
     # via virtualenv
 dj-database-url==2.1.0
@@ -35,11 +38,13 @@ dj-email-url==1.0.6
     # via environs
 django==4.2.11
     # via
+    #   -r ./requirements.in
     #   dj-database-url
     #   django-ajaximage
     #   django-braces
     #   django-contrib-comments
     #   django-filter
+    #   django-health-check
     #   django-ical
     #   django-markdownify
     #   django-picklefield
@@ -54,44 +59,69 @@ django==4.2.11
     #   djangorestframework
     #   heroicons
 django-ajaximage @ git+https://github.com/trailhawks/django-ajaximage.git@9a3431ef499cb48d7a1273b099df0457dff6888b
+    # via -r ./requirements.in
 django-braces==1.15.0
+    # via -r ./requirements.in
 django-cache-url==3.4.5
     # via environs
 django-click==2.3.0
+    # via -r ./requirements.in
 django-contrib-comments==2.2.0
+    # via -r ./requirements.in
 django-favicon==0.1.4
+    # via -r ./requirements.in
 django-filter==24.1
+    # via -r ./requirements.in
+django-health-check==3.20.0
+    # via -r ./requirements.in
 django-ical==1.9.2
+    # via -r ./requirements.in
 django-markdownify==0.9.3
+    # via -r ./requirements.in
 django-markup-deprecated==0.0.4
+    # via -r ./requirements.in
 django-picklefield==3.1
     # via django-q2
 django-q2==1.6.2
+    # via -r ./requirements.in
 django-recurrence==1.11.1
     # via django-ical
 django-robots==6.1
+    # via -r ./requirements.in
 django-shorturls==2.0.0
+    # via -r ./requirements.in
 django-simple-open-graph==0.3
+    # via -r ./requirements.in
 django-storages==1.14.2
+    # via -r ./requirements.in
 django-syncr @ git+https://github.com/trailhawks/django-syncr.git@3efeace192ca5626f73d68534f7be0717a253809
+    # via -r ./requirements.in
 django-taggit==5.0.1
+    # via -r ./requirements.in
 django-tailwind-cli==2.9.0
+    # via -r ./requirements.in
 django-thumbor==0.5
+    # via -r ./requirements.in
 django-typer==1.0.5
     # via django-tailwind-cli
 djangorestframework==3.14.0
+    # via -r ./requirements.in
 docopt==0.6.2
     # via num2words
 environs==11.0.0
+    # via -r ./requirements.in
 executing==2.0.1
     # via
     #   friendly-traceback
     #   stack-data
 feedparser==6.0.11
+    # via -r ./requirements.in
 filelock==3.13.1
     # via virtualenv
 flickrapi==2.0
+    # via -r ./requirements.in
 friendly==0.7.21
+    # via -r ./requirements.in
 friendly-styles==0.2
     # via friendly
 friendly-traceback==0.7.61
@@ -99,9 +129,13 @@ friendly-traceback==0.7.61
 greenlet==3.0.3
     # via playwright
 gunicorn==21.2.0
+    # via -r ./requirements.in
 heroicons==2.6.0
+    # via -r ./requirements.in
 html5lib==1.1
+    # via -r ./requirements.in
 httplib2==0.22.0
+    # via -r ./requirements.in
 icalendar==5.0.11
     # via django-ical
 identify==2.5.35
@@ -115,6 +149,7 @@ libthumbor==2.0.2
 looseversion==1.3.0
     # via bumpver
 lxml==5.1.0
+    # via -r ./requirements.in
 markdown==3.6
     # via django-markdownify
 markdown-it-py==3.0.0
@@ -124,9 +159,11 @@ marshmallow==3.21.1
 mdurl==0.1.2
     # via markdown-it-py
 micawber==0.5.5
+    # via -r ./requirements.in
 nodeenv==1.8.0
     # via pre-commit
 num2words==0.5.13
+    # via -r ./requirements.in
 numpy==1.26.4
     # via pandas
 oauthlib==3.2.2
@@ -136,6 +173,7 @@ packaging==24.0
     #   gunicorn
     #   marshmallow
 pandas==2.2.1
+    # via -r ./requirements.in
 pillow==10.2.0
     # via django-ajaximage
 platformdirs==4.2.0
@@ -143,8 +181,11 @@ platformdirs==4.2.0
     #   friendly
     #   virtualenv
 playwright==1.42.0
+    # via -r ./requirements.in
 pre-commit==3.6.2
+    # via -r ./requirements.in
 psycopg2-binary==2.9.9
+    # via -r ./requirements.in
 pure-eval==0.2.2
     # via
     #   friendly-traceback
@@ -167,6 +208,7 @@ python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
     # via environs
 python-slugify==8.0.4
+    # via -r ./requirements.in
 pytz==2024.1
     # via
     #   dateutils
@@ -177,6 +219,7 @@ pyyaml==6.0.1
     # via pre-commit
 requests==2.31.0
     # via
+    #   -r ./requirements.in
     #   flickrapi
     #   requests-oauthlib
     #   requests-toolbelt
@@ -186,7 +229,9 @@ requests-oauthlib==1.4.0
 requests-toolbelt==1.0.0
     # via flickrapi
 rich==13.7.1
-    # via friendly
+    # via
+    #   -r ./requirements.in
+    #   friendly
 scrapelib==2.1.0
     # via spatula
 setuptools==69.2.0
@@ -210,6 +255,7 @@ six==1.16.0
 soupsieve==2.5
     # via beautifulsoup4
 spatula==0.0.2
+    # via -r ./requirements.in
 sqlparse==0.4.4
     # via django
 stack-data==0.6.3
@@ -219,13 +265,15 @@ text-unidecode==1.3
 tinycss2==1.2.1
     # via bleach
 titlecase==2.4.1
+    # via -r ./requirements.in
 toml==0.10.2
     # via bumpver
 typer==0.9.0
-    # via django-typer
+    # via
+    #   -r ./requirements.in
+    #   django-typer
 typing-extensions==4.10.0
     # via
-    #   asgiref
     #   dj-database-url
     #   pyee
     #   typer
@@ -234,6 +282,7 @@ tzdata==2024.1
 urllib3==2.2.1
     # via requests
 uwsgi==2.0.24
+    # via -r ./requirements.in
 virtualenv==20.25.1
     # via pre-commit
 webencodings==0.5.1
@@ -242,3 +291,4 @@ webencodings==0.5.1
     #   html5lib
     #   tinycss2
 whitenoise==6.6.0
+    # via -r ./requirements.in
