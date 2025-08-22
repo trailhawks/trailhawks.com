@@ -80,7 +80,7 @@
                         {{ news.body|markdownify|truncatewords_html:"100" }}
                     </section>
                 {% endfor %}
-                <a class="block inline-block py-1 px-3 w-full font-normal leading-normal text-center text-white no-underline align-middle bg-blue-600 rounded border select-none whitespace-no-wrap hover:bg-blue-600" href="{% url 'news_list' %}">More news &#187;</a>
+                <a class="block inline-block py-1 px-3 w-full font-normal leading-normal text-center text-white no-underline align-middle bg-red-600 rounded border select-none whitespace-no-wrap hover:bg-red-700" href="{% url 'news_list' %}">More news &#187;</a>
             </div>
         </div>
 
@@ -104,7 +104,7 @@
                         <div><strong>Race distance:</strong> {{ latest_race.distance }}</div>
                     </div>
 
-                    <p><a class="block inline-block py-1 px-3 w-full font-normal leading-normal text-center text-white no-underline align-middle bg-blue-600 rounded border select-none whitespace-no-wrap hover:bg-blue-600" href="{{ latest_race.get_absolute_url }}">More information &#187;</a></p>
+                    <p><a class="block inline-block py-1 px-3 w-full font-normal leading-normal text-center text-white no-underline align-middle bg-red-600 rounded border select-none whitespace-no-wrap hover:bg-red-700" href="{{ latest_race.get_absolute_url }}">More information &#187;</a></p>
                 </div>
             {% else %}
                 <h2 class="font-bold text-4xl py-2">Latest post</h2>
