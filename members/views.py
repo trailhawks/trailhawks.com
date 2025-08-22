@@ -6,7 +6,7 @@ from django.contrib.sites.models import Site
 from django.core.mail import EmailMultiAlternatives
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from django.template import RequestContext, loader
+from django.template import loader
 from django.urls import reverse
 from django.views.generic import TemplateView
 from django.views.generic.detail import DetailView
