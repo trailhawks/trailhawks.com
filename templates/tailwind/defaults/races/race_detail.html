@@ -73,9 +73,9 @@
     {% get_race_types_for_race object as race_types %}
 
     <header class="masthead">
-        <h1 class="font-bold text-6xl py-4">{{ object.title }}</h1>
+        <h1 class="font-bold text-3xl sm:text-4xl md:text-6xl py-4">{{ object.title }}</h1>
         {% if object.slogan %}
-            <h2 class="font-bold text-2xl py-2">{{ object.slogan }}</h2>
+            <h2 class="font-bold text-xl sm:text-2xl py-2">{{ object.slogan }}</h2>
         {% endif %}
     </header>
 
@@ -88,26 +88,28 @@
 
             {% if not object.is_finished %}
                 {% if object.registration_set.exists %}
-                    <table class="mb-4 w-full max-w-full bg-transparent table-hover table-striped">
-                        <thead>
-                            <tr>
-                                <th>Price level</th>
-                                <th>Dates</th>
-                                <th>Price</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for registration in object.registration_set.all %}
-                                <tr class="{% if registration.has_expired %}highlight{% endif %}">
-                                    <td>{{ registration.description }}</td>
-                                    <td>{{ registration.reg_date|date }} {% if registration.end_date %} to {{ registration.end_date|date }}{% endif %}</td>
-                                    <td>${{ registration.reg_cost }}</td>
-                                    <td><p><a class="block inline-block py-1 px-2 w-full text-xs font-normal leading-tight text-center text-black no-underline align-middle bg-orange-400 rounded border select-none whitespace-no-wrap  hover:bg-orange-500" href="{{ object.reg_url }}">register!</a></p></td>
+                    <div class="overflow-x-auto mb-4">
+                        <table class="w-full min-w-full bg-transparent table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="px-2 py-2 text-left">Price level</th>
+                                    <th class="px-2 py-2 text-left">Dates</th>
+                                    <th class="px-2 py-2 text-left">Price</th>
+                                    <th class="px-2 py-2"></th>
                                 </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {% for registration in object.registration_set.all %}
+                                    <tr class="{% if registration.has_expired %}bg-yellow-100{% endif %}">
+                                        <td class="px-2 py-2">{{ registration.description }}</td>
+                                        <td class="px-2 py-2 whitespace-nowrap">{{ registration.reg_date|date }} {% if registration.end_date %} to {{ registration.end_date|date }}{% endif %}</td>
+                                        <td class="px-2 py-2">${{ registration.reg_cost }}</td>
+                                        <td class="px-2 py-2"><a class="block inline-block py-1 px-2 w-full text-xs font-normal leading-tight text-center text-black no-underline align-middle bg-orange-400 rounded border select-none whitespace-no-wrap hover:bg-orange-500" href="{{ object.reg_url }}">register!</a></td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 {% endif %}
             {% endif %}
 

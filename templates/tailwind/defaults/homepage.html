@@ -63,14 +63,14 @@
         </div>
     </div>
     {% endcomment %}
-    <section class="bg-yellow-300 p-4 border-4 border-gray-900 flex flex-row text-xl gap-2 rounded-2xl">
-        {% heroicon_outline "exclamation-triangle" class="size-8" %}
-        <span class="font-medium">UNDER CONSTRUCTION</span>
-        <span>The Lawrence Trail Hawks website is undergoing maintenance.</span>
+    <section class="bg-yellow-300 p-4 border-4 border-gray-900 flex flex-col sm:flex-row items-center text-base sm:text-xl gap-2 rounded-2xl">
+        {% heroicon_outline "exclamation-triangle" class="size-8 flex-shrink-0" %}
+        <span class="font-medium text-center sm:text-left">UNDER CONSTRUCTION</span>
+        <span class="text-center sm:text-left">The Lawrence Trail Hawks website is undergoing maintenance.</span>
     </section>
 
-    <section class="flex flex-auto divide-solid divide-y gap-16">
-        <div class="md:w-1/3">
+    <section class="flex flex-col md:flex-row flex-auto md:divide-solid md:divide-y gap-8 md:gap-16">
+        <div class="w-full md:w-1/3">
             <h2 class="font-bold text-4xl py-2">Latest updates</h2>
             <div class="flex flex-col gap-4 divide-y divide-gray-200">
                 {% get_latest_news num=4 as latest_news %}
@@ -84,7 +84,7 @@
             </div>
         </div>
 
-        <div class="md:w-2/3">
+        <div class="w-full md:w-2/3">
             {% get_latest_race as latest_race %}
             {% if latest_race %}
                 <h2 class="font-bold text-4xl py-2">Next event</h2>
@@ -124,15 +124,15 @@
         <h2 class="font-bold text-4xl py-4">Weekly runs</h2>
         <div class="grid grid-cols-1 gap-x-2 divide-solid divide-y">
             {% for run in runs %}
-                <div class="text-2xl py-3 hover:bg-yellow-400">
-                    <a class="flex" href="{{ run.get_absolute_url }}">
-                        <span class="w-1/3 font-bold">
+                <div class="text-lg sm:text-2xl py-3 hover:bg-yellow-400">
+                    <a class="flex flex-col sm:flex-row" href="{{ run.get_absolute_url }}">
+                        <span class="sm:w-1/3 font-bold">
                             {{ run.get_day_of_week_display }}s
                         </span>
-                        <span class="w-1/3 text-center underline">
+                        <span class="sm:w-1/3 sm:text-center underline">
                             {{ run.name }}
                         </span>
-                        <span class="w-1/3 text-right">
+                        <span class="sm:w-1/3 sm:text-right">
                             {{ run.location }}
                         </span>
                     </a>
@@ -143,7 +143,7 @@
 
     <section id="events">
         <h2 class="font-bold text-4xl py-4">Upcoming races</h2>
-        <div class="grid grid-cols-3 gap-x-2 gap-y-3">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-2 gap-y-3">
             {% get_latest_races as races %}
             {% for race in races %}
                 {% include 'includes/_race.html' with race=race %}
@@ -153,7 +153,7 @@
 
     <section id="races">
         <h2 class="font-bold text-4xl py-4">Past races</h2>
-        <div class="grid grid-cols-3 gap-x-2 gap-y-3">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-2 gap-y-3">
             {% get_past_races as past_races %}
             {% for past_race in past_races reversed %}
                 <a class="underline" href="{{ past_race.get_absolute_url }}">{{ past_race }}</a>
