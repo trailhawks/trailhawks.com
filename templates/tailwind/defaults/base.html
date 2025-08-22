@@ -8,132 +8,228 @@
 {% load static %}
 
 {% block navbar %}
-    <div class="p-2">
-        <nav class="relative" role="navigation">
-            <!-- Desktop Menu -->
-            <div class="flex flex-row items-center justify-between">
-                <div class="flex items-center">
-                    <img class="h-16 md:h-20" src="{% static 'img/hawk-head.png' %}">
-                    <a href="/" class="ml-2">
-                        <span class="font-bold text-3xl md:text-5xl lg:text-7xl text-red-950">Lawrence Trail Hawks</span>
-                    </a>
-                </div>
-                <!-- Mobile menu button -->
-                <button id="mobile-menu-button" class="md:hidden p-2 bg-red-100 rounded">
-                    <i class="fa fa-bars text-xl text-red-950"></i>
-                </button>
-            </div>
-
-            <!-- Desktop navigation links -->
-            <div class="hidden md:block mt-3 text-red-950">
-                <!-- Desktop menu container with responsive behavior -->
-                <div class="desktop-menu-container flex flex-wrap lg:flex-row gap-3">
-                    <!-- Main navigation section -->
-                    <div class="menu-section flex flex-wrap gap-3">
-                        <span><a class="underline hover:bg-yellow-300 px-1" href="{% url 'race_index' %}">Races &amp; Events</a></span>
-                        <span><a class="underline hover:bg-yellow-300 px-1" href="{% url 'run_list' %}">Group Runs</a></span>
-                        <span><a class="underline hover:bg-yellow-300 px-1" href="{% url 'blog_list' %}">Blog</a></span>
-                        <span><a class="underline hover:bg-yellow-300 px-1" href="{% url 'link_list' %}">Links</a></span>
-                        <span><a class="underline hover:bg-yellow-300 px-1" href="{% url 'member_list' %}">Members</a></span>
-                        <span><a class="underline hover:bg-yellow-300 px-1" href="{% url 'sponsor_list' %}">Sponsors</a></span>
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <nav class="relative" role="navigation">
+                <!-- Main Header -->
+                <div class="flex flex-row items-center justify-between py-3">
+                    <div class="flex items-center">
+                        <img class="h-12 sm:h-16 md:h-20" src="{% static 'img/hawk-head.png' %}" alt="Trail Hawks Logo">
+                        <a href="/" class="ml-2 group">
+                            <span class="font-bold text-xl sm:text-3xl md:text-4xl lg:text-5xl text-red-900 group-hover:text-red-700 transition-colors">Lawrence Trail Hawks</span>
+                        </a>
                     </div>
+                    <!-- Mobile menu button -->
+                    <button id="mobile-menu-button" class="md:hidden p-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors" aria-label="Toggle menu">
+                        <i class="fa fa-bars text-xl"></i>
+                    </button>
+                </div>
 
-                    <!-- Secondary navigation and documents -->
-                    <div class="menu-section flex flex-wrap gap-3">
-                        <span><a class="underline hover:bg-yellow-300 px-1" href="/brochure/">Tri-Fold Brochure</a></span>
-                        <span><a class="underline hover:bg-yellow-300 px-1" href="/static/docs/Lawrence-Trail-Hawks-Guide-to-Running-Clinton-Lake.pdf">Guide to Clinton Lake</a></span>
-                    </div>
+                <!-- Desktop navigation links -->
+                <div class="hidden md:block border-t border-gray-200">
+                    <div class="flex flex-wrap items-center justify-between py-2">
+                        <!-- Main navigation -->
+                        <div class="flex flex-wrap items-center gap-1 lg:gap-2">
+                            <a class="px-3 py-1 text-sm lg:text-base font-medium text-gray-700 hover:text-red-700 hover:bg-red-50 rounded transition-colors" href="{% url 'race_index' %}">Races & Events</a>
+                            <a class="px-3 py-1 text-sm lg:text-base font-medium text-gray-700 hover:text-red-700 hover:bg-red-50 rounded transition-colors" href="{% url 'run_list' %}">Group Runs</a>
+                            <a class="px-3 py-1 text-sm lg:text-base font-medium text-gray-700 hover:text-red-700 hover:bg-red-50 rounded transition-colors" href="{% url 'blog_list' %}">Blog</a>
+                            <a class="px-3 py-1 text-sm lg:text-base font-medium text-gray-700 hover:text-red-700 hover:bg-red-50 rounded transition-colors" href="{% url 'member_list' %}">Members</a>
+                            <a class="px-3 py-1 text-sm lg:text-base font-medium text-gray-700 hover:text-red-700 hover:bg-red-50 rounded transition-colors" href="{% url 'sponsor_list' %}">Sponsors</a>
+                            <a class="px-3 py-1 text-sm lg:text-base font-medium text-gray-700 hover:text-red-700 hover:bg-red-50 rounded transition-colors" href="{% url 'about' %}">About</a>
+                        </div>
 
-                    <!-- Action items and social -->
-                    <div class="menu-section flex flex-wrap gap-3">
-                        <span><a class="underline hover:bg-yellow-300 px-1" href="/signup/"><i class="fa fa-plus-circle"></i> Join Us</a></span>
-                        <span><a class="underline hover:bg-yellow-300 px-1" href="/contact/"><i class="fa fa-envelope"></i> Contact</a></span>
-                        <span><a class="underline hover:bg-yellow-300 px-1" href="{% url 'about' %}">About</a></span>
-                        <span class="flex gap-2">
-                            <a class="hover:bg-yellow-300 px-1" href="https://www.facebook.com/home.php#/group.php?gid=91186762641&amp;ref=ts"><i class="fa fa-facebook"></i></a>
-                            <a class="hover:bg-yellow-300 px-1" href="https://www.flickr.com/photos/trailhawks"><i class="fa fa-flickr"></i></a>
-                            <a class="hover:bg-yellow-300 px-1" href="https://github.com/organizations/TrailHawks"><i class="fa fa-github"></i></a>
-                        </span>
+                        <!-- Action buttons and social -->
+                        <div class="flex items-center gap-2">
+                            <a class="px-3 py-1 bg-yellow-400 hover:bg-yellow-500 text-red-900 font-semibold rounded-lg transition-colors text-sm lg:text-base" href="/signup/">
+                                <i class="fa fa-plus-circle mr-1"></i>Join
+                            </a>
+                            <a class="px-3 py-1 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors text-sm lg:text-base" href="/contact/">
+                                <i class="fa fa-envelope mr-1"></i>Contact
+                            </a>
+                            <div class="flex items-center gap-1 ml-2 border-l pl-2 border-gray-300">
+                                <a class="p-1 text-gray-600 hover:text-red-600 transition-colors" href="https://www.facebook.com/home.php#/group.php?gid=91186762641&amp;ref=ts" aria-label="Facebook">
+                                    <i class="fa fa-facebook fa-lg"></i>
+                                </a>
+                                <a class="p-1 text-gray-600 hover:text-red-600 transition-colors" href="https://www.instagram.com/trail.hawks/" aria-label="Instagram">
+                                    <i class="fa fa-instagram fa-lg"></i>
+                                </a>
+                                <a class="p-1 text-gray-600 hover:text-red-600 transition-colors" href="https://www.flickr.com/photos/trailhawks" aria-label="Flickr">
+                                    <i class="fa fa-flickr fa-lg"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Mobile navigation menu (hidden by default) -->
-            <div id="mobile-menu" class="hidden md:hidden mt-2 flex flex-col bg-white border border-red-200 rounded shadow-lg p-4">
-                <a class="py-2 border-b border-red-100 hover:bg-yellow-100" href="{% url 'race_index' %}">Races &amp; Events</a>
-                <a class="py-2 border-b border-red-100 hover:bg-yellow-100" href="{% url 'run_list' %}">Group Runs</a>
-                <a class="py-2 border-b border-red-100 hover:bg-yellow-100" href="{% url 'blog_list' %}">Blog</a>
-                <a class="py-2 border-b border-red-100 hover:bg-yellow-100" href="{% url 'link_list' %}">Links</a>
-                <a class="py-2 border-b border-red-100 hover:bg-yellow-100" href="{% url 'member_list' %}">Members</a>
-                <a class="py-2 border-b border-red-100 hover:bg-yellow-100" href="{% url 'sponsor_list' %}">Sponsors</a>
-                <a class="py-2 border-b border-red-100 hover:bg-yellow-100" href="/brochure/">Tri-Fold Brochure</a>
-                <a class="py-2 border-b border-red-100 hover:bg-yellow-100" href="/static/docs/Lawrence-Trail-Hawks-Guide-to-Running-Clinton-Lake.pdf">Guide to Running Clinton Lake</a>
-                <a class="py-2 border-b border-red-100 hover:bg-yellow-100" href="/signup/"><i class="fa fa-plus-circle"></i> Join Us</a>
-                <a class="py-2 border-b border-red-100 hover:bg-yellow-100" href="/contact/"><i class="fa fa-envelope"></i> Contact us</a>
-                <a class="py-2 border-b border-red-100 hover:bg-yellow-100" href="{% url 'about' %}">About</a>
-                <div class="py-2 flex gap-4">
-                    <a class="hover:text-red-600" href="https://www.facebook.com/home.php#/group.php?gid=91186762641&amp;ref=ts"><i class="fa fa-facebook fa-lg"></i></a>
-                    <a class="hover:text-red-600" href="https://www.flickr.com/photos/trailhawks"><i class="fa fa-flickr fa-lg"></i></a>
-                    <a class="hover:text-red-600" href="https://github.com/organizations/TrailHawks"><i class="fa fa-github fa-lg"></i></a>
+                <!-- Mobile navigation menu (hidden by default) -->
+                <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 right-0 bg-white border-t border-gray-200 shadow-lg">
+                    <div class="flex flex-col">
+                        <a class="px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-700 border-b border-gray-100 transition-colors" href="{% url 'race_index' %}">
+                            <i class="fa fa-calendar-alt mr-2 text-red-400"></i>Races & Events
+                        </a>
+                        <a class="px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-700 border-b border-gray-100 transition-colors" href="{% url 'run_list' %}">
+                            <i class="fa fa-running mr-2 text-red-400"></i>Group Runs
+                        </a>
+                        <a class="px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-700 border-b border-gray-100 transition-colors" href="{% url 'blog_list' %}">
+                            <i class="fa fa-blog mr-2 text-red-400"></i>Blog
+                        </a>
+                        <a class="px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-700 border-b border-gray-100 transition-colors" href="{% url 'member_list' %}">
+                            <i class="fa fa-users mr-2 text-red-400"></i>Members
+                        </a>
+                        <a class="px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-700 border-b border-gray-100 transition-colors" href="{% url 'sponsor_list' %}">
+                            <i class="fa fa-handshake mr-2 text-red-400"></i>Sponsors
+                        </a>
+                        <a class="px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-700 border-b border-gray-100 transition-colors" href="{% url 'about' %}">
+                            <i class="fa fa-info-circle mr-2 text-red-400"></i>About
+                        </a>
+                        <div class="border-t-2 border-gray-200 mt-2">
+                            <a class="px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-700 border-b border-gray-100 transition-colors" href="/brochure/">
+                                <i class="fa fa-file-alt mr-2 text-red-400"></i>Tri-Fold Brochure
+                            </a>
+                            <a class="px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-700 border-b border-gray-100 transition-colors" href="/static/docs/Lawrence-Trail-Hawks-Guide-to-Running-Clinton-Lake.pdf">
+                                <i class="fa fa-map mr-2 text-red-400"></i>Guide to Clinton Lake
+                            </a>
+                        </div>
+                        <div class="flex gap-2 p-4 bg-gray-50">
+                            <a class="flex-1 px-3 py-2 bg-yellow-400 hover:bg-yellow-500 text-red-900 font-semibold rounded-lg transition-colors text-center" href="/signup/">
+                                <i class="fa fa-plus-circle mr-1"></i>Join Us
+                            </a>
+                            <a class="flex-1 px-3 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors text-center" href="/contact/">
+                                <i class="fa fa-envelope mr-1"></i>Contact
+                            </a>
+                        </div>
+                        <div class="flex justify-center gap-4 p-4 border-t border-gray-200">
+                            <a class="text-gray-600 hover:text-red-600 transition-colors" href="https://www.facebook.com/home.php#/group.php?gid=91186762641&amp;ref=ts">
+                                <i class="fa fa-facebook fa-lg"></i>
+                            </a>
+                            <a class="text-gray-600 hover:text-red-600 transition-colors" href="https://www.instagram.com/trail.hawks/">
+                                <i class="fa fa-instagram fa-lg"></i>
+                            </a>
+                            <a class="text-gray-600 hover:text-red-600 transition-colors" href="https://www.flickr.com/photos/trailhawks">
+                                <i class="fa fa-flickr fa-lg"></i>
+                            </a>
+                            <a class="text-gray-600 hover:text-red-600 transition-colors" href="https://github.com/organizations/TrailHawks">
+                                <i class="fa fa-github fa-lg"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </div>
+            </nav>
+        </div>
+    </header>
 {% endblock navbar %}
 
 
 {% block content-wrapper %}
-    <div class="container p-2 divide-y divide-red-950 flex flex-col gap-8">
+    <main class="container mx-auto p-4 md:p-6 divide-y divide-gray-200 flex flex-col gap-8">
         {% block content %}
         {% endblock content %}
-    </div>
+    </main>
 {% endblock content-wrapper %}
 
 
 {% block footer %}
-    <div class="flex flex-col md:flex-row gap-8 border-t-2 border-red-950 py-8">
-        <div class="w-full md:w-1/3">
-            <ul class="list-none space-y-2">
-                <li><a class="underline hover:bg-yellow-300" href="/signup/"><i class="fa fa-plus-circle"></i> Join Us</a></li>
-                <li><a class="underline hover:bg-yellow-300" href="/contact/"><i class="fa fa-envelope"></i> Contact us</a></li>
-                <li><a class="underline hover:bg-yellow-300" href="http://www.trailhawks.store"><i class="fa fa-plus-circle"></i> www.trailhawks.store</a></li>
-                <li class="mt-4">
-                    <div class="flex gap-4">
-                        <a class="text-2xl hover:text-red-600" href="https://www.facebook.com/home.php#/group.php?gid=91186762641&amp;ref=ts"><i class="fa fa-facebook"></i></a>
-                        <a class="text-2xl hover:text-red-600" href="https://www.instagram.com/trail.hawks/"><i class="fa fa-instagram"></i></a>
-                        <a class="text-2xl hover:text-red-600" href="https://www.flickr.com/photos/trailhawks"><i class="fa fa-flickr"></i></a>
-                        <a class="text-2xl hover:text-red-600" href="https://github.com/organizations/TrailHawks"><i class="fa fa-github"></i></a>
+    <div class="bg-gray-50 border-t border-gray-200 mt-8">
+        <div class="container mx-auto px-4 py-8">
+            <div class="flex flex-col md:flex-row gap-8">
+                <div class="w-full md:w-1/3">
+                    <h3 class="font-bold text-gray-900 mb-4">Connect</h3>
+                    <ul class="list-none space-y-3">
+                        <li>
+                            <a class="flex items-center text-gray-600 hover:text-red-600 transition-colors" href="/signup/">
+                                <i class="fa fa-plus-circle mr-2"></i>Join Us
+                            </a>
+                        </li>
+                        <li>
+                            <a class="flex items-center text-gray-600 hover:text-red-600 transition-colors" href="/contact/">
+                                <i class="fa fa-envelope mr-2"></i>Contact Us
+                            </a>
+                        </li>
+                        <li>
+                            <a class="flex items-center text-gray-600 hover:text-red-600 transition-colors" href="http://www.trailhawks.store">
+                                <i class="fa fa-shopping-cart mr-2"></i>Shop
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="mt-6">
+                        <h4 class="font-semibold text-gray-700 mb-3">Follow Us</h4>
+                        <div class="flex gap-3">
+                            <a class="text-2xl text-gray-400 hover:text-blue-600 transition-colors" href="https://www.facebook.com/home.php#/group.php?gid=91186762641&amp;ref=ts" aria-label="Facebook">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                            <a class="text-2xl text-gray-400 hover:text-pink-600 transition-colors" href="https://www.instagram.com/trail.hawks/" aria-label="Instagram">
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                            <a class="text-2xl text-gray-400 hover:text-blue-500 transition-colors" href="https://www.flickr.com/photos/trailhawks" aria-label="Flickr">
+                                <i class="fa fa-flickr"></i>
+                            </a>
+                            <a class="text-2xl text-gray-400 hover:text-gray-900 transition-colors" href="https://github.com/organizations/TrailHawks" aria-label="GitHub">
+                                <i class="fa fa-github"></i>
+                            </a>
+                        </div>
                     </div>
-                </li>
-            </ul>
+                </div>
+                <div class="w-full md:w-1/3">
+                    <h3 class="font-bold text-gray-900 mb-4">By the Numbers</h3>
+                    <ul class="list-none space-y-2">
+                        {# Upcoming races #}
+                        {% get_latest_races as latest_races %}
+                        <li class="flex justify-between">
+                            <span class="text-gray-600">Upcoming races:</span>
+                            <span class="font-semibold text-red-600">{{ latest_races.count|intcomma }}</span>
+                        </li>
+
+                        {# Past races #}
+                        {% get_past_races as past_races %}
+                        <li class="flex justify-between">
+                            <span class="text-gray-600">Past races:</span>
+                            <span class="font-semibold text-red-600">{{ past_races.count|intcomma }}</span>
+                        </li>
+
+                        {# Total members #}
+                        {% get_active_members as active_members %}
+                        <li class="flex justify-between">
+                            <span class="text-gray-600">Active members:</span>
+                            <span class="font-semibold text-red-600">{{ active_members.count|intcomma }}</span>
+                        </li>
+
+                        {# Total racers #}
+                        {% get_all_racers as racers %}
+                        <li class="flex justify-between">
+                            <span class="text-gray-600">Total racers:</span>
+                            <span class="font-semibold text-red-600">{{ racers.count|intcomma }}</span>
+                        </li>
+
+                        {# Total results #}
+                        {% get_all_results as results %}
+                        <li class="flex justify-between">
+                            <span class="text-gray-600">Race results:</span>
+                            <span class="font-semibold text-red-600">{{ results.count|intcomma }}</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="w-full md:w-1/3">
+                    <h3 class="font-bold text-gray-900 mb-4">Quick Links</h3>
+                    <ul class="list-none space-y-3">
+                        <li>
+                            <a class="text-gray-600 hover:text-red-600 transition-colors" href="/brochure/">Tri-Fold Brochure</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-600 hover:text-red-600 transition-colors" href="/static/docs/Lawrence-Trail-Hawks-Guide-to-Running-Clinton-Lake.pdf">Guide to Clinton Lake</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-600 hover:text-red-600 transition-colors" href="{% url 'link_list' %}">External Links</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="w-full md:w-1/3">
-            <ul class="list-none space-y-2">
-                {# Upcoming races #}
-                {% get_latest_races as latest_races %}
-                <li><strong>{{ latest_races.count|intcomma }}</strong> upcoming races</li>
-
-                {# Past races #}
-                {% get_past_races as past_races %}
-                <li><strong>{{ past_races.count|intcomma }}</strong> past races</li>
-
-                {# Total members #}
-                {% get_active_members as active_members %}
-                <li><strong>{{ active_members.count|intcomma }}</strong> members</li>
-
-                {# Total racers #}
-                {% get_all_racers as racers %}
-                <li><strong>{{ racers.count|intcomma }}</strong> racers</li>
-
-                {# Total results #}
-                {% get_all_results as results %}
-                <li><strong>{{ results.count|intcomma }}</strong> results</li>
-            </ul>
-        </div>
-    </div>
-    <div class="flex flex-auto py-4 border-t-2 border-red-950">
-        <div class="w-full text-center">
-            <p>&copy; 2009-{% now "Y" %} <a class="underline hover:bg-yellow-300" href="https://trailhawks.com/">Lawrence Trail Hawks</a>. All rights reserved. v{% get_version %}</p>
+        <div class="border-t border-gray-200 bg-gray-100">
+            <div class="container mx-auto px-4 py-4">
+                <div class="text-center text-sm text-gray-600">
+                    <p>&copy; 2009-{% now "Y" %} <a class="text-red-600 hover:text-red-700 font-medium" href="https://trailhawks.com/">Lawrence Trail Hawks</a>. All rights reserved. <span class="text-gray-400">v{% get_version %}</span></p>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock footer %}
