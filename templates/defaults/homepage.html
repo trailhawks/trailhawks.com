@@ -59,6 +59,12 @@
                         <div><strong>Race distance:</strong> {{ latest_race.distance }}</div>
                     </div>
 
+                    {% if latest_race.description %}
+                        <div class="py-4 prose prose-a:underline prose-a:text-red-600 hover:prose-a:text-red-800">
+                            {{ latest_race.description|markdownify|truncatewords_html:50 }}
+                        </div>
+                    {% endif %}
+
                     <p><a class="block inline-block py-1 px-3 w-full font-normal leading-normal text-center text-white no-underline align-middle bg-red-600 rounded border select-none whitespace-no-wrap hover:bg-red-700" href="{{ latest_race.get_absolute_url }}">More information &#187;</a></p>
                 </div>
             {% else %}
