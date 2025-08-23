@@ -18,7 +18,7 @@
 ## Install
 
 ```sh
-docker-compose build
+docker compose build
 ```
 
 ## Usage
@@ -32,15 +32,15 @@ cd trailhawks.com
 cp .env-sample .env
 
 # build our primary Docker image
-docker-compose build
+docker compose build
 
 # Some house cleaning
-docker-compose run --rm web python manage.py collectstatic --noinput
-docker-compose run --rm web python manage.py migrate
-docker-compose run --rm web python manage.py createsuperuser
+docker compose run --rm web python manage.py collectstatic --noinput
+docker compose run --rm web python manage.py migrate
+docker compose run --rm web python manage.py createsuperuser
 
 # Run our dev server
-docker-compose up
+docker compose up
 
 # Open the Admin and add some races and weekly runs
 open http://localhost:8000/admin/
@@ -49,7 +49,7 @@ open http://localhost:8000/admin/
 
 ```sh
 # TDB
-# docker-compose run --rm web pytest
+# docker compose run --rm web pytest
 ```
 
 ## Author
