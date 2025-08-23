@@ -63,9 +63,13 @@ TAILWIND_CSS_VERSION := "latest"
     # just run import_from_ultrasignup 36684
     # just run import_from_ultrasignup 36685
 
-# Run linting and pre-commit hooks on all files
+# Run pre-commit hooks on all files
 @lint *ARGS:
-    just pre-commit run --all-files {{ ARGS }}
+    uv --quiet tool run --with pre-commit-uv pre-commit run {{ ARGS }} --all-files
+
+# Update pre-commit hooks to their latest versions
+@lint-update:
+    uv --quiet tool run --with pre-commit-uv pre-commit autoupdate
 
 # View Docker container logs (accepts docker compose logs arguments)
 @logs +ARGS="":
@@ -85,10 +89,6 @@ TAILWIND_CSS_VERSION := "latest"
         --rm web \
             bash -c "uv pip compile {{ ARGS }} ./requirements.in \
                 --output-file ./requirements.txt"
-
-# Run pre-commit hooks (Python linting, formatting, type checking)
-@pre-commit *ARGS:
-    pre-commit {{ ARGS }}
 
 # Execute Django management commands (default: show help)
 @run +ARGS="--help":
