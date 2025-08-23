@@ -4,7 +4,7 @@ SITE_ID = 1
 
 ROOT_URLCONF = "config.urls"
 
-TEMPLATE_ROOT = BASE_DIR.joinpath("templates", "tailwind")
+TEMPLATE_ROOT = BASE_DIR.joinpath("templates")
 
 TEMPLATES = [
     {
