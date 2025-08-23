@@ -78,7 +78,7 @@
     </header>
 
     <div class="flex flex-col md:flex-row gap-8">
-        <div class="w-full md:w-2/3 flex flex-col gap-8 md:gap-16">
+        <div class="w-full md:w-2/3 flex flex-col gap-8">
 
             {% if object.logo %}
                 <img class="w-full h-auto object-contain max-h-80" src="{{ object.logo.url }}">
@@ -114,14 +114,14 @@
             {% if object.get_race_news %}
                 <section>
                     <a name="news"></a>
-                    <h3 class="text-2xl">Latest News</h3>
+                    <h3 class="text-2xl font-bold mb-4">Latest News</h3>
                     {% for item in object.get_race_news|slice:":3" %}
-                        <p>&nbsp;&nbsp;{{ item.body|markdownify }}</p>
+                        <div class="mb-4 prose">{{ item.body|markdownify }}</div>
                     {% endfor %}
                 </section>
             {% endif %}
 
-            <section class="flex flex-col divide-y divide-gray-300 py-8 text-xl border-2">
+            <section class="flex flex-col divide-y divide-gray-300 py-8 text-xl">
                 <div><strong>Race date:</strong> {{ object.start_datetime|date:"F j, Y" }}</div>
                 <div><strong>Start time:</strong> {{ object.start_datetime|time:"h:i A" }}</div>
                 <div><strong>Race distance:</strong> {{ object.distance }}</div>
@@ -131,49 +131,49 @@
                 {% endif %}
             </section>
 
-            <section class="prose-lg prose-a:underline prose-a:bg-yellow-300 prose-a:px-1 border-2">
+            <section class="prose-lg prose-a:underline prose-a:text-red-600 hover:prose-a:text-red-800">
                 {{ object.description|markdownify }}
             </section>
 
-            <section class="border-2">
+            <section>
                 <h2 class="text-4xl font-bold py-8">Event Information</h2>
             </section>
 
-            <section class="border-2">
+            <section>
                 {% if object.location %}
                     <h3 class="font-bold text-2xl py-4">Location</h3>
                     <div id="map-canvas"></div>
-                    <p>{{ object.location.description|markdownify }}</p>
+                    <div class="prose prose-a:underline prose-a:text-red-600 hover:prose-a:text-red-800">{{ object.location.description|markdownify }}</div>
                 {% endif %}
 
                 {% if object.course_map %}
-                    <p>Click <a href="{{ object.course_map }}">here</a> for a course map.</p>
+                    <p>Click <a href="{{ object.course_map }}" class="text-red-600 hover:text-red-800 underline">here</a> for a course map.</p>
                 {% endif %}
             </section>
 
             {% if object.awards %}
-                <section class="border-2" id="awards">
-                    <h3 class="font-bold text-2xl py-2">Awards</h3>
-                    <div class="prose">{{ object.awards|markdownify }}</div>
+                <section id="awards">
+                    <h3 class="text-2xl font-bold mb-4">Awards</h3>
+                    <div class="prose prose-a:underline prose-a:text-red-600 hover:prose-a:text-red-800">{{ object.awards|markdownify }}</div>
                 </section>
             {% endif %}
 
             {% if object.race_directors.exists %}
-                <section class="py-2 border-2" id="rds">
-                    <h3 class="text-2xl">Race Director{{ object.race_directors.count|pluralize }}</h3>
+                <section id="rds">
+                    <h3 class="text-2xl font-bold mb-4">Race Director{{ object.race_directors.count|pluralize }}</h3>
                     <ul>
                         {% for race_directory in object.race_directors.all %}
-                            <li><a href="{% url 'member_detail' pk=race_directory.pk %}">{{ race_directory.full_hawk_name }}</a> - <a href="mailto:{{ race_directory.email }}">contact</a></li>
+                            <li><a href="{% url 'member_detail' pk=race_directory.pk %}" class="text-red-600 hover:text-red-800 underline">{{ race_directory.full_hawk_name }}</a> - <a href="mailto:{{ race_directory.email }}" class="text-red-600 hover:text-red-800 underline">contact</a></li>
                         {% endfor %}
                     </ul>
                 </section>
             {% endif %}
 
             {% if not object.get_overall_results %}
-                <section class="py-2 border-2">
-                    <h3 class="text-2xl">Registration</h3>
+                <section>
+                    <h3 class="text-2xl font-bold mb-4">Registration</h3>
 
-                    <div class="prose">
+                    <div class="prose prose-a:underline prose-a:text-red-600 hover:prose-a:text-red-800">
                         {{ object.reg_description|markdownify }}
                     </div>
 
@@ -199,19 +199,19 @@
                         </ul>
                     {% endif %}
 
-                    {{ object.discounts|markdownify }}
+                    <div class="prose prose-a:underline prose-a:text-red-600 hover:prose-a:text-red-800">{{ object.discounts|markdownify }}</div>
 
                     {% if object.packet_pickup %}
                         <h3 class="text-2xl">Packet Pickup</h3>
-                        {{ object.packet_pickup|markdownify }}
+                        <div class="prose prose-a:underline prose-a:text-red-600 hover:prose-a:text-red-800">{{ object.packet_pickup|markdownify }}</div>
                     {% endif %}
                 </section>
             {% endif %}
 
             {% if object.lodging %}
                 <hr>
-                <h3 class="text-2xl">Lodging</h3>
-                <p>Lodging information can be found <a href="{{ object.lodging }}">here</a>.</p>
+                <h3 class="text-2xl font-bold mb-4">Lodging</h3>
+                <p>Lodging information can be found <a href="{{ object.lodging }}" class="text-red-600 hover:text-red-800 underline">here</a>.</p>
             {% endif %}
 
             {% if object.get_race_reports %}
@@ -219,16 +219,16 @@
             {% endif %}
 
             {% if race_types %}
-                <section class="py-2 border-2">
-                    <h3 class="font-bold text-2xl py-4">
+                <section>
+                    <h3 class="text-2xl font-bold mb-4">
                         <a name="results"></a>
                         Race Results
                     </h3>
                     <ul>
                         {% for race_type in race_types %}
-                            <li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-overallresults">{{ race_type.name }} Overall Results</a></li>
-                            <li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-mensresults">{{ race_type.name }} Men&apos;s Results</a></li>
-                            <li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-womensresults">{{ race_type.name }} Women&apos;s Results</a></li>
+                            <li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-overallresults" class="text-red-600 hover:text-red-800 underline">{{ race_type.name }} Overall Results</a></li>
+                            <li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-mensresults" class="text-red-600 hover:text-red-800 underline">{{ race_type.name }} Men&apos;s Results</a></li>
+                            <li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-womensresults" class="text-red-600 hover:text-red-800 underline">{{ race_type.name }} Women&apos;s Results</a></li>
                         {% endfor %}
                     </ul>
                 </section>
@@ -239,10 +239,10 @@
             {% get_links_for_object object as link_list %}
             {% if link_list %}
                 <hr>
-                <h3 class="text-2xl">Links</h3>
+                <h3 class="text-2xl font-bold mb-4">Links</h3>
                 {% for link in link_list %}
                     <h4>{{ link.name }}</h4>
-                    {{ link.description|markdownify }}
+                    <div class="prose prose-a:underline prose-a:text-red-600 hover:prose-a:text-red-800">{{ link.description|markdownify }}</div>
                 {% endfor %}
             {% endif %}
 
@@ -250,10 +250,10 @@
             {% get_faqs_for_object object as faq_list %}
             {% if faq_list %}
                 <hr>
-                <h3 class="text-2xl">Frequently Asked Questions</h3>
+                <h3 class="text-2xl font-bold mb-4">Frequently Asked Questions</h3>
                 {% for faq in faq_list %}
                     <h4>{{ faq.question }}</h4>
-                    {{ faq.answer|markdownify }}
+                    <div class="prose prose-a:underline prose-a:text-red-600 hover:prose-a:text-red-800">{{ faq.answer|markdownify }}</div>
                 {% endfor %}
             {% endif %}
 
@@ -261,13 +261,13 @@
             {% if sponsor_list %}
                 <hr>
 
-                <h3 class="text-2xl"><a name="sponsors"></a>Sponsors</h3>
+                <h3 class="text-2xl font-bold mb-4"><a name="sponsors"></a>Sponsors</h3>
                 <div class="flex flex-auto">
                     {% for sponsor in sponsor_list %}
                         <div class="md:w-1/2">
-                            <h3 class="text-2xl"><a href="{{ sponsor.url }}">{{ sponsor.name }}</a></h3>
+                            <h3 class="text-2xl"><a href="{{ sponsor.url }}" class="text-red-600 hover:text-red-800 underline">{{ sponsor.name }}</a></h3>
                             {% if sponsor.logo %}
-                                <a href="{{ sponsor.url }}">
+                                <a href="{{ sponsor.url }}" class="hover:opacity-80 transition-opacity">
                                     <img class="w-full h-auto" src="{{ sponsor.logo.url }}" />
                                 </a>
                             {% endif %}
@@ -278,30 +278,24 @@
         </div>
 
         <div class="md:w-1/3">
-            <div class="bg-white border border-gray-300 rounded">
-                <ul class="flex flex-col pl-0 mb-0 list-none">
-                    <li><a class="inline-block py-1 px-3 font-normal leading-normal text-center text-white no-underline align-middle bg-red-600 rounded border select-none whitespace-no-wrap hover:bg-red-700" href="{{ object.reg_url }}">Register</a></li>
-                    {% comment %}
-                <li><a href="#">Volunteer</a></li>
-                {% endcomment %}
+            <div class="bg-white border border-gray-300 rounded p-4">
+                <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                <ul class="flex flex-col space-y-2 list-none">
+                    <li><a class="inline-block py-2 px-4 w-full text-center text-white bg-red-600 rounded hover:bg-red-700 transition-colors" href="{{ object.reg_url }}">Register</a></li>
                     {% if object.get_race_news %}
-                        <li><a href="#news">News</a></li>
+                        <li><a href="#news" class="text-red-600 hover:text-red-800 hover:underline">News</a></li>
                     {% endif %}
-
                     {% if object.awards %}
-                        <li><a href="#awards">Awards</a></li>
+                        <li><a href="#awards" class="text-red-600 hover:text-red-800 hover:underline">Awards</a></li>
                     {% endif %}
-
                     {% if object.race_directors.exists %}
-                        <li><a href="#rds">Race Directors</a></li>
+                        <li><a href="#rds" class="text-red-600 hover:text-red-800 hover:underline">Race Directors</a></li>
                     {% endif %}
-
                     {% if race_types %}
-                        <li><a href="#results">Results</a></li>
+                        <li><a href="#results" class="text-red-600 hover:text-red-800 hover:underline">Results</a></li>
                     {% endif %}
-
                     {% if object.sponsors.exists %}
-                        <li><a href="#sponsors">Sponsors</a></li>
+                        <li><a href="#sponsors" class="text-red-600 hover:text-red-800 hover:underline">Sponsors</a></li>
                     {% endif %}
                 </ul>
             </div>
@@ -311,11 +305,11 @@
                     <div class="bg-gray-50 px-4 py-2 border-b border-gray-300">
                         <h3 class="text-2xl font-bold">Race Results</h3>
                     </div>
-                    <ul class="flex flex-col pl-0 mb-0 rounded border border-gray-300">
+                    <ul class="flex flex-col pl-0 mb-0">
                         {% for race_type in race_types %}
-                            <li class="block relative py-3 px-6 -mb-px no-underline border border-r-0 border-l-0 border-gray-300"><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-overallresults">{{ race_type.name }} Overall Results</a></li>
-                            <li class="block relative py-3 px-6 -mb-px no-underline border border-r-0 border-l-0 border-gray-300"><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-mensresults">{{ race_type.name }} Men&apos;s Results</a></li>
-                            <li class="block relative py-3 px-6 -mb-px no-underline border border-r-0 border-l-0 border-gray-300"><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-womensresults">{{ race_type.name }} Women&apos;s Results</a></li>
+                            <li class="py-2 px-4"><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-overallresults" class="text-red-600 hover:text-red-800 hover:underline">{{ race_type.name }} Overall Results</a></li>
+                            <li class="py-2 px-4"><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-mensresults" class="text-red-600 hover:text-red-800 hover:underline">{{ race_type.name }} Men&apos;s Results</a></li>
+                            <li class="py-2 px-4"><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-womensresults" class="text-red-600 hover:text-red-800 hover:underline">{{ race_type.name }} Women&apos;s Results</a></li>
                         {% endfor %}
                     </ul>
                 </div>

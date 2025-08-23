@@ -25,7 +25,7 @@
 
             <h1 class="font-bold text-6xl">{{ object.name }}</h1>
 
-            <div class="prose-slate prose-xl py-4">
+            <div class="prose-slate prose-xl py-4 prose-a:underline prose-a:text-red-600 hover:prose-a:text-red-800">
                 {{ object.details|markdownify }}
             </div>
 
@@ -33,27 +33,27 @@
                 <div><strong>When:</strong> {{ object.get_day_of_week_display }} at {{ object.run_time }}</div>
                 <div><strong>Where:</strong> {{ object.location }}</div>
                 {% for contact in object.leaders.all %}
-                    <div><strong>Run Leader:</strong> <a href="mailto:{{ contact.email }}">{{ contact.full_name }}</a></div>
+                    <div><strong>Run Leader:</strong> <a href="mailto:{{ contact.email }}" class="text-red-600 hover:text-red-800 underline">{{ contact.full_name }}</a></div>
                 {% endfor %}
             </div>
 
             {% get_latest_news_for_object object as news_list %}
             {% if news_list %}
-                <h3 class="text-2xl">Latest News</h3>
+                <h3 class="text-2xl font-bold mb-4">Latest News</h3>
                 {% for news in news_list|slice:":3" %}
-                    <div class="{% if news.alert_status %}relative px-3 py-3 mb-4 border rounded {% if news.alert_status == 'success' %}border-green-500 bg-green-50 text-green-800{% elif news.alert_status == 'warning' %}border-yellow-500 bg-yellow-50 text-yellow-800{% elif news.alert_status == 'danger' %}border-red-500 bg-red-50 text-red-800{% else %}border-blue-500 bg-blue-50 text-blue-800{% endif %}{% endif %}"
-                         <h4>{{ news.pub_date|date }} - {{ news.title }}</h4>
-                    {{ news.body|markdownify }}
+                    <div class="{% if news.alert_status %}relative px-3 py-3 mb-4 border rounded {% if news.alert_status == 'success' %}border-green-500 bg-green-50 text-green-800{% elif news.alert_status == 'warning' %}border-yellow-500 bg-yellow-50 text-yellow-800{% elif news.alert_status == 'danger' %}border-red-500 bg-red-50 text-red-800{% else %}border-blue-500 bg-blue-50 text-blue-800{% endif %}{% endif %}">
+                        <h4>{{ news.pub_date|date }} - {{ news.title }}</h4>
+                        <div class="prose prose-a:underline prose-a:text-red-600 hover:prose-a:text-red-800">{{ news.body|markdownify }}</div>
                     </div>
                 {% endfor %}
             {% endif %}
 
             {% get_faqs_for_object object as faq_list %}
             {% if faq_list %}
-                <h2 class="font-bold text-4xl py-4">Frequently Asked Questions</h2>
+                <h2 class="text-2xl font-bold mb-4">Frequently Asked Questions</h2>
                 {% for faq in faq_list %}
-                    <h4 class="font-bold text-2xl py-4">{{ faq.question }}</h4>
-                    <div class="prose prose-md">{{ faq.answer|markdownify }}</div>
+                    <h4 class="font-bold text-lg mb-2">{{ faq.question }}</h4>
+                    <div class="prose prose-md prose-a:underline prose-a:text-red-600 hover:prose-a:text-red-800">{{ faq.answer|markdownify }}</div>
                 {% endfor %}
             {% endif %}
         </div>
