@@ -1,5 +1,5 @@
 default_language_version:
-  python: python3.10
+  python: python3.12
 
 exclude: |
     (?x)^(
@@ -34,6 +34,7 @@ repos:
     rev: v3.20.0
     hooks:
       - id: pyupgrade
+        args: [--py312-plus]
   - repo: https://github.com/adamchainz/django-upgrade
     rev: 1.25.0
     hooks:
