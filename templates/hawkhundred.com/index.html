@@ -1,5 +1,15 @@
 {% extends "base.html" %}
 
+{% load simple_open_graph %}
+
+{% block title %}The Hawk Hundred - 100 Mile, 50 Mile & Marathon Trail Races{% endblock title %}
+
+{% block opengraph %}
+    {% with 'The Hawk Hundred is a premier 100-mile, 50-mile and Marathon trail race through the scenic Clinton State Park in Lawrence, Kansas. September 6-7, 2025.' as og_description %}
+        {% opengraph_meta "type='website', url='/', title='The Hawk Hundred Trail Races', description=og_description, image='https://trailhawks.com/static/img/header-hawk-2023.png'" %}
+    {% endwith %}
+{% endblock opengraph %}
+
 {% block content %}
 
     <h1 class="font-bold text-6xl">The Hawk Hundred</h1>

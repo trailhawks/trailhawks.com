@@ -3,6 +3,15 @@
 {% load markdownify %}
 {% load race_tags %}
 {% load static %}
+{% load simple_open_graph %}
+
+{% block title %}Photo Gallery - Hawk Hundred{% endblock title %}
+
+{% block opengraph %}
+    {% with "Photo gallery from the Hawk Hundred trail races - See the beauty and challenge of the course" as og_description %}
+        {% opengraph_meta "type='website', url='/gallery/', title='Hawk Hundred Photo Gallery', description=og_description, image='https://trailhawks.com/static/img/header-hawk-2023.png'" %}
+    {% endwith %}
+{% endblock opengraph %}
 
 {% block content %}
 

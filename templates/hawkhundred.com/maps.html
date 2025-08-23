@@ -1,8 +1,15 @@
 {% extends "base.html" %}
 
 {% load markdownify %}
+{% load simple_open_graph %}
 
-{% block title %}{{ flatpage.title }}{% endblock title %}
+{% block title %}Course Maps - Hawk Hundred{% endblock title %}
+
+{% block opengraph %}
+    {% with "Interactive course maps and GPS tracks for the Hawk Hundred trail races at Clinton State Park" as og_description %}
+        {% opengraph_meta "type='website', url='/maps/', title='Hawk Hundred Course Maps', description=og_description, image='https://trailhawks.com/static/img/header-hawk-2023.png'" %}
+    {% endwith %}
+{% endblock opengraph %}
 
 {% block post_head %}
     {{ block.super }}
