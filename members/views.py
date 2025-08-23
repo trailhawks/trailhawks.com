@@ -175,7 +175,7 @@ class MemberResultCsvListView(ListView):
         result_list = csv.writer(response)
         result_list.writerow(
             [
-                "racer.trailhawk" "racer.trailhawk.date_paid",
+                "racer.trailhawkracer.trailhawk.date_paid",
                 "racer.trailhawk.member_since",
                 "race.title",
                 "race.start_datetime.year",
