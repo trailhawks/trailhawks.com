@@ -54,13 +54,13 @@ class Race(MachineTagMixin):
 
     # background = AjaxImageField(upload_to='races/backgrounds', blank=True, null=True,
     #                             help_text='Optional background photo')
-    background = models.ForeignKey(
-        "flickr.Photo",
-        on_delete=models.CASCADE,
-        blank=True,
-        null=True,
-        help_text="The background image is used on the homepage. If a background image is not provided, the logo image will be used.",
-    )
+    # background = models.ForeignKey(
+    #     "flickr.Photo",
+    #     on_delete=models.CASCADE,
+    #     blank=True,
+    #     null=True,
+    #     help_text="The background image is used on the homepage. If a background image is not provided, the logo image will be used.",
+    # )
 
     race_type = models.IntegerField(choices=DISCIPLINE_CHOICES, default=RUN, blank=True, null=True)
     sponsors = models.ManyToManyField("sponsors.Sponsor", related_name="sponsors")

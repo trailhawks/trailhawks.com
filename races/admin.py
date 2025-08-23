@@ -86,7 +86,7 @@ class RaceAdmin(admin.ModelAdmin):
     list_editable = ["ultrasignup_id"]
     list_filter = ["active", "start_datetime", "number", "annual", "location"]
     ordering = ["-start_datetime"]
-    raw_id_fields = ["background"]
+    # raw_id_fields = ["background"]
     save_on_top = True
     search_fields = ["title", "slogan", "description", "slogan"]
     actions = [
