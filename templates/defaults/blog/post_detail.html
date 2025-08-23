@@ -9,12 +9,11 @@
 {% block title %}{{ object.title }}{% endblock title %}
 
 
-{% block metas %}
-    {{ block.super }}
+{% block opengraph %}
     {% with object.body|markdownify|striptags|truncatechars:300 as og_description %}
-        {% opengraph_meta "type='article', url=object.get_absolute_url, title=object.title, description=og_description" %}
+        {% opengraph_meta "type='article', url=object.get_absolute_url, title=object.title, image='https://trailhawks.com/static/img/hawk-head.png', description=og_description" %}
     {% endwith %}
-{% endblock metas %}
+{% endblock opengraph %}
 
 
 {% block content %}
