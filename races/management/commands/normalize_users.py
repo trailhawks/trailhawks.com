@@ -25,7 +25,7 @@ class Command(BaseCommand):
                 except Member.DoesNotExist:
                     pass
                 except Member.MultipleObjectsReturned:
-                    logger.error("More than one member exists for: {} {}".format(racer.first_name, racer.last_name))
+                    logger.error(f"More than one member exists for: {racer.first_name} {racer.last_name}")
 
     def normalize_racers(self):
         racers = Racer.objects.all().order_by("id")
