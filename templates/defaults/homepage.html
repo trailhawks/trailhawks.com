@@ -101,10 +101,10 @@
             {% get_latest_race as latest_race %}
             {% if latest_race %}
                 <h2 class="font-bold text-4xl py-2">Next event</h2>
-                <div class="panel-body">
+                <div class="p-4 bg-white border border-gray-300 rounded">
                     <h3 class="text-2xl"><a href="{{ latest_race.get_absolute_url }}">{{ latest_race.title }}</a></h3>
                     {% if latest_race.logo %}
-                        <p><a href="{{ latest_race.get_absolute_url }}"><img class="img-responsive" src="{{ latest_race.logo.url }}"></a></p>
+                        <p><a href="{{ latest_race.get_absolute_url }}"><img class="w-full h-auto" src="{{ latest_race.logo.url }}"></a></p>
                     {% endif %}
 
                     {% if latest_race.slogan %}

@@ -36,16 +36,16 @@
                         </nav>
                     </div>
 
-                    <div class="tab-content">
-                        <div class="tab-pane block" id="{{ race_type.slug }}-overall-results">
+                    <div>
+                        <div class="block" id="{{ race_type.slug }}-overall-results">
                             {% get_results_for_race race=object race_type=race_type as race_results %}
                             {% render_results race_results %}
                         </div>
-                        <div class="tab-pane hidden" id="{{ race_type.slug }}-womens-results">
+                        <div class="hidden" id="{{ race_type.slug }}-womens-results">
                             {% get_results_for_race race=object race_type=race_type gender=2 as race_results %}
                             {% render_results race_results %}
                         </div>
-                        <div class="tab-pane hidden" id="{{ race_type.slug }}-mens-results">
+                        <div class="hidden" id="{{ race_type.slug }}-mens-results">
                             {% get_results_for_race race=object race_type=race_type gender=1 as race_results %}
                             {% render_results race_results %}
                         </div>
@@ -69,7 +69,7 @@
                     const tabGroup = this.closest('nav').parentElement.nextElementSibling;
 
                 // Hide all tabs in this group
-                    tabGroup.querySelectorAll('.tab-pane').forEach(tab => {
+                    tabGroup.querySelectorAll('div[id$="-results"]').forEach(tab => {
                         tab.classList.add('hidden');
                         tab.classList.remove('block');
                     });

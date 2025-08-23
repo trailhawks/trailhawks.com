@@ -270,7 +270,7 @@
                             <h3 class="text-2xl"><a href="{{ sponsor.url }}">{{ sponsor.name }}</a></h3>
                             {% if sponsor.logo %}
                                 <a href="{{ sponsor.url }}">
-                                    <img class="img-responsive" src="{{ sponsor.logo.url }}" />
+                                    <img class="w-full h-auto" src="{{ sponsor.logo.url }}" />
                                 </a>
                             {% endif %}
                         </div>
@@ -280,8 +280,8 @@
         </div>
 
         <div class="md:w-1/3">
-            <div class="panel panel-default">
-                <ul class="flex flex-auto pl-0 mb-0 list-none  nav-stacked">
+            <div class="bg-white border border-gray-300 rounded">
+                <ul class="flex flex-col pl-0 mb-0 list-none">
                     <li><a class="inline-block py-1 px-3 font-normal leading-normal text-center text-white no-underline align-middle bg-red-600 rounded border select-none whitespace-no-wrap hover:bg-red-700" href="{{ object.reg_url }}">Register</a></li>
                     {% comment %}
                 <li><a href="#">Volunteer</a></li>
@@ -309,9 +309,9 @@
             </div>
 
             {% if object.get_overall_results %}
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="text-2xl font-bold py-2">Race Results</h3>
+                <div class="bg-white border border-gray-300 rounded">
+                    <div class="bg-gray-50 px-4 py-2 border-b border-gray-300">
+                        <h3 class="text-2xl font-bold">Race Results</h3>
                     </div>
                     <ul class="flex flex-col pl-0 mb-0 rounded border border-gray-300">
                         {% for race_type in race_types %}
