@@ -1,17 +1,11 @@
 {% load thumbor_tags %}
 
 <div class="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow group">
-    {% if race.logo or race.background %}
+    {% if race.logo %}
         <div class="aspect-w-16 aspect-h-9 bg-gray-100">
-            {% if race.background %}
-                <img src="{% thumbor_url race.background.get_large_url height=180 width=320 smart=True %}"
-                     alt="{{ race.title }}"
-                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-            {% elif race.logo %}
-                <img src="{{ race.logo.url }}"
-                     alt="{{ race.title }}"
-                     class="w-full h-full object-contain p-4">
-            {% endif %}
+            <img src="{{ race.logo.url }}"
+                 alt="{{ race.title }}"
+                 class="w-full h-full object-contain p-4">
         </div>
     {% endif %}
     <div class="p-4">

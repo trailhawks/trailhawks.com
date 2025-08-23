@@ -4,11 +4,9 @@
 
 {% load core_tags %}
 {% load faq_tags %}
-{% load flickr %}
 {% load links_tags %}
 {% load markdownify %}
 {% load news_tags %}
-{% load photo_tags %}
 {% load race_tags %}
 {% load share_tags %}
 {% load simple_open_graph %}
@@ -323,9 +321,7 @@
                 </div>
             {% endif %}
 
-            {% get_photos_by_machine_tags object.get_machine_tags num=10 random=1 as photos_list %}
             {# include "panels/photos.html" with photos=photos_list #}
-            {% include "includes/flickr_photos.html" with photos=photos_list %}
         </div>
     </div>
 {% endblock content %}

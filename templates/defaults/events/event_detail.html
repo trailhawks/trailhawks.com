@@ -3,7 +3,6 @@
 {% load core_tags %}
 {% load faq_tags %}
 {% load markdownify %}
-{% load photo_tags %}
 {% load micawber_tags %}
 
 
@@ -56,8 +55,6 @@
                     {{ object.get_machine_tags }}
                 </div>
             </div>
-            {% get_photos_by_machine_tags object.get_machine_tags 10 as photos_list %}
-            {% include "includes/flickr_photos.html" %}
         </div>
     </div>
 {% endblock content %}
