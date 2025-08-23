@@ -6,27 +6,81 @@
 
 {% block content %}
 
-    <div class="prose-xl prose-a:underline prose-a:bg-yellow-300 prose-a:px-1">
-        {{ block.super }}
+    <!-- Hero/Welcome Section -->
+    <div class="bg-gradient-to-br from-red-50 to-white rounded-xl p-8 mb-12 shadow-sm">
+        <div class="prose prose-lg max-w-none prose-headings:text-red-900 prose-p:text-gray-700 prose-a:text-red-600 prose-a:no-underline hover:prose-a:text-red-700 prose-a:transition-colors prose-strong:text-red-800">
+            {{ block.super }}
+        </div>
     </div>
 
+    <!-- Key Information Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div class="bg-white rounded-lg shadow-md p-6 border border-red-100">
+            <div class="flex items-center mb-3">
+                <i class="fa fa-calendar text-red-600 text-2xl mr-3"></i>
+                <h3 class="text-xl font-bold text-red-900">Race Date</h3>
+            </div>
+            <p class="text-gray-700">September 6-7, {% now "Y" %}</p>
+            <p class="text-sm text-gray-600 mt-2">Registration opens soon!</p>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 border border-red-100">
+            <div class="flex items-center mb-3">
+                <i class="fa fa-map-marker text-red-600 text-2xl mr-3"></i>
+                <h3 class="text-xl font-bold text-red-900">Location</h3>
+            </div>
+            <p class="text-gray-700">Clinton Lake State Park</p>
+            <p class="text-sm text-gray-600 mt-2">Lawrence, Kansas</p>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 border border-red-100">
+            <div class="flex items-center mb-3">
+                <i class="fa fa-trophy text-red-600 text-2xl mr-3"></i>
+                <h3 class="text-xl font-bold text-red-900">Distances</h3>
+            </div>
+            <p class="text-gray-700">100 Mile • 50 Mile • Marathon</p>
+            <p class="text-sm text-gray-600 mt-2">Something for everyone!</p>
+        </div>
+    </div>
+
+    <!-- Quick Links Section -->
+    <div class="bg-red-600 text-white rounded-xl p-8 mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-center">Get Started</h2>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <a href="/signup/" class="bg-white text-red-600 rounded-lg px-6 py-3 text-center font-semibold hover:bg-red-50 transition-colors">
+                Sign Up Now
+            </a>
+            <a href="/course/" class="bg-red-700 text-white rounded-lg px-6 py-3 text-center font-semibold hover:bg-red-800 transition-colors">
+                View Course
+            </a>
+            <a href="/travel/" class="bg-red-700 text-white rounded-lg px-6 py-3 text-center font-semibold hover:bg-red-800 transition-colors">
+                Travel Info
+            </a>
+            <a href="/maps/" class="bg-red-700 text-white rounded-lg px-6 py-3 text-center font-semibold hover:bg-red-800 transition-colors">
+                Interactive Maps
+            </a>
+        </div>
+    </div>
+
+    <!-- Sponsors Section -->
     <section id="sponsors">
         {% get_race_by_slug slug='the-hawk-fifteenth-annual' as race %}
         {% get_sponsors_for_object race as sponsor_list %}
         {% if sponsor_list %}
-            <div class="w-full mb-6">
-                <h2 class="text-4xl font-bold" id="sponsors">Sponsors</h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {% for sponsor in sponsor_list %}
-                    <div class="flex flex-col">
-                        <h3 class="text-2xl">{{ sponsor.name }}</h3>
-                        <a href="{{ sponsor.url }}">
-                            <img class="max-w-full h-auto" src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }}" />
-                        </a>
-                    </div>
-                {% endfor %}
+            <div class="bg-gradient-to-br from-gray-50 to-white rounded-xl p-8">
+                <h2 class="text-3xl font-bold text-red-900 mb-8 text-center">Our Sponsors</h2>
+                <p class="text-center text-gray-600 mb-8">Thank you to our generous sponsors who make this event possible!</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {% for sponsor in sponsor_list %}
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+                            <h3 class="text-lg font-semibold text-gray-800 mb-3">{{ sponsor.name }}</h3>
+                            <a href="{{ sponsor.url }}" target="_blank" rel="noopener" class="block">
+                                <img class="max-w-full h-auto rounded" src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }}" />
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         {% endif %}
     </section>

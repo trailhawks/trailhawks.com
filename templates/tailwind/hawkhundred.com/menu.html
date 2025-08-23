@@ -1,25 +1,186 @@
 {% load static %}
 
 {% block navbar %}
-    <nav class="flex flex-col gap-2 content-between items-start" role="navigation">
-        <img class="w-full object-fill" src="{% static 'img/header-hawk-2023.png' %}">
-        <div class="flex relative flex-auto content-between items-center py-3 px-4" role="navigation">
-            <div class="flex-grow items-center">
-                <div class="flex flex-auto gap-8 text-red-950 items-center">
-                    <a href="/" class="hover:underline">Home</a>
-                    <a href="/course/" class="hover:underline">Course</a>
-                    <a href="/calendar/" class="hover:underline">Calendar</a>
-                    <a href="/travel/" class="hover:underline">Travel</a>
-                    <a href="/maps/" class="hover:underline">Interactive Maps</a>
-                    <a href="{% url 'race_gallery' %}" class="hover:underline">Gallery</a>
-                    <a href="https://ultrasignup.com/results_event.aspx?did=111695" class="hover:underline">Results</a>
-                    <a href="/signup/" class="font-bold hover:underline">SIGN UP!</a>
-                    <div class="flex gap-4 ml-4">
-                        <a href="https://www.facebook.com/groups/hawkhundred/" class="text-lg"><i class="fa fa-facebook"></i></a>
-                        <a href="https://www.flickr.com/photos/trailhawks" class="text-lg"><i class="fa fa-flickr"></i></a>
+    <nav class="bg-white shadow-lg" role="navigation">
+        <!-- Hero Banner -->
+        <div class="relative w-full bg-gradient-to-b from-red-800 to-red-900">
+            <div class="w-full mx-auto flex items-center justify-center">
+                <div class="relative w-full h-48 md:h-64 lg:h-80 xl:h-96 overflow-hidden flex items-center justify-center">
+                    <img class="w-full h-full object-cover md:object-fill lg:object-cover" 
+                         src="{% static 'img/header-hawk-2023.png' %}" 
+                         alt="Hawk Hundred - 100 Mile, 50 Mile & Marathon Trail Race"
+                         style="object-position: center; transform: scaleX(1.1);">
+                    <!-- Subtle overlay for better text contrast if needed later -->
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/15 pointer-events-none"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Desktop Navigation -->
+        <div class="hidden lg:block border-b border-red-100">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-between py-4">
+                    <!-- Primary Navigation -->
+                    <div class="flex items-center space-x-1">
+                        <a href="/" class="px-4 py-2 text-red-900 font-medium rounded-lg hover:bg-red-50 hover:text-red-700 transition-colors">
+                            Home
+                        </a>
+                        <a href="/course/" class="px-4 py-2 text-red-900 font-medium rounded-lg hover:bg-red-50 hover:text-red-700 transition-colors">
+                            Course
+                        </a>
+                        <a href="/calendar/" class="px-4 py-2 text-red-900 font-medium rounded-lg hover:bg-red-50 hover:text-red-700 transition-colors">
+                            Calendar
+                        </a>
+                        <a href="/travel/" class="px-4 py-2 text-red-900 font-medium rounded-lg hover:bg-red-50 hover:text-red-700 transition-colors">
+                            Travel
+                        </a>
+                        <a href="/maps/" class="px-4 py-2 text-red-900 font-medium rounded-lg hover:bg-red-50 hover:text-red-700 transition-colors">
+                            Interactive Maps
+                        </a>
+                        <a href="{% url 'race_gallery' %}" class="px-4 py-2 text-red-900 font-medium rounded-lg hover:bg-red-50 hover:text-red-700 transition-colors">
+                            Gallery
+                        </a>
+                        <a href="https://ultrasignup.com/results_event.aspx?did=111695" target="_blank" rel="noopener" class="px-4 py-2 text-red-900 font-medium rounded-lg hover:bg-red-50 hover:text-red-700 transition-colors">
+                            Results <i class="fa fa-external-link text-xs"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- CTA and Social -->
+                    <div class="flex items-center space-x-4">
+                        <a href="/signup/" class="px-6 py-2 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition-colors shadow-sm">
+                            SIGN UP!
+                        </a>
+                        <div class="flex items-center space-x-3 pl-4 border-l border-red-200">
+                            <a href="https://www.facebook.com/groups/hawkhundred/" target="_blank" rel="noopener" class="text-red-600 hover:text-red-800 transition-colors">
+                                <i class="fa fa-facebook text-xl"></i>
+                            </a>
+                            <a href="https://www.flickr.com/photos/trailhawks" target="_blank" rel="noopener" class="text-red-600 hover:text-red-800 transition-colors">
+                                <i class="fa fa-flickr text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tablet Navigation (md to lg) -->
+        <div class="hidden md:block lg:hidden border-b border-red-100">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-wrap items-center justify-between py-4">
+                    <!-- Primary Navigation - Two Rows -->
+                    <div class="flex flex-wrap gap-2 flex-1">
+                        <a href="/" class="px-3 py-2 text-red-900 font-medium rounded-lg hover:bg-red-50 hover:text-red-700 transition-colors">
+                            Home
+                        </a>
+                        <a href="/course/" class="px-3 py-2 text-red-900 font-medium rounded-lg hover:bg-red-50 hover:text-red-700 transition-colors">
+                            Course
+                        </a>
+                        <a href="/calendar/" class="px-3 py-2 text-red-900 font-medium rounded-lg hover:bg-red-50 hover:text-red-700 transition-colors">
+                            Calendar
+                        </a>
+                        <a href="/travel/" class="px-3 py-2 text-red-900 font-medium rounded-lg hover:bg-red-50 hover:text-red-700 transition-colors">
+                            Travel
+                        </a>
+                        <a href="/maps/" class="px-3 py-2 text-red-900 font-medium rounded-lg hover:bg-red-50 hover:text-red-700 transition-colors">
+                            Maps
+                        </a>
+                        <a href="{% url 'race_gallery' %}" class="px-3 py-2 text-red-900 font-medium rounded-lg hover:bg-red-50 hover:text-red-700 transition-colors">
+                            Gallery
+                        </a>
+                        <a href="https://ultrasignup.com/results_event.aspx?did=111695" target="_blank" rel="noopener" class="px-3 py-2 text-red-900 font-medium rounded-lg hover:bg-red-50 hover:text-red-700 transition-colors">
+                            Results
+                        </a>
+                    </div>
+                    
+                    <!-- CTA and Social -->
+                    <div class="flex items-center space-x-3 mt-2 w-full md:w-auto md:mt-0">
+                        <a href="/signup/" class="px-5 py-2 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition-colors shadow-sm">
+                            SIGN UP!
+                        </a>
+                        <a href="https://www.facebook.com/groups/hawkhundred/" target="_blank" rel="noopener" class="text-red-600 hover:text-red-800">
+                            <i class="fa fa-facebook text-xl"></i>
+                        </a>
+                        <a href="https://www.flickr.com/photos/trailhawks" target="_blank" rel="noopener" class="text-red-600 hover:text-red-800">
+                            <i class="fa fa-flickr text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div class="md:hidden">
+            <div class="flex items-center justify-between px-4 py-3 border-b border-red-100">
+                <div class="text-lg font-bold text-red-900">Hawk Hundred</div>
+                <button type="button" class="mobile-menu-button p-2 rounded-lg text-red-600 hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-500">
+                    <svg class="h-6 w-6 menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <svg class="h-6 w-6 close-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu (hidden by default) -->
+            <div class="mobile-menu hidden bg-white border-b border-red-100">
+                <div class="px-2 pt-2 pb-4 space-y-1">
+                    <a href="/" class="block px-4 py-3 text-red-900 font-medium rounded-lg hover:bg-red-50 hover:text-red-700 transition-colors">
+                        <i class="fa fa-home w-5"></i> Home
+                    </a>
+                    <a href="/course/" class="block px-4 py-3 text-red-900 font-medium rounded-lg hover:bg-red-50 hover:text-red-700 transition-colors">
+                        <i class="fa fa-map w-5"></i> Course
+                    </a>
+                    <a href="/calendar/" class="block px-4 py-3 text-red-900 font-medium rounded-lg hover:bg-red-50 hover:text-red-700 transition-colors">
+                        <i class="fa fa-calendar w-5"></i> Calendar
+                    </a>
+                    <a href="/travel/" class="block px-4 py-3 text-red-900 font-medium rounded-lg hover:bg-red-50 hover:text-red-700 transition-colors">
+                        <i class="fa fa-plane w-5"></i> Travel
+                    </a>
+                    <a href="/maps/" class="block px-4 py-3 text-red-900 font-medium rounded-lg hover:bg-red-50 hover:text-red-700 transition-colors">
+                        <i class="fa fa-map-marker w-5"></i> Interactive Maps
+                    </a>
+                    <a href="{% url 'race_gallery' %}" class="block px-4 py-3 text-red-900 font-medium rounded-lg hover:bg-red-50 hover:text-red-700 transition-colors">
+                        <i class="fa fa-picture-o w-5"></i> Gallery
+                    </a>
+                    <a href="https://ultrasignup.com/results_event.aspx?did=111695" target="_blank" rel="noopener" class="block px-4 py-3 text-red-900 font-medium rounded-lg hover:bg-red-50 hover:text-red-700 transition-colors">
+                        <i class="fa fa-trophy w-5"></i> Results <i class="fa fa-external-link text-xs"></i>
+                    </a>
+                    
+                    <div class="pt-3 mt-3 border-t border-red-100">
+                        <a href="/signup/" class="block mx-4 px-4 py-3 bg-red-600 text-white text-center font-bold rounded-lg hover:bg-red-700 transition-colors shadow-sm">
+                            SIGN UP!
+                        </a>
+                    </div>
+                    
+                    <div class="flex justify-center space-x-4 pt-3">
+                        <a href="https://www.facebook.com/groups/hawkhundred/" target="_blank" rel="noopener" class="text-red-600 hover:text-red-800 transition-colors">
+                            <i class="fa fa-facebook text-2xl"></i>
+                        </a>
+                        <a href="https://www.flickr.com/photos/trailhawks" target="_blank" rel="noopener" class="text-red-600 hover:text-red-800 transition-colors">
+                            <i class="fa fa-flickr text-2xl"></i>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </nav>
+    
+    <!-- Mobile Menu Toggle Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuButton = document.querySelector('.mobile-menu-button');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const menuIcon = document.querySelector('.menu-icon');
+            const closeIcon = document.querySelector('.close-icon');
+            
+            if (menuButton && mobileMenu) {
+                menuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                    menuIcon.classList.toggle('hidden');
+                    closeIcon.classList.toggle('hidden');
+                });
+            }
+        });
+    </script>
 {% endblock navbar %}

@@ -4,6 +4,8 @@
 {% load simple_open_graph %}
 {% load static %}
 
+{% block body_class %}min-h-screen flex flex-col bg-white{% endblock body_class %}
+
 {% block post_head %}
     <meta name="google-site-verification" content="_Kz6E3Y--MPqOSnDnUxyrYvFKc6jZ5V7zRUh1LFvQc4" />
 {% endblock post_head %}
@@ -19,21 +21,126 @@
 {% endblock navbar %}
 
 {% block content-wrapper %}
-    <main class="mx-auto w-full">
-        {% block content %}
-        {% endblock content %}
+    <main class="flex-grow">
+        <div class="container mx-auto px-4 py-8">
+            {% block content %}
+            {% endblock content %}
+        </div>
     </main>
 {% endblock content-wrapper %}
 
-{% block footer %}
-    <div class="mx-auto mt-8 border-t pt-4">
-        <div class="flex flex-col gap-2 items-center text-center">
-            <div class="flex flex-auto gap-4 justify-center">
-                <a class="underline hover:bg-yellow-300" href="/signup/"><i class="fa fa-plus-circle"></i> Join Us</a>
-                <a class="underline hover:bg-yellow-300" href="https://www.facebook.com/groups/hawkhundred/"><i class="fa fa-facebook"></i> Facebook</a>
-                <a class="underline hover:bg-yellow-300" href="https://www.flickr.com/photos/trailhawks"><i class="fa fa-flickr"></i> Flickr</a>
+{% block footer-wrapper %}
+    <footer class="bg-gradient-to-b from-white to-red-50 mt-auto">
+        <div class="container mx-auto px-4">
+            <!-- Main Footer Content -->
+            <div class="border-t-2 border-red-200 pt-12 pb-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- About Section -->
+                    <div class="text-center md:text-left">
+                        <h3 class="text-lg font-bold text-red-900 mb-4">Hawk Hundred</h3>
+                        <p class="text-sm text-gray-700 mb-4">
+                            A premier trail running event featuring 100-mile, 50-mile, and Marathon distances through the scenic Kansas trails.
+                        </p>
+                        <div class="flex justify-center md:justify-start space-x-3">
+                            <a href="https://www.facebook.com/groups/hawkhundred/" target="_blank" rel="noopener" 
+                               class="w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center hover:bg-red-700 transition-colors">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                            <a href="https://www.flickr.com/photos/trailhawks" target="_blank" rel="noopener" 
+                               class="w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center hover:bg-red-700 transition-colors">
+                                <i class="fa fa-flickr"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Links -->
+                    <div class="text-center md:text-left">
+                        <h3 class="text-lg font-bold text-red-900 mb-4">Race Info</h3>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="/course/" class="text-gray-700 hover:text-red-600 transition-colors">
+                                    <i class="fa fa-angle-right text-xs"></i> Course Details
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/calendar/" class="text-gray-700 hover:text-red-600 transition-colors">
+                                    <i class="fa fa-angle-right text-xs"></i> Race Calendar
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/maps/" class="text-gray-700 hover:text-red-600 transition-colors">
+                                    <i class="fa fa-angle-right text-xs"></i> Interactive Maps
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://ultrasignup.com/results_event.aspx?did=111695" target="_blank" rel="noopener" 
+                                   class="text-gray-700 hover:text-red-600 transition-colors">
+                                    <i class="fa fa-angle-right text-xs"></i> Race Results
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Resources -->
+                    <div class="text-center md:text-left">
+                        <h3 class="text-lg font-bold text-red-900 mb-4">Resources</h3>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="/travel/" class="text-gray-700 hover:text-red-600 transition-colors">
+                                    <i class="fa fa-angle-right text-xs"></i> Travel & Lodging
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'race_gallery' %}" class="text-gray-700 hover:text-red-600 transition-colors">
+                                    <i class="fa fa-angle-right text-xs"></i> Photo Gallery
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://trailhawks.com/" target="_blank" rel="noopener" 
+                                   class="text-gray-700 hover:text-red-600 transition-colors">
+                                    <i class="fa fa-angle-right text-xs"></i> Trail Hawks Club
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- CTA Section -->
+                    <div class="text-center md:text-left">
+                        <h3 class="text-lg font-bold text-red-900 mb-4">Ready to Run?</h3>
+                        <p class="text-sm text-gray-700 mb-4">
+                            Join us for an unforgettable trail running experience in Lawrence, Kansas.
+                        </p>
+                        <a href="/signup/" 
+                           class="inline-block px-6 py-3 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition-colors shadow-md">
+                            <i class="fa fa-plus-circle"></i> Sign Up Now
+                        </a>
+                        <div class="mt-4">
+                            <p class="text-sm text-gray-600">
+                                September 6-7, {% now "Y" %}<br>
+                                Lawrence, Kansas
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="text-center">&copy; 2009-{% now "Y" %} <a class="underline hover:bg-yellow-300" href="https://trailhawks.com/">Lawrence Trail Hawks</a>. All rights reserved. v{% get_version %}</div>
+            
+            <!-- Bottom Bar -->
+            <div class="border-t border-red-200 py-6">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
+                    <div class="text-sm text-gray-600 text-center md:text-left">
+                        &copy; 2009-{% now "Y" %} <a href="https://trailhawks.com/" class="text-red-600 hover:text-red-700 transition-colors">Lawrence Trail Hawks</a>. All rights reserved.
+                    </div>
+                    <div class="flex items-center space-x-4 text-sm text-gray-600">
+                        <a href="/privacy/" class="hover:text-red-600 transition-colors">Privacy Policy</a>
+                        <span class="text-gray-400">|</span>
+                        <a href="/terms/" class="hover:text-red-600 transition-colors">Terms</a>
+                        <span class="text-gray-400">|</span>
+                        <a href="/contact/" class="hover:text-red-600 transition-colors">Contact</a>
+                        <span class="text-gray-400 hidden md:inline">|</span>
+                        <span class="hidden md:inline text-xs text-gray-500">v{% get_version %}</span>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-{% endblock footer %}
+    </footer>
+{% endblock footer-wrapper %}
