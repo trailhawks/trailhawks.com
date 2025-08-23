@@ -38,7 +38,6 @@ psycopg2-binary
 python-slugify
 requests
 rich
-spatula
 titlecase
 typer
 uwsgi

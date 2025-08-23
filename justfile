@@ -85,27 +85,13 @@ TAILWIND_CSS_VERSION := "latest"
 
 # Compile Python dependencies from requirements.in to requirements.txt
 @lock *ARGS:
-    docker compose run \
-        --rm web \
-            bash -c "uv pip compile {{ ARGS }} ./requirements.in \
-                --output-file ./requirements.txt"
+    uv pip compile {{ ARGS }} ./requirements.in \
+        --output-file ./requirements.txt
 
 # Execute Django management commands (default: show help)
 @run +ARGS="--help":
     {{ manage }} {{ ARGS }}
 
-# Scrape race data from UltraSignup using Spatula
-@scrape:
-    just spatula scrape
-
-# Test the Spatula scraper without saving data
-@scrape-test:
-    just spatula test
-
-# Run Spatula scraper with custom arguments (clears cache first)
-@spatula +ARGS="scrape":
-    rm -rf _scrapes/*
-    {{ compose }} spatula {{ ARGS }} --fastmode scrapers.scrape_ultrasignup.RaceListFromDjango
 
 # Start development server (database, migrations, then web server)
 @server:

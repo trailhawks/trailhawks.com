@@ -223,7 +223,6 @@ requests==2.31.0
     #   flickrapi
     #   requests-oauthlib
     #   requests-toolbelt
-    #   scrapelib
 requests-oauthlib==1.4.0
     # via flickrapi
 requests-toolbelt==1.0.0
@@ -232,8 +231,6 @@ rich==13.7.1
     # via
     #   -r ./requirements.in
     #   friendly
-scrapelib==2.1.0
-    # via spatula
 setuptools==69.2.0
     # via
     #   django-shorturls
@@ -254,8 +251,6 @@ six==1.16.0
     #   python-dateutil
 soupsieve==2.5
     # via beautifulsoup4
-spatula==0.0.2
-    # via -r ./requirements.in
 sqlparse==0.4.4
     # via django
 stack-data==0.6.3
