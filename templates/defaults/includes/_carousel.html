@@ -293,20 +293,6 @@ Photo Carousel Component
             }
         }
 
-    // Keyboard navigation - listen on document level
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') {
-                prevSlide();
-                stopAutoplay();
-                startAutoplay();
-                e.preventDefault();
-            } else if (e.key === 'ArrowRight') {
-                nextSlide();
-                stopAutoplay();
-                startAutoplay();
-                e.preventDefault();
-            }
-        });
 
     // Pause on hover (desktop only)
         carousel.addEventListener('mouseenter', stopAutoplay);
