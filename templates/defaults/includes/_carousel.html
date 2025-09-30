@@ -160,169 +160,169 @@ Photo Carousel Component
 </div>
 
 <script>
-(function() {
-    const carousel = document.getElementById('photo-carousel');
-    if (!carousel) return;
+    (function() {
+        const carousel = document.getElementById('photo-carousel');
+        if (!carousel) return;
 
-    const slides = carousel.querySelectorAll('.carousel-slide');
-    const indicators = carousel.querySelectorAll('.carousel-indicator');
-    const prevBtn = carousel.querySelector('#carousel-prev');
-    const nextBtn = carousel.querySelector('#carousel-next');
+        const slides = carousel.querySelectorAll('.carousel-slide');
+        const indicators = carousel.querySelectorAll('.carousel-indicator');
+        const prevBtn = carousel.querySelector('#carousel-prev');
+        const nextBtn = carousel.querySelector('#carousel-next');
 
-    let currentSlide = 0;
-    let autoplayInterval;
-    let touchStartX = 0;
-    let touchEndX = 0;
-    let slideOrder = [];
+        let currentSlide = 0;
+        let autoplayInterval;
+        let touchStartX = 0;
+        let touchEndX = 0;
+        let slideOrder = [];
 
     // Create randomized slide order
-    function createRandomOrder() {
-        slideOrder = Array.from({ length: slides.length }, (_, i) => i);
+        function createRandomOrder() {
+            slideOrder = Array.from({ length: slides.length }, (_, i) => i);
         // Fisher-Yates shuffle
-        for (let i = slideOrder.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [slideOrder[i], slideOrder[j]] = [slideOrder[j], slideOrder[i]];
+            for (let i = slideOrder.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [slideOrder[i], slideOrder[j]] = [slideOrder[j], slideOrder[i]];
+            }
         }
-    }
 
     // Initialize random order
-    createRandomOrder();
+        createRandomOrder();
 
-    function showSlide(index) {
+        function showSlide(index) {
         // Wrap around
-        if (index < 0) index = slides.length - 1;
-        if (index >= slides.length) index = 0;
+            if (index < 0) index = slides.length - 1;
+            if (index >= slides.length) index = 0;
 
-        currentSlide = index;
+            currentSlide = index;
 
         // Get the actual slide to show based on random order
-        const slideToShow = slideOrder[currentSlide];
+            const slideToShow = slideOrder[currentSlide];
 
         // Update slides
-        slides.forEach((slide, i) => {
-            if (i === slideToShow) {
-                slide.style.opacity = '1';
-                slide.style.zIndex = '10';
-            } else {
-                slide.style.opacity = '0';
-                slide.style.zIndex = '0';
-            }
-        });
+            slides.forEach((slide, i) => {
+                if (i === slideToShow) {
+                    slide.style.opacity = '1';
+                    slide.style.zIndex = '10';
+                } else {
+                    slide.style.opacity = '0';
+                    slide.style.zIndex = '0';
+                }
+            });
 
         // Update indicators
-        indicators.forEach((indicator, i) => {
-            if (i === currentSlide) {
-                indicator.classList.remove('bg-white/50');
-                indicator.classList.add('bg-white');
-            } else {
-                indicator.classList.remove('bg-white');
-                indicator.classList.add('bg-white/50');
-            }
-        });
-    }
-
-    function nextSlide() {
-        showSlide(currentSlide + 1);
-    }
-
-    function prevSlide() {
-        showSlide(currentSlide - 1);
-    }
-
-    function startAutoplay() {
-        stopAutoplay();
-        autoplayInterval = setInterval(nextSlide, 5000);
-    }
-
-    function stopAutoplay() {
-        if (autoplayInterval) {
-            clearInterval(autoplayInterval);
+            indicators.forEach((indicator, i) => {
+                if (i === currentSlide) {
+                    indicator.classList.remove('bg-white/50');
+                    indicator.classList.add('bg-white');
+                } else {
+                    indicator.classList.remove('bg-white');
+                    indicator.classList.add('bg-white/50');
+                }
+            });
         }
-    }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        function startAutoplay() {
+            stopAutoplay();
+            autoplayInterval = setInterval(nextSlide, 5000);
+        }
+
+        function stopAutoplay() {
+            if (autoplayInterval) {
+                clearInterval(autoplayInterval);
+            }
+        }
 
     // Event listeners
-    if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            prevSlide();
-            stopAutoplay();
-            startAutoplay();
-        });
-    }
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                stopAutoplay();
+                startAutoplay();
+            });
+        }
 
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            nextSlide();
-            stopAutoplay();
-            startAutoplay();
-        });
-    }
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                stopAutoplay();
+                startAutoplay();
+            });
+        }
 
-    indicators.forEach((indicator) => {
-        indicator.addEventListener('click', (e) => {
-            const slideIndex = parseInt(e.target.dataset.slide);
-            showSlide(slideIndex);
-            stopAutoplay();
-            startAutoplay();
+        indicators.forEach((indicator) => {
+            indicator.addEventListener('click', (e) => {
+                const slideIndex = parseInt(e.target.dataset.slide);
+                showSlide(slideIndex);
+                stopAutoplay();
+                startAutoplay();
+            });
         });
-    });
 
     // Touch support for mobile
-    carousel.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
+        carousel.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
 
-    carousel.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-    }, { passive: true });
+        carousel.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
 
-    function handleSwipe() {
-        const swipeThreshold = 50;
-        const diff = touchStartX - touchEndX;
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
 
-        if (Math.abs(diff) > swipeThreshold) {
-            if (diff > 0) {
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
                 // Swipe left - next slide
-                nextSlide();
-            } else {
+                    nextSlide();
+                } else {
                 // Swipe right - previous slide
-                prevSlide();
+                    prevSlide();
+                }
+                stopAutoplay();
+                startAutoplay();
             }
-            stopAutoplay();
-            startAutoplay();
         }
-    }
 
     // Keyboard navigation - listen on document level
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') {
-            prevSlide();
-            stopAutoplay();
-            startAutoplay();
-            e.preventDefault();
-        } else if (e.key === 'ArrowRight') {
-            nextSlide();
-            stopAutoplay();
-            startAutoplay();
-            e.preventDefault();
-        }
-    });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                prevSlide();
+                stopAutoplay();
+                startAutoplay();
+                e.preventDefault();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+                stopAutoplay();
+                startAutoplay();
+                e.preventDefault();
+            }
+        });
 
     // Pause on hover (desktop only)
-    carousel.addEventListener('mouseenter', stopAutoplay);
-    carousel.addEventListener('mouseleave', startAutoplay);
+        carousel.addEventListener('mouseenter', stopAutoplay);
+        carousel.addEventListener('mouseleave', startAutoplay);
 
     // Pause when page is hidden
-    document.addEventListener('visibilitychange', () => {
-        if (document.hidden) {
-            stopAutoplay();
-        } else {
-            startAutoplay();
-        }
-    });
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                stopAutoplay();
+            } else {
+                startAutoplay();
+            }
+        });
 
     // Initialize
-    showSlide(0);
-    startAutoplay();
-})();
+        showSlide(0);
+        startAutoplay();
+    })();
 </script>
