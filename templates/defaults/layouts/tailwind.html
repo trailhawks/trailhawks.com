@@ -1,6 +1,6 @@
 {% block doc %}
     <!DOCTYPE html>{% load static %}{% load tailwind_cli %}
-    <html{% block html_attribs %}{% endblock html_attribs %}>
+    <html lang="en"{% block html_attribs %}{% endblock html_attribs %}>
         {% block html %}
             <head>
                 {% block head %}
@@ -67,12 +67,10 @@
                 {% block body %}
                     {% block navbar %}
                     {% endblock navbar %}
-                    <!-- 2 -->
                     {% block content-wrapper %}
                         {% block content %}
                         {% endblock content %}
                     {% endblock content-wrapper %}
-                    <!-- 2 -->
                 {% endblock body %}
 
                 {% block footer-wrapper %}

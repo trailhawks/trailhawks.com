@@ -81,39 +81,55 @@
         <div class="w-full md:w-2/3 flex flex-col gap-8">
 
             {% if object.logo %}
-                <img class="w-full h-auto object-contain max-h-80" src="{{ object.logo.url }}">
+                <img class="w-full h-auto object-contain max-h-80" src="{{ object.logo.url }}" alt="{{ object.title }} logo">
             {% endif %}
 
             {% if not object.is_finished %}
                 {% if object.registration_set.exists %}
-                    <div class="overflow-x-auto mb-4">
-                        <table class="w-full min-w-full bg-transparent table-hover table-striped">
-                            <thead>
-                                <tr>
-                                    <th class="px-2 py-2 text-left">Price level</th>
-                                    <th class="px-2 py-2 text-left">Dates</th>
-                                    <th class="px-2 py-2 text-left">Price</th>
-                                    <th class="px-2 py-2"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for registration in object.registration_set.all %}
-                                    <tr class="{% if registration.has_expired %}bg-yellow-100{% endif %}">
-                                        <td class="px-2 py-2">{{ registration.description }}</td>
-                                        <td class="px-2 py-2 whitespace-nowrap">{{ registration.reg_date|date }} {% if registration.end_date %} to {{ registration.end_date|date }}{% endif %}</td>
-                                        <td class="px-2 py-2">${{ registration.reg_cost }}</td>
-                                        <td class="px-2 py-2"><a class="block inline-block py-1 px-2 w-full text-xs font-normal leading-tight text-center text-black no-underline align-middle bg-orange-400 rounded border select-none whitespace-no-wrap hover:bg-orange-500" href="{{ object.reg_url }}">register!</a></td>
+                    <div class="mb-4">
+                        {# Desktop table view #}
+                        <div class="hidden md:block overflow-x-auto">
+                            <table class="w-full min-w-full bg-transparent table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="px-2 py-2 text-left">Price level</th>
+                                        <th class="px-2 py-2 text-left">Dates</th>
+                                        <th class="px-2 py-2 text-left">Price</th>
+                                        <th class="px-2 py-2"></th>
                                     </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    {% for registration in object.registration_set.all %}
+                                        <tr class="{% if registration.has_expired %}bg-yellow-100{% endif %}">
+                                            <td class="px-2 py-2">{{ registration.description }}</td>
+                                            <td class="px-2 py-2 whitespace-nowrap">{{ registration.reg_date|date }} {% if registration.end_date %} to {{ registration.end_date|date }}{% endif %}</td>
+                                            <td class="px-2 py-2">${{ registration.reg_cost }}</td>
+                                            <td class="px-2 py-2"><a class="block inline-block py-1 px-2 w-full text-xs font-normal leading-tight text-center text-black no-underline align-middle bg-orange-400 rounded border select-none whitespace-no-wrap hover:bg-orange-500" href="{{ object.reg_url }}">register!</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        {# Mobile card view #}
+                        <div class="md:hidden space-y-4">
+                            {% for registration in object.registration_set.all %}
+                                <div class="border rounded-lg p-4 {% if registration.has_expired %}bg-yellow-100{% else %}bg-white{% endif %}">
+                                    <div class="font-bold text-lg mb-2">{{ registration.description }}</div>
+                                    <div class="text-sm text-gray-600 mb-2">
+                                        {{ registration.reg_date|date }} {% if registration.end_date %} to {{ registration.end_date|date }}{% endif %}
+                                    </div>
+                                    <div class="text-2xl font-bold text-red-600 mb-3">${{ registration.reg_cost }}</div>
+                                    <a class="block py-2 px-4 text-center text-black bg-orange-400 rounded hover:bg-orange-500 transition-colors" href="{{ object.reg_url }}">Register!</a>
+                                </div>
+                            {% endfor %}
+                        </div>
                     </div>
                 {% endif %}
             {% endif %}
 
             {% if object.get_race_news %}
-                <section>
-                    <a name="news"></a>
+                <section id="news">
                     <h3 class="text-2xl font-bold mb-4">Latest News</h3>
                     {% for item in object.get_race_news|slice:":3" %}
                         <div class="mb-4 prose">{{ item.body|markdownify }}</div>
@@ -142,7 +158,7 @@
             <section>
                 {% if object.location %}
                     <h3 class="font-bold text-2xl py-4">Location</h3>
-                    <div id="map-canvas"></div>
+                    <div id="map-canvas" class="w-full h-96"></div>
                     <div class="prose prose-a:underline prose-a:text-red-600 hover:prose-a:text-red-800">{{ object.location.description|markdownify }}</div>
                 {% endif %}
 
@@ -219,9 +235,8 @@
             {% endif %}
 
             {% if race_types %}
-                <section>
+                <section id="results">
                     <h3 class="text-2xl font-bold mb-4">
-                        <a name="results"></a>
                         Race Results
                     </h3>
                     <ul>
@@ -261,14 +276,14 @@
             {% if sponsor_list %}
                 <hr>
 
-                <h3 class="text-2xl font-bold mb-4"><a name="sponsors"></a>Sponsors</h3>
+                <h3 class="text-2xl font-bold mb-4" id="sponsors">Sponsors</h3>
                 <div class="flex flex-auto">
                     {% for sponsor in sponsor_list %}
                         <div class="md:w-1/2">
                             <h3 class="text-2xl"><a href="{{ sponsor.url }}" class="text-red-600 hover:text-red-800 underline">{{ sponsor.name }}</a></h3>
                             {% if sponsor.logo %}
                                 <a href="{{ sponsor.url }}" class="hover:opacity-80 transition-opacity">
-                                    <img class="w-full h-auto" src="{{ sponsor.logo.url }}" />
+                                    <img class="w-full h-auto" src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }} logo" />
                                 </a>
                             {% endif %}
                         </div>
