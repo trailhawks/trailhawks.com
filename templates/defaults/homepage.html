@@ -57,7 +57,7 @@
                         <h4 class="text-2xl">{{ latest_race.slogan }}</h4>
                     {% endif %}
 
-                    <div class="flex flex-col divide-y divide-gray-300 py-4 text-xl">
+                    <div class="flex flex-col gap-3 py-4 text-xl">
                         <div><strong>Race date:</strong> {{ latest_race.start_datetime|date:"F j, Y" }}</div>
                         <div><strong>Start time:</strong> {{ latest_race.start_datetime|time:"h:i A" }}</div>
                         <div><strong>Race distance:</strong> {{ latest_race.distance }}</div>
@@ -97,9 +97,11 @@
                         <span class="sm:w-1/3 sm:text-center underline">
                             {{ run.name }}
                         </span>
-                        <span class="sm:w-1/3 sm:text-right">
-                            {{ run.location }}
-                        </span>
+                        {% if run.location %}
+                            <span class="sm:w-1/3 sm:text-right">
+                                {{ run.location }}
+                            </span>
+                        {% endif %}
                     </a>
                 </div>
             {% endfor %}
