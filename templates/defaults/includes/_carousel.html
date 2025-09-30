@@ -1,0 +1,328 @@
+{% comment %}
+Photo Carousel Component
+- Mobile-friendly with swipe support
+- Auto-advances every 5 seconds
+- Touch/keyboard accessible
+- Responsive design
+{% endcomment %}
+
+<div class="relative w-full overflow-hidden rounded-lg shadow-lg bg-gray-900" id="photo-carousel">
+    <!-- Carousel Container -->
+    <div class="relative h-64 md:h-96 lg:h-[500px]">
+        <!-- Slides -->
+        <div class="carousel-slides absolute inset-0 transition-opacity duration-700">
+            <!-- Slide 1: Sanders Saunter 2023 - Before Start -->
+            <div class="carousel-slide absolute inset-0 opacity-100">
+                <img src="https://www.mile90.com/Race-Photos/2023-Race-Events/Sanders-Saunter-2023/10K/Before-Start/i-pFZ97kr/0/4K/SandersSaunter-2023-AR-2097-4K.jpg"
+                     alt="Runners at Sanders Saunter 2023 before start"
+                     class="w-full h-full object-cover">
+                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 md:p-6">
+                    <h3 class="text-white text-lg md:text-2xl font-bold">Sanders Saunter 2023</h3>
+                    <p class="text-white/90 text-sm md:text-base">Before the Start - Clinton Lake</p>
+                </div>
+            </div>
+
+            <!-- Slide 2: Sanders Saunter 2023 - Awards -->
+            <div class="carousel-slide absolute inset-0 opacity-0">
+                <img src="https://www.mile90.com/Race-Photos/2023-Race-Events/Sanders-Saunter-2023/Miscellaneous/Miscellaneous/i-fvf2JhV/0/4K/SandersSaunter-2023-AR-2345-4K.jpg"
+                     alt="Sanders Saunter 2023 awards ceremony"
+                     class="w-full h-full object-cover">
+                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 md:p-6">
+                    <h3 class="text-white text-lg md:text-2xl font-bold">Sanders Saunter 2023</h3>
+                    <p class="text-white/90 text-sm md:text-base">Post-Race Celebration</p>
+                </div>
+            </div>
+
+            <!-- Slide 3: The Hawk 2023 - Red Trail -->
+            <div class="carousel-slide absolute inset-0 opacity-0">
+                <img src="https://www.mile90.com/Race-Photos/2023-Race-Events/The-Hawk-2023/100-75-Mile/Red-Trail/i-rTkFf92/0/4K/Hawk-2023-RM-7805-4K.jpg"
+                     alt="Trail runner at The Hawk 100 2023"
+                     class="w-full h-full object-cover">
+                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 md:p-6">
+                    <h3 class="text-white text-lg md:text-2xl font-bold">The Hawk Hundred 2023</h3>
+                    <p class="text-white/90 text-sm md:text-base">Red Trail - 100 Mile Endurance</p>
+                </div>
+            </div>
+
+            <!-- Slide 4: The Hawk 2023 - Course -->
+            <div class="carousel-slide absolute inset-0 opacity-0">
+                <img src="https://www.mile90.com/Race-Photos/2023-Race-Events/The-Hawk-2023/Aid-Miscellaneous/Course-Misc/i-HWvX533/0/4K/Hawk-2023-RM-8088-4K.jpg"
+                     alt="The Hawk 2023 trail course"
+                     class="w-full h-full object-cover">
+                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 md:p-6">
+                    <h3 class="text-white text-lg md:text-2xl font-bold">The Hawk Hundred 2023</h3>
+                    <p class="text-white/90 text-sm md:text-base">Clinton Lake Trail Course</p>
+                </div>
+            </div>
+
+            <!-- Slide 5: Night Hawk 2023 -->
+            <div class="carousel-slide absolute inset-0 opacity-0">
+                <img src="https://www.mile90.com/Race-Photos/2023-Race-Events/The-Night-Hawk-2023/50K/Near-Start-White/i-PxHhFX8/0/4K/NightHawk-2023-AR-1476-4K.jpg"
+                     alt="Night Hawk 2023 runners at start"
+                     class="w-full h-full object-cover">
+                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 md:p-6">
+                    <h3 class="text-white text-lg md:text-2xl font-bold">The Night Hawk 2023</h3>
+                    <p class="text-white/90 text-sm md:text-base">50K Start - Nighttime Trail Running</p>
+                </div>
+            </div>
+
+            <!-- Slide 6: Night Hawk 2021 -->
+            <div class="carousel-slide absolute inset-0 opacity-0">
+                <img src="https://www.mile90.com/Race-Photos/2021-Race-Events/The-Night-Hawk-2021/Before/Before-Misc/i-W2mVzr8/0/4K/NightHawk-2021-RM-0088-4K.jpg"
+                     alt="Night Hawk 2021 before race"
+                     class="w-full h-full object-cover">
+                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 md:p-6">
+                    <h3 class="text-white text-lg md:text-2xl font-bold">The Night Hawk 2021</h3>
+                    <p class="text-white/90 text-sm md:text-base">Pre-Race Preparations</p>
+                </div>
+            </div>
+
+            <!-- Slide 7: Cactus Roulette 2023 - Cactus Ridge -->
+            <div class="carousel-slide absolute inset-0 opacity-0">
+                <img src="https://www.mile90.com/Race-Photos/2023-Race-Events/Cactus-Roulette-2023/Saturday/Cactus-Ridge/i-3bx7P2L/0/4K/CactusRoulette-2023-RM-4074-4K.jpg"
+                     alt="Cactus Roulette 2023 runner on trail"
+                     class="w-full h-full object-cover">
+                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 md:p-6">
+                    <h3 class="text-white text-lg md:text-2xl font-bold">Cactus Roulette 2023</h3>
+                    <p class="text-white/90 text-sm md:text-base">Cactus Ridge - Endurance Challenge</p>
+                </div>
+            </div>
+
+            <!-- Slide 8: Cactus Roulette 2023 - Start/Finish -->
+            <div class="carousel-slide absolute inset-0 opacity-0">
+                <img src="https://www.mile90.com/Race-Photos/2023-Race-Events/Cactus-Roulette-2023/Sunday/Start-Finish/i-4sFjwLd/0/4K/CactusRoulette-2023-JK-1020-4K.jpg"
+                     alt="Cactus Roulette 2023 start and finish area"
+                     class="w-full h-full object-cover">
+                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 md:p-6">
+                    <h3 class="text-white text-lg md:text-2xl font-bold">Cactus Roulette 2023</h3>
+                    <p class="text-white/90 text-sm md:text-base">Start & Finish Line</p>
+                </div>
+            </div>
+
+            <!-- Slide 9: Pi Day 2023 - South Trail -->
+            <div class="carousel-slide absolute inset-0 opacity-0">
+                <img src="https://www.mile90.com/Race-Photos/2023-Race-Events/Pi-Day-River-Rotation-2023/On-Course/Pi-Miler/South-Trail/i-tZ5WRmW/0/4K/PiDay-2023-KM-8359-4K.jpg"
+                     alt="Pi Day River Rotation 2023 runner on trail"
+                     class="w-full h-full object-cover">
+                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 md:p-6">
+                    <h3 class="text-white text-lg md:text-2xl font-bold">Pi Day River Rotation 2023</h3>
+                    <p class="text-white/90 text-sm md:text-base">South Trail - Pi Miler 5K</p>
+                </div>
+            </div>
+
+            <!-- Slide 10: Pi Day 2022 - Finish -->
+            <div class="carousel-slide absolute inset-0 opacity-0">
+                <img src="https://www.mile90.com/Race-Photos/2022-Race-Events/Pi-Day-River-Rotation-2022/Finish/Pi-Miler/i-4qLMJGq/0/4K/PiDay-2022-RM-3024-4K.jpg"
+                     alt="Pi Day River Rotation 2022 finish line"
+                     class="w-full h-full object-cover">
+                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 md:p-6">
+                    <h3 class="text-white text-lg md:text-2xl font-bold">Pi Day River Rotation 2022</h3>
+                    <p class="text-white/90 text-sm md:text-base">Pi Miler Finish Line</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <button type="button" id="carousel-prev"
+            class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 bg-black/50 hover:bg-black/70 text-white p-2 md:p-3 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-red-500"
+            aria-label="Previous slide">
+        <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+    </button>
+    <button type="button" id="carousel-next"
+            class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-20 bg-black/50 hover:bg-black/70 text-white p-2 md:p-3 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-red-500"
+            aria-label="Next slide">
+        <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+    </button>
+
+    <!-- Indicators -->
+    <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2" id="carousel-indicators">
+        <button type="button" class="carousel-indicator w-2 h-2 md:w-3 md:h-3 rounded-full bg-white transition-all" data-slide="0" aria-label="Go to slide 1"></button>
+        <button type="button" class="carousel-indicator w-2 h-2 md:w-3 md:h-3 rounded-full bg-white/50 transition-all" data-slide="1" aria-label="Go to slide 2"></button>
+        <button type="button" class="carousel-indicator w-2 h-2 md:w-3 md:h-3 rounded-full bg-white/50 transition-all" data-slide="2" aria-label="Go to slide 3"></button>
+        <button type="button" class="carousel-indicator w-2 h-2 md:w-3 md:h-3 rounded-full bg-white/50 transition-all" data-slide="3" aria-label="Go to slide 4"></button>
+        <button type="button" class="carousel-indicator w-2 h-2 md:w-3 md:h-3 rounded-full bg-white/50 transition-all" data-slide="4" aria-label="Go to slide 5"></button>
+        <button type="button" class="carousel-indicator w-2 h-2 md:w-3 md:h-3 rounded-full bg-white/50 transition-all" data-slide="5" aria-label="Go to slide 6"></button>
+        <button type="button" class="carousel-indicator w-2 h-2 md:w-3 md:h-3 rounded-full bg-white/50 transition-all" data-slide="6" aria-label="Go to slide 7"></button>
+        <button type="button" class="carousel-indicator w-2 h-2 md:w-3 md:h-3 rounded-full bg-white/50 transition-all" data-slide="7" aria-label="Go to slide 8"></button>
+        <button type="button" class="carousel-indicator w-2 h-2 md:w-3 md:h-3 rounded-full bg-white/50 transition-all" data-slide="8" aria-label="Go to slide 9"></button>
+        <button type="button" class="carousel-indicator w-2 h-2 md:w-3 md:h-3 rounded-full bg-white/50 transition-all" data-slide="9" aria-label="Go to slide 10"></button>
+    </div>
+
+    <!-- Photo Credit -->
+    <div class="absolute top-2 right-2 md:top-4 md:right-4 z-20 bg-black/50 text-white text-xs md:text-sm px-2 md:px-3 py-1 rounded">
+        Photos by <a href="https://www.mile90.com" target="_blank" rel="noopener" class="underline hover:text-yellow-400">Mile 90 Photography</a>
+    </div>
+</div>
+
+<script>
+(function() {
+    const carousel = document.getElementById('photo-carousel');
+    if (!carousel) return;
+
+    const slides = carousel.querySelectorAll('.carousel-slide');
+    const indicators = carousel.querySelectorAll('.carousel-indicator');
+    const prevBtn = carousel.querySelector('#carousel-prev');
+    const nextBtn = carousel.querySelector('#carousel-next');
+
+    let currentSlide = 0;
+    let autoplayInterval;
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let slideOrder = [];
+
+    // Create randomized slide order
+    function createRandomOrder() {
+        slideOrder = Array.from({ length: slides.length }, (_, i) => i);
+        // Fisher-Yates shuffle
+        for (let i = slideOrder.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [slideOrder[i], slideOrder[j]] = [slideOrder[j], slideOrder[i]];
+        }
+    }
+
+    // Initialize random order
+    createRandomOrder();
+
+    function showSlide(index) {
+        // Wrap around
+        if (index < 0) index = slides.length - 1;
+        if (index >= slides.length) index = 0;
+
+        currentSlide = index;
+
+        // Get the actual slide to show based on random order
+        const slideToShow = slideOrder[currentSlide];
+
+        // Update slides
+        slides.forEach((slide, i) => {
+            if (i === slideToShow) {
+                slide.style.opacity = '1';
+                slide.style.zIndex = '10';
+            } else {
+                slide.style.opacity = '0';
+                slide.style.zIndex = '0';
+            }
+        });
+
+        // Update indicators
+        indicators.forEach((indicator, i) => {
+            if (i === currentSlide) {
+                indicator.classList.remove('bg-white/50');
+                indicator.classList.add('bg-white');
+            } else {
+                indicator.classList.remove('bg-white');
+                indicator.classList.add('bg-white/50');
+            }
+        });
+    }
+
+    function nextSlide() {
+        showSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+        showSlide(currentSlide - 1);
+    }
+
+    function startAutoplay() {
+        stopAutoplay();
+        autoplayInterval = setInterval(nextSlide, 5000);
+    }
+
+    function stopAutoplay() {
+        if (autoplayInterval) {
+            clearInterval(autoplayInterval);
+        }
+    }
+
+    // Event listeners
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            stopAutoplay();
+            startAutoplay();
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            stopAutoplay();
+            startAutoplay();
+        });
+    }
+
+    indicators.forEach((indicator) => {
+        indicator.addEventListener('click', (e) => {
+            const slideIndex = parseInt(e.target.dataset.slide);
+            showSlide(slideIndex);
+            stopAutoplay();
+            startAutoplay();
+        });
+    });
+
+    // Touch support for mobile
+    carousel.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    carousel.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                // Swipe left - next slide
+                nextSlide();
+            } else {
+                // Swipe right - previous slide
+                prevSlide();
+            }
+            stopAutoplay();
+            startAutoplay();
+        }
+    }
+
+    // Keyboard navigation - listen on document level
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            prevSlide();
+            stopAutoplay();
+            startAutoplay();
+            e.preventDefault();
+        } else if (e.key === 'ArrowRight') {
+            nextSlide();
+            stopAutoplay();
+            startAutoplay();
+            e.preventDefault();
+        }
+    });
+
+    // Pause on hover (desktop only)
+    carousel.addEventListener('mouseenter', stopAutoplay);
+    carousel.addEventListener('mouseleave', startAutoplay);
+
+    // Pause when page is hidden
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            stopAutoplay();
+        } else {
+            startAutoplay();
+        }
+    });
+
+    // Initialize
+    showSlide(0);
+    startAutoplay();
+})();
+</script>
