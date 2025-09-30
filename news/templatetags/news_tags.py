@@ -25,7 +25,11 @@ def get_news_for_object(context, obj):
 
 @register.simple_tag(takes_context=True)
 def get_latest_news(context, num=10):
-    return News.objects.public()[:num]
+    from datetime import timedelta
+    from django.utils import timezone
+
+    six_months_ago = timezone.now() - timedelta(days=180)
+    return News.objects.public().filter(pub_date__gte=six_months_ago)[:num]
 
 
 @register.simple_tag(takes_context=True)
