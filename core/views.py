@@ -1,4 +1,5 @@
 from django.views.generic import TemplateView
+from blog.models import Post
 from runs.models import Run
 
 
@@ -29,6 +30,7 @@ class HomepageView(TemplateView):
         ]
         context["use_bootstrap"] = True if self.request.GET.get("bootstrap") else False
         context["runs"] = runs
+        context["latest_post"] = Post.objects.public().first()
         return context
 
 

@@ -72,15 +72,17 @@
                     <p><a class="block inline-block py-1 px-3 w-full font-normal leading-normal text-center text-white no-underline align-middle bg-red-600 rounded border select-none whitespace-no-wrap hover:bg-red-700" href="{{ latest_race.get_absolute_url }}">More information &#187;</a></p>
                 </div>
             {% else %}
-                <h2 class="font-bold text-4xl py-2">Latest post</h2>
-                <div class="post">
-                    <div class="post-title"><h2 class="font-bold text-4xl py-2"><a href="{{ latest_post.get_absolute_url }}">{{ latest_post.title }}</a></h2></div>
-                    <div class="post-date">{{ latest_post.publish|date:"D d M, Y" }} by <a href="{{ latest_post.author.get_absolute_url }}">{{ latest_post.author}}</a></div>
-                    <div class="post-body">
-                        {{ latest_post.body|markdownify|truncatewords:"400" }}
-                        <p><a href="{{ latest_post.get_absolute_url }}">Read more...</a></p>
+                {% if latest_post %}
+                    <h2 class="font-bold text-4xl py-2">Latest post</h2>
+                    <div class="post">
+                        <div class="post-title"><h2 class="font-bold text-4xl py-2"><a href="{{ latest_post.get_absolute_url }}">{{ latest_post.title }}</a></h2></div>
+                        <div class="post-date">{{ latest_post.publish|date:"D d M, Y" }} by <a href="{{ latest_post.author.get_absolute_url }}">{{ latest_post.author}}</a></div>
+                        <div class="prose prose-a:underline prose-a:text-red-600 hover:prose-a:text-red-800 max-w-none">
+                            {{ latest_post.body|markdownify|truncatewords_html:"400" }}
+                            <p><a href="{{ latest_post.get_absolute_url }}">Read more...</a></p>
+                        </div>
                     </div>
-                </div>
+                {% endif %}
             {% endif %}
         </div>
     </section>
