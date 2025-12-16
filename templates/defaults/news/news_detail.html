@@ -10,19 +10,38 @@
 {% block content %}
     <div class="flex flex-auto gap-8">
         <div class="md:w-2/3">
-            <h1 class="font-bold text-6xl">{{ object.title }}</h1>
-            <h3 class="text-2xl">{{ object.pub_date|date }}</h3>
-            {{ object.body|markdownify }}
+            <section class="py-4">
+                <h1 class="font-bold text-3xl md:text-6xl py-4">{{ object.title }}</h1>
+                <p class="text-xl text-gray-600">{{ object.pub_date|date }}</p>
+            </section>
 
-            <ul class="pager">
+            <div class="prose md:prose-xl max-w-none">
+                {{ object.body|markdownify }}
+            </div>
+
+            <nav class="flex justify-between items-center py-6 border-t border-gray-200 mt-8" aria-label="News navigation">
                 {% if object.get_previous_by_publish %}
-                    <li class="previous"><a href="{{ object.get_previous_news.get_absolute_url }}">&larr; Older</a></li>
+                    <a href="{{ object.get_previous_news.get_absolute_url }}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:text-red-600 transition-colors">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                        Older
+                    </a>
+                {% else %}
+                    <span></span>
                 {% endif %}
 
                 {% if object.get_next_by_publish %}
-                    <li class="next"><a href="{{ object.get_next_news.get_absolute_url }}">Newer &rarr;</a></li>
+                    <a href="{{ object.get_next_news.get_absolute_url }}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:text-red-600 transition-colors">
+                        Newer
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                {% else %}
+                    <span></span>
                 {% endif %}
-            </ul>
+            </nav>
         </div>
     </div>
 {% endblock content %}

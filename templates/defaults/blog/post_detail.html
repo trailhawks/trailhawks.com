@@ -40,19 +40,29 @@
 
             {# render_facebook_like obj=object #}
 
-            <ul class="pager">
+            <nav class="flex justify-between items-center py-6 border-t border-gray-200 mt-8" aria-label="Post navigation">
                 {% if object.get_previous_by_publish %}
-                    <li class="underline hover:bg-yellow-300">
-                        <a href="{{ object.get_previous_post.get_absolute_url }}">&larr; Older</a>
-                    </li>
+                    <a href="{{ object.get_previous_post.get_absolute_url }}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:text-red-600 transition-colors">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                        Older
+                    </a>
+                {% else %}
+                    <span></span>
                 {% endif %}
 
                 {% if object.get_next_by_publish %}
-                    <li class="underline hover:bg-yellow-300">
-                        <a href="{{ object.get_next_post.get_absolute_url }}">Newer &rarr;</a>
-                    </li>
+                    <a href="{{ object.get_next_post.get_absolute_url }}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:text-red-600 transition-colors">
+                        Newer
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                {% else %}
+                    <span></span>
                 {% endif %}
-            </ul>
+            </nav>
         </div>
 
         <div class="w-full md:w-1/3">

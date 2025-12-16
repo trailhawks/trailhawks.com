@@ -22,19 +22,23 @@
                 <h1 class="font-bold text-6xl py-4">Sponsors</h1>
             </section>
             {% for sponsor in object_list %}
-                <section>
-                    <h2 class="text-4xl font-bold">{{ sponsor.name }}</h2>
+                <section class="py-6">
+                    <h2 class="text-4xl font-bold mb-4">{{ sponsor.name }}</h2>
                     {% if sponsor.logo %}
-                        <a href="{{ sponsor.url }}"><img class="p-1 max-w-full h-auto rounded border-gray-200 img-responsive border-1" src="{{ sponsor.logo.url }}" alt="{{ sponsor.title }}">{{ sponsor.get_logo_url }}</a>
+                        <a href="{{ sponsor.url }}" class="block mb-4 hover:opacity-80 transition-opacity">
+                            <img class="p-1 max-w-full h-auto rounded border border-gray-200" src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }}">
+                        </a>
                     {% endif %}
                     {% if sponsor.address %}
-                        <address>
+                        <address class="text-gray-600 mb-2 not-italic">
                             {{ sponsor.address }}
                         </address>
                     {% endif %}
-                    <p><strong>Discount: </strong>{{ sponsor.discount_detail }}</p>
+                    {% if sponsor.discount_detail %}
+                        <p><strong>Discount: </strong>{{ sponsor.discount_detail }}</p>
+                    {% endif %}
                 </section>
-                <hr>
+                <hr class="border-gray-200">
             {% endfor %}
         </div>
     </div>

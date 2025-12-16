@@ -20,69 +20,75 @@
 
 
 {% block content %}
-    <h1 class="font-bold text-6xl">{{ object.full_hawk_name }}</h1>
+    <section class="py-4">
+        <h1 class="font-bold text-3xl md:text-6xl py-4">{{ object.full_hawk_name }}</h1>
+    </section>
 
-    <div class="flex items-start">
+    <div class="flex flex-col sm:flex-row items-start gap-6">
         {% if object.avatar %}
-            <a class="pull-left" href="#">
-                <img class="media-object" src="{{ object.avatar.url }}" alt="...">
-            </a>
+            <div class="flex-shrink-0">
+                <img class="w-32 h-32 rounded-lg object-cover border border-gray-200" src="{{ object.avatar.url }}" alt="{{ object.full_hawk_name }}">
+            </div>
         {% endif %}
         <div class="flex-1">
-            <dl {% comment %}class="dl-horizontal"{% endcomment %}>
-                <dt>Hawk Name:</dt>
-                <dd>{{ object.hawk_name }}</dd>
+            <dl class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
+                <dt class="font-semibold text-gray-700">Hawk Name:</dt>
+                <dd class="text-gray-900">{{ object.hawk_name }}</dd>
 
                 {% if object.position %}
-                    <dt>Position:</dt>
-                    <dd>{{ object.get_position }}</dd>
+                    <dt class="font-semibold text-gray-700">Position:</dt>
+                    <dd class="text-gray-900">{{ object.get_position }}</dd>
                 {% endif %}
 
-                <dt>Member since:</dt>
-                <dd>{{ object.member_since|date }}</dd>
+                <dt class="font-semibold text-gray-700">Member since:</dt>
+                <dd class="text-gray-900">{{ object.member_since|date }}</dd>
             </dl>
         </div>
     </div>
 
     {% if object.get_race_results %}
-        <h3 class="text-2xl">Race Results</h3>
-        {{ object.racer_set.results_set }}
-        <ul>
-            {% for result in object.get_race_results %}
-                <li>
-                    Ran
-                    <a class="hover:bg-yellow-400 underline" href="{{ result.race.get_absolute_url }}">{{ result.race.title }}</a>
-                    in {{ result.time }}
-                    on {{ result.race.start_datetime|date }}
-                </li>
-            {% endfor %}
-        </ul>
+        <section class="py-6">
+            <h3 class="text-2xl font-bold mb-4">Race Results</h3>
+            <ul class="space-y-2">
+                {% for result in object.get_race_results %}
+                    <li class="py-2 border-b border-gray-100">
+                        Ran
+                        <a class="text-red-600 hover:text-red-800 hover:bg-yellow-100 underline" href="{{ result.race.get_absolute_url }}">{{ result.race.title }}</a>
+                        in <span class="font-semibold">{{ result.time }}</span>
+                        on {{ result.race.start_datetime|date }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
     {% endif %}
 
     {% if object.get_race_reports %}
-        <h3 class="text-2xl">Race Reports</h3>
-        <ul>
-            {% for result in object.get_race_reports %}
-                <li>
-                    <a class="hover:bg-yellow-400 underline" href="{{ result.report }}">{{ result.title }}</a>
-                    for
-                    <a class="hover:bg-yellow-400 underline" href="{{ result.race.get_absolute_url }}">{{ result.race.title }}</a>
-                    on {{ result.race.start_datetime|date }}
-                </li>
-            {% endfor %}
-        </ul>
+        <section class="py-6">
+            <h3 class="text-2xl font-bold mb-4">Race Reports</h3>
+            <ul class="space-y-2">
+                {% for result in object.get_race_reports %}
+                    <li class="py-2 border-b border-gray-100">
+                        <a class="text-red-600 hover:text-red-800 hover:bg-yellow-100 underline" href="{{ result.report }}">{{ result.title }}</a>
+                        for
+                        <a class="text-red-600 hover:text-red-800 hover:bg-yellow-100 underline" href="{{ result.race.get_absolute_url }}">{{ result.race.title }}</a>
+                        on {{ result.race.start_datetime|date }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
     {% endif %}
 
     {% if object.get_blog_posts %}
-        <h3 class="text-2xl">Blog Posts</h3>
-        <ul>
-            {% for post in object.get_blog_posts %}
-                <li>
-                    <a class="hover:bg-yellow-400 underline" href="{{ post.get_absolute_url }}">{{ post.title }}</a>
-                    on {{ post.publish|date }}
-                </li>
-            {% endfor %}
-        </ul>
+        <section class="py-6">
+            <h3 class="text-2xl font-bold mb-4">Blog Posts</h3>
+            <ul class="space-y-2">
+                {% for post in object.get_blog_posts %}
+                    <li class="py-2 border-b border-gray-100">
+                        <a class="text-red-600 hover:text-red-800 hover:bg-yellow-100 underline" href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                        on {{ post.publish|date }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
     {% endif %}
-
 {% endblock content %}

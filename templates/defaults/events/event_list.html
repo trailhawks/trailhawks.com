@@ -15,11 +15,20 @@
 
 
 {% block content %}
-    <h1 class="font-bold text-6xl">Events</h1>
-
-    <ul>
-        {% for event in event_list %}
-            <li><a href="{% url 'event_detail' slug=event.slug %}">{{ event }}</a></li>
-        {% endfor %}
-    </ul>
+    <div class="flex flex-auto gap-8">
+        <div class="md:w-2/3">
+            <section class="py-4">
+                <h1 class="font-bold text-3xl md:text-6xl py-4">Events</h1>
+            </section>
+            <div class="divide-y divide-gray-200">
+                {% for event in event_list %}
+                    <a href="{% url 'event_detail' slug=event.slug %}" class="block py-4 hover:bg-gray-50 transition-colors group">
+                        <span class="text-lg text-gray-900 group-hover:text-red-600 transition-colors">{{ event }}</span>
+                    </a>
+                {% empty %}
+                    <p class="py-4 text-gray-500">No events scheduled at this time.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock content %}
