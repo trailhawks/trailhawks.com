@@ -11,17 +11,26 @@
 {% endblock opengraph %}
 
 {% block content %}
+    <section class="py-4">
+        <h1 class="font-bold text-3xl md:text-6xl py-4">The Hawk Hundred</h1>
+    </section>
 
-    <h1 class="font-bold text-6xl">The Hawk Hundred</h1>
+    <div class="prose prose-lg md:prose-xl max-w-none prose-a:text-red-600 hover:prose-a:text-red-800 prose-a:underline">
+        <p><strong>The Hawk Hundred</strong> is a 100-mile, 50-mile and marathon trail race put on by the <a href="https://trailhawks.com/">Lawrence Trail Hawks</a>. The course covers four loops through the rolling hills of <a href="https://ksoutdoors.com/State-Parks/Locations/Clinton">Clinton State Park</a>.</p>
 
-    <p><strong>The Fifth Annual Hawk Hundred</strong> is a 100-mile, 50-mile and marathon trail race put on by the <a href="http://trailhawks.com/">Lawrence Trail Hawks</a>. This year’s race takes place on September 12th and 13th in Lawrence, Kansas. The course covers four loops through the rolling hills of <a href="http://www.kdwpt.state.ks.us/news/State-Parks/Locations/Clinton">Clinton State Park</a>.</p>
+        <p>As Hawks, we pride ourselves in putting on top-notch events. At The Hawk you'll find aid stations staffed by experienced ultrarunners and a well-marked course through tough, but pretty trails.</p>
 
-    <p><strong>Hawk 2015 updated guide coming soon – Last years Guide is still available</strong> <a href="http://hawkhundred.com/wp-content/uploads/2014-Hawk-Race-Guide.pdf">2014 Hawk Race Guide</a>.</p>
+        <p>Click through the links above for more information. Any questions? Just <a href="/contact/">e-mail us</a>.</p>
 
-    <p>As Hawks, we pride ourselves in putting on top-notch events. At The Hawk you’ll find aid stations staffed by experienced ultrarunners and a well-marked course through tough, but pretty trails.</p>
+        <p>Also be sure to visit the <a href="https://trailhawks.com/">Lawrence Trail Hawks</a> website for information about our weekly group runs as well as our upcoming events.</p>
+    </div>
 
-    <p>Click through the links above for more information. Any questions? Just e-mail us.</p>
-
-    <p>Also be sure to visit the <a href="http://trailhawks.com/">Lawrence Trail Hawks</a> website for information about our weekly group runs as well as our upcoming events.</p>
-
+    <div class="mt-8 flex flex-col sm:flex-row gap-4">
+        <a href="/signup/" class="inline-block py-3 px-6 bg-red-600 text-white font-bold text-center rounded-lg hover:bg-red-700 transition-colors">
+            Sign Up Now
+        </a>
+        <a href="/course/" class="inline-block py-3 px-6 bg-white text-red-600 font-bold text-center rounded-lg border-2 border-red-600 hover:bg-red-50 transition-colors">
+            View Course Details
+        </a>
+    </div>
 {% endblock content %}
