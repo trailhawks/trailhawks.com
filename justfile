@@ -10,6 +10,28 @@ TAILWIND_CSS_VERSION := "latest"
 @_default:
     just --list
 
+# Initialize project with dependencies and environment
+bootstrap *ARGS:
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    if [ ! -f ".env" ]; then
+        cp .env-dist .env
+        echo ".env created"
+    fi
+
+    if [ -n "${VIRTUAL_ENV-}" ]; then
+        python -m pip install --upgrade pip uv
+    else
+        echo "Skipping pip steps as VIRTUAL_ENV is not set"
+    fi
+
+    just upgrade
+
+    if [ -f "compose.yml" ]; then
+        just build {{ ARGS }} --pull
+    fi
+
 # Format the justfile using just's built-in formatter
 @fmt:
     just --fmt --unstable
@@ -30,6 +52,13 @@ TAILWIND_CSS_VERSION := "latest"
 # Open an interactive bash shell in the web container
 @console:
     {{ compose }} /bin/bash
+
+# Open interactive bash console in database container
+@console-db:
+    docker compose run \
+        --no-deps \
+        --rm \
+        db /bin/bash
 
 # Stop and remove all Docker containers
 @down:
@@ -65,11 +94,15 @@ TAILWIND_CSS_VERSION := "latest"
 
 # Run pre-commit hooks on all files
 @lint *ARGS:
-    uv --quiet tool run --with pre-commit-uv pre-commit run {{ ARGS }} --all-files
+    uv --quiet tool run prek {{ ARGS }} --all-files
 
-# Update pre-commit hooks to their latest versions
+# Update pre-commit hooks to latest versions
+@lint-autoupdate:
+    uv --quiet tool run prek autoupdate
+
+# Update pre-commit hooks to their latest versions (alias)
 @lint-update:
-    uv --quiet tool run --with pre-commit-uv pre-commit autoupdate
+    uv --quiet tool run prek autoupdate
 
 # View Docker container logs (accepts docker compose logs arguments)
 @logs +ARGS="":
@@ -79,6 +112,10 @@ TAILWIND_CSS_VERSION := "latest"
 @makemigrations:
     {{ manage }} makemigrations
 
+# Run Django management commands
+@manage *ARGS:
+    {{ manage }} {{ ARGS }}
+
 # Apply Django database migrations
 @migrate:
     {{ manage }} migrate
@@ -87,6 +124,10 @@ TAILWIND_CSS_VERSION := "latest"
 @lock *ARGS:
     uv pip compile {{ ARGS }} ./requirements.in \
         --output-file ./requirements.txt
+
+# Pull Docker images
+@pull *ARGS:
+    docker compose pull {{ ARGS }}
 
 # Execute Django management commands (default: show help)
 @run +ARGS="--help":
@@ -116,6 +157,11 @@ TAILWIND_CSS_VERSION := "latest"
 @up *ARGS:
     docker compose up {{ ARGS }}
 
+# Update dependencies and pre-commit hooks
+@update:
+    just upgrade
+    just lint-autoupdate
+
 # Upgrade all Python dependencies to their latest versions
 @upgrade:
     just lock --upgrade
@@ -138,9 +184,9 @@ TAILWIND_CSS_VERSION := "latest"
 @status:
     docker compose ps
 
-# Stop all services without removing containers
-@stop:
-    docker compose down
+# Stop running containers
+@stop *ARGS:
+    docker compose stop {{ ARGS }}
 
 # Tail service logs with auto-follow
 @tail:
@@ -171,3 +217,7 @@ pg_restore file='db.dump':
             --no-owner \
             --verbose \
             /src/{{ file }}
+
+# Watch for file changes and rebuild Docker services
+@watch *ARGS:
+    docker compose watch {{ ARGS }}

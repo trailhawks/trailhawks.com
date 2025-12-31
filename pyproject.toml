@@ -1,8 +1,65 @@
-[tool.poetry]
-name = "Lawrence Trail Hawks"
+[project]
+name = "trailhawks"
 version = "2025.12.2"
-description = ""
-authors = ["Jeff Triplett <jeff.triplett@gmail.com>"]
+description = "Lawrence Trail Hawks website"
+authors = [
+    {name = "Jeff Triplett", email = "jeff.triplett@gmail.com"},
+]
+requires-python = ">=3.12"
+dependencies = [
+    "beautifulsoup4",
+    "dateutils",
+    "django-braces",
+    "django-browser-reload",
+    "django-click",
+    "django-contrib-comments",
+    "django-favicon",
+    "django-filter",
+    "django-health-check",
+    "django-ical",
+    "django-markdownify",
+    "django-markup-deprecated",
+    "django-prodserver[gunicorn]",
+    "django-q2",
+    "django-robots",
+    "django-shorturls",
+    "django-simple-open-graph==0.3",
+    "django-storages",
+    "django-taggit",
+    "django-tailwind-cli>=4.5.1",
+    "django-thumbor==0.5",
+    "django<6.0",
+    "djangorestframework<3.15",
+    "environs[django]",
+    "feedparser",
+    "flickrapi==2.0",
+    "gunicorn",
+    "heroicons[django]",
+    "html5lib",
+    "httplib2",
+    "lxml",
+    "micawber",
+    "num2words",
+    "pandas",
+    "playwright",
+    "psycopg2-binary",
+    "python-slugify",
+    "requests",
+    "rich",
+    "titlecase",
+    "typer",
+    "uwsgi",
+    "whitenoise",
+    "django-ajaximage @ git+https://github.com/trailhawks/django-ajaximage.git",
+    "django-syncr @ git+https://github.com/trailhawks/django-syncr.git",
+]
+
+[project.optional-dependencies]
+dev = [
+    "bumpver",
+    "friendly",
+    "pre-commit",
+]
 
 [tool.bumpver]
 current_version = "2025.12.2"

@@ -97,6 +97,7 @@ INSTALLED_APPS = [
 INSTALLED_APPS += [
     # "storages",
     "ajaximage",
+    "django_prodserver",
     "django_q",
     "django_tailwind_cli",
     "django_thumbor",
@@ -222,6 +223,7 @@ THUMBOR_SERVER = env("THUMBOR_SERVER", default="")
 
 Q_CLUSTER = {
     "bulk": 10,
+    "max_attempts": 1,
     "name": "DjangORM",
     "orm": "default",
     "queue_limit": 50,
@@ -247,7 +249,18 @@ MARKDOWNIFY = {
     },
 }
 
-TAILWIND_CLI_CONFIG_FILE = "frontend/tailwind.config.js"
-TAILWIND_CLI_DIST_CSS = "css/tailwind.css"
-TAILWIND_CLI_SRC_CSS = "frontend/index.css"
-# "assets/css/tailwind.css"
+TAILWIND_CLI_AUTOMATIC_DOWNLOAD = env.bool("TAILWIND_CLI_AUTOMATIC_DOWNLOAD", default=True)
+TAILWIND_CLI_DIST_CSS = env.str("TAILWIND_CLI_DIST_CSS", default="css/tailwind.css")
+TAILWIND_CLI_SRC_CSS = env.str("TAILWIND_CLI_SRC_CSS", default="frontend/index.css")
+TAILWIND_CLI_VERSION = env.str("TAILWIND_CLI_VERSION", default="4.1.18")
+
+PRODUCTION_PROCESSES = {
+    "web": {
+        "BACKEND": "django_prodserver.backends.gunicorn.GunicornServer",
+        "ARGS": {"bind": "0.0.0.0:8000", "workers": "2"},
+    },
+    "worker": {
+        "BACKEND": "django_prodserver.backends.django_q2.DjangoQ2Worker",
+        "ARGS": {},
+    },
+}
