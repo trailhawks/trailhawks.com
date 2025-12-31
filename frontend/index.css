@@ -1,5 +1,12 @@
-@tailwind base;
+@import "tailwindcss";
 
-@tailwind components;
+@source "../**/templates/**/*.html";
+@source "../**/forms.py";
 
-@tailwind utilities;
+@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/forms";
+
+@custom-variant htmx-settling (&.htmx-settling, .htmx-settling &);
+@custom-variant htmx-request (&.htmx-request, .htmx-request &);
+@custom-variant htmx-swapping (&.htmx-swapping, .htmx-swapping &);
+@custom-variant htmx-added (&.htmx-added, .htmx-added &);
