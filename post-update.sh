@@ -2,6 +2,6 @@
 
 set -eo pipefail
 
-python -m manage showmigrations --plan --skip-checks
-python -m manage migrate --noinput --skip-checks
-python -m manage collectstatic --noinput --skip-checks
+uv run -m manage showmigrations --plan --skip-checks
+uv run -m manage migrate --noinput --skip-checks
+uv run -m manage collectstatic --noinput --skip-checks

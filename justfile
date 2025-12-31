@@ -3,7 +3,7 @@ set dotenv-load := false
 
 # Define reusable command prefixes for Docker operations
 compose := "docker compose run --rm --no-deps web"
-manage := compose + " python -m manage"
+manage := compose + " uv run -m manage"
 TAILWIND_CSS_VERSION := "latest"
 
 # Show all available recipes when just is run without arguments
@@ -21,7 +21,7 @@ bootstrap *ARGS:
     fi
 
     if [ -n "${VIRTUAL_ENV-}" ]; then
-        python -m pip install --upgrade pip uv
+        uv pip install --upgrade pip uv
     else
         echo "Skipping pip steps as VIRTUAL_ENV is not set"
     fi

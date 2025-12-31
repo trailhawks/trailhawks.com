@@ -14,8 +14,7 @@ services:
 
   web:
     <<: *common-settings
-    # command: uv run gunicorn config.wsgi --bind 0.0.0.0:8000 --workers=2
-    command: uwsgi --buffer-size=8196 --chdir=/src --enable-threads --harakiri=180 --http-socket=:8000 --http-timeout=180 --log-x-forwarded-for --master --max-requests=5000 --module=config.wsgi --need-app --offload-threads=2 --post-buffering=4096 --processes=1 --static-map=/media=/src/media_root --strict --threads=2 --thunder-lock --vacuum
+    command: /src/start-web.sh
     environment:
       - "DJANGO_SETTINGS_MODULE=config.settings_trailhawks"
     expose:
@@ -29,8 +28,7 @@ services:
 
   hawkhundred:
     <<: *common-settings
-    # command: uv run gunicorn config.wsgi --bind 0.0.0.0:8000 --workers=2
-    command: uwsgi --buffer-size=8196 --chdir=/src --enable-threads --harakiri=180 --http-socket=:8000 --http-timeout=180 --log-x-forwarded-for --master --max-requests=5000 --module=config.wsgi --need-app --offload-threads=2 --post-buffering=4096 --processes=1 --static-map=/media=/src/media_root --strict --threads=2 --thunder-lock --vacuum
+    command: /src/start-web.sh
     environment:
       - "DJANGO_SETTINGS_MODULE=config.settings_hawkhundred"
     expose:
