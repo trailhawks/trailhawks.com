@@ -9,7 +9,7 @@ FROM segment/chamber:2.14 AS chamber
 # ------------------------------------------------------------
 # Stage 2: Base/builder layer - Setup Python environment
 # ------------------------------------------------------------
-FROM python:3.12-slim-bookworm AS builder
+FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim AS builder
 
 ENV PIP_DISABLE_PIP_VERSION_CHECK 1
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -22,13 +22,10 @@ RUN --mount=type=cache,target=/var/cache/apt,rw \
     --mount=type=cache,target=/var/lib/apt,rw \
     apt-get update && apt-get install -y build-essential git curl
 
-RUN --mount=type=cache,target=/root/.cache,id=pip \
-    pip install --upgrade pip uv
+COPY pyproject.toml uv.lock /tmp/
 
-COPY pyproject.toml /tmp/
-
-RUN --mount=type=cache,target=/root/.cache,id=pip \
-    python -m uv pip install --system /tmp/
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync --frozen --no-install-project --no-dev --directory /tmp
 
 WORKDIR /src/
 
