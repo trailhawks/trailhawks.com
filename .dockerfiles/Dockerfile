@@ -1,18 +1,7 @@
-# syntax = docker/dockerfile:experimental
-# Uses Docker BuildKit for improved caching and build performance
-
 # ------------------------------------------------------------
-# Stage 1: Import chamber (secrets management tool)
-# ------------------------------------------------------------
-FROM segment/chamber:2.14 AS chamber
-
-# ------------------------------------------------------------
-# Stage 2: Base/builder layer - Setup Python environment
+# Base/builder layer - Setup Python environment
 # ------------------------------------------------------------
 FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim
-
-# Copy chamber for secrets management in production
-COPY --from=chamber /chamber /bin/chamber
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
