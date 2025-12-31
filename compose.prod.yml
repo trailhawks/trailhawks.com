@@ -2,7 +2,6 @@ x-common-settings: &common-settings
   build:
     context: .
     dockerfile: .dockerfiles/Dockerfile
-    target: release
   env_file:
     - .env
   entrypoint: /src/compose-entrypoint.sh
