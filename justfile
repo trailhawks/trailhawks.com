@@ -120,10 +120,9 @@ bootstrap *ARGS:
 @migrate:
     {{ manage }} migrate
 
-# Compile Python dependencies from requirements.in to requirements.txt
+# Lock Python dependencies using uv
 @lock *ARGS:
-    uv pip compile {{ ARGS }} ./requirements.in \
-        --output-file ./requirements.txt
+    uv lock {{ ARGS }}
 
 # Pull Docker images
 @pull *ARGS:

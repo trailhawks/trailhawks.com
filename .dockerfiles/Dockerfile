@@ -25,10 +25,10 @@ RUN --mount=type=cache,target=/var/cache/apt,rw \
 RUN --mount=type=cache,target=/root/.cache,id=pip \
     pip install --upgrade pip uv
 
-COPY requirements.txt /tmp/
+COPY pyproject.toml /tmp/
 
 RUN --mount=type=cache,target=/root/.cache,id=pip \
-    python -m uv pip install --system --requirement /tmp/requirements.txt
+    python -m uv pip install --system /tmp/
 
 WORKDIR /src/
 
