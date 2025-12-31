@@ -1,4 +1,0 @@
-bumpversion
-Fabric
-invoke
-piprot
