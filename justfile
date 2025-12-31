@@ -100,10 +100,6 @@ bootstrap *ARGS:
 @lint-autoupdate:
     uv --quiet tool run prek autoupdate
 
-# Update pre-commit hooks to their latest versions (alias)
-@lint-update:
-    uv --quiet tool run prek autoupdate
-
 # View Docker container logs (accepts docker compose logs arguments)
 @logs +ARGS="":
     docker compose logs {{ ARGS }}

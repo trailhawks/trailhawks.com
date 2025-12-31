@@ -256,8 +256,8 @@ TAILWIND_CLI_VERSION = env.str("TAILWIND_CLI_VERSION", default="4.1.18")
 
 PRODUCTION_PROCESSES = {
     "web": {
-        "BACKEND": "django_prodserver.backends.gunicorn.GunicornServer",
-        "ARGS": {"bind": "0.0.0.0:8000", "workers": "2"},
+        "BACKEND": "django_prodserver.backends.uwsgi.UwsgiServer",
+        "ARGS": {"http": "0.0.0.0:8000", "processes": 2},
     },
     "worker": {
         "BACKEND": "django_prodserver.backends.django_q2.DjangoQ2Worker",
