@@ -1,33 +1,52 @@
 # ------------------------------------------------------------
-# Base/builder layer - Setup Python environment
+# Stage 1: Base/builder layer - Setup Python environment
 # ------------------------------------------------------------
-FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim
+FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim AS builder
 
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
+# Configure environment variables
 ENV UV_COMPILE_BYTECODE=1
-ENV UV_LINK_MODE=copy
+ENV UV_SYSTEM_PYTHON 1
 
-RUN apt-get update && \
-    apt-get install -y build-essential curl git && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+# Set working directory
+WORKDIR /src/
 
-RUN mkdir -p /src
+# Install curl for health checks and build tools
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    curl \
+    git \
+    && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /src
+# Install Python dependencies using uv
+# Mount only the necessary files (dependency definitions)
+# This optimizes layer caching - changes to other files won't invalidate this layer
+RUN --mount=type=cache,target=/root/.cache/uv \
+    --mount=type=bind,source=uv.lock,target=uv.lock \
+    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+    uv sync \
+        --all-extras \
+        --frozen \
+        --no-install-project
 
-# Copy dependency files first for better layer caching
-COPY pyproject.toml uv.lock ./
+# ------------------------------------------------------------
+# Stage 2: Release - Final production image
+# ------------------------------------------------------------
+FROM builder AS release
 
-# Install dependencies using uv
-RUN uv sync --frozen --no-install-project --no-dev
+# Use SIGINT for stopping the container
+# This allows for graceful shutdown and proper cleanup
+STOPSIGNAL SIGINT
 
-COPY . /src/
+ADD . /src/
 
-# Install the project itself
-RUN uv sync --frozen --no-dev
+# Copy the uv cache from builder stage to avoid re-downloading packages
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync --frozen
 
-EXPOSE 8000
+# Collect static files for production serving
+RUN DATABASE_URL=sqlite://:memory: SECRET_KEY=build-key uv run --frozen -m manage collectstatic --noinput --clear
 
+# Default command runs Gunicorn WSGI server
+# - Binds to all interfaces on port 8000
+# - Uses 2 worker processes for handling requests
 CMD ["/src/start-web.sh"]
