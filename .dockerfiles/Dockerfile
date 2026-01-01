@@ -4,8 +4,8 @@
 FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim AS builder
 
 # Configure environment variables
-ENV UV_COMPILE_BYTECODE=1
-ENV UV_SYSTEM_PYTHON 1
+ENV UV_SYSTEM_PYTHON=1
+ENV UV_LINK_MODE=copy
 
 # Set working directory
 WORKDIR /src/
@@ -39,12 +39,12 @@ STOPSIGNAL SIGINT
 
 ADD . /src/
 
-# Copy the uv cache from builder stage to avoid re-downloading packages
+# Copy the uv cache from builder stage and compile bytecode once
 RUN --mount=type=cache,target=/root/.cache/uv \
-    uv sync --frozen
+    uv sync --frozen --compile
 
 # Collect static files for production serving
-RUN DATABASE_URL=sqlite://:memory: SECRET_KEY=build-key uv run --frozen -m manage collectstatic --noinput --clear
+RUN DATABASE_URL=sqlite://:memory: SECRET_KEY=build-key uv run --frozen -m manage collectstatic --noinput
 
 # Default command runs Gunicorn WSGI server
 # - Binds to all interfaces on port 8000
