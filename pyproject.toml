@@ -21,6 +21,7 @@ dependencies = [
     "django-markup-deprecated",
     "django-prodserver[uwsgi]",
     "django-q2",
+    "blessed",
     "django-robots",
     "django-shorturls",
     "django-simple-open-graph==0.3",
