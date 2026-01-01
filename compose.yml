@@ -36,7 +36,7 @@ services:
     ports:
       - 8010:8000
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health/"]
+      test: ["CMD-SHELL", "./healthcheck-web.sh"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -49,7 +49,7 @@ services:
     ports:
       - 8000:8000
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health/"]
+      test: ["CMD-SHELL", "./healthcheck-web.sh"]
       interval: 30s
       timeout: 10s
       retries: 3
