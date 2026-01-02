@@ -7,6 +7,7 @@ on:
       - main
     paths-ignore:
       - '.github/workflows/**'
+  workflow_dispatch:
 
 jobs:
   test:
@@ -50,7 +51,7 @@ jobs:
           DATABASE_URL: 'postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres'
           SECRET_KEY: 'for-testing'
         run: |
-          uv run pytest
+          uv run -m pytest
 
   version-bump:
     needs: [test]
