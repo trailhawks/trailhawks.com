@@ -59,7 +59,13 @@ dev = [
     "bumpver",
     "friendly",
     "pre-commit",
+    "pytest",
+    "pytest-django",
 ]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings"
+python_files = ["test_*.py", "*_test.py"]
 
 [tool.bumpver]
 current_version = "2025.12.5"
