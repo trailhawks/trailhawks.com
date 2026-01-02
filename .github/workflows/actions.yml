@@ -7,58 +7,8 @@ on:
       main
 
 jobs:
-  # test:
-  #   runs-on: ubuntu-latest
-  #   name: Tests with Python
-
-  #   services:
-  #     postgres:
-  #       image: postgres:11
-  #       env:
-  #         POSTGRES_USER: postgres
-  #         POSTGRES_PASSWORD: postgres
-  #         POSTGRES_DB: postgres
-  #       ports: ['5432:5432']
-  #       options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-
-  #   steps:
-  #     - uses: actions/checkout@v1
-  #       with:
-  #         fetch-depth: 1
-
-  #     - name: Set up Python 3.7
-  #       uses: actions/setup-python@v5
-  #       with:
-  #         python-version: 3.7
-
-  #     - uses: actions/cache@v1
-  #       with:
-  #         path: ~/.cache/pip
-  #         key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements/base.txt') }}
-  #         restore-keys: |
-  #           ${{ runner.os }}-pip-
-
-  #     - name: Install dependencies
-  #       run: |
-  #         python -m pip install --upgrade pip
-  #         python -m pip install -r requirements/base.txt
-  #       if: steps.cache.outputs.cache-hit != 'true'
-
-  #     - name: Collect Static Assets
-  #       env:
-  #         DATABASE_URL: 'postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres'
-  #       run: |
-  #         python manage.py collectstatic --noinput
-
-  #     - name: Test with pytest
-  #       env:
-  #         DATABASE_URL: 'postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres'
-  #       run: |
-  #         python -m pytest
-
   build:
-    # needs: [test]
-    name: Build and Publish Trail Hawks Django Docker image
+    name: Git checkout on push
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
@@ -67,38 +17,3 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 1
-
-      # - name: Set up Docker Buildx
-      #   id: buildx
-      #   uses: docker/setup-buildx-action@master
-
-      # - name: Cache Docker layers
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: /tmp/.buildx-cache
-      #     key: ${{ runner.os }}-buildx-${{ github.sha }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-buildx-
-
-      # - name: Login to Docker Registry
-      #   uses: docker/login-action@v1
-      #   with:
-      #     password: ${{ secrets.GITHUB_TOKEN }}
-      #     registry: docker.pkg.github.com
-      #     username: ${{ github.actor }}
-
-      # - name: build and push image
-      #   uses: docker/build-push-action@v1
-      #   env:
-      #     DOCKER_BUILDKIT: 1
-      #     INPUT_CACHE_FROMS: ${{ github.repository }}/trailhawks:latest
-      #   with:
-      #     always_pull: true
-      #     dockerfile: "./.docker/Dockerfile"
-      #     password: ${{ secrets.GITHUB_TOKEN }}
-      #     registry: docker.pkg.github.com
-      #     repository: ${{ github.repository }}/trailhawks
-      #     tag_with_ref: true
-      #     tag_with_sha: true
-      #     tags: latest
-      #     username: ${{ github.actor }}
