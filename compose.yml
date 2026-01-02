@@ -42,6 +42,10 @@ services:
       retries: 3
       start_period: 40s
 
+  tailwind:
+    <<: *common-settings
+    command: ["uv", "run", "-m", "manage", "tailwind", "watch"]
+
   web:
     <<: *common-settings
     command: ["uv", "run", "-m", "manage", "runserver", "0.0.0.0:8000"]
