@@ -37,7 +37,7 @@ FROM builder AS release
 # This allows for graceful shutdown and proper cleanup
 STOPSIGNAL SIGINT
 
-ADD . /src/
+COPY . /src/
 
 # Copy the uv cache from builder stage and compile bytecode once
 RUN --mount=type=cache,target=/root/.cache/uv \
