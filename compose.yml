@@ -11,6 +11,7 @@ x-common-settings: &common-settings
     - ./media_root:/src/media_root
     - ./static_root:/src/static_root
     - .:/src
+    - django-tailwind-cli-data:/src/.django_tailwind_cli
 
 services:
 
@@ -65,4 +66,5 @@ services:
   #   command: ["python", "-m", "manage", "qcluster", "--skip-checks"]
 
 volumes:
+  django-tailwind-cli-data:
   postgres-data:
