@@ -1,7 +1,7 @@
 # ------------------------------------------------------------
 # Stage 1: Base/builder layer - Setup Python environment
 # ------------------------------------------------------------
-FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim AS builder
+FROM ghcr.io/astral-sh/uv:python3.13-bookworm-slim AS builder
 
 # Configure environment variables
 ENV UV_SYSTEM_PYTHON=1
