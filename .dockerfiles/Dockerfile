@@ -57,3 +57,13 @@ RUN DATABASE_URL=sqlite://:memory: SECRET_KEY=build-key uv run --frozen -m manag
 # - Binds to all interfaces on port 8000
 # - Uses 2 worker processes for handling requests
 CMD ["/src/start-web.sh"]
+
+# Worker stage
+FROM release AS worker
+
+CMD ["/src/start-worker.sh"]
+
+# Web stage (default)
+FROM release AS web
+
+CMD ["/src/start-web.sh"]
