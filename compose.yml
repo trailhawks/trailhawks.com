@@ -61,10 +61,9 @@ services:
       retries: 3
       start_period: 40s
 
-  # qcluster:
-  #   <<: *common-settings
-  #   # command: ["python", "manage.py", "qcluster"]
-  #   command: ["python", "-m", "manage", "qcluster", "--skip-checks"]
+  qcluster:
+    <<: *common-settings
+    command: ["/src/start-worker.sh"]
 
 volumes:
   django-tailwind-cli-data:
