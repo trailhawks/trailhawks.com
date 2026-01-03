@@ -46,7 +46,7 @@ services:
 
   tailwind:
     <<: *common-settings
-    command: ["uv", "run", "-m", "manage", "tailwind", "watch"]
+    command: ["/src/start-tailwind.sh"]
 
   web:
     <<: *common-settings
