@@ -2,32 +2,39 @@ x-common-settings: &common-settings
   build:
     context: .
     dockerfile: .dockerfiles/Dockerfile
+    target: release
   depends_on:
     db:
       condition: service_healthy
-  env_file:
-    - ".env"
+  environment:
+    - "ALLOWED_HOSTS=*"
+    - "DATABASE_URL=postgres://postgres@db/postgres"
+    - "DJANGO_DEBUG=true"
+  env_file: .env
   init: true
+  tty: true
   volumes:
-    - ./media_root:/src/media_root
-    - ./static_root:/src/static_root
-    - .:/src
+    - ./media_root:/src/media_root:cache
+    - ./static_root:/src/static_root:cache
+    - .:/src:cache
     - django-tailwind-cli-data:/src/.django_tailwind_cli
 
 services:
 
   db:
     image: "pgautoupgrade/pgautoupgrade:17-alpine"
+    init: true
+    user: postgres
     environment:
       - "POSTGRES_HOST_AUTH_METHOD=trust"
     volumes:
       - postgres-data:/var/lib/postgresql/data/
-      - .:/src
+      - .:/src:cache
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: ["CMD-SHELL", "pg_isready", "-d", "postgres"]
       interval: 10s
-      timeout: 5s
-      retries: 5
+      timeout: 3s
+      retries: 3
 
   hawkhundred:
     <<: *common-settings
@@ -36,7 +43,7 @@ services:
     environment:
       - "DJANGO_SETTINGS_MODULE=config.settings_hawkhundred"
     ports:
-      - 8010:8000
+      - "8010:8000"
     healthcheck:
       test: ["CMD-SHELL", "./healthcheck-web.sh"]
       interval: 30s
@@ -48,12 +55,22 @@ services:
     <<: *common-settings
     command: ["/src/start-tailwind.sh"]
 
+  utility:
+    <<: *common-settings
+    command: [
+      "uv",
+      "run",
+      "-m",
+      "manage",
+      "--version"
+    ]
+    entrypoint: ["/src/compose-entrypoint.sh"]
+
   web:
     <<: *common-settings
-    command: ["uv", "run", "-m", "manage", "runserver", "0.0.0.0:8000"]
-    entrypoint: ["/src/compose-entrypoint.sh"]
+    command: ["/src/start-dev.sh"]
     ports:
-      - 8000:8000
+      - "8000:8000"
     healthcheck:
       test: ["CMD-SHELL", "./healthcheck-web.sh"]
       interval: 30s
@@ -64,6 +81,12 @@ services:
   worker:
     <<: *common-settings
     command: ["/src/start-worker.sh"]
+    healthcheck:
+      test: ["CMD-SHELL", "./healthcheck-worker.sh"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
 
 volumes:
   django-tailwind-cli-data:
