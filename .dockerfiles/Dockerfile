@@ -17,7 +17,8 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     build-essential \
     curl \
     git \
-    procps
+    procps \
+    wget
 
 # Install Python dependencies using uv
 # Mount only the necessary files (dependency definitions)
