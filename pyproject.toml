@@ -1,6 +1,6 @@
 [project]
 name = "trailhawks"
-version = "2026.1.9"
+version = "2026.1.10"
 description = "Lawrence Trail Hawks website"
 authors = [
     {name = "Jeff Triplett", email = "jeff.triplett@gmail.com"},
@@ -69,7 +69,7 @@ addopts = "--nomigrations --reuse-db"
 python_files = ["test_*.py", "*_test.py"]
 
 [tool.bumpver]
-current_version = "2026.1.9"
+current_version = "2026.1.10"
 version_pattern = "YYYY.MM.INC1"
 commit_message = ":bookmark: bump version {old_version} -> {new_version}"
 commit = true
