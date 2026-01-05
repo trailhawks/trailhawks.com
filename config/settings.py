@@ -224,9 +224,10 @@ THUMBOR_SERVER = env("THUMBOR_SERVER", default="")
 Q_CLUSTER = {
     "bulk": 10,
     "max_attempts": 1,
-    "name": "DjangORM",
+    "name": "trailhawks",
     "orm": "default",
     "queue_limit": 50,
+    "recycle": 500,
     "retry": 120,
     "timeout": 90,
     "workers": 4,
