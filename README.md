@@ -1,6 +1,6 @@
 <h1 align="center">Welcome to Lawrence Trail Hawks website 👋</h1>
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-2026.1.10-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-2026.1.11-blue.svg?cacheSeconds=2592000" />
   <a href="#" target="_blank">
     <img alt="License: LIMITED" src="https://img.shields.io/badge/License-LIMITED-yellow.svg" />
   </a>
