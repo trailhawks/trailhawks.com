@@ -230,7 +230,7 @@ Q_CLUSTER = {
     "recycle": 500,
     "retry": 120,
     "timeout": 90,
-    "workers": 4,
+    "workers": 2,
 }
 
 MARKDOWNIFY = {
