@@ -1,0 +1,128 @@
+{% extends base_template_name|default:"base.html" %}
+
+{# Demo C: "Three-Column Dashboard" #}
+{# News, runs, and races as equal columns - most compact layout #}
+
+{% load blog_tags %}
+{% load cache %}
+{% load core_tags %}
+{% load heroicons %}
+{% load markdownify %}
+{% load news_tags %}
+{% load race_tags %}
+{% load run_tags %}
+{% load sponsors_tags %}
+{% load static %}
+{% load thumbor_tags %}
+
+
+{% block content %}
+    {# Photo Carousel #}
+    <section class="w-full">
+        {% include 'includes/_carousel.html' %}
+    </section>
+
+    {# Three-Column Dashboard: Runs | Races | News #}
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        {# Column 1: Weekly Runs #}
+        <div>
+            <h2 class="font-bold text-xl md:text-2xl pb-4 border-b border-gray-200 mb-4">
+                <i class="fa fa-running text-red-600 mr-2"></i>Weekly Runs
+            </h2>
+            <div class="space-y-3">
+                {% for run in runs %}
+                    <a href="{{ run.get_absolute_url }}" class="block p-3 bg-white rounded-lg border border-gray-200 hover:border-red-300 hover:shadow-sm transition-all group">
+                        <div class="flex items-center justify-between">
+                            <span class="font-semibold text-gray-900 group-hover:text-red-700">{{ run.get_day_of_week_display }}s</span>
+                            {% if run.run_time %}
+                                <span class="text-sm text-gray-500">{{ run.run_time }}</span>
+                            {% endif %}
+                        </div>
+                        <p class="text-sm text-red-600 mt-1">{{ run.name }}</p>
+                        {% if run.location %}
+                            <p class="text-xs text-gray-500 mt-1">
+                                <i class="fa fa-map-marker-alt mr-1"></i>{{ run.location }}
+                            </p>
+                        {% endif %}
+                    </a>
+                {% empty %}
+                    <p class="text-gray-500 text-sm">No weekly runs scheduled.</p>
+                {% endfor %}
+            </div>
+            <a class="inline-block mt-4 text-sm font-medium text-red-600 hover:text-red-800 transition-colors" href="{% url 'run_list' %}">
+                All runs <i class="fa fa-arrow-right ml-1"></i>
+            </a>
+        </div>
+
+        {# Column 2: Upcoming Races #}
+        <div>
+            <h2 class="font-bold text-xl md:text-2xl pb-4 border-b border-gray-200 mb-4">
+                <i class="fa fa-flag-checkered text-red-600 mr-2"></i>Upcoming Races
+            </h2>
+            <div class="space-y-3">
+                {% get_latest_races as races %}
+                {% for race in races|slice:":4" %}
+                    <a href="{{ race.get_absolute_url }}" class="block p-3 bg-white rounded-lg border border-gray-200 hover:border-red-300 hover:shadow-sm transition-all group">
+                        <div class="flex items-center gap-3">
+                            {% if race.logo %}
+                                <img class="w-12 h-12 object-contain rounded bg-gray-50" src="{{ race.logo.url }}" alt="">
+                            {% else %}
+                                <div class="w-12 h-12 bg-red-100 rounded flex items-center justify-center">
+                                    <i class="fa fa-trophy text-red-600"></i>
+                                </div>
+                            {% endif %}
+                            <div class="flex-1 min-w-0">
+                                <p class="font-semibold text-gray-900 group-hover:text-red-700 truncate">{{ race.title }}</p>
+                                <p class="text-sm text-gray-500">{{ race.start_datetime|date:"M j, Y" }}</p>
+                            </div>
+                        </div>
+                    </a>
+                {% empty %}
+                    <p class="text-gray-500 text-sm">No upcoming races.</p>
+                {% endfor %}
+            </div>
+            <a class="inline-block mt-4 text-sm font-medium text-red-600 hover:text-red-800 transition-colors" href="{% url 'race_index' %}">
+                All races <i class="fa fa-arrow-right ml-1"></i>
+            </a>
+        </div>
+
+        {# Column 3: Recent News #}
+        <div>
+            <h2 class="font-bold text-xl md:text-2xl pb-4 border-b border-gray-200 mb-4">
+                <i class="fa fa-newspaper text-red-600 mr-2"></i>Recent News
+            </h2>
+            <div class="space-y-3">
+                {% get_latest_news num=4 as latest_news %}
+                {% for news in latest_news %}
+                    <article class="p-3 bg-white rounded-lg border border-gray-200 hover:border-red-300 hover:shadow-sm transition-all">
+                        <p class="text-xs text-gray-500 mb-1">{{ news.pub_date|date:"M j, Y" }}</p>
+                        {% if news.title %}
+                            <h4 class="font-semibold text-gray-900 text-sm mb-1 line-clamp-1">{{ news.title }}</h4>
+                        {% endif %}
+                        <div class="prose prose-sm text-gray-600 text-xs line-clamp-2">
+                            {{ news.body|markdownify|truncatewords_html:20 }}
+                        </div>
+                    </article>
+                {% empty %}
+                    <p class="text-gray-500 text-sm">No recent news.</p>
+                {% endfor %}
+            </div>
+            <a class="inline-block mt-4 text-sm font-medium text-red-600 hover:text-red-800 transition-colors" href="{% url 'news_list' %}">
+                All news <i class="fa fa-arrow-right ml-1"></i>
+            </a>
+        </div>
+    </section>
+
+    {# Sponsors #}
+    {% get_homepage_sponsors as homepage_sponsors %}
+    {% if homepage_sponsors %}
+        <section id="sponsors">
+            <h2 class="font-bold text-xl md:text-2xl pb-4">Sponsors</h2>
+            <div class="flex flex-wrap -mx-2">
+                {% for sponsor in homepage_sponsors %}
+                    {% include 'includes/_sponsor.html' with sponsor=sponsor %}
+                {% endfor %}
+            </div>
+        </section>
+    {% endif %}
+{% endblock content %}

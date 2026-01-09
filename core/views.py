@@ -34,6 +34,21 @@ class HomepageView(TemplateView):
         return context
 
 
+class HomepageAView(HomepageView):
+    """Demo A: Carousel + Side-by-Side layout"""
+    template_name = "homepage_a.html"
+
+
+class HomepageBView(HomepageView):
+    """Demo B: Runs First layout"""
+    template_name = "homepage_b.html"
+
+
+class HomepageCView(HomepageView):
+    """Demo C: Three-Column Dashboard layout"""
+    template_name = "homepage_c.html"
+
+
 class HumansView(TemplateView):
     content_type = "text/plain"
     template_name = "humans.txt"
