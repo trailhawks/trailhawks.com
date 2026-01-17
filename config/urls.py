@@ -7,7 +7,7 @@ from django.views.generic import TemplateView
 from rest_framework.routers import DefaultRouter
 
 from blog.models import Post
-from core import __version__
+from config import __version__
 from core.views import (
     AboutView,
     HomepageAView,
