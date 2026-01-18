@@ -151,7 +151,7 @@ media_root
 previews
 # requirements* - removed, now using pyproject.toml
 settings/
-static_root/
+staticfiles/
 
 media/
 

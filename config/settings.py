@@ -34,12 +34,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 MEDIA_ROOT = str(BASE_DIR.joinpath("media_root"))
 MEDIA_URL = "/media/"
 
-STATIC_ROOT = str(BASE_DIR.joinpath("static_root"))
+STATIC_ROOT = str(BASE_DIR.joinpath("staticfiles"))
 STATIC_URL = "/static/"
-STATICFILES_DIRS = (
-    str(BASE_DIR.joinpath("assets")),
-    str(BASE_DIR.joinpath("frontend")),
-)
+STATICFILES_DIRS = (str(BASE_DIR.joinpath("frontend")),)
 
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
