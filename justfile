@@ -146,7 +146,7 @@ bootstrap *ARGS:
 
 # Run pytest test suite in Docker
 @test *ARGS:
-    {{ compose }} uv run pytest {{ ARGS }}
+    {{ compose }} uv run --extra dev pytest {{ ARGS }}
 
 # Start Docker containers (accepts docker compose up arguments)
 @up *ARGS:
