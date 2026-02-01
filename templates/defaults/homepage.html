@@ -1,149 +1,120 @@
 {% extends base_template_name|default:"base.html" %}
 
-
 {% load blog_tags %}
 {% load cache %}
 {% load core_tags %}
-{% load faq_tags %}
 {% load heroicons %}
 {% load markdownify %}
-{% load micawber_tags %}
 {% load news_tags %}
 {% load race_tags %}
 {% load run_tags %}
 {% load sponsors_tags %}
 {% load static %}
 {% load thumbor_tags %}
-{% load twitterfy %}
 
 
 {% block content %}
-    <section class="bg-blue-50 border-l-4 border-blue-400 p-4 flex flex-col sm:flex-row items-center gap-3 rounded">
-        {% heroicon_outline "information-circle" class="size-6 text-blue-600 flex-shrink-0" %}
-        <span class="text-sm sm:text-base text-gray-700 text-center sm:text-left">We're currently rebuilding our website. Some pages may be moved or updated as we improve your experience.</span>
-    </section>
-
     {# Photo Carousel #}
     <section class="w-full">
         {% include 'includes/_carousel.html' %}
     </section>
 
-    <section class="flex flex-col md:flex-row gap-8 md:gap-12">
-        <div class="w-full md:w-1/3">
-            <h2 class="font-bold text-3xl md:text-4xl pb-4">Latest updates</h2>
-            <div class="flex flex-col divide-y divide-gray-200">
-                {% get_latest_news num=4 as latest_news %}
-                {% for news in latest_news %}
-                    <article class="py-4 first:pt-0">
-                        <h4 class="font-medium text-lg text-gray-600 mb-2">{{ news.pub_date|date }}</h4>
-                        <div class="prose prose-sm">
-                            {{ news.body|markdownify|truncatewords_html:"100" }}
+    {# Three-Column Dashboard: Runs | Races | News #}
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        {# Column 1: Weekly Runs #}
+        <div>
+            <h2 class="font-bold text-xl md:text-2xl pb-4 border-b border-gray-200 mb-4">
+                <i class="fa fa-running text-red-600 mr-2"></i>Weekly Runs
+            </h2>
+            <div class="space-y-3">
+                {% for run in runs %}
+                    <a href="{{ run.get_absolute_url }}" class="block p-3 bg-white rounded-lg border border-gray-200 hover:border-red-300 hover:shadow-sm transition-all group">
+                        <div class="flex items-center justify-between">
+                            <span class="font-semibold text-gray-900 group-hover:text-red-700">{{ run.get_day_of_week_display }}s</span>
+                            {% if run.run_time %}
+                                <span class="text-sm text-gray-500">{{ run.run_time }}</span>
+                            {% endif %}
                         </div>
-                    </article>
+                        <p class="text-sm text-red-600 mt-1">{{ run.name }}</p>
+                        {% if run.location %}
+                            <p class="text-xs text-gray-500 mt-1">
+                                <i class="fa fa-map-marker-alt mr-1"></i>{{ run.location }}
+                            </p>
+                        {% endif %}
+                    </a>
+                {% empty %}
+                    <p class="text-gray-500 text-sm">No weekly runs scheduled.</p>
                 {% endfor %}
             </div>
-            <a class="inline-block mt-4 py-2 px-4 w-full font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors" href="{% url 'news_list' %}">More news &raquo;</a>
+            <a class="inline-block mt-4 text-sm font-medium text-red-600 hover:text-red-800 transition-colors" href="{% url 'run_list' %}">
+                All runs <i class="fa fa-arrow-right ml-1"></i>
+            </a>
         </div>
 
-        <div class="w-full md:w-2/3">
-            {% get_latest_race as latest_race %}
-            {% if latest_race %}
-                <h2 class="font-bold text-3xl md:text-4xl pb-4">Next event</h2>
-                <div class="p-4 md:p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
-                    <h3 class="text-xl md:text-2xl font-bold mb-4">
-                        <a href="{{ latest_race.get_absolute_url }}" class="text-gray-900 hover:text-red-600 transition-colors">{{ latest_race.title }}</a>
-                    </h3>
-                    {% if latest_race.logo %}
-                        <a href="{{ latest_race.get_absolute_url }}" class="block mb-4">
-                            <img class="w-full h-auto rounded" src="{{ latest_race.logo.url }}" alt="{{ latest_race.title }} logo">
-                        </a>
-                    {% endif %}
-
-                    {% if latest_race.slogan %}
-                        <p class="text-xl md:text-2xl text-gray-600 italic mb-4">{{ latest_race.slogan }}</p>
-                    {% endif %}
-
-                    <div class="flex flex-col gap-2 py-4 text-base md:text-lg border-y border-gray-100">
-                        <div><strong>Race date:</strong> {{ latest_race.start_datetime|date:"F j, Y" }}</div>
-                        <div><strong>Start time:</strong> {{ latest_race.start_datetime|time:"h:i A" }}</div>
-                        <div><strong>Race distance:</strong> {{ latest_race.distance }}</div>
-                    </div>
-
-                    {% if latest_race.description %}
-                        <div class="py-4 prose prose-a:underline prose-a:text-red-600 hover:prose-a:text-red-800">
-                            {{ latest_race.description|markdownify|truncatewords_html:50 }}
+        {# Column 2: Upcoming Races #}
+        <div>
+            <h2 class="font-bold text-xl md:text-2xl pb-4 border-b border-gray-200 mb-4">
+                <i class="fa fa-flag-checkered text-red-600 mr-2"></i>Upcoming Races
+            </h2>
+            <div class="space-y-3">
+                {% get_latest_races as races %}
+                {% for race in races|slice:":4" %}
+                    <a href="{{ race.get_absolute_url }}" class="block p-3 bg-white rounded-lg border border-gray-200 hover:border-red-300 hover:shadow-sm transition-all group">
+                        <div class="flex items-center gap-3">
+                            {% if race.logo %}
+                                <img class="w-12 h-12 object-contain rounded bg-gray-50" src="{{ race.logo.url }}" alt="">
+                            {% else %}
+                                <div class="w-12 h-12 bg-red-100 rounded flex items-center justify-center">
+                                    <i class="fa fa-trophy text-red-600"></i>
+                                </div>
+                            {% endif %}
+                            <div class="flex-1 min-w-0">
+                                <p class="font-semibold text-gray-900 group-hover:text-red-700 truncate">{{ race.title }}</p>
+                                <p class="text-sm text-gray-500">{{ race.start_datetime|date:"M j, Y" }}</p>
+                            </div>
                         </div>
-                    {% endif %}
+                    </a>
+                {% empty %}
+                    <p class="text-gray-500 text-sm">No upcoming races.</p>
+                {% endfor %}
+            </div>
+            <a class="inline-block mt-4 text-sm font-medium text-red-600 hover:text-red-800 transition-colors" href="{% url 'race_index' %}">
+                All races <i class="fa fa-arrow-right ml-1"></i>
+            </a>
+        </div>
 
-                    <a class="inline-block mt-2 py-2 px-4 w-full font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors" href="{{ latest_race.get_absolute_url }}">More information &raquo;</a>
-                </div>
-            {% else %}
-                {% if latest_post %}
-                    <h2 class="font-bold text-3xl md:text-4xl pb-4">Latest post</h2>
-                    <article class="p-4 md:p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
-                        <h3 class="font-bold text-xl md:text-2xl mb-2">
-                            <a href="{{ latest_post.get_absolute_url }}" class="text-gray-900 hover:text-red-600 transition-colors">{{ latest_post.title }}</a>
-                        </h3>
-                        <p class="text-gray-600 mb-4">{{ latest_post.publish|date:"D d M, Y" }} by <a href="{{ latest_post.author.get_absolute_url }}" class="text-red-600 hover:text-red-800">{{ latest_post.author}}</a></p>
-                        <div class="prose prose-a:underline prose-a:text-red-600 hover:prose-a:text-red-800 max-w-none">
-                            {{ latest_post.body|markdownify|truncatewords_html:"400" }}
+        {# Column 3: Recent News #}
+        <div>
+            <h2 class="font-bold text-xl md:text-2xl pb-4 border-b border-gray-200 mb-4">
+                <i class="fa fa-newspaper text-red-600 mr-2"></i>Recent News
+            </h2>
+            <div class="space-y-3">
+                {% get_latest_news num=4 as latest_news %}
+                {% for news in latest_news %}
+                    <article class="p-3 bg-white rounded-lg border border-gray-200 hover:border-red-300 hover:shadow-sm transition-all">
+                        <p class="text-xs text-gray-500 mb-1">{{ news.pub_date|date:"M j, Y" }}</p>
+                        {% if news.title %}
+                            <h4 class="font-semibold text-gray-900 text-sm mb-1 line-clamp-1">{{ news.title }}</h4>
+                        {% endif %}
+                        <div class="prose prose-sm text-gray-600 text-xs line-clamp-2">
+                            {{ news.body|markdownify|truncatewords_html:20 }}
                         </div>
-                        <a href="{{ latest_post.get_absolute_url }}" class="inline-block mt-4 text-red-600 hover:text-red-800 font-medium">Read more &raquo;</a>
                     </article>
-                {% endif %}
-            {% endif %}
+                {% empty %}
+                    <p class="text-gray-500 text-sm">No recent news.</p>
+                {% endfor %}
+            </div>
+            <a class="inline-block mt-4 text-sm font-medium text-red-600 hover:text-red-800 transition-colors" href="{% url 'news_list' %}">
+                All news <i class="fa fa-arrow-right ml-1"></i>
+            </a>
         </div>
     </section>
 
-    <section id="weekly-runs">
-        <h2 class="font-bold text-3xl md:text-4xl pb-4">Weekly runs</h2>
-        <div class="divide-y divide-gray-200">
-            {% for run in runs %}
-                <a class="flex flex-col sm:flex-row py-3 text-base sm:text-xl hover:bg-yellow-100 transition-colors rounded" href="{{ run.get_absolute_url }}">
-                    <span class="sm:w-1/3 font-bold text-gray-900">
-                        {{ run.get_day_of_week_display }}s
-                    </span>
-                    <span class="sm:w-1/3 sm:text-center text-red-600 hover:text-red-800 underline">
-                        {{ run.name }}
-                    </span>
-                    {% if run.location %}
-                        <span class="sm:w-1/3 sm:text-right text-gray-600">
-                            {{ run.location }}
-                        </span>
-                    {% endif %}
-                </a>
-            {% endfor %}
-        </div>
-    </section>
-
-    <section id="upcoming-races">
-        <h2 class="font-bold text-3xl md:text-4xl pb-4">Upcoming races</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-            {% get_latest_races as races %}
-            {% for race in races %}
-                {% include 'includes/_race.html' with race=race %}
-            {% empty %}
-                <p class="text-gray-500 col-span-full">No upcoming races scheduled.</p>
-            {% endfor %}
-        </div>
-    </section>
-
-    <section id="past-races">
-        <h2 class="font-bold text-3xl md:text-4xl pb-4">Past races</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4">
-            {% get_past_races as past_races %}
-            {% for past_race in past_races reversed %}
-                <a class="py-2 text-gray-700 hover:text-red-600 hover:bg-gray-50 rounded px-2 transition-colors" href="{{ past_race.get_absolute_url }}">{{ past_race }}</a>
-            {% empty %}
-                <p class="text-gray-500 col-span-full">No past races available.</p>
-            {% endfor %}
-        </div>
-    </section>
-
+    {# Sponsors #}
     {% get_homepage_sponsors as homepage_sponsors %}
     {% if homepage_sponsors %}
         <section id="sponsors">
-            <h2 class="font-bold text-3xl md:text-4xl pb-4">Sponsors</h2>
+            <h2 class="font-bold text-xl md:text-2xl pb-4">Sponsors</h2>
             <div class="flex flex-wrap -mx-2">
                 {% for sponsor in homepage_sponsors %}
                     {% include 'includes/_sponsor.html' with sponsor=sponsor %}

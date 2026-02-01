@@ -8,16 +8,7 @@ from rest_framework.routers import DefaultRouter
 
 from blog.models import Post
 from config import __version__
-from core.views import (
-    AboutView,
-    HomepageAView,
-    HomepageBView,
-    HomepageCView,
-    HomepageView,
-    HumansView,
-    StyleGuideView,
-    ThanksView,
-)
+from core.views import AboutView, HomepageView, HumansView, StyleGuideView, ThanksView
 from members.views import officer_list
 from news.models import News
 from photos.apis import PhotoViewSet, RandomPhotoViewSet
@@ -60,9 +51,6 @@ admin.site.site_title = admin_header
 
 urlpatterns = [
     path("", HomepageView.as_view(), name="homepage"),
-    path("demo/a/", HomepageAView.as_view(), name="homepage_demo_a"),
-    path("demo/b/", HomepageBView.as_view(), name="homepage_demo_b"),
-    path("demo/c/", HomepageCView.as_view(), name="homepage_demo_c"),
     path("about/", AboutView.as_view(), name="about"),
     path("contact/", officer_list, name="contact"),
     path("contact/thanks/", ThanksView.as_view(), name="thanks"),
