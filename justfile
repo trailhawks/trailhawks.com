@@ -138,7 +138,7 @@ bootstrap *ARGS:
 # Build Tailwind CSS and collect Django static files
 @static:
     npx -p tailwindcss@{{ TAILWIND_CSS_VERSION }} tailwindcss build \
-        ./frontend/index.css \
+        ./src/index.css \
         --config ./frontend/tailwind.config.js \
         --output ./assets/css/tailwind.css
 
