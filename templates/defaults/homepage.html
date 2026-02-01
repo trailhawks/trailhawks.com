@@ -20,7 +20,7 @@
     </section>
 
     {# Three-Column Dashboard: Runs | Races | News #}
-    <section class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 pt-4">
         {# Column 1: Weekly Runs #}
         <div>
             <h2 class="font-bold text-xl md:text-2xl pb-4 border-b border-gray-200 mb-4">
@@ -113,7 +113,7 @@
     {# Sponsors #}
     {% get_homepage_sponsors as homepage_sponsors %}
     {% if homepage_sponsors %}
-        <section id="sponsors">
+        <section id="sponsors" class="pt-4">
             <h2 class="font-bold text-xl md:text-2xl pb-4">Sponsors</h2>
             <div class="flex flex-wrap -mx-2">
                 {% for sponsor in homepage_sponsors %}
