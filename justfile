@@ -145,8 +145,8 @@ bootstrap *ARGS:
     {{ manage }} collectstatic --noinput
 
 # Run pytest test suite in Docker
-@test:
-    {{ compose }} pytest
+@test *ARGS:
+    {{ compose }} uv run pytest {{ ARGS }}
 
 # Start Docker containers (accepts docker compose up arguments)
 @up *ARGS:
