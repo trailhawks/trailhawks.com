@@ -4,6 +4,8 @@ Photo Carousel Component
 - Auto-advances every 5 seconds
 - Touch/keyboard accessible
 - Responsive design
+
+Image position options: object-top (default), object-center, object-bottom
 {% endcomment %}
 
 <div class="relative w-full overflow-hidden rounded-lg shadow-lg bg-gray-900" id="photo-carousel">
@@ -11,22 +13,22 @@ Photo Carousel Component
     <div class="relative h-64 md:h-96 lg:h-[500px]">
         <!-- Slides -->
         <div class="carousel-slides absolute inset-0 transition-opacity duration-700">
-            <!-- Slide 1: Sanders Saunter 2023 - Before Start -->
+            <!-- Slide 1: Sanders Saunter 2023 - Before Start (object-center) -->
             <div class="carousel-slide absolute inset-0 opacity-100">
                 <img src="https://www.mile90.com/Race-Photos/2023-Race-Events/Sanders-Saunter-2023/10K/Before-Start/i-pFZ97kr/0/4K/SandersSaunter-2023-AR-2097-4K.jpg"
                      alt="Runners at Sanders Saunter 2023 before start"
-                     class="w-full h-full object-cover">
+                     class="w-full h-full object-cover object-center">
                 <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 md:p-6">
                     <h3 class="text-white text-lg md:text-2xl font-bold">Sanders Saunter 2023</h3>
                     <p class="text-white/90 text-sm md:text-base">Before the Start - Clinton Lake</p>
                 </div>
             </div>
 
-            <!-- Slide 2: Sanders Saunter 2023 - Awards -->
+            <!-- Slide 2: Sanders Saunter 2023 - Post-Race (25% from top) -->
             <div class="carousel-slide absolute inset-0 opacity-0">
-                <img src="https://www.mile90.com/Race-Photos/2023-Race-Events/Sanders-Saunter-2023/Miscellaneous/Miscellaneous/i-fvf2JhV/0/4K/SandersSaunter-2023-AR-2345-4K.jpg"
-                     alt="Sanders Saunter 2023 awards ceremony"
-                     class="w-full h-full object-cover">
+                <img src="https://photos.smugmug.com/Race-Photos/2023-Race-Events/Sanders-Saunter-2023/Miscellaneous/Miscellaneous/i-fvf2JhV/0/KMTFRf8c5r6k3xwwj6tVd8rJF996JM7B7JsXMBsrV/X5/SandersSaunter-2023-AR-2491-X5.jpg"
+                     alt="Sanders Saunter 2023 post-race celebration"
+                     class="w-full h-full object-cover object-[50%_25%]">
                 <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 md:p-6">
                     <h3 class="text-white text-lg md:text-2xl font-bold">Sanders Saunter 2023</h3>
                     <p class="text-white/90 text-sm md:text-base">Post-Race Celebration</p>
@@ -37,7 +39,7 @@ Photo Carousel Component
             <div class="carousel-slide absolute inset-0 opacity-0">
                 <img src="https://www.mile90.com/Race-Photos/2023-Race-Events/The-Hawk-2023/100-75-Mile/Red-Trail/i-rTkFf92/0/4K/Hawk-2023-RM-7805-4K.jpg"
                      alt="Trail runner at The Hawk 100 2023"
-                     class="w-full h-full object-cover">
+                     class="w-full h-full object-cover object-top">
                 <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 md:p-6">
                     <h3 class="text-white text-lg md:text-2xl font-bold">The Hawk Hundred 2023</h3>
                     <p class="text-white/90 text-sm md:text-base">Red Trail - 100 Mile Endurance</p>
@@ -48,7 +50,7 @@ Photo Carousel Component
             <div class="carousel-slide absolute inset-0 opacity-0">
                 <img src="https://www.mile90.com/Race-Photos/2023-Race-Events/The-Hawk-2023/Aid-Miscellaneous/Course-Misc/i-HWvX533/0/4K/Hawk-2023-RM-8088-4K.jpg"
                      alt="The Hawk 2023 trail course"
-                     class="w-full h-full object-cover">
+                     class="w-full h-full object-cover object-top">
                 <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 md:p-6">
                     <h3 class="text-white text-lg md:text-2xl font-bold">The Hawk Hundred 2023</h3>
                     <p class="text-white/90 text-sm md:text-base">Clinton Lake Trail Course</p>
@@ -59,18 +61,18 @@ Photo Carousel Component
             <div class="carousel-slide absolute inset-0 opacity-0">
                 <img src="https://www.mile90.com/Race-Photos/2023-Race-Events/The-Night-Hawk-2023/50K/Near-Start-White/i-PxHhFX8/0/4K/NightHawk-2023-AR-1476-4K.jpg"
                      alt="Night Hawk 2023 runners at start"
-                     class="w-full h-full object-cover">
+                     class="w-full h-full object-cover object-top">
                 <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 md:p-6">
                     <h3 class="text-white text-lg md:text-2xl font-bold">The Night Hawk 2023</h3>
                     <p class="text-white/90 text-sm md:text-base">50K Start - Nighttime Trail Running</p>
                 </div>
             </div>
 
-            <!-- Slide 6: Night Hawk 2021 -->
+            <!-- Slide 6: Night Hawk 2021 (object-center) -->
             <div class="carousel-slide absolute inset-0 opacity-0">
                 <img src="https://www.mile90.com/Race-Photos/2021-Race-Events/The-Night-Hawk-2021/Before/Before-Misc/i-W2mVzr8/0/4K/NightHawk-2021-RM-0088-4K.jpg"
                      alt="Night Hawk 2021 before race"
-                     class="w-full h-full object-cover">
+                     class="w-full h-full object-cover object-center">
                 <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 md:p-6">
                     <h3 class="text-white text-lg md:text-2xl font-bold">The Night Hawk 2021</h3>
                     <p class="text-white/90 text-sm md:text-base">Pre-Race Preparations</p>
@@ -81,18 +83,18 @@ Photo Carousel Component
             <div class="carousel-slide absolute inset-0 opacity-0">
                 <img src="https://www.mile90.com/Race-Photos/2023-Race-Events/Cactus-Roulette-2023/Saturday/Cactus-Ridge/i-3bx7P2L/0/4K/CactusRoulette-2023-RM-4074-4K.jpg"
                      alt="Cactus Roulette 2023 runner on trail"
-                     class="w-full h-full object-cover">
+                     class="w-full h-full object-cover object-top">
                 <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 md:p-6">
                     <h3 class="text-white text-lg md:text-2xl font-bold">Cactus Roulette 2023</h3>
                     <p class="text-white/90 text-sm md:text-base">Cactus Ridge - Endurance Challenge</p>
                 </div>
             </div>
 
-            <!-- Slide 8: Cactus Roulette 2023 - Start/Finish -->
+            <!-- Slide 8: Cactus Roulette 2023 - Start/Finish (object-center) -->
             <div class="carousel-slide absolute inset-0 opacity-0">
                 <img src="https://www.mile90.com/Race-Photos/2023-Race-Events/Cactus-Roulette-2023/Sunday/Start-Finish/i-4sFjwLd/0/4K/CactusRoulette-2023-JK-1020-4K.jpg"
                      alt="Cactus Roulette 2023 start and finish area"
-                     class="w-full h-full object-cover">
+                     class="w-full h-full object-cover object-center">
                 <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 md:p-6">
                     <h3 class="text-white text-lg md:text-2xl font-bold">Cactus Roulette 2023</h3>
                     <p class="text-white/90 text-sm md:text-base">Start & Finish Line</p>
@@ -103,7 +105,7 @@ Photo Carousel Component
             <div class="carousel-slide absolute inset-0 opacity-0">
                 <img src="https://www.mile90.com/Race-Photos/2023-Race-Events/Pi-Day-River-Rotation-2023/On-Course/Pi-Miler/South-Trail/i-tZ5WRmW/0/4K/PiDay-2023-KM-8359-4K.jpg"
                      alt="Pi Day River Rotation 2023 runner on trail"
-                     class="w-full h-full object-cover">
+                     class="w-full h-full object-cover object-top">
                 <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 md:p-6">
                     <h3 class="text-white text-lg md:text-2xl font-bold">Pi Day River Rotation 2023</h3>
                     <p class="text-white/90 text-sm md:text-base">South Trail - Pi Miler 5K</p>
@@ -114,7 +116,7 @@ Photo Carousel Component
             <div class="carousel-slide absolute inset-0 opacity-0">
                 <img src="https://www.mile90.com/Race-Photos/2022-Race-Events/Pi-Day-River-Rotation-2022/Finish/Pi-Miler/i-4qLMJGq/0/4K/PiDay-2022-RM-3024-4K.jpg"
                      alt="Pi Day River Rotation 2022 finish line"
-                     class="w-full h-full object-cover">
+                     class="w-full h-full object-cover object-top">
                 <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 md:p-6">
                     <h3 class="text-white text-lg md:text-2xl font-bold">Pi Day River Rotation 2022</h3>
                     <p class="text-white/90 text-sm md:text-base">Pi Miler Finish Line</p>
@@ -175,30 +177,30 @@ Photo Carousel Component
         let touchEndX = 0;
         let slideOrder = [];
 
-    // Create randomized slide order
+        // Create randomized slide order
         function createRandomOrder() {
             slideOrder = Array.from({ length: slides.length }, (_, i) => i);
-        // Fisher-Yates shuffle
+            // Fisher-Yates shuffle
             for (let i = slideOrder.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [slideOrder[i], slideOrder[j]] = [slideOrder[j], slideOrder[i]];
             }
         }
 
-    // Initialize random order
+        // Initialize random order
         createRandomOrder();
 
         function showSlide(index) {
-        // Wrap around
+            // Wrap around
             if (index < 0) index = slides.length - 1;
             if (index >= slides.length) index = 0;
 
             currentSlide = index;
 
-        // Get the actual slide to show based on random order
+            // Get the actual slide to show based on random order
             const slideToShow = slideOrder[currentSlide];
 
-        // Update slides
+            // Update slides
             slides.forEach((slide, i) => {
                 if (i === slideToShow) {
                     slide.style.opacity = '1';
@@ -209,7 +211,7 @@ Photo Carousel Component
                 }
             });
 
-        // Update indicators
+            // Update indicators
             indicators.forEach((indicator, i) => {
                 if (i === currentSlide) {
                     indicator.classList.remove('bg-white/50');
@@ -240,7 +242,7 @@ Photo Carousel Component
             }
         }
 
-    // Event listeners
+        // Event listeners
         if (prevBtn) {
             prevBtn.addEventListener('click', () => {
                 prevSlide();
@@ -266,7 +268,7 @@ Photo Carousel Component
             });
         });
 
-    // Touch support for mobile
+        // Touch support for mobile
         carousel.addEventListener('touchstart', (e) => {
             touchStartX = e.changedTouches[0].screenX;
         }, { passive: true });
@@ -282,10 +284,10 @@ Photo Carousel Component
 
             if (Math.abs(diff) > swipeThreshold) {
                 if (diff > 0) {
-                // Swipe left - next slide
+                    // Swipe left - next slide
                     nextSlide();
                 } else {
-                // Swipe right - previous slide
+                    // Swipe right - previous slide
                     prevSlide();
                 }
                 stopAutoplay();
@@ -293,12 +295,11 @@ Photo Carousel Component
             }
         }
 
-
-    // Pause on hover (desktop only)
+        // Pause on hover (desktop only)
         carousel.addEventListener('mouseenter', stopAutoplay);
         carousel.addEventListener('mouseleave', startAutoplay);
 
-    // Pause when page is hidden
+        // Pause when page is hidden
         document.addEventListener('visibilitychange', () => {
             if (document.hidden) {
                 stopAutoplay();
@@ -307,7 +308,7 @@ Photo Carousel Component
             }
         });
 
-    // Initialize
+        // Initialize
         showSlide(0);
         startAutoplay();
     })();
