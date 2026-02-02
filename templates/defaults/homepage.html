@@ -20,38 +20,38 @@
     {% get_homepage_sponsors as homepage_sponsors %}
     {% get_active_members as active_members %}
 
-    {# Hero Carousel #}
+    {% comment %}Hero Carousel{% endcomment %}
     <section class="w-full -mx-4 md:-mx-6 -mt-4 md:-mt-6 mb-8">
         <div class="px-4 md:px-6">
             {% include 'includes/_carousel.html' %}
         </div>
     </section>
 
-    {# Quick Stats Bar #}
+    {% comment %}Quick Stats Bar{% endcomment %}
     <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        <div class="bg-gradient-to-br from-red-600 to-red-700 rounded-xl p-4 text-white text-center">
-            <div class="text-3xl md:text-4xl font-bold">{{ races.count }}</div>
-            <div class="text-red-200 text-sm">Upcoming Races</div>
+        <div class="bg-white border border-gray-200 rounded-xl p-4 text-center">
+            <div class="text-3xl md:text-4xl font-bold text-red-600">{{ races.count }}</div>
+            <div class="text-gray-500 text-sm">Upcoming Races</div>
         </div>
-        <div class="bg-gradient-to-br from-green-600 to-green-700 rounded-xl p-4 text-white text-center">
-            <div class="text-3xl md:text-4xl font-bold">{{ runs|length }}</div>
-            <div class="text-green-200 text-sm">Weekly Runs</div>
+        <div class="bg-white border border-gray-200 rounded-xl p-4 text-center">
+            <div class="text-3xl md:text-4xl font-bold text-red-600">{{ runs|length }}</div>
+            <div class="text-gray-500 text-sm">Weekly Runs</div>
         </div>
-        <div class="bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl p-4 text-white text-center">
-            <div class="text-3xl md:text-4xl font-bold">{{ active_members.count }}</div>
-            <div class="text-blue-200 text-sm">Active Members</div>
+        <div class="bg-white border border-gray-200 rounded-xl p-4 text-center">
+            <div class="text-3xl md:text-4xl font-bold text-red-600">{{ active_members.count }}</div>
+            <div class="text-gray-500 text-sm">Active Members</div>
         </div>
-        <div class="bg-gradient-to-br from-purple-600 to-purple-700 rounded-xl p-4 text-white text-center">
-            <div class="text-3xl md:text-4xl font-bold">{{ past_races.count }}</div>
-            <div class="text-purple-200 text-sm">Races Organized</div>
+        <div class="bg-white border border-gray-200 rounded-xl p-4 text-center">
+            <div class="text-3xl md:text-4xl font-bold text-red-600">{{ past_races.count }}</div>
+            <div class="text-gray-500 text-sm">Races Organized</div>
         </div>
     </section>
 
-    {# Three-Column Dashboard: Runs | Races | News #}
+    {% comment %}Three-Column Dashboard: Runs | Races | News{% endcomment %}
     <section class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-12">
-        {# Column 1: Weekly Runs #}
+        {% comment %}Column 1: Weekly Runs{% endcomment %}
         <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-            <div class="bg-gradient-to-r from-green-600 to-green-700 px-4 py-3">
+            <div class="bg-gray-800 px-4 py-3">
                 <h2 class="font-bold text-lg text-white flex items-center gap-2">
                     <i class="fa fa-running"></i>
                     Weekly Runs
@@ -59,14 +59,14 @@
             </div>
             <div class="p-4 space-y-3">
                 {% for run in runs %}
-                    <a href="{{ run.get_absolute_url }}" class="block p-3 bg-gray-50 rounded-lg hover:bg-green-50 hover:border-green-300 border border-transparent transition-all group">
+                    <a href="{{ run.get_absolute_url }}" class="block p-3 bg-gray-50 rounded-lg hover:bg-red-50 hover:border-red-300 border border-transparent transition-all group">
                         <div class="flex items-center justify-between">
-                            <span class="font-semibold text-gray-900 group-hover:text-green-700">{{ run.get_day_of_week_display }}s</span>
+                            <span class="font-semibold text-gray-900 group-hover:text-red-700">{{ run.get_day_of_week_display }}s</span>
                             {% if run.run_time %}
                                 <span class="text-sm text-gray-500 bg-white px-2 py-0.5 rounded">{{ run.run_time }}</span>
                             {% endif %}
                         </div>
-                        <p class="text-sm text-green-600 mt-1 font-medium">{{ run.name }}</p>
+                        <p class="text-sm text-red-600 mt-1 font-medium">{{ run.name }}</p>
                         {% if run.location %}
                             <p class="text-xs text-gray-500 mt-1 flex items-center gap-1">
                                 <i class="fa fa-map-marker-alt"></i>{{ run.location }}
@@ -78,15 +78,15 @@
                 {% endfor %}
             </div>
             <div class="px-4 pb-4">
-                <a href="{% url 'run_list' %}" class="block w-full py-2 px-4 bg-green-600 hover:bg-green-700 text-white text-center font-semibold rounded-lg transition-colors">
+                <a href="{% url 'run_list' %}" class="block w-full py-2 px-4 bg-gray-800 hover:bg-gray-900 text-white text-center font-semibold rounded-lg transition-colors">
                     View All Runs <i class="fa fa-arrow-right ml-1"></i>
                 </a>
             </div>
         </div>
 
-        {# Column 2: Upcoming Races #}
+        {% comment %}Column 2: Upcoming Races{% endcomment %}
         <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-            <div class="bg-gradient-to-r from-red-600 to-red-700 px-4 py-3">
+            <div class="bg-red-700 px-4 py-3">
                 <h2 class="font-bold text-lg text-white flex items-center gap-2">
                     <i class="fa fa-flag-checkered"></i>
                     Upcoming Races
@@ -123,9 +123,9 @@
             </div>
         </div>
 
-        {# Column 3: Recent News #}
+        {% comment %}Column 3: Recent News{% endcomment %}
         <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-            <div class="bg-gradient-to-r from-blue-600 to-blue-700 px-4 py-3">
+            <div class="bg-gray-700 px-4 py-3">
                 <h2 class="font-bold text-lg text-white flex items-center gap-2">
                     <i class="fa fa-newspaper"></i>
                     Recent News
@@ -134,7 +134,7 @@
             <div class="p-4 space-y-3">
                 {% get_latest_news num=4 as latest_news %}
                 {% for news in latest_news %}
-                    <article class="p-3 bg-gray-50 rounded-lg hover:bg-blue-50 border border-transparent hover:border-blue-300 transition-all">
+                    <article class="p-3 bg-gray-50 rounded-lg hover:bg-red-50 border border-transparent hover:border-red-300 transition-all">
                         <div class="flex items-center gap-2 text-xs text-gray-500 mb-1">
                             <i class="fa fa-calendar-alt"></i>
                             {{ news.pub_date|date:"M j, Y" }}
@@ -151,19 +151,20 @@
                 {% endfor %}
             </div>
             <div class="px-4 pb-4">
-                <a href="{% url 'news_list' %}" class="block w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white text-center font-semibold rounded-lg transition-colors">
+                <a href="{% url 'news_list' %}" class="block w-full py-2 px-4 bg-gray-700 hover:bg-gray-800 text-white text-center font-semibold rounded-lg transition-colors">
                     View All News <i class="fa fa-arrow-right ml-1"></i>
                 </a>
             </div>
         </div>
     </section>
 
-    {# Sponsors Section #}
+    {% comment %}
+    Sponsors Section - Hidden until logos are fixed
     {% if homepage_sponsors %}
         <section id="sponsors" class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-12">
-            <div class="bg-gradient-to-r from-pink-600 to-pink-700 px-6 py-4">
-                <h2 class="text-xl font-bold text-white flex items-center gap-2">
-                    <i class="fa fa-handshake"></i>
+            <div class="bg-gray-100 border-b border-gray-200 px-6 py-4">
+                <h2 class="text-xl font-bold text-gray-900 flex items-center gap-2">
+                    <i class="fa fa-handshake text-red-600"></i>
                     Our Sponsors
                 </h2>
             </div>
@@ -171,24 +172,25 @@
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
                     {% for sponsor in homepage_sponsors %}
                         {% if sponsor.logo %}
-                            <a href="{{ sponsor.url }}" class="group block p-3 bg-gray-50 rounded-lg hover:bg-pink-50 border border-transparent hover:border-pink-300 transition-all" target="_blank" rel="noopener">
+                            <a href="{{ sponsor.url }}" class="group block p-3 bg-gray-50 rounded-lg hover:bg-red-50 border border-transparent hover:border-red-300 transition-all" target="_blank" rel="noopener">
                                 <img class="w-full h-16 object-contain group-hover:scale-105 transition-transform" src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }}">
                             </a>
                         {% endif %}
                     {% endfor %}
                 </div>
                 <div class="mt-4 text-center">
-                    <a href="{% url 'sponsor_list' %}" class="inline-block text-sm font-medium text-pink-600 hover:text-pink-800 transition-colors">
+                    <a href="{% url 'sponsor_list' %}" class="inline-block text-sm font-medium text-red-600 hover:text-red-800 transition-colors">
                         View All Sponsors <i class="fa fa-arrow-right ml-1"></i>
                     </a>
                 </div>
             </div>
         </section>
     {% endif %}
+    {% endcomment %}
 
-    {# About Trail Hawks #}
+    {% comment %}About Trail Hawks{% endcomment %}
     <section class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-12">
-        <div class="bg-gradient-to-r from-red-800 to-red-900 px-6 py-4">
+        <div class="bg-red-800 px-6 py-4">
             <h2 class="text-xl font-bold text-white flex items-center gap-2">
                 <i class="fa fa-users"></i>
                 About the Trail Hawks
@@ -221,7 +223,7 @@
         </div>
     </section>
 
-    {# Featured Race - Next Upcoming #}
+    {% comment %}Featured Race - Next Upcoming{% endcomment %}
     {% if races %}
         {% with races.first as featured_race %}
             <section class="bg-gradient-to-br from-red-900 via-red-800 to-red-900 rounded-xl shadow-lg overflow-hidden mb-12 text-white">
@@ -271,13 +273,13 @@
         {% endwith %}
     {% endif %}
 
-    {# Latest Blog Posts #}
+    {% comment %}Latest Blog Posts{% endcomment %}
     {% get_latest_posts num=3 as latest_posts %}
     {% if latest_posts %}
         <section class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-12">
-            <div class="bg-gradient-to-r from-indigo-600 to-indigo-700 px-6 py-4">
-                <h2 class="text-xl font-bold text-white flex items-center gap-2">
-                    <i class="fa fa-blog"></i>
+            <div class="bg-gray-100 border-b border-gray-200 px-6 py-4">
+                <h2 class="text-xl font-bold text-gray-900 flex items-center gap-2">
+                    <i class="fa fa-blog text-red-600"></i>
                     From the Blog
                 </h2>
             </div>
@@ -289,21 +291,21 @@
                                 {% if post.hero_image %}
                                     <img class="w-full h-40 object-cover rounded-lg mb-3 group-hover:shadow-md transition-shadow" src="{{ post.hero_image.url }}" alt="">
                                 {% else %}
-                                    <div class="w-full h-40 bg-gradient-to-br from-indigo-100 to-indigo-200 rounded-lg mb-3 flex items-center justify-center group-hover:shadow-md transition-shadow">
-                                        <i class="fa fa-feather-alt text-4xl text-indigo-400"></i>
+                                    <div class="w-full h-40 bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg mb-3 flex items-center justify-center group-hover:shadow-md transition-shadow">
+                                        <i class="fa fa-feather-alt text-4xl text-gray-400"></i>
                                     </div>
                                 {% endif %}
                                 <div class="text-xs text-gray-500 mb-1 flex items-center gap-2">
                                     <i class="fa fa-calendar-alt"></i>
                                     {{ post.pub_date|date:"M j, Y" }}
                                 </div>
-                                <h3 class="font-semibold text-gray-900 group-hover:text-indigo-600 transition-colors line-clamp-2">{{ post.title }}</h3>
+                                <h3 class="font-semibold text-gray-900 group-hover:text-red-600 transition-colors line-clamp-2">{{ post.title }}</h3>
                             </a>
                         </article>
                     {% endfor %}
                 </div>
                 <div class="mt-6 text-center">
-                    <a href="{% url 'blog_list' %}" class="inline-flex items-center gap-2 px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg transition-colors">
+                    <a href="{% url 'blog_list' %}" class="inline-flex items-center gap-2 px-6 py-2 bg-gray-800 hover:bg-gray-900 text-white font-semibold rounded-lg transition-colors">
                         View All Posts <i class="fa fa-arrow-right ml-1"></i>
                     </a>
                 </div>
@@ -311,20 +313,20 @@
         </section>
     {% endif %}
 
-    {# Why Join / Benefits #}
+    {% comment %}Why Join / Benefits{% endcomment %}
     <section class="mb-12">
         <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-8">Why Run With Us?</h2>
         <div class="grid md:grid-cols-3 gap-6">
             <div class="bg-white border border-gray-200 rounded-xl p-6 text-center hover:shadow-lg transition-shadow">
-                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i class="fa fa-users text-2xl text-green-600"></i>
+                <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fa fa-users text-2xl text-red-600"></i>
                 </div>
                 <h3 class="font-bold text-lg text-gray-900 mb-2">Welcoming Community</h3>
                 <p class="text-gray-600 text-sm">Runners of all abilities are welcome. From beginners to ultramarathoners, everyone finds their place here.</p>
             </div>
             <div class="bg-white border border-gray-200 rounded-xl p-6 text-center hover:shadow-lg transition-shadow">
-                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i class="fa fa-calendar-check text-2xl text-blue-600"></i>
+                <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fa fa-calendar-check text-2xl text-red-600"></i>
                 </div>
                 <h3 class="font-bold text-lg text-gray-900 mb-2">Regular Group Runs</h3>
                 <p class="text-gray-600 text-sm">Multiple weekly runs at various times and locations. Find a group that fits your schedule.</p>
@@ -339,7 +341,7 @@
         </div>
     </section>
 
-    {# Call to Action #}
+    {% comment %}Call to Action{% endcomment %}
     <section class="bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-xl shadow-lg p-8 md:p-12 text-center mb-8">
         <div class="max-w-2xl mx-auto">
             <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -348,7 +350,7 @@
             <h2 class="text-2xl md:text-3xl font-bold text-yellow-900 mb-4">Ready to Hit the Trails?</h2>
             <p class="text-yellow-800 text-lg mb-6">Join the Lawrence Trail Hawks today and become part of our amazing running community. Your next adventure awaits!</p>
             <div class="flex flex-wrap justify-center gap-4">
-                <a href="/signup/" class="inline-flex items-center gap-2 px-8 py-4 bg-yellow-900 hover:bg-yellow-800 text-white font-bold text-lg rounded-lg transition-colors shadow-lg">
+                <a href="/signup/" class="inline-flex items-center gap-2 px-8 py-4 bg-red-700 hover:bg-red-800 text-white font-bold text-lg rounded-lg transition-colors shadow-lg">
                     <i class="fa fa-plus-circle"></i>
                     Become a Member
                 </a>
