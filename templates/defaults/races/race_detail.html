@@ -1,7 +1,6 @@
 {% extends base_template_name|default:"base.html" %}
 
 
-
 {% load core_tags %}
 {% load faq_tags %}
 {% load links_tags %}
@@ -50,61 +49,108 @@
             }
             google.maps.event.addDomListener(window, 'load', initialize);
         {% endif %}
-
-        ZeroClipboard.config({ moviePath: "{% static 'js/ZeroClipboard.swf' %}" });
-
-        var client = new ZeroClipboard( document.getElementById("copy-button"));
-
-        client.on("ready", function( readyEvent ) {
-            client.on("aftercopy", function(event) {
-                // `this` === `client`
-                // `event.target` === the element that was clicked
-                event.target.style.display = "none";
-                alert("Copied text to clipboard: " + event.data["text/plain"]);
-            });
-        });
     </script>
 {% endblock post_script %}
 
 
 {% block content %}
     {% get_race_types_for_race object as race_types %}
+    {% get_faqs_for_object object as faq_list %}
+    {% get_links_for_object object as link_list %}
+    {% get_sponsors_for_object object as sponsor_list %}
 
-    <header class="masthead">
-        <h1 class="font-bold text-3xl sm:text-4xl md:text-6xl py-4">{{ object.title }}</h1>
-        {% if object.slogan %}
-            <h2 class="font-bold text-xl sm:text-2xl py-2">{{ object.slogan }}</h2>
-        {% endif %}
+    {# Hero Section #}
+    <header class="relative -mx-4 md:-mx-6 -mt-4 md:-mt-6 mb-8">
+        <div class="bg-gradient-to-br from-red-900 via-red-800 to-red-900 text-white">
+            <div class="container mx-auto px-4 py-8 md:py-12">
+                <div class="flex flex-col md:flex-row items-center gap-6 md:gap-10">
+                    {% if object.logo %}
+                        <div class="flex-shrink-0">
+                            <img class="w-32 h-32 md:w-48 md:h-48 object-contain bg-white rounded-lg p-2 shadow-lg" src="{{ object.logo.url }}" alt="{{ object.title }} logo">
+                        </div>
+                    {% endif %}
+                    <div class="text-center md:text-left flex-grow">
+                        <h1 class="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-2">{{ object.title }}</h1>
+                        {% if object.slogan %}
+                            <p class="text-lg md:text-xl text-red-200 mb-4">{{ object.slogan }}</p>
+                        {% endif %}
+                        <div class="flex flex-wrap justify-center md:justify-start gap-3 mt-4">
+                            <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full text-sm md:text-base">
+                                <i class="fa fa-calendar"></i>
+                                {{ object.start_datetime|date:"F j, Y" }}
+                            </span>
+                            <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full text-sm md:text-base">
+                                <i class="fa fa-clock"></i>
+                                {{ object.start_datetime|time:"g:i A" }}
+                            </span>
+                            <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full text-sm md:text-base">
+                                <i class="fa fa-route"></i>
+                                {{ object.distance }}
+                            </span>
+                            {% if object.cut_off %}
+                                <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full text-sm md:text-base">
+                                    <i class="fa fa-hourglass-half"></i>
+                                    Cutoff: {{ object.cut_off }}
+                                </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% if not object.is_finished and object.reg_url %}
+                        <div class="flex-shrink-0">
+                            <a href="{{ object.reg_url }}" class="inline-block px-8 py-4 bg-yellow-400 hover:bg-yellow-300 text-red-900 font-bold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5">
+                                Register Now
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
     </header>
 
-    <div class="flex flex-col md:flex-row gap-8">
-        <div class="w-full md:w-2/3 flex flex-col gap-8">
+    <div class="flex flex-col lg:flex-row gap-8">
+        {# Main Content #}
+        <div class="w-full lg:w-2/3 flex flex-col gap-8">
 
-            {% if object.logo %}
-                <img class="w-full h-auto object-contain max-h-80" src="{{ object.logo.url }}" alt="{{ object.title }} logo">
-            {% endif %}
-
-            {% if not object.is_finished %}
-                {% if object.registration_set.exists %}
-                    <div class="mb-4">
+            {# Registration Pricing - Only show if race is open #}
+            {% if not object.is_finished and object.registration_set.exists %}
+                <section id="registration" class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                    <div class="bg-gradient-to-r from-red-600 to-red-700 px-6 py-4">
+                        <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                            <i class="fa fa-ticket-alt"></i>
+                            Registration
+                        </h2>
+                    </div>
+                    <div class="p-6">
                         {# Desktop table view #}
                         <div class="hidden md:block overflow-x-auto">
-                            <table class="w-full min-w-full bg-transparent table-hover table-striped">
+                            <table class="w-full">
                                 <thead>
-                                    <tr>
-                                        <th class="px-2 py-2 text-left">Price level</th>
-                                        <th class="px-2 py-2 text-left">Dates</th>
-                                        <th class="px-2 py-2 text-left">Price</th>
-                                        <th class="px-2 py-2"></th>
+                                    <tr class="border-b-2 border-gray-200">
+                                        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">Price Level</th>
+                                        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">Dates</th>
+                                        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-600 uppercase tracking-wider">Price</th>
+                                        <th class="px-4 py-3"></th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="divide-y divide-gray-100">
                                     {% for registration in object.registration_set.all %}
-                                        <tr class="{% if registration.has_expired %}bg-yellow-100{% endif %}">
-                                            <td class="px-2 py-2">{{ registration.description }}</td>
-                                            <td class="px-2 py-2 whitespace-nowrap">{{ registration.reg_date|date }} {% if registration.end_date %} to {{ registration.end_date|date }}{% endif %}</td>
-                                            <td class="px-2 py-2">${{ registration.reg_cost }}</td>
-                                            <td class="px-2 py-2"><a class="block inline-block py-1 px-2 w-full text-xs font-normal leading-tight text-center text-black no-underline align-middle bg-orange-400 rounded border select-none whitespace-no-wrap hover:bg-orange-500" href="{{ object.reg_url }}">register!</a></td>
+                                        <tr class="{% if registration.has_expired %}bg-gray-50 text-gray-400{% else %}hover:bg-gray-50{% endif %} transition-colors">
+                                            <td class="px-4 py-4 font-medium">{{ registration.description }}</td>
+                                            <td class="px-4 py-4 text-gray-600 whitespace-nowrap">
+                                                {{ registration.reg_date|date }}{% if registration.end_date %} – {{ registration.end_date|date }}{% endif %}
+                                            </td>
+                                            <td class="px-4 py-4">
+                                                <span class="text-xl font-bold {% if registration.has_expired %}text-gray-400{% else %}text-red-600{% endif %}">${{ registration.reg_cost }}</span>
+                                            </td>
+                                            <td class="px-4 py-4 text-right">
+                                                {% if not registration.has_expired %}
+                                                    <a href="{{ object.reg_url }}" class="inline-block px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors text-sm">
+                                                        Register
+                                                    </a>
+                                                {% else %}
+                                                    <span class="text-gray-400 text-sm">Expired</span>
+                                                {% endif %}
+                                            </td>
                                         </tr>
                                     {% endfor %}
                                 </tbody>
@@ -114,223 +160,516 @@
                         {# Mobile card view #}
                         <div class="md:hidden space-y-4">
                             {% for registration in object.registration_set.all %}
-                                <div class="border rounded-lg p-4 {% if registration.has_expired %}bg-yellow-100{% else %}bg-white{% endif %}">
-                                    <div class="font-bold text-lg mb-2">{{ registration.description }}</div>
-                                    <div class="text-sm text-gray-600 mb-2">
-                                        {{ registration.reg_date|date }} {% if registration.end_date %} to {{ registration.end_date|date }}{% endif %}
+                                <div class="border rounded-xl p-4 {% if registration.has_expired %}bg-gray-50 border-gray-200{% else %}bg-white border-gray-200 shadow-sm{% endif %}">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <div class="font-bold text-lg {% if registration.has_expired %}text-gray-400{% endif %}">{{ registration.description }}</div>
+                                        {% if registration.has_expired %}
+                                            <span class="text-xs bg-gray-200 text-gray-500 px-2 py-1 rounded">Expired</span>
+                                        {% endif %}
                                     </div>
-                                    <div class="text-2xl font-bold text-red-600 mb-3">${{ registration.reg_cost }}</div>
-                                    <a class="block py-2 px-4 text-center text-black bg-orange-400 rounded hover:bg-orange-500 transition-colors" href="{{ object.reg_url }}">Register!</a>
+                                    <div class="text-sm text-gray-500 mb-3">
+                                        <i class="fa fa-calendar-alt mr-1"></i>
+                                        {{ registration.reg_date|date }}{% if registration.end_date %} – {{ registration.end_date|date }}{% endif %}
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-2xl font-bold {% if registration.has_expired %}text-gray-400{% else %}text-red-600{% endif %}">${{ registration.reg_cost }}</span>
+                                        {% if not registration.has_expired %}
+                                            <a href="{{ object.reg_url }}" class="px-6 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors">
+                                                Register
+                                            </a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        {% if object.discounts %}
+                            <div class="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                                <div class="prose prose-sm prose-a:text-red-600 hover:prose-a:text-red-800">
+                                    {{ object.discounts|markdownify }}
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </section>
+            {% endif %}
+
+            {# Race News #}
+            {% if object.get_race_news %}
+                <section id="news" class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                    <div class="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-4">
+                        <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                            <i class="fa fa-newspaper"></i>
+                            Latest News
+                        </h2>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        {% for item in object.get_race_news|slice:":3" %}
+                            <article class="border-l-4 border-blue-500 pl-4 py-2">
+                                <div class="prose prose-lg prose-a:text-red-600 hover:prose-a:text-red-800">
+                                    {{ item.body|markdownify }}
+                                </div>
+                            </article>
+                        {% endfor %}
+                    </div>
+                </section>
+            {% endif %}
+
+            {# About the Race #}
+            <section id="about" class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                <div class="bg-gradient-to-r from-gray-700 to-gray-800 px-6 py-4">
+                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fa fa-info-circle"></i>
+                        About the Race
+                    </h2>
+                </div>
+                <div class="p-6">
+                    <div class="prose prose-lg max-w-none prose-a:text-red-600 hover:prose-a:text-red-800 prose-headings:text-gray-900">
+                        {{ object.description|markdownify }}
+                    </div>
+                </div>
+            </section>
+
+            {# Location & Course #}
+            {% if object.location or object.course_map %}
+                <section id="location" class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                    <div class="bg-gradient-to-r from-green-600 to-green-700 px-6 py-4">
+                        <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                            <i class="fa fa-map-marker-alt"></i>
+                            Location & Course
+                        </h2>
+                    </div>
+                    <div class="p-6">
+                        {% if object.location %}
+                            <div id="map-canvas" class="w-full h-80 rounded-lg mb-4"></div>
+                            <div class="prose prose-a:text-red-600 hover:prose-a:text-red-800">
+                                {{ object.location.description|markdownify }}
+                            </div>
+                        {% endif %}
+                        {% if object.course_map %}
+                            <a href="{{ object.course_map }}" class="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors">
+                                <i class="fa fa-map"></i>
+                                View Course Map
+                            </a>
+                        {% endif %}
+                    </div>
+                </section>
+            {% endif %}
+
+            {# Awards #}
+            {% if object.awards %}
+                <section id="awards" class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                    <div class="bg-gradient-to-r from-yellow-500 to-yellow-600 px-6 py-4">
+                        <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                            <i class="fa fa-trophy"></i>
+                            Awards
+                        </h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="prose prose-lg prose-a:text-red-600 hover:prose-a:text-red-800">
+                            {{ object.awards|markdownify }}
+                        </div>
+                    </div>
+                </section>
+            {% endif %}
+
+            {# Race Directors #}
+            {% if object.race_directors.exists %}
+                <section id="rds" class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                    <div class="bg-gradient-to-r from-purple-600 to-purple-700 px-6 py-4">
+                        <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                            <i class="fa fa-user-tie"></i>
+                            Race Director{{ object.race_directors.count|pluralize }}
+                        </h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid gap-4 sm:grid-cols-2">
+                            {% for race_director in object.race_directors.all %}
+                                <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
+                                    <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                                        <i class="fa fa-user text-purple-600"></i>
+                                    </div>
+                                    <div>
+                                        <a href="{% url 'member_detail' pk=race_director.pk %}" class="font-semibold text-gray-900 hover:text-red-600 transition-colors">
+                                            {{ race_director.full_hawk_name }}
+                                        </a>
+                                        <a href="mailto:{{ race_director.email }}" class="block text-sm text-gray-500 hover:text-red-600 transition-colors">
+                                            <i class="fa fa-envelope mr-1"></i>Contact
+                                        </a>
+                                    </div>
                                 </div>
                             {% endfor %}
                         </div>
                     </div>
-                {% endif %}
-            {% endif %}
-
-            {% if object.get_race_news %}
-                <section id="news">
-                    <h3 class="text-2xl font-bold mb-4">Latest News</h3>
-                    {% for item in object.get_race_news|slice:":3" %}
-                        <div class="mb-4 prose">{{ item.body|markdownify }}</div>
-                    {% endfor %}
                 </section>
             {% endif %}
 
-            <section class="flex flex-col divide-y divide-gray-300 py-8 text-xl">
-                <div><strong>Race date:</strong> {{ object.start_datetime|date:"F j, Y" }}</div>
-                <div><strong>Start time:</strong> {{ object.start_datetime|time:"h:i A" }}</div>
-                <div><strong>Race distance:</strong> {{ object.distance }}</div>
-
-                {% if object.cut_off %}
-                    <div>Cut off time: {{ object.cut_off }}</div>
-                {% endif %}
-            </section>
-
-            <section class="prose-lg prose-a:underline prose-a:text-red-600 hover:prose-a:text-red-800">
-                {{ object.description|markdownify }}
-            </section>
-
-            <section>
-                <h2 class="text-4xl font-bold py-8">Event Information</h2>
-            </section>
-
-            <section>
-                {% if object.location %}
-                    <h3 class="font-bold text-2xl py-4">Location</h3>
-                    <div id="map-canvas" class="w-full h-96"></div>
-                    <div class="prose prose-a:underline prose-a:text-red-600 hover:prose-a:text-red-800">{{ object.location.description|markdownify }}</div>
-                {% endif %}
-
-                {% if object.course_map %}
-                    <p>Click <a href="{{ object.course_map }}" class="text-red-600 hover:text-red-800 underline">here</a> for a course map.</p>
-                {% endif %}
-            </section>
-
-            {% if object.awards %}
-                <section id="awards">
-                    <h3 class="text-2xl font-bold mb-4">Awards</h3>
-                    <div class="prose prose-a:underline prose-a:text-red-600 hover:prose-a:text-red-800">{{ object.awards|markdownify }}</div>
-                </section>
-            {% endif %}
-
-            {% if object.race_directors.exists %}
-                <section id="rds">
-                    <h3 class="text-2xl font-bold mb-4">Race Director{{ object.race_directors.count|pluralize }}</h3>
-                    <ul>
-                        {% for race_directory in object.race_directors.all %}
-                            <li><a href="{% url 'member_detail' pk=race_directory.pk %}" class="text-red-600 hover:text-red-800 underline">{{ race_directory.full_hawk_name }}</a> - <a href="mailto:{{ race_directory.email }}" class="text-red-600 hover:text-red-800 underline">contact</a></li>
-                        {% endfor %}
-                    </ul>
-                </section>
-            {% endif %}
-
-            {% if not object.get_overall_results %}
-                <section>
-                    <h3 class="text-2xl font-bold mb-4">Registration</h3>
-
-                    <div class="prose prose-a:underline prose-a:text-red-600 hover:prose-a:text-red-800">
-                        {{ object.reg_description|markdownify }}
+            {# Registration Details - for races that haven't finished #}
+            {% if not object.get_overall_results and object.reg_description %}
+                <section id="reg-details" class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                    <div class="bg-gradient-to-r from-red-600 to-red-700 px-6 py-4">
+                        <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                            <i class="fa fa-clipboard-list"></i>
+                            Registration Details
+                        </h2>
                     </div>
+                    <div class="p-6 space-y-6">
+                        <div class="prose prose-lg prose-a:text-red-600 hover:prose-a:text-red-800">
+                            {{ object.reg_description|markdownify }}
+                        </div>
 
-                    {% if object.entry_form %}
-                        <h3 class="text-2xl">Entry Form</h3>
-                        <p>Prefer to print and mail in your entry form?</p>
-                        <p>Make Checks Payable to: <em>Lawrence Trail Hawks</em></p>
-                        <p>Mail to: <br>Lawrence Trail Hawks<br>PO Box 442548<br>Lawrence, KS 66044</p>
-                        <p><a class="block inline-block py-1 px-3 w-full font-normal leading-normal text-center text-white no-underline align-middle bg-yellow-500 rounded border select-none whitespace-no-wrap hover:bg-yellow-600" href="{{ object.entry_form.url }}">Download Entry Form</a></p>
-                    {% endif %}
+                        {% if object.entry_form %}
+                            <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                                <h3 class="font-semibold text-lg mb-2">Prefer to mail your entry?</h3>
+                                <p class="text-gray-600 mb-2">Make checks payable to: <strong>Lawrence Trail Hawks</strong></p>
+                                <address class="text-gray-600 not-italic mb-4">
+                                    Lawrence Trail Hawks<br>
+                                    PO Box 442548<br>
+                                    Lawrence, KS 66044
+                                </address>
+                                <a href="{{ object.entry_form.url }}" class="inline-flex items-center gap-2 px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg transition-colors">
+                                    <i class="fa fa-download"></i>
+                                    Download Entry Form
+                                </a>
+                            </div>
+                        {% endif %}
 
-                    {% if not object.is_finished %}
-                        <hr>
-                        <p><a class="block inline-block py-3 px-4 w-full text-xl font-normal leading-tight text-center text-white no-underline align-middle bg-red-600 rounded border select-none whitespace-no-wrap hover:bg-red-700" href="{{ object.reg_url }}">REGISTER TODAY</a></p>
-                    {% endif %}
+                        {% if object.packet_pickup %}
+                            <div class="border-t border-gray-200 pt-6">
+                                <h3 class="font-semibold text-lg mb-2 flex items-center gap-2">
+                                    <i class="fa fa-box-open text-gray-500"></i>
+                                    Packet Pickup
+                                </h3>
+                                <div class="prose prose-a:text-red-600 hover:prose-a:text-red-800">
+                                    {{ object.packet_pickup|markdownify }}
+                                </div>
+                            </div>
+                        {% endif %}
 
-                    {% if object.get_reg_dates %}
-                        <p><strong><em>Entry fee:</em></strong></p>
-                        <ul>
-                            {% for reg in object.get_reg_dates %}
-                                <li>${{ reg.reg_cost }} until {{ reg.reg_date|date:"M d" }}</li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-
-                    <div class="prose prose-a:underline prose-a:text-red-600 hover:prose-a:text-red-800">{{ object.discounts|markdownify }}</div>
-
-                    {% if object.packet_pickup %}
-                        <h3 class="text-2xl">Packet Pickup</h3>
-                        <div class="prose prose-a:underline prose-a:text-red-600 hover:prose-a:text-red-800">{{ object.packet_pickup|markdownify }}</div>
-                    {% endif %}
+                        {% if not object.is_finished and object.reg_url %}
+                            <a href="{{ object.reg_url }}" class="block w-full py-4 px-6 bg-red-600 hover:bg-red-700 text-white text-center text-xl font-bold rounded-lg transition-colors shadow-lg hover:shadow-xl">
+                                Register Today
+                            </a>
+                        {% endif %}
+                    </div>
                 </section>
             {% endif %}
 
+            {# Lodging #}
             {% if object.lodging %}
-                <hr>
-                <h3 class="text-2xl font-bold mb-4">Lodging</h3>
-                <p>Lodging information can be found <a href="{{ object.lodging }}" class="text-red-600 hover:text-red-800 underline">here</a>.</p>
+                <section id="lodging" class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                    <div class="bg-gradient-to-r from-teal-600 to-teal-700 px-6 py-4">
+                        <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                            <i class="fa fa-bed"></i>
+                            Lodging
+                        </h2>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600 mb-4">Need a place to stay? We've gathered lodging options for you.</p>
+                        <a href="{{ object.lodging }}" class="inline-flex items-center gap-2 px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-lg transition-colors" target="_blank" rel="noopener">
+                            <i class="fa fa-external-link-alt"></i>
+                            View Lodging Options
+                        </a>
+                    </div>
+                </section>
             {% endif %}
 
+            {# Race Reports #}
             {% if object.get_race_reports %}
                 {% include "races/includes/race_reports.html" %}
             {% endif %}
 
+            {# Race Results #}
             {% if race_types %}
-                <section id="results">
-                    <h3 class="text-2xl font-bold mb-4">
-                        Race Results
-                    </h3>
-                    <ul>
-                        {% for race_type in race_types %}
-                            <li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-overallresults" class="text-red-600 hover:text-red-800 underline">{{ race_type.name }} Overall Results</a></li>
-                            <li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-mensresults" class="text-red-600 hover:text-red-800 underline">{{ race_type.name }} Men&apos;s Results</a></li>
-                            <li><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-womensresults" class="text-red-600 hover:text-red-800 underline">{{ race_type.name }} Women&apos;s Results</a></li>
-                        {% endfor %}
-                    </ul>
+                <section id="results" class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                    <div class="bg-gradient-to-r from-orange-500 to-orange-600 px-6 py-4">
+                        <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                            <i class="fa fa-medal"></i>
+                            Race Results
+                        </h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                            {% for race_type in race_types %}
+                                <div class="border border-gray-200 rounded-lg p-4">
+                                    <h3 class="font-semibold text-lg mb-3">{{ race_type.name }}</h3>
+                                    <ul class="space-y-2">
+                                        <li>
+                                            <a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-overallresults" class="flex items-center gap-2 text-red-600 hover:text-red-800 transition-colors">
+                                                <i class="fa fa-list-ol text-sm"></i>
+                                                Overall Results
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-mensresults" class="flex items-center gap-2 text-red-600 hover:text-red-800 transition-colors">
+                                                <i class="fa fa-male text-sm"></i>
+                                                Men's Results
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-womensresults" class="flex items-center gap-2 text-red-600 hover:text-red-800 transition-colors">
+                                                <i class="fa fa-female text-sm"></i>
+                                                Women's Results
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </section>
             {% endif %}
 
-            {# render_facebook_like obj=object #}
-
-            {% get_links_for_object object as link_list %}
+            {# Links #}
             {% if link_list %}
-                <hr>
-                <h3 class="text-2xl font-bold mb-4">Links</h3>
-                {% for link in link_list %}
-                    <h4>{{ link.name }}</h4>
-                    <div class="prose prose-a:underline prose-a:text-red-600 hover:prose-a:text-red-800">{{ link.description|markdownify }}</div>
-                {% endfor %}
-            {% endif %}
-
-
-            {% get_faqs_for_object object as faq_list %}
-            {% if faq_list %}
-                <hr>
-                <h3 class="text-2xl font-bold mb-4">Frequently Asked Questions</h3>
-                {% for faq in faq_list %}
-                    <h4>{{ faq.question }}</h4>
-                    <div class="prose prose-a:underline prose-a:text-red-600 hover:prose-a:text-red-800">{{ faq.answer|markdownify }}</div>
-                {% endfor %}
-            {% endif %}
-
-            {% get_sponsors_for_object object as sponsor_list %}
-            {% if sponsor_list %}
-                <hr>
-
-                <h3 class="text-2xl font-bold mb-4" id="sponsors">Sponsors</h3>
-                <div class="flex flex-auto">
-                    {% for sponsor in sponsor_list %}
-                        <div class="md:w-1/2">
-                            <h3 class="text-2xl"><a href="{{ sponsor.url }}" class="text-red-600 hover:text-red-800 underline">{{ sponsor.name }}</a></h3>
-                            {% if sponsor.logo %}
-                                <a href="{{ sponsor.url }}" class="hover:opacity-80 transition-opacity">
-                                    <img class="w-full h-auto" src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }} logo" />
-                                </a>
-                            {% endif %}
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        </div>
-
-        <div class="md:w-1/3">
-            <div class="bg-white border border-gray-300 rounded p-4">
-                <h3 class="text-lg font-bold mb-4">Quick Links</h3>
-                <ul class="flex flex-col space-y-2 list-none">
-                    <li><a class="inline-block py-2 px-4 w-full text-center text-white bg-red-600 rounded hover:bg-red-700 transition-colors" href="{{ object.reg_url }}">Register</a></li>
-                    {% if object.get_race_news %}
-                        <li><a href="#news" class="text-red-600 hover:text-red-800 hover:underline">News</a></li>
-                    {% endif %}
-                    {% if object.awards %}
-                        <li><a href="#awards" class="text-red-600 hover:text-red-800 hover:underline">Awards</a></li>
-                    {% endif %}
-                    {% if object.race_directors.exists %}
-                        <li><a href="#rds" class="text-red-600 hover:text-red-800 hover:underline">Race Directors</a></li>
-                    {% endif %}
-                    {% if race_types %}
-                        <li><a href="#results" class="text-red-600 hover:text-red-800 hover:underline">Results</a></li>
-                    {% endif %}
-                    {% if object.sponsors.exists %}
-                        <li><a href="#sponsors" class="text-red-600 hover:text-red-800 hover:underline">Sponsors</a></li>
-                    {% endif %}
-                </ul>
-            </div>
-
-            {% if object.get_overall_results %}
-                <div class="bg-white border border-gray-300 rounded">
-                    <div class="bg-gray-50 px-4 py-2 border-b border-gray-300">
-                        <h3 class="text-2xl font-bold">Race Results</h3>
+                <section id="links" class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                    <div class="bg-gradient-to-r from-indigo-600 to-indigo-700 px-6 py-4">
+                        <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                            <i class="fa fa-link"></i>
+                            Links
+                        </h2>
                     </div>
-                    <ul class="flex flex-col pl-0 mb-0">
-                        {% for race_type in race_types %}
-                            <li class="py-2 px-4"><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-overallresults" class="text-red-600 hover:text-red-800 hover:underline">{{ race_type.name }} Overall Results</a></li>
-                            <li class="py-2 px-4"><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-mensresults" class="text-red-600 hover:text-red-800 hover:underline">{{ race_type.name }} Men&apos;s Results</a></li>
-                            <li class="py-2 px-4"><a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-womensresults" class="text-red-600 hover:text-red-800 hover:underline">{{ race_type.name }} Women&apos;s Results</a></li>
+                    <div class="p-6 space-y-4">
+                        {% for link in link_list %}
+                            <div class="border-b border-gray-100 pb-4 last:border-0 last:pb-0">
+                                <h3 class="font-semibold text-lg text-gray-900">{{ link.name }}</h3>
+                                <div class="prose prose-sm prose-a:text-red-600 hover:prose-a:text-red-800">
+                                    {{ link.description|markdownify }}
+                                </div>
+                            </div>
                         {% endfor %}
-                    </ul>
-                </div>
+                    </div>
+                </section>
             {% endif %}
 
-            {# include "panels/photos.html" with photos=photos_list #}
+            {# FAQs #}
+            {% if faq_list %}
+                <section id="faq" class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                    <div class="bg-gradient-to-r from-cyan-600 to-cyan-700 px-6 py-4">
+                        <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                            <i class="fa fa-question-circle"></i>
+                            Frequently Asked Questions
+                        </h2>
+                    </div>
+                    <div class="divide-y divide-gray-200">
+                        {% for faq in faq_list %}
+                            <details class="group">
+                                <summary class="flex items-center justify-between cursor-pointer px-6 py-4 hover:bg-gray-50 transition-colors">
+                                    <span class="font-medium text-gray-900 pr-4">{{ faq.question }}</span>
+                                    <span class="flex-shrink-0 text-gray-400 group-open:rotate-180 transition-transform">
+                                        <i class="fa fa-chevron-down"></i>
+                                    </span>
+                                </summary>
+                                <div class="px-6 pb-4">
+                                    <div class="prose prose-a:text-red-600 hover:prose-a:text-red-800">
+                                        {{ faq.answer|markdownify }}
+                                    </div>
+                                </div>
+                            </details>
+                        {% endfor %}
+                    </div>
+                </section>
+            {% endif %}
+
+            {# Sponsors #}
+            {% if sponsor_list %}
+                <section id="sponsors" class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                    <div class="bg-gradient-to-r from-pink-600 to-pink-700 px-6 py-4">
+                        <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                            <i class="fa fa-handshake"></i>
+                            Sponsors
+                        </h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid gap-6 sm:grid-cols-2">
+                            {% for sponsor in sponsor_list %}
+                                <a href="{{ sponsor.url }}" class="group block p-4 border border-gray-200 rounded-lg hover:border-red-300 hover:shadow-md transition-all" target="_blank" rel="noopener">
+                                    {% if sponsor.logo %}
+                                        <img class="w-full h-24 object-contain mb-3 group-hover:scale-105 transition-transform" src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }} logo">
+                                    {% endif %}
+                                    <h3 class="text-center font-semibold text-gray-900 group-hover:text-red-600 transition-colors">{{ sponsor.name }}</h3>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </section>
+            {% endif %}
         </div>
+
+        {# Sidebar #}
+        <aside class="w-full lg:w-1/3">
+            <div class="lg:sticky lg:top-24 space-y-6">
+                {# Quick Info Card #}
+                <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                    <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                        <h3 class="font-bold text-gray-900">Race Details</h3>
+                    </div>
+                    <div class="p-4 space-y-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fa fa-calendar text-red-600"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500">Date</div>
+                                <div class="font-semibold">{{ object.start_datetime|date:"F j, Y" }}</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fa fa-clock text-red-600"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500">Start Time</div>
+                                <div class="font-semibold">{{ object.start_datetime|time:"g:i A" }}</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fa fa-route text-red-600"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500">Distance</div>
+                                <div class="font-semibold">{{ object.distance }}</div>
+                            </div>
+                        </div>
+                        {% if object.cut_off %}
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fa fa-hourglass-half text-red-600"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm text-gray-500">Cut-off Time</div>
+                                    <div class="font-semibold">{{ object.cut_off }}</div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                    {% if not object.is_finished and object.reg_url %}
+                        <div class="p-4 border-t border-gray-200">
+                            <a href="{{ object.reg_url }}" class="block w-full py-3 px-4 bg-red-600 hover:bg-red-700 text-white text-center font-bold rounded-lg transition-colors">
+                                Register Now
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+
+                {# Quick Links #}
+                <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                    <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                        <h3 class="font-bold text-gray-900">Quick Links</h3>
+                    </div>
+                    <nav class="p-2">
+                        <ul class="space-y-1">
+                            {% if not object.is_finished and object.registration_set.exists %}
+                                <li>
+                                    <a href="#registration" class="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-red-50 hover:text-red-700 rounded-lg transition-colors">
+                                        <i class="fa fa-ticket-alt w-5 text-gray-400"></i>
+                                        Registration
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if object.get_race_news %}
+                                <li>
+                                    <a href="#news" class="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-red-50 hover:text-red-700 rounded-lg transition-colors">
+                                        <i class="fa fa-newspaper w-5 text-gray-400"></i>
+                                        Latest News
+                                    </a>
+                                </li>
+                            {% endif %}
+                            <li>
+                                <a href="#about" class="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-red-50 hover:text-red-700 rounded-lg transition-colors">
+                                    <i class="fa fa-info-circle w-5 text-gray-400"></i>
+                                    About
+                                </a>
+                            </li>
+                            {% if object.location or object.course_map %}
+                                <li>
+                                    <a href="#location" class="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-red-50 hover:text-red-700 rounded-lg transition-colors">
+                                        <i class="fa fa-map-marker-alt w-5 text-gray-400"></i>
+                                        Location
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if object.awards %}
+                                <li>
+                                    <a href="#awards" class="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-red-50 hover:text-red-700 rounded-lg transition-colors">
+                                        <i class="fa fa-trophy w-5 text-gray-400"></i>
+                                        Awards
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if object.race_directors.exists %}
+                                <li>
+                                    <a href="#rds" class="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-red-50 hover:text-red-700 rounded-lg transition-colors">
+                                        <i class="fa fa-user-tie w-5 text-gray-400"></i>
+                                        Race Directors
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if race_types %}
+                                <li>
+                                    <a href="#results" class="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-red-50 hover:text-red-700 rounded-lg transition-colors">
+                                        <i class="fa fa-medal w-5 text-gray-400"></i>
+                                        Results
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if faq_list %}
+                                <li>
+                                    <a href="#faq" class="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-red-50 hover:text-red-700 rounded-lg transition-colors">
+                                        <i class="fa fa-question-circle w-5 text-gray-400"></i>
+                                        FAQ
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if sponsor_list %}
+                                <li>
+                                    <a href="#sponsors" class="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-red-50 hover:text-red-700 rounded-lg transition-colors">
+                                        <i class="fa fa-handshake w-5 text-gray-400"></i>
+                                        Sponsors
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+
+                {# Results Card - if race has finished #}
+                {% if object.get_overall_results and race_types %}
+                    <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                        <div class="bg-orange-500 px-4 py-3">
+                            <h3 class="font-bold text-white flex items-center gap-2">
+                                <i class="fa fa-medal"></i>
+                                Race Results
+                            </h3>
+                        </div>
+                        <nav class="p-2">
+                            <ul class="space-y-1">
+                                {% for race_type in race_types %}
+                                    <li>
+                                        <a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-overallresults" class="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-700 rounded-lg transition-colors">
+                                            <i class="fa fa-list-ol w-5 text-gray-400"></i>
+                                            {{ race_type.name }} Overall
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-mensresults" class="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-700 rounded-lg transition-colors">
+                                            <i class="fa fa-male w-5 text-gray-400"></i>
+                                            {{ race_type.name }} Men's
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ object.get_absolute_url }}results/#{{ race_type.slug }}-womensresults" class="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-700 rounded-lg transition-colors">
+                                            <i class="fa fa-female w-5 text-gray-400"></i>
+                                            {{ race_type.name }} Women's
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </nav>
+                    </div>
+                {% endif %}
+            </div>
+        </aside>
     </div>
 {% endblock content %}

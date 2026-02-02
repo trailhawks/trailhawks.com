@@ -5,6 +5,7 @@
 {% load faq_tags %}
 {% load markdownify %}
 {% load news_tags %}
+{% load run_tags %}
 {% load simple_open_graph %}
 
 
@@ -19,42 +20,283 @@
 
 
 {% block content %}
-    <div class="flex flex-auto gap-8">
-        <div class="md:w-2/3 text-lg">
+    {% get_latest_news_for_object object as news_list %}
+    {% get_faqs_for_object object as faq_list %}
+    {% get_all_runs as all_runs %}
 
-            <h1 class="font-bold text-6xl">{{ object.name }}</h1>
-
-            <div class="prose-slate prose-xl py-4 prose-a:underline prose-a:text-red-600 hover:prose-a:text-red-800">
-                {{ object.details|markdownify }}
-            </div>
-
-            <div class="flex flex-col gap-2 divide-y divide-gray-300 py-4 text-xl">
-                <div><strong>When:</strong> {{ object.get_day_of_week_display }} at {{ object.run_time }}</div>
-                <div><strong>Where:</strong> {{ object.location }}</div>
-                {% for contact in object.leaders.all %}
-                    <div><strong>Run Leader:</strong> <a href="mailto:{{ contact.email }}" class="text-red-600 hover:text-red-800 underline">{{ contact.full_name }}</a></div>
-                {% endfor %}
-            </div>
-
-            {% get_latest_news_for_object object as news_list %}
-            {% if news_list %}
-                <h3 class="text-2xl font-bold mb-4">Latest News</h3>
-                {% for news in news_list|slice:":3" %}
-                    <div class="{% if news.alert_status %}relative px-3 py-3 mb-4 border rounded {% if news.alert_status == 'success' %}border-green-500 bg-green-50 text-green-800{% elif news.alert_status == 'warning' %}border-yellow-500 bg-yellow-50 text-yellow-800{% elif news.alert_status == 'danger' %}border-red-500 bg-red-50 text-red-800{% else %}border-blue-500 bg-blue-50 text-blue-800{% endif %}{% endif %}">
-                        <h4>{{ news.pub_date|date }} - {{ news.title }}</h4>
-                        <div class="prose prose-a:underline prose-a:text-red-600 hover:prose-a:text-red-800">{{ news.body|markdownify }}</div>
+    {# Hero Section #}
+    <header class="relative -mx-4 md:-mx-6 -mt-4 md:-mt-6 mb-8">
+        <div class="bg-gradient-to-br from-green-800 via-green-700 to-green-800 text-white">
+            <div class="container mx-auto px-4 py-8 md:py-12">
+                <div class="flex flex-col md:flex-row items-center gap-6 md:gap-10">
+                    <div class="flex-shrink-0">
+                        <div class="w-24 h-24 md:w-32 md:h-32 bg-white/10 backdrop-blur rounded-full flex items-center justify-center">
+                            <i class="fa fa-running text-4xl md:text-5xl text-white"></i>
+                        </div>
                     </div>
-                {% endfor %}
+                    <div class="text-center md:text-left flex-grow">
+                        <h1 class="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-4">{{ object.name }}</h1>
+                        <div class="flex flex-wrap justify-center md:justify-start gap-3">
+                            <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full text-sm md:text-base">
+                                <i class="fa fa-calendar-day"></i>
+                                {{ object.get_day_of_week_display }}
+                            </span>
+                            <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full text-sm md:text-base">
+                                <i class="fa fa-clock"></i>
+                                {{ object.run_time }}
+                            </span>
+                            <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full text-sm md:text-base">
+                                <i class="fa fa-map-marker-alt"></i>
+                                {{ object.location }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex flex-col lg:flex-row gap-8">
+        {# Main Content #}
+        <div class="w-full lg:w-2/3 flex flex-col gap-8">
+
+            {# About the Run #}
+            <section id="about" class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                <div class="bg-gradient-to-r from-green-600 to-green-700 px-6 py-4">
+                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fa fa-info-circle"></i>
+                        About This Run
+                    </h2>
+                </div>
+                <div class="p-6">
+                    <div class="prose prose-lg max-w-none prose-a:text-red-600 hover:prose-a:text-red-800 prose-headings:text-gray-900">
+                        {{ object.details|markdownify }}
+                    </div>
+                </div>
+            </section>
+
+            {# Run Leaders #}
+            {% if object.leaders.exists %}
+                <section id="leaders" class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                    <div class="bg-gradient-to-r from-purple-600 to-purple-700 px-6 py-4">
+                        <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                            <i class="fa fa-user-friends"></i>
+                            Run Leader{{ object.leaders.count|pluralize }}
+                        </h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid gap-4 sm:grid-cols-2">
+                            {% for contact in object.leaders.all %}
+                                <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
+                                    <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                                        <i class="fa fa-user text-purple-600"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-semibold text-gray-900">{{ contact.full_name }}</div>
+                                        <a href="mailto:{{ contact.email }}" class="text-sm text-gray-500 hover:text-red-600 transition-colors">
+                                            <i class="fa fa-envelope mr-1"></i>Contact
+                                        </a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </section>
             {% endif %}
 
-            {% get_faqs_for_object object as faq_list %}
+            {# Latest News #}
+            {% if news_list %}
+                <section id="news" class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                    <div class="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-4">
+                        <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                            <i class="fa fa-newspaper"></i>
+                            Latest News
+                        </h2>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        {% for news in news_list|slice:":3" %}
+                            <article class="{% if news.alert_status %}p-4 rounded-lg border {% if news.alert_status == 'success' %}border-green-300 bg-green-50{% elif news.alert_status == 'warning' %}border-yellow-300 bg-yellow-50{% elif news.alert_status == 'danger' %}border-red-300 bg-red-50{% else %}border-blue-300 bg-blue-50{% endif %}{% else %}border-l-4 border-blue-500 pl-4 py-2{% endif %}">
+                                <div class="flex items-center gap-2 text-sm text-gray-500 mb-2">
+                                    <i class="fa fa-calendar-alt"></i>
+                                    {{ news.pub_date|date }}
+                                    {% if news.title %}<span class="font-semibold text-gray-700">– {{ news.title }}</span>{% endif %}
+                                </div>
+                                <div class="prose prose-a:text-red-600 hover:prose-a:text-red-800">
+                                    {{ news.body|markdownify }}
+                                </div>
+                            </article>
+                        {% endfor %}
+                    </div>
+                </section>
+            {% endif %}
+
+            {# FAQs #}
             {% if faq_list %}
-                <h2 class="text-2xl font-bold mb-4">Frequently Asked Questions</h2>
-                {% for faq in faq_list %}
-                    <h4 class="font-bold text-lg mb-2">{{ faq.question }}</h4>
-                    <div class="prose prose-md prose-a:underline prose-a:text-red-600 hover:prose-a:text-red-800">{{ faq.answer|markdownify }}</div>
-                {% endfor %}
+                <section id="faq" class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                    <div class="bg-gradient-to-r from-cyan-600 to-cyan-700 px-6 py-4">
+                        <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                            <i class="fa fa-question-circle"></i>
+                            Frequently Asked Questions
+                        </h2>
+                    </div>
+                    <div class="divide-y divide-gray-200">
+                        {% for faq in faq_list %}
+                            <details class="group">
+                                <summary class="flex items-center justify-between cursor-pointer px-6 py-4 hover:bg-gray-50 transition-colors">
+                                    <span class="font-medium text-gray-900 pr-4">{{ faq.question }}</span>
+                                    <span class="flex-shrink-0 text-gray-400 group-open:rotate-180 transition-transform">
+                                        <i class="fa fa-chevron-down"></i>
+                                    </span>
+                                </summary>
+                                <div class="px-6 pb-4">
+                                    <div class="prose prose-a:text-red-600 hover:prose-a:text-red-800">
+                                        {{ faq.answer|markdownify }}
+                                    </div>
+                                </div>
+                            </details>
+                        {% endfor %}
+                    </div>
+                </section>
             {% endif %}
         </div>
+
+        {# Sidebar #}
+        <aside class="w-full lg:w-1/3">
+            <div class="lg:sticky lg:top-24 space-y-6">
+                {# Run Details Card #}
+                <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                    <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                        <h3 class="font-bold text-gray-900">Run Details</h3>
+                    </div>
+                    <div class="p-4 space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fa fa-calendar-day text-green-600"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500">Day</div>
+                                <div class="font-semibold">{{ object.get_day_of_week_display }}</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fa fa-clock text-green-600"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500">Time</div>
+                                <div class="font-semibold">{{ object.run_time }}</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fa fa-map-marker-alt text-green-600"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500">Location</div>
+                                <div class="font-semibold">{{ object.location }}</div>
+                            </div>
+                        </div>
+                        {% if object.leaders.exists %}
+                            <div class="flex items-start gap-3">
+                                <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fa fa-user text-green-600"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm text-gray-500">Run Leader{{ object.leaders.count|pluralize }}</div>
+                                    {% for contact in object.leaders.all %}
+                                        <div class="font-semibold">{{ contact.full_name }}</div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                {# Quick Links #}
+                <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                    <div class="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                        <h3 class="font-bold text-gray-900">Quick Links</h3>
+                    </div>
+                    <nav class="p-2">
+                        <ul class="space-y-1">
+                            <li>
+                                <a href="#about" class="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-lg transition-colors">
+                                    <i class="fa fa-info-circle w-5 text-gray-400"></i>
+                                    About
+                                </a>
+                            </li>
+                            {% if object.leaders.exists %}
+                                <li>
+                                    <a href="#leaders" class="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-lg transition-colors">
+                                        <i class="fa fa-user-friends w-5 text-gray-400"></i>
+                                        Run Leaders
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if news_list %}
+                                <li>
+                                    <a href="#news" class="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-lg transition-colors">
+                                        <i class="fa fa-newspaper w-5 text-gray-400"></i>
+                                        Latest News
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if faq_list %}
+                                <li>
+                                    <a href="#faq" class="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-lg transition-colors">
+                                        <i class="fa fa-question-circle w-5 text-gray-400"></i>
+                                        FAQ
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+
+                {# Other Group Runs #}
+                {% if all_runs.count > 1 %}
+                    <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                        <div class="bg-green-600 px-4 py-3">
+                            <h3 class="font-bold text-white flex items-center gap-2">
+                                <i class="fa fa-running"></i>
+                                Other Group Runs
+                            </h3>
+                        </div>
+                        <nav class="p-2">
+                            <ul class="space-y-1">
+                                {% for run in all_runs %}
+                                    {% if run.pk != object.pk %}
+                                        <li>
+                                            <a href="{{ run.get_absolute_url }}" class="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-green-50 hover:text-green-700 rounded-lg transition-colors">
+                                                <i class="fa fa-calendar-day w-5 text-gray-400"></i>
+                                                <span class="flex-grow">{{ run.name }}</span>
+                                                <span class="text-xs text-gray-400">{{ run.get_day_of_week_display|slice:":3" }}</span>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </nav>
+                        <div class="p-4 border-t border-gray-200">
+                            <a href="{% url 'run_list' %}" class="block w-full py-2 px-4 bg-green-600 hover:bg-green-700 text-white text-center font-semibold rounded-lg transition-colors">
+                                View All Runs
+                            </a>
+                        </div>
+                    </div>
+                {% endif %}
+
+                {# Join Us CTA #}
+                <div class="bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-xl shadow-sm p-6 text-center">
+                    <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-users text-2xl text-yellow-900"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-yellow-900 mb-2">Join the Trail Hawks!</h3>
+                    <p class="text-yellow-800 text-sm mb-4">We welcome runners of all abilities. Come run with us!</p>
+                    <a href="/signup/" class="inline-block px-6 py-2 bg-yellow-900 hover:bg-yellow-800 text-white font-semibold rounded-lg transition-colors">
+                        Become a Member
+                    </a>
+                </div>
+            </div>
+        </aside>
     </div>
 {% endblock content %}
