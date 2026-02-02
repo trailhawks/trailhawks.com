@@ -31,7 +31,7 @@ DATABASES = {"default": env.dj_db_url("DATABASE_URL", default="postgres://postgr
 
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
-MEDIA_ROOT = str(BASE_DIR.joinpath("media_root"))
+MEDIA_ROOT = str(BASE_DIR.joinpath("media"))
 MEDIA_URL = "/media/"
 
 STATIC_ROOT = str(BASE_DIR.joinpath("staticfiles"))
