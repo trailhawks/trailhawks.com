@@ -38,20 +38,6 @@ STATIC_ROOT = str(BASE_DIR.joinpath("staticfiles"))
 STATIC_URL = "/static/"
 STATICFILES_DIRS = (str(BASE_DIR.joinpath("frontend")),)
 
-STATICFILES_FINDERS = [
-    "django.contrib.staticfiles.finders.FileSystemFinder",
-    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-]
-
-STORAGES = {
-    "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
-    },
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
-    },
-}
-
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
@@ -191,9 +177,6 @@ MACHINE_TAG_NAMESPACE = "trailhawks"
 
 # Removing deprecation nagging...
 DJANGO_MARKUP_IGNORE_WARNINGS = True
-
-# Favicon path
-FAVICON_PATH = STATIC_URL + "ico/favicon.png"
 
 REST_FRAMEWORK = {
     # "DEFAULT_FILTER_BACKENDS": ("rest_framework.filters.DjangoFilterBackend",),
