@@ -37,10 +37,12 @@
             <div class="text-3xl md:text-4xl font-bold text-red-600">{{ runs|length }}</div>
             <div class="text-gray-500 text-sm">Weekly Runs</div>
         </div>
+        {% comment %}
         <div class="bg-white border border-gray-200 rounded-xl p-4 text-center">
             <div class="text-3xl md:text-4xl font-bold text-red-600">{{ active_members.count }}</div>
             <div class="text-gray-500 text-sm">Active Members</div>
         </div>
+        {% endcomment %}
         <div class="bg-white border border-gray-200 rounded-xl p-4 text-center">
             <div class="text-3xl md:text-4xl font-bold text-red-600">{{ past_races.count }}</div>
             <div class="text-gray-500 text-sm">Races Organized</div>

@@ -213,12 +213,13 @@
                             <span class="font-semibold text-red-600">{{ past_races.count|intcomma }}</span>
                         </li>
 
-                        {# Total members #}
+                        {% comment %}Total members - hidden for now
                         {% get_active_members as active_members %}
                         <li class="flex justify-between">
                             <span class="text-gray-600">Active members:</span>
                             <span class="font-semibold text-red-600">{{ active_members.count|intcomma }}</span>
                         </li>
+                        {% endcomment %}
 
                         {# Total racers #}
                         {% get_all_racers as racers %}
