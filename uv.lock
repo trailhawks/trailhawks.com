@@ -1545,7 +1545,7 @@ requires-dist = [
     { name = "django-ical" },
     { name = "django-markdownify" },
     { name = "django-markup-deprecated" },
-    { name = "django-prodserver", extras = ["django-q2", "uwsgi"] },
+    { name = "django-prodserver", extras = ["django-q2"] },
     { name = "django-q2" },
     { name = "django-robots" },
     { name = "django-shorturls" },

@@ -19,7 +19,7 @@ dependencies = [
     "django-ical",
     "django-markdownify",
     "django-markup-deprecated",
-    "django-prodserver[django-q2,uwsgi]",
+    "django-prodserver[django-q2]",
     "django-q2",
     "blessed",
     "django-robots",
