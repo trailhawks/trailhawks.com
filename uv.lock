@@ -385,6 +385,12 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/13/f6/74efddbab4208f413eb5f1e0faff225911d1a7793bf0c523d2862b014307/django_prodserver-2.4.0-py3-none-any.whl", hash = "sha256:912096f383c9547227c8bc3db586f1acb68efaa4704b10a66d91016be1d67ee7", size = 15291, upload-time = "2025-12-04T21:16:04.81Z" },
 ]
 
+[package.optional-dependencies]
+django-q2 = [
+    { name = "django-picklefield" },
+    { name = "django-q2" },
+]
+
 [[package]]
 name = "django-q2"
 version = "1.9.0"
@@ -1480,7 +1486,7 @@ dependencies = [
     { name = "django-ical" },
     { name = "django-markdownify" },
     { name = "django-markup-deprecated" },
-    { name = "django-prodserver" },
+    { name = "django-prodserver", extra = ["django-q2"] },
     { name = "django-q2" },
     { name = "django-robots" },
     { name = "django-shorturls" },
@@ -1539,7 +1545,7 @@ requires-dist = [
     { name = "django-ical" },
     { name = "django-markdownify" },
     { name = "django-markup-deprecated" },
-    { name = "django-prodserver", extras = ["uwsgi"] },
+    { name = "django-prodserver", extras = ["django-q2", "uwsgi"] },
     { name = "django-q2" },
     { name = "django-robots" },
     { name = "django-shorturls" },
