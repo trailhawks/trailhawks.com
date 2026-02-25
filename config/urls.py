@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import admin
 from django.contrib.flatpages.sitemaps import FlatPageSitemap
 from django.contrib.sitemaps import GenericSitemap
@@ -78,7 +79,7 @@ urlpatterns = [
     path("404/", TemplateView.as_view(template_name="404.html")),
     path("500/", TemplateView.as_view(template_name="500.html")),
     path("", include("favicon.urls")),
-    path("admin/", admin.site.urls),
+    path(settings.ADMIN_URL, admin.site.urls),
     path("health/", include("health_check.urls")),
 ]
 

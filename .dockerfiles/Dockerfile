@@ -4,8 +4,9 @@
 FROM ghcr.io/astral-sh/uv:python3.13-bookworm-slim AS builder
 
 # Configure environment variables
-ENV UV_SYSTEM_PYTHON=1
+ENV UV_COMPILE_BYTECODE=1
 ENV UV_LINK_MODE=copy
+ENV UV_SYSTEM_PYTHON=1
 
 # Set working directory
 WORKDIR /src/
@@ -29,6 +30,7 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync \
         --all-extras \
         --frozen \
+        --no-editable \
         --no-install-project
 
 # ------------------------------------------------------------
@@ -42,9 +44,9 @@ STOPSIGNAL SIGINT
 
 COPY . /src/
 
-# Copy the uv cache from builder stage and compile bytecode once
+# Install the project with dependencies
 RUN --mount=type=cache,target=/root/.cache/uv \
-    uv sync --frozen --compile
+    uv sync --frozen --no-editable
 
 # Download the TailwindCSS CLI
 # Using SQLite memory database and dummy secret key during build
@@ -56,9 +58,6 @@ RUN DATABASE_URL=sqlite://:memory: SECRET_KEY=build-key uv run --frozen -m manag
 # Collect static files for production serving
 RUN DATABASE_URL=sqlite://:memory: SECRET_KEY=build-key uv run --frozen -m manage collectstatic --noinput
 
-# Default command runs Gunicorn WSGI server
-# - Binds to all interfaces on port 8000
-# - Uses 2 worker processes for handling requests
 CMD ["/src/start-web.sh"]
 
 # Worker stage

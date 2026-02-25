@@ -173,6 +173,8 @@ ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=list())
 
 CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS", default=list())
 
+ADMIN_URL = env("ADMIN_URL", default="admin/")
+
 MACHINE_TAG_NAMESPACE = "trailhawks"
 
 # Removing deprecation nagging...
