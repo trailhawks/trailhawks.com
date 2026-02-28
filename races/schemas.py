@@ -6,23 +6,28 @@ from pydantic import BaseModel, Field
 class RaceAgentResult(BaseModel):
     """Structured output for race data extracted from external URLs."""
 
-    title: str | None = Field(default=None, description="The name/title of the race event")
-    annual: str | None = Field(default=None, description="Annual designation, e.g. '10th Annual' or 'Inaugural'")
+    title: str | None = Field(default=None, max_length=200, description="The name/title of the race event")
+    annual: str | None = Field(
+        default=None, max_length=32, description="Annual designation, e.g. '10th Annual' or 'Inaugural'"
+    )
     number: int | None = Field(default=None, description="The edition number of the race, e.g. 10 for '10th Annual'")
-    slogan: str | None = Field(default=None, description="Race slogan or tagline")
+    slogan: str | None = Field(default=None, max_length=300, description="Race slogan or tagline")
     description: str | None = Field(default=None, description="Detailed description of the race event")
-    distance: str | None = Field(default=None, description="Race distance as a string, e.g. '26.2' or '50'")
+    distance: str | None = Field(
+        default=None, max_length=100, description="Race distance as a string, e.g. '26.2' or '50'"
+    )
     unit: int | None = Field(
         default=None,
         description="Distance unit: 1 for Kilometers, 2 for Miles",
     )
     start_datetime: datetime | None = Field(default=None, description="Race start date and time in ISO 8601 format")
     course_map: str | None = Field(default=None, description="URL to the course map")
-    cut_off: str | None = Field(default=None, description="Race cut-off time, e.g. '13 hours'")
+    cut_off: str | None = Field(default=None, max_length=75, description="Race cut-off time, e.g. '13 hours'")
     reg_url: str | None = Field(default=None, description="URL for race registration")
     reg_description: str | None = Field(default=None, description="Description of registration details and pricing")
     ultrasignup_id: str | None = Field(
         default=None,
+        max_length=50,
         description="UltraSignup event ID (the ?did= parameter from ultrasignup.com URLs)",
     )
     awards: str | None = Field(default=None, description="Description of race awards")
