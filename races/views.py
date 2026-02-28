@@ -1,11 +1,19 @@
 import csv
+import json
+import re
 
+from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponse
-from django.views.generic import TemplateView, dates
+from django.shortcuts import redirect
+from django.views.generic import FormView, TemplateView, dates
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
+from .agents import apply_race_changes, compute_race_diff, run_chat_agent, run_race_agent
+from .forms import RaceAgentForm
 from .models import Race, Racer, Result, Series
+from .schemas import RaceAgentResult
 
 
 class RaceMixin:
@@ -182,3 +190,146 @@ class SeriesResultCsvDetail(DetailView):
             )
 
         return response
+
+
+class RaceAgentView(LoginRequiredMixin, FormView):
+    template_name = "races/race_agent.html"
+    form_class = RaceAgentForm
+
+    def post(self, request, *args, **kwargs):
+        # Phase 2: confirm and apply
+        if request.POST.get("confirm"):
+            race_pk = request.POST.get("race_pk")
+            agent_result_json = request.POST.get("agent_result_json")
+            try:
+                race = Race.objects.get(pk=race_pk)
+                result = RaceAgentResult.model_validate_json(agent_result_json)
+                changes = compute_race_diff(race, result)
+                apply_race_changes(race, changes)
+                messages.success(request, f"Applied {len(changes)} change(s) to {race}.")
+            except Race.DoesNotExist:
+                messages.error(request, "Race not found.")
+            except Exception as e:
+                messages.error(request, f"Error applying changes: {e}")
+            return redirect("race_agent")
+
+        # Phase 1: fetch and preview
+        form = self.get_form()
+        if form.is_valid():
+            race = form.cleaned_data["race"]
+            url = form.cleaned_data["url"]
+            try:
+                result = run_race_agent(url)
+                changes = compute_race_diff(race, result)
+                if not changes:
+                    messages.info(request, "No changes detected from the provided URL.")
+                    return redirect("race_agent")
+                context = self.get_context_data(
+                    form=form,
+                    changes=changes,
+                    race=race,
+                    agent_result_json=result.model_dump_json(),
+                )
+                return self.render_to_response(context)
+            except Exception as e:
+                messages.error(request, f"Error fetching race data: {e}")
+                return redirect("race_agent")
+        return self.form_invalid(form)
+
+
+class StaffRequiredMixin(LoginRequiredMixin, UserPassesTestMixin):
+    def test_func(self):
+        return self.request.user.is_staff
+
+
+class RaceChatView(StaffRequiredMixin, TemplateView):
+    template_name = "races/race_chat.html"
+
+    def get_race(self):
+        return Race.objects.get(pk=self.kwargs["pk"])
+
+    def session_key(self):
+        return f"race_chat_history_{self.kwargs['pk']}"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        race = self.get_race()
+        context["race"] = race
+        context["chat_history"] = self.request.session.get(self.session_key(), [])
+        return context
+
+    def post(self, request, *args, **kwargs):
+        race = self.get_race()
+        session_key = self.session_key()
+
+        # Handle clearing chat history
+        if request.POST.get("clear_chat"):
+            request.session.pop(session_key, None)
+            return redirect("race_chat", pk=race.pk)
+
+        user_message = request.POST.get("message", "").strip()
+        if not user_message:
+            return redirect("race_chat", pk=race.pk)
+
+        chat_history = request.session.get(session_key, [])
+        chat_history.append({"role": "user", "content": user_message})
+
+        try:
+            response_text = run_chat_agent(race, user_message)
+
+            # Check for JSON update blocks in the response
+            updates = self._extract_updates(response_text)
+            applied_fields = []
+            if updates:
+                for field, value in updates.items():
+                    if field in [
+                        "title",
+                        "annual",
+                        "number",
+                        "slogan",
+                        "description",
+                        "distance",
+                        "unit",
+                        "start_datetime",
+                        "course_map",
+                        "cut_off",
+                        "reg_url",
+                        "reg_description",
+                        "ultrasignup_id",
+                        "awards",
+                        "discounts",
+                        "lodging",
+                        "packet_pickup",
+                        "facebook_url",
+                        "facebook_event_url",
+                        "race_type",
+                        "active",
+                    ]:
+                        if field in ("unit", "race_type", "number"):
+                            value = int(value) if value is not None else None
+                        elif field == "active":
+                            value = value if isinstance(value, bool) else str(value).lower() == "true"
+                        setattr(race, field, value)
+                        applied_fields.append(field)
+                if applied_fields:
+                    race.save(update_fields=applied_fields)
+                    response_text += f"\n\n_Applied updates to: {', '.join(applied_fields)}_"
+
+            chat_history.append({"role": "assistant", "content": response_text})
+
+        except Exception as e:
+            chat_history.append({"role": "assistant", "content": f"Error: {e}"})
+
+        request.session[session_key] = chat_history
+        return redirect("race_chat", pk=race.pk)
+
+    def _extract_updates(self, text: str) -> dict:
+        """Extract JSON update block from agent response."""
+        match = re.search(r"```json\s*(\{.*?\})\s*```", text, re.DOTALL)
+        if match:
+            try:
+                data = json.loads(match.group(1))
+                return data.get("updates", {})
+            except (json.JSONDecodeError, AttributeError):
+                pass
+        return {}

@@ -96,6 +96,7 @@ INSTALLED_APPS += [
     "django_q",
     "django_tailwind_cli",
     "django_thumbor",
+    "django_typer",
     "favicon",
     "heroicons",
     "markdownify.apps.MarkdownifyConfig",
@@ -241,6 +242,8 @@ TAILWIND_CLI_AUTOMATIC_DOWNLOAD = env.bool("TAILWIND_CLI_AUTOMATIC_DOWNLOAD", de
 TAILWIND_CLI_DIST_CSS = env.str("TAILWIND_CLI_DIST_CSS", default="css/tailwind.css")
 TAILWIND_CLI_SRC_CSS = env.str("TAILWIND_CLI_SRC_CSS", default="frontend/index.css")
 TAILWIND_CLI_VERSION = env.str("TAILWIND_CLI_VERSION", default="4.1.18")
+
+AI_MODEL = env("AI_MODEL", default="openai:gpt-5-mini")
 
 PRODUCTION_PROCESSES = {
     "web": {

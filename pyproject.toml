@@ -52,6 +52,7 @@ dependencies = [
     "django-ajaximage @ git+https://github.com/trailhawks/django-ajaximage.git",
     "django-syncr @ git+https://github.com/trailhawks/django-syncr.git",
     "django-ninja>=1.5.3",
+    "pydantic-ai>=1.63.0",
 ]
 
 [project.optional-dependencies]
