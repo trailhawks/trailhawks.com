@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="mb-6">
+        <h1 class="text-3xl font-bold text-gray-900">
+            {% if object %}
+                Edit {{ object }}
+            {% else %}
+                Add {{ model_verbose_name|title }}
+            {% endif %}
+        </h1>
+    </div>
+
+    <div class="bg-white shadow rounded-lg p-6">
+        <form method="post" novalidate>
+            {% csrf_token %}
+
+            {% if form.errors %}
+                <div class="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+                    <p class="text-red-700 font-medium">Please correct the errors below.</p>
+                </div>
+            {% endif %}
+
+            {{ form.as_div }}
+
+            <div class="mt-6 flex space-x-3">
+                <button type="submit" class="px-6 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors">
+                    Save
+                </button>
+                <a href="{{ list_view_url }}" class="px-6 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold rounded-lg transition-colors">
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

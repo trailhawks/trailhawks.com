@@ -45,6 +45,9 @@
                         <!-- Action buttons and social -->
                         <div class="flex items-center gap-2">
                             {% if user.is_staff %}
+                                <a class="px-3 py-1 bg-red-700 hover:bg-red-800 text-white font-semibold rounded-lg transition-colors text-sm lg:text-base" href="{% url 'staff:dashboard' %}">
+                                    <i class="fa fa-clipboard-list mr-1"></i>Staff
+                                </a>
                                 <a class="px-3 py-1 bg-gray-700 hover:bg-gray-800 text-white font-semibold rounded-lg transition-colors text-sm lg:text-base" href="{% url 'admin:index' %}">
                                     <i class="fa fa-cog mr-1"></i>Admin
                                 </a>
@@ -93,6 +96,9 @@
                         </a>
                         <div class="border-t-2 border-gray-200 mt-2">
                             {% if user.is_staff %}
+                                <a class="px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-700 border-b border-gray-100 transition-colors" href="{% url 'staff:dashboard' %}">
+                                    <i class="fa fa-clipboard-list mr-2 text-red-400"></i>Staff
+                                </a>
                                 <a class="px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-700 border-b border-gray-100 transition-colors" href="{% url 'admin:index' %}">
                                     <i class="fa fa-cog mr-2 text-red-400"></i>Admin
                                 </a>
