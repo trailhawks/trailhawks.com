@@ -58,22 +58,26 @@ def officer_list(request):
             message = form.cleaned_data["message"]
             sender = form.cleaned_data["sender"]
             cc_myself = form.cleaned_data["cc_myself"]
-            recipients = [officer.email for officer in officers]
+            recipients = [officer.email for officer in officers if officer.email]
             if cc_myself:
                 recipients.append(sender)
 
-            message_html = loader.render_to_string(
-                "emails/contact_message.html",
-                {"body": message, "sender": sender, "subject": subject},
-            )
-            message_text = loader.render_to_string(
-                "emails/contact_message.txt",
-                {"body": message, "sender": sender, "subject": subject},
-            )
+            if recipients:
+                message_html = loader.render_to_string(
+                    "emails/contact_message.html",
+                    {"body": message, "sender": sender, "subject": subject},
+                )
+                message_text = loader.render_to_string(
+                    "emails/contact_message.txt",
+                    {"body": message, "sender": sender, "subject": subject},
+                )
 
-            msg = EmailMultiAlternatives(subject, message_text, "no-reply@trailhawks.com", recipients)
-            msg.attach_alternative(message_html, "text/html")
-            msg.send()
+                try:
+                    msg = EmailMultiAlternatives(subject, message_text, "no-reply@trailhawks.com", recipients)
+                    msg.attach_alternative(message_html, "text/html")
+                    msg.send()
+                except Exception:
+                    pass
 
             return HttpResponseRedirect(reverse("thanks"))
     else:
