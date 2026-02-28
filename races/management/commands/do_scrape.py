@@ -79,7 +79,7 @@ def command(create, update):
                 defaults={
                     "city": data["city"],
                     "country": "USA",
-                    "gender": Racer.MALE if data["gender"] == "M" else Racer.FEMALE,
+                    "gender": "Man" if data["gender"] == "M" else "Woman",
                     "state": data["state"],
                 },
             )

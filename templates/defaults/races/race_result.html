@@ -94,11 +94,11 @@
                         {% render_results race_results %}
                     </div>
                     <div class="py-4 hidden" id="{{ race_type.slug }}-womens-results">
-                        {% get_results_for_race race=object race_type=race_type gender=2 as race_results %}
+                        {% get_results_for_race race=object race_type=race_type gender="Woman" as race_results %}
                         {% render_results race_results %}
                     </div>
                     <div class="py-4 hidden" id="{{ race_type.slug }}-mens-results">
-                        {% get_results_for_race race=object race_type=race_type gender=1 as race_results %}
+                        {% get_results_for_race race=object race_type=race_type gender="Man" as race_results %}
                         {% render_results race_results %}
                     </div>
                 </div>

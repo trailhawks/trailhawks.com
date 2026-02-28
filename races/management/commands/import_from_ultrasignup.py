@@ -52,7 +52,7 @@ def command(race_id):
                     defaults={
                         "city": item["city"],
                         "country": "USA",
-                        "gender": Racer.MALE if item["gender"] == "M" else Racer.FEMALE,
+                        "gender": "Man" if item["gender"] == "M" else "Woman",
                         "state": item["state"],
                     },
                 )

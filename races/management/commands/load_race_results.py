@@ -40,9 +40,9 @@ def command(race, csv_filename, update):
         distance = row["distance"]
 
         if row["gender"].strip() in ["m", "M"]:
-            gender = 1
+            gender = "Man"
         else:
-            gender = 2
+            gender = "Woman"
 
         racer, _ = Racer.objects.get_or_create(first_name=first_name, last_name=last_name, gender=gender)
 

@@ -160,13 +160,6 @@ class Race(MachineTagMixin):
 class Racer(MachineTagMixin):
     """Racer model."""
 
-    MALE = 1
-    FEMALE = 2
-    GENDER_CHOICES = (
-        (MALE, "Man"),
-        (FEMALE, "Woman"),
-    )
-
     first_name = models.CharField(max_length=40)
     last_name = models.CharField(max_length=40)
     trailhawk = models.OneToOneField(
@@ -178,7 +171,7 @@ class Racer(MachineTagMixin):
     )
     email = models.CharField(max_length=50, blank=True, null=True)
     phone = models.CharField(max_length=13, blank=True, null=True)
-    gender = models.IntegerField(choices=GENDER_CHOICES)
+    gender = models.CharField(max_length=100, blank=True, null=True)
     birth_date = models.DateField(null=True, blank=True)
     city = models.CharField(max_length=40, null=True, blank=True)
     state = models.CharField(max_length=40, null=True, blank=True)
@@ -219,9 +212,7 @@ class Racer(MachineTagMixin):
 
     @property
     def get_gender(self):
-        for num, gender in self.GENDER_CHOICES:
-            if num == self.gender:
-                return gender
+        return self.gender
 
 
 class RaceType(models.Model):

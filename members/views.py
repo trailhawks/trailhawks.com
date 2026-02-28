@@ -208,7 +208,7 @@ class MemberResultCsvListView(ListView):
                     result.race_type.name,
                     result.bib_number,
                     result.racer.full_name,
-                    result.racer.get_gender_display(),
+                    result.racer.gender,
                     time,
                     result.place,
                 ]

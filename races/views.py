@@ -103,7 +103,7 @@ class RaceResultCsvDetail(RaceMixin, dates.DateDetailView):
                     result.race.start_datetime.year,
                     result.bib_number,
                     result.racer.full_name,
-                    result.racer.get_gender_display(),
+                    result.racer.gender,
                     time,
                     result.place,
                 ]
@@ -175,7 +175,7 @@ class SeriesResultCsvDetail(DetailView):
                     result.race_type.name,
                     result.bib_number,
                     result.racer.full_name,
-                    result.racer.get_gender_display(),
+                    result.racer.gender,
                     time,
                     result.place,
                 ]
