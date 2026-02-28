@@ -1,45 +1,30 @@
 {% extends base_template_name|default:"base.html" %}
 
-
-
-
-
 {% block title %}Contact Us{% endblock title %}
-
 
 {% block content %}
     <div class="flex flex-col md:flex-row gap-8">
         <div class="w-full md:w-2/3">
-            <h1 class="font-bold text-4xl md:text-6xl">Contact us</h1>
+            <h1 class="font-bold text-4xl md:text-6xl mb-4">Contact us</h1>
 
-            <p class="text-lg md:text-2xl font-light">You can get in contact with the trail hawks by filling out the form below. We look forward to running with you soon.</p>
+            <p class="text-lg md:text-2xl font-light mb-8">You can get in contact with the trail hawks by filling out the form below. We look forward to running with you soon.</p>
 
-            <form action="/contact/" method="post">
+            <form action="/contact/" method="post" class="space-y-6">
                 {% csrf_token %}
-                <div class="mb-4 {% if form.subject.errors %}has-error{% endif %}">
-                    <label class="control-label" for="id_subject">Subject (required)</label>
-                    {{ form.subject.errors }}
-                    <input id="id_subject" type="text" name="subject" maxlength="100" class="block py-1 px-2 mb-1 w-full text-base leading-normal text-gray-800 bg-white rounded border border-gray-200 appearance-none">
-                </div>
-
-                <div class="mb-4 {% if form.sender.errors %}has-error{% endif %}">
-
-                    <label class="control-label" for="id_sender">Email (required)</label>
+                <div class="{% if form.sender.errors %}has-error{% endif %}">
+                    <label class="block text-sm font-semibold text-gray-700 mb-1" for="id_sender">Email (required)</label>
                     {{ form.sender.errors }}
-                    <input id="id_sender" type="text" name="sender" maxlength="100" class="block py-1 px-2 mb-1 w-full text-base leading-normal text-gray-800 bg-white rounded border border-gray-200 appearance-none">
+                    <input id="id_sender" type="email" name="sender" maxlength="100" class="block py-2 px-3 w-full text-base leading-normal text-gray-800 bg-white rounded-lg border border-gray-300 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none transition-colors">
                 </div>
 
-                <div class="mb-4 {% if form.message.errors %}has-error{% endif %}">
-                    <textarea name="message" id="message" class="block py-1 px-2 mb-1 w-full text-base leading-normal text-gray-800 bg-white rounded border border-gray-200 appearance-none" rows="10" tabindex="4"></textarea>
+                <div class="{% if form.message.errors %}has-error{% endif %}">
+                    <label class="block text-sm font-semibold text-gray-700 mb-1" for="message">Message</label>
+                    <textarea name="message" id="message" class="block py-2 px-3 w-full text-base leading-normal text-gray-800 bg-white rounded-lg border border-gray-300 focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-none transition-colors" rows="10" tabindex="4"></textarea>
                 </div>
 
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" name="cc_myself"> Cc myself
-                    </label>
+                <div>
+                    <button type="submit" class="inline-block py-3 px-6 text-lg font-semibold text-center text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors">Submit</button>
                 </div>
-
-                <button type="submit" class="inline-block py-3 px-4 text-xl font-normal leading-tight text-center text-white no-underline align-middle bg-red-600 rounded border select-none whitespace-no-wrap hover:bg-red-700">Submit</button>
             </form>
         </div>
     </div>

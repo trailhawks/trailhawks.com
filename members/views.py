@@ -54,13 +54,10 @@ def officer_list(request):
     if request.method == "POST":
         form = ContactForm(request.POST)
         if form.is_valid():
-            subject = "[Trailhawks]: %s" % form.cleaned_data["subject"]
+            subject = "[Trailhawks]: Contact Us Website Form"
             message = form.cleaned_data["message"]
             sender = form.cleaned_data["sender"]
-            cc_myself = form.cleaned_data["cc_myself"]
             recipients = [officer.email for officer in officers if officer.email]
-            if cc_myself:
-                recipients.append(sender)
 
             if recipients:
                 message_html = loader.render_to_string(
