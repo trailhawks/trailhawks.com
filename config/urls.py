@@ -5,14 +5,13 @@ from django.contrib.sitemaps import GenericSitemap
 from django.contrib.sitemaps.views import sitemap
 from django.urls import include, path
 from django.views.generic import TemplateView
-from rest_framework.routers import DefaultRouter
 
 from blog.models import Post
 from config import __version__
+from config.api import api
 from core.views import AboutView, HomepageView, HumansView, StyleGuideView, ThanksView
 from members.views import officer_list
 from news.models import News
-from photos.apis import PhotoViewSet, RandomPhotoViewSet
 from races.models import Race
 from sitemaps.default import StaticViewSitemap
 
@@ -39,11 +38,6 @@ sitemaps = {
     "blog": GenericSitemap(blog_dict, priority=0.6),
 }
 
-router = DefaultRouter()
-
-router.register(r"photos", PhotoViewSet)
-router.register(r"random_photos", RandomPhotoViewSet)
-
 admin_header = f"Trail Hawks v{__version__}"
 admin.site.enable_nav_sidebar = False
 admin.site.site_header = admin_header
@@ -67,7 +61,7 @@ urlpatterns = [
     path("runs/", include("runs.urls")),
     path("sponsors/", include("sponsors.urls")),
     path("ajaximage/", include("ajaximage.urls")),
-    path("api/v1/", include(router.urls)),
+    path("api/", api.urls),
     path("humans.txt", HumansView.as_view()),
     path("robots.txt", include("robots.urls")),
     path(

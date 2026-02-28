@@ -100,7 +100,7 @@ INSTALLED_APPS += [
     "heroicons",
     "markdownify.apps.MarkdownifyConfig",
     "micawber.contrib.mcdjango",
-    "rest_framework",
+    "ninja",
     "robots",
     "simple_open_graph",
     "syncr.flickr",
@@ -179,13 +179,6 @@ MACHINE_TAG_NAMESPACE = "trailhawks"
 
 # Removing deprecation nagging...
 DJANGO_MARKUP_IGNORE_WARNINGS = True
-
-REST_FRAMEWORK = {
-    # "DEFAULT_FILTER_BACKENDS": ("rest_framework.filters.DjangoFilterBackend",),
-    "PAGINATE_BY_PARAM": "limit",
-    # 'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
-    "PAGINATE_BY": 10,
-}
 
 TWITTER = {
     "username": env("TWITTER_USERNAME", default=""),
