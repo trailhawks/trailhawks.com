@@ -1959,6 +1959,18 @@ wheels = [
 ]
 
 [[package]]
+name = "model-bakery"
+version = "1.23.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/88/34/cdac0f2565d34cd73c02b79e3f03c8d9bd4b14084f790e28ab85abb3d245/model_bakery-1.23.3.tar.gz", hash = "sha256:cb94b30eeaf6300336bbfed21f30dbaa01d68e3799e792f60d06e937d5ce46c8", size = 23247, upload-time = "2026-02-13T16:47:01.536Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/6c/70/d2c827e2fb9aee0844da298d65e6df4d42a7bf182592c116af51037904f1/model_bakery-1.23.3-py3-none-any.whl", hash = "sha256:3c378fad570d64b8b15f6cb6acb4f589b0f70d4df823d23257720ba381e18fd5", size = 25436, upload-time = "2026-02-13T16:47:00.408Z" },
+]
+
+[[package]]
 name = "more-itertools"
 version = "10.8.0"
 source = { registry = "https://pypi.org/simple" }
@@ -3636,6 +3648,11 @@ dev = [
     { name = "pytest-django" },
 ]
 
+[package.dev-dependencies]
+dev = [
+    { name = "model-bakery" },
+]
+
 [package.metadata]
 requires-dist = [
     { name = "beautifulsoup4" },
@@ -3692,6 +3709,9 @@ requires-dist = [
     { name = "whitenoise" },
 ]
 provides-extras = ["dev"]
+
+[package.metadata.requires-dev]
+dev = [{ name = "model-bakery", specifier = ">=1.23.3" }]
 
 [[package]]
 name = "typer"

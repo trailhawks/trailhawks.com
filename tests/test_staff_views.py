@@ -1,71 +1,52 @@
 from datetime import datetime, timezone as dt_timezone
 
 import pytest
-from django.contrib.auth.models import User
 from django.test import Client
 from django.urls import reverse
-from django.utils import timezone
+from model_bakery import baker
 
 from races.models import Race
 from runs.models import Run
 
 
 @pytest.fixture
-def staff_user(db):
-    return User.objects.create_user(username="staff", password="testpass", is_staff=True)
-
-
-@pytest.fixture
-def regular_user(db):
-    return User.objects.create_user(username="regular", password="testpass", is_staff=False)
-
-
-@pytest.fixture
-def staff_client(staff_user):
+def staff_client(db):
+    user = baker.make("auth.User", is_staff=True)
+    user.set_password("testpass")
+    user.save()
     client = Client()
-    client.login(username="staff", password="testpass")
+    client.login(username=user.username, password="testpass")
     return client
 
 
 @pytest.fixture
-def regular_client(regular_user):
+def regular_client(db):
+    user = baker.make("auth.User", is_staff=False)
+    user.set_password("testpass")
+    user.save()
     client = Client()
-    client.login(username="regular", password="testpass")
+    client.login(username=user.username, password="testpass")
     return client
 
 
 @pytest.fixture
 def race(db):
-    return Race.objects.create(
-        title="Test Trail Race",
-        slug="test-trail-race",
-        start_datetime=timezone.now(),
-        active=True,
-        race_type=1,
-    )
+    return baker.make(Race, title="Test Trail Race", active=True)
 
 
 @pytest.fixture
 def inactive_race(db):
-    return Race.objects.create(
+    return baker.make(
+        Race,
         title="Old Race",
-        slug="old-race",
         start_datetime=datetime(2020, 6, 1, tzinfo=dt_timezone.utc),
         active=False,
-        race_type=1,
     )
 
 
 @pytest.fixture
 def run(db):
-    return Run.objects.create(
-        name="Monday Trail Run",
-        slug="monday-trail-run",
-        run_time="6:30 PM",
-        details="Weekly group run",
-        day_of_week=0,
-        active=True,
-    )
+    return baker.make(Run, name="Monday Trail Run", active=True)
 
 
 # -- Dashboard --
@@ -131,7 +112,6 @@ class TestRaceList:
             HTTP_HX_REQUEST="true",
         )
         assert response.status_code == 200
-        # Partial should not contain the full page layout
         assert b"<!DOCTYPE html>" not in response.content
         assert b"Test Trail Race" in response.content
 
@@ -186,7 +166,7 @@ class TestRaceUpdate:
             reverse("staff:race-update", kwargs={"pk": race.pk}),
             {
                 "title": "Updated Race",
-                "slug": "test-trail-race",
+                "slug": race.slug,
                 "start_datetime": "2026-06-01 08:00:00",
                 "active": True,
                 "race_type": 1,
@@ -280,7 +260,7 @@ class TestRunUpdate:
             reverse("staff:run-update", kwargs={"pk": run.pk}),
             {
                 "name": "Updated Run",
-                "slug": "monday-trail-run",
+                "slug": run.slug,
                 "run_time": "6:30 PM",
                 "details": "Updated details",
                 "day_of_week": 0,
