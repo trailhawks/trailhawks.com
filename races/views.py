@@ -325,6 +325,13 @@ class RaceChatView(StaffRequiredMixin, TemplateView):
                             value = int(value) if value is not None else None
                         elif field == "active":
                             value = value if isinstance(value, bool) else str(value).lower() == "true"
+                        elif field == "start_datetime" and isinstance(value, str):
+                            from django.utils.dateparse import parse_datetime
+
+                            parsed = parse_datetime(value)
+                            if parsed is None:
+                                continue
+                            value = parsed
                         setattr(race, field, value)
                         applied_fields.append(field)
                 if applied_fields:
