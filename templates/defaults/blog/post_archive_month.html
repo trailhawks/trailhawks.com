@@ -1,6 +1,14 @@
 {% extends base_template_name|default:"base.html" %}
 
+{% load simple_open_graph %}
+
 {% block title %}Blog{% endblock title %}
+
+{% block opengraph %}
+    {% with "Trail running stories, race reports, and updates from the Lawrence Trail Hawks community." as og_description %}
+        {% opengraph_meta "type='website', url='/blog/', title='Trail Hawks Blog', description=og_description, image='https://trailhawks.com/static/img/hawk-head.png'" %}
+    {% endwith %}
+{% endblock opengraph %}
 
 {% block sub_nav %}
     <div class="navigation" id="sub-nav">

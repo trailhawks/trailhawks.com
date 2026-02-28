@@ -8,6 +8,13 @@
 {% load members_tags %}
 {% load news_tags %}
 {% load race_tags %}
+{% load simple_open_graph %}
+
+{% block opengraph %}
+    {% with "Lawrence Trail Hawks - trail running, races, and community in Lawrence, Kansas. Join us on the trails!" as og_description %}
+        {% opengraph_meta "type='website', url='/', title='Lawrence Trail Hawks', description=og_description, image='https://trailhawks.com/static/img/hawk-head.png'" %}
+    {% endwith %}
+{% endblock opengraph %}
 {% load run_tags %}
 {% load sponsors_tags %}
 {% load static %}

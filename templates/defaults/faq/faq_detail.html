@@ -1,11 +1,15 @@
 {% extends base_template_name|default:"base.html" %}
 
-
 {% load markdownify %}
+{% load simple_open_graph %}
 
+{% block title %}FAQ - {{ object.question }}{% endblock title %}
 
-{% block title %}FAQ{% endblock title %}
-
+{% block opengraph %}
+    {% with object.answer|markdownify|striptags|truncatechars:300 as og_description %}
+        {% opengraph_meta "type='article', url=object.get_absolute_url, title=object.question, description=og_description, image='https://trailhawks.com/static/img/hawk-head.png'" %}
+    {% endwith %}
+{% endblock opengraph %}
 
 {% block content %}
     <div class="flex flex-auto gap-8">
