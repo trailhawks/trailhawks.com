@@ -23,6 +23,23 @@ class RaceSchema(Schema):
     description: str | None = None
     distance: str | None = None
     start_datetime: datetime | None = None
+    annual: str | None = None
+    number: int | None = None
+    slogan: str | None = None
+    race_type: int | None = None
+    unit: int | None = None
+    active: bool = True
+    awards: str | None = None
+    cut_off: str | None = None
+    course_map: str | None = None
+    reg_url: str | None = None
+    reg_description: str | None = None
+    ultrasignup_id: str | None = None
+    discounts: str | None = None
+    lodging: str | None = None
+    packet_pickup: str | None = None
+    facebook_url: str | None = None
+    facebook_event_url: str | None = None
 
 
 class RunSchema(Schema):
@@ -31,6 +48,8 @@ class RunSchema(Schema):
     slug: str
     day_of_week: int | None = None
     location: str | None = None
+    run_time: str | None = None
+    details: str | None = None
     active: bool
 
 
