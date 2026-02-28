@@ -14,7 +14,7 @@ class RaceAgentResult(BaseModel):
     slogan: str | None = Field(default=None, max_length=300, description="Race slogan or tagline")
     description: str | None = Field(default=None, description="Detailed description of the race event")
     distance: str | None = Field(
-        default=None, max_length=100, description="Race distance as a string, e.g. '26.2' or '50'"
+        default=None, max_length=200, description="Race distance as a string, e.g. '26.2' or '50'"
     )
     unit: int | None = Field(
         default=None,
@@ -22,7 +22,7 @@ class RaceAgentResult(BaseModel):
     )
     start_datetime: datetime | None = Field(default=None, description="Race start date and time in ISO 8601 format")
     course_map: str | None = Field(default=None, description="URL to the course map")
-    cut_off: str | None = Field(default=None, max_length=75, description="Race cut-off time, e.g. '13 hours'")
+    cut_off: str | None = Field(default=None, max_length=200, description="Race cut-off time, e.g. '13 hours'")
     reg_url: str | None = Field(default=None, description="URL for race registration")
     reg_description: str | None = Field(default=None, description="Description of registration details and pricing")
     ultrasignup_id: str | None = Field(

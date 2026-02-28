@@ -66,13 +66,13 @@ class Race(MachineTagMixin):
     sponsors = models.ManyToManyField("sponsors.Sponsor", related_name="sponsors")
     race_directors = models.ManyToManyField("members.Member")
     awards = models.TextField(blank=True, null=True)
-    distance = models.CharField(max_length=100, blank=True, null=True, help_text="eg 26.2")
+    distance = models.CharField(max_length=200, blank=True, null=True, help_text="eg 26.2")
     unit = models.IntegerField(choices=UNIT_CHOICES, default=KM, blank=True, null=True)
     start_datetime = models.DateTimeField(verbose_name="Start Date and Time")
     description = models.TextField(blank=True)
     location = models.ForeignKey("locations.Location", on_delete=models.CASCADE, blank=True, null=True)
     course_map = models.URLField(blank=True, null=True, help_text="Link to course map if avail.")
-    cut_off = models.CharField(max_length=75, null=True, blank=True, help_text="eg: 13 hours")
+    cut_off = models.CharField(max_length=200, null=True, blank=True, help_text="eg: 13 hours")
     reg_url = models.URLField(
         blank=True,
         null=True,
