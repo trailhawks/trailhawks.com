@@ -13,14 +13,13 @@
                 {% for row in object_rows %}
                     <tr class="hover:bg-gray-50">
                         {% for value in row.fields %}
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ value }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{% if forloop.first %}<a href="{{ row.detail_url }}" class="text-blue-600 hover:text-blue-800 font-medium">{{ value }}</a>{% else %}{{ value }}{% endif %}</td>
                         {% endfor %}
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
                             <a href="{{ row.detail_url }}" class="text-blue-600 hover:text-blue-800">View</a>
                             <a href="{{ row.edit_url }}" class="text-yellow-600 hover:text-yellow-800">Edit</a>
                             <a href="{{ row.agent_url }}" class="text-purple-600 hover:text-purple-800">Agent</a>
                             <a href="{{ row.chat_url }}" class="text-green-600 hover:text-green-800">Chat</a>
-                            <a href="{{ row.delete_url }}" class="text-red-600 hover:text-red-800">Delete</a>
                         </td>
                     </tr>
                 {% endfor %}

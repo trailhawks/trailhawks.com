@@ -147,13 +147,12 @@ class RaceFilterSet(django_filters.FilterSet):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        years = (
-            Race.objects.exclude(start_datetime__isnull=True)
-            .dates("start_datetime", "year", order="DESC")
-        )
+        years = Race.objects.exclude(start_datetime__isnull=True).dates("start_datetime", "year", order="DESC")
         self.filters["year"].extra["choices"] = [(y.year, y.year) for y in years]
         # Style all widgets
-        select_classes = "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+        select_classes = (
+            "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+        )
         for f in self.filters.values():
             f.field.widget.attrs.setdefault("class", select_classes)
 
@@ -223,7 +222,9 @@ class RunFilterSet(django_filters.FilterSet):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        select_classes = "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+        select_classes = (
+            "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+        )
         for f in self.filters.values():
             f.field.widget.attrs.setdefault("class", select_classes)
 
