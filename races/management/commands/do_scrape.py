@@ -1,5 +1,4 @@
 import json
-from pathlib import Path
 
 import djclick as click
 
@@ -36,20 +35,12 @@ def command(create, update):
         if gender_place in [1, 2, 3]:
             if gender.upper() in ["F", "W"]:
                 if place in [1, 2, 3]:
-                    place_data.append(
-                        titlecase(f"{num2words(place, ordinal=True)} Place Overall.")
-                    )
-                place_data.append(
-                    titlecase(f"{num2words(gender_place, ordinal=True)} Place Womens.")
-                )
+                    place_data.append(titlecase(f"{num2words(place, ordinal=True)} Place Overall."))
+                place_data.append(titlecase(f"{num2words(gender_place, ordinal=True)} Place Womens."))
             elif gender.upper() in ["M"]:
-                place_data.append(
-                    titlecase(f"{num2words(gender_place, ordinal=True)} Place Mens.")
-                )
+                place_data.append(titlecase(f"{num2words(gender_place, ordinal=True)} Place Mens."))
             else:
-                place_data.append(
-                    titlecase(f"{num2words(gender_place, ordinal=True)} Place Overall.")
-                )
+                place_data.append(titlecase(f"{num2words(gender_place, ordinal=True)} Place Overall."))
 
         if len(place_data):
             place_data = " ".join(place_data)

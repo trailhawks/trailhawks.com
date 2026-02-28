@@ -1,5 +1,4 @@
 import os
-import pandas
 
 import djclick as click
 import json
@@ -16,9 +15,6 @@ from urllib.parse import urlparse
 
 from events.models import Event
 from races.models import Race
-from races.models import Racer
-from races.models import RaceType
-from races.models import Result
 
 
 os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
@@ -131,9 +127,7 @@ def command():
 
             event_name = soup.find("h1").string
 
-            event, created = Event.objects.get_or_create(
-                title=event_name, defaults={"status": Event.STATUS_DRAFT}
-            )
+            event, created = Event.objects.get_or_create(title=event_name, defaults={"status": Event.STATUS_DRAFT})
 
             table = soup.find_all("table")[2]
             for cell in table.find_all("td"):
@@ -220,9 +214,7 @@ def command():
                 filename = slugify(f"{did['did']} {did['name']} {did['year']} ")
                 filename = f"{filename}.json"
 
-                Path("exports", filename).write_text(
-                    json.dumps(response.json(), indent=2)
-                )
+                Path("exports", filename).write_text(json.dumps(response.json(), indent=2))
 
             except Exception as e:
                 print(f"[red]{e}[/red]")
