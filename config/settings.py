@@ -92,6 +92,7 @@ INSTALLED_APPS = [
 INSTALLED_APPS += [
     # "storages",
     "ajaximage",
+    "django_filters",
     "django_prodserver",
     "django_q",
     "django_tailwind_cli",
@@ -101,6 +102,7 @@ INSTALLED_APPS += [
     "heroicons",
     "markdownify.apps.MarkdownifyConfig",
     "micawber.contrib.mcdjango",
+    "neapolitan",
     "ninja",
     "robots",
     "simple_open_graph",

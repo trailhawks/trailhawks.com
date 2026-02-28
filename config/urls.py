@@ -73,6 +73,7 @@ urlpatterns = [
     path("404/", TemplateView.as_view(template_name="404.html")),
     path("500/", TemplateView.as_view(template_name="500.html")),
     path("", include("favicon.urls")),
+    path("staff/", include("config.staff_urls")),
     path(settings.ADMIN_URL, admin.site.urls),
     path("health/", include("health_check.urls")),
 ]

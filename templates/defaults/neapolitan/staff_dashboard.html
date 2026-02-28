@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-900">Staff Dashboard</h1>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <a href="{% url 'staff:race-list' %}" class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:shadow-md hover:border-red-300 transition-all">
+            <h2 class="text-xl font-bold text-gray-900 mb-2"><i class="fa fa-flag mr-2 text-red-600"></i>Races</h2>
+            <p class="text-gray-600">Manage races, distances, and event details.</p>
+        </a>
+
+        <a href="{% url 'staff:run-list' %}" class="block p-6 bg-white border border-gray-200 rounded-lg shadow hover:shadow-md hover:border-red-300 transition-all">
+            <h2 class="text-xl font-bold text-gray-900 mb-2"><i class="fa fa-running mr-2 text-red-600"></i>Group Runs</h2>
+            <p class="text-gray-600">Manage weekly group runs and schedules.</p>
+        </a>
+    </div>
+{% endblock content %}

@@ -10,7 +10,7 @@ from races.models import Race, Racer
 from runs.models import Run
 from sponsors.models import Sponsor
 
-api = NinjaAPI(title="Trail Hawks API", version="2.0")
+api = NinjaAPI(title="Trail Hawks API", version="2.0", urls_namespace="api")
 
 
 # Schemas

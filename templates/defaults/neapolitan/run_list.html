@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="flex items-center justify-between mb-6">
+        <h1 class="text-3xl font-bold text-gray-900">Runs</h1>
+        <a href="{{ create_view_url }}" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors">
+            <i class="fa fa-plus mr-1"></i>Add New
+        </a>
+    </div>
+
+    <form id="filter-form"
+          hx-get="{{ list_view_url }}"
+          hx-trigger="input delay:300ms from:#search-input, change from:.filter-field"
+          hx-target="#results-table"
+          hx-push-url="true"
+          class="mb-6 flex flex-col sm:flex-row gap-4">
+        <div class="flex-1">
+            <input type="text"
+                   id="search-input"
+                   name="q"
+                   value="{{ search_query }}"
+                   placeholder="Search runs..."
+                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500">
+        </div>
+        {% if filterset %}
+            {% for field in filterset.form %}
+                <div class="w-full sm:w-48">
+                    <label for="{{ field.id_for_label }}" class="sr-only">{{ field.label }}</label>
+                    {{ field }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </form>
+
+    <div id="results-table">
+        {% include "neapolitan/run_list_partial.html" %}
+    </div>
+
+    <script>
+        // Add filter-field class to all selects in the filter form so htmx triggers on change
+        document.querySelectorAll('#filter-form select').forEach(function(el) {
+            el.classList.add('filter-field');
+        });
+    </script>
+{% endblock content %}
