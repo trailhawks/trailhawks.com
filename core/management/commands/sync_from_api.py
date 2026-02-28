@@ -1,4 +1,5 @@
 import typer
+from django.db import IntegrityError
 from django_typer.management import TyperCommand
 from rich.console import Console
 
@@ -71,7 +72,7 @@ class Command(TyperCommand):
             response.raise_for_status()
         except httpx.HTTPStatusError as exc:
             console.print(f"  [red]API returned {exc.response.status_code} for /api/{endpoint}/ — skipping.[/red]")
-            console.print(f"  [red]You may need to deploy schema changes to production first.[/red]")
+            console.print("  [red]You may need to deploy schema changes to production first.[/red]")
             return
 
         data = response.json()
@@ -79,6 +80,7 @@ class Command(TyperCommand):
 
         created = 0
         updated = 0
+        skipped = 0
 
         for item in data:
             defaults = {}
@@ -98,7 +100,12 @@ class Command(TyperCommand):
                 else:
                     created += 1
             else:
-                _, was_created = model.objects.update_or_create(id=obj_id, defaults=defaults)
+                try:
+                    _, was_created = model.objects.update_or_create(id=obj_id, defaults=defaults)
+                except IntegrityError as exc:
+                    skipped += 1
+                    console.print(f"  [red]Skipped:[/red] {name} (id={obj_id}) — {exc}")
+                    continue
                 if was_created:
                     created += 1
                     console.print(f"  [green]Created:[/green] {name} (id={obj_id})")
@@ -107,4 +114,7 @@ class Command(TyperCommand):
                     console.print(f"  [yellow]Updated:[/yellow] {name} (id={obj_id})")
 
         prefix = "[bold blue]DRY RUN[/bold blue] " if dry_run else ""
-        console.print(f"\n{prefix}{label}: {created} created, {updated} updated\n")
+        parts = [f"{created} created", f"{updated} updated"]
+        if skipped:
+            parts.append(f"{skipped} skipped")
+        console.print(f"\n{prefix}{label}: {', '.join(parts)}\n")

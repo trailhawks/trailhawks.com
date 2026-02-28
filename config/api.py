@@ -52,6 +52,10 @@ class RunSchema(Schema):
     details: str | None = None
     active: bool
 
+    @staticmethod
+    def resolve_location(obj):
+        return str(obj.location) if obj.location else None
+
 
 class MemberSchema(Schema):
     id: int
