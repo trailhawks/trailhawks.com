@@ -196,6 +196,19 @@ class RaceAgentView(LoginRequiredMixin, FormView):
     template_name = "races/race_agent.html"
     form_class = RaceAgentForm
 
+    def get_initial(self):
+        initial = super().get_initial()
+        pk = self.kwargs.get("pk")
+        if pk:
+            try:
+                race = Race.objects.get(pk=pk)
+                initial["race"] = race.pk
+                if race.reg_url:
+                    initial["url"] = race.reg_url
+            except Race.DoesNotExist:
+                pass
+        return initial
+
     def post(self, request, *args, **kwargs):
         # Phase 2: confirm and apply
         if request.POST.get("confirm"):
@@ -217,7 +230,10 @@ class RaceAgentView(LoginRequiredMixin, FormView):
         form = self.get_form()
         if form.is_valid():
             race = form.cleaned_data["race"]
-            url = form.cleaned_data["url"]
+            url = form.cleaned_data["url"] or race.reg_url
+            if not url:
+                messages.error(request, "No URL provided and the selected race has no registration URL set.")
+                return redirect("race_agent")
             try:
                 result = run_race_agent(url)
                 changes = compute_race_diff(race, result)

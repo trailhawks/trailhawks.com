@@ -13,7 +13,9 @@ class Command(TyperCommand):
     def handle(
         self,
         race_pk: int = typer.Argument(help="Primary key of the Race to update"),
-        url: str = typer.Argument(help="URL to fetch race information from"),
+        url: str | None = typer.Argument(
+            default=None, help="URL to fetch race information from (defaults to race reg_url)"
+        ),
         dry_run: bool = typer.Option(False, "--dry-run", help="Show changes without applying"),
         apply: bool = typer.Option(False, "--apply", help="Apply changes without confirmation"),
     ):
@@ -24,6 +26,12 @@ class Command(TyperCommand):
         except Race.DoesNotExist:
             console.print(f"[red]Race with pk={race_pk} not found.[/red]")
             raise typer.Exit(code=1)
+
+        if not url:
+            url = race.reg_url
+            if not url:
+                console.print("[red]No URL provided and race has no reg_url set.[/red]")
+                raise typer.Exit(code=1)
 
         console.print(f"[bold]Race:[/bold] {race}")
         console.print(f"[bold]URL:[/bold] {url}")

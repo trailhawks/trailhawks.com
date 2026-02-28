@@ -29,10 +29,11 @@ class RaceAgentForm(forms.Form):
     )
     url = forms.URLField(
         label="URL",
+        required=False,
         widget=forms.URLInput(
             attrs={
                 "class": "block w-full rounded-md border-gray-300 shadow-sm",
-                "placeholder": "https://ultrasignup.com/register.aspx?did=...",
+                "placeholder": "https://ultrasignup.com/register.aspx?did=... (leave blank to use race reg_url)",
             }
         ),
     )

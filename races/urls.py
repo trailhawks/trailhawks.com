@@ -21,6 +21,7 @@ urlpatterns = [
         name="race_result_csv_detail",
     ),
     path("agent/", views.RaceAgentView.as_view(), name="race_agent"),
+    path("agent/<int:pk>/", views.RaceAgentView.as_view(), name="race_agent_pk"),
     path("chat/<int:pk>/", views.RaceChatView.as_view(), name="race_chat"),
     path("ical/", feeds.RaceFeed(), name="race_ical"),
     path("racers/<int:pk>/", views.RacerDetail.as_view(), name="racer_detail"),
