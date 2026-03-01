@@ -86,7 +86,11 @@ class StaffCRUDView(LoginRequiredMixin, UserPassesTestMixin, CRUDView):
         for obj in object_list:
             field_values = []
             for f in fields:
-                field_values.append(getattr(obj, f, ""))
+                display_method = getattr(obj, f"get_{f}_display", None)
+                if display_method and callable(display_method):
+                    field_values.append(display_method())
+                else:
+                    field_values.append(getattr(obj, f, ""))
             row = {
                 "object": obj,
                 "fields": field_values,
