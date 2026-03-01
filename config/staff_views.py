@@ -4,11 +4,12 @@ from operator import or_
 import django_filters
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Q
+from django.forms import widgets
 from django.urls import reverse
 from django.views.generic import TemplateView
 from neapolitan.views import CRUDView, Role
 
-from races.models import Race
+from races.models import Race, Result
 from runs.models import Run
 
 
@@ -45,6 +46,25 @@ class StaffCRUDView(LoginRequiredMixin, UserPassesTestMixin, CRUDView):
         if role in (Role.LIST, Role.CREATE):
             return reverse(url_name)
         return reverse(url_name, kwargs={url_kwarg: getattr(obj, self.lookup_field)})
+
+    def get_form(self, data=None, files=None, **kwargs):
+        form = super().get_form(data=data, files=files, **kwargs)
+        input_classes = (
+            "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+        )
+        checkbox_classes = "h-5 w-5 text-red-600 border-gray-300 rounded focus:ring-red-500"
+        for field in form.fields.values():
+            widget = field.widget
+            if isinstance(widget, widgets.CheckboxInput):
+                widget.attrs.setdefault("class", checkbox_classes)
+            elif isinstance(widget, (widgets.Textarea,)):
+                widget.attrs.setdefault("class", input_classes + " min-h-[120px]")
+                widget.attrs.setdefault("rows", 4)
+            elif isinstance(widget, (widgets.Select, widgets.SelectMultiple)):
+                widget.attrs.setdefault("class", input_classes)
+            else:
+                widget.attrs.setdefault("class", input_classes)
+        return form
 
     def get_queryset(self):
         qs = super().get_queryset()
@@ -150,10 +170,23 @@ class RaceFilterSet(django_filters.FilterSet):
         choices=[("", "All Statuses"), ("true", "Active"), ("false", "Inactive")],
         coerce=lambda x: x == "true",
     )
+    has_results = django_filters.ChoiceFilter(
+        label="Results",
+        choices=[("", "All Races"), ("yes", "Has Results"), ("no", "No Results")],
+        method="filter_has_results",
+    )
 
     class Meta:
         model = Race
-        fields = ["year", "active"]
+        fields = ["year", "active", "has_results"]
+
+    def filter_has_results(self, queryset, name, value):
+        race_ids_with_results = Result.objects.values_list("race_id", flat=True).distinct()
+        if value == "yes":
+            return queryset.filter(pk__in=race_ids_with_results)
+        elif value == "no":
+            return queryset.exclude(pk__in=race_ids_with_results)
+        return queryset
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

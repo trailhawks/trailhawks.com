@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="mb-6">
+    <div class="mb-6 flex items-center justify-between">
         <h1 class="text-3xl font-bold text-gray-900">
             {% if object %}
                 Edit {{ object }}
@@ -9,6 +9,9 @@
                 Add {{ model_verbose_name|title }}
             {% endif %}
         </h1>
+        <a href="{{ list_view_url }}" class="text-sm text-gray-500 hover:text-gray-700">
+            &larr; Back to list
+        </a>
     </div>
 
     <div class="bg-white shadow rounded-lg p-6">
@@ -16,14 +19,41 @@
             {% csrf_token %}
 
             {% if form.errors %}
-                <div class="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+                <div class="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
                     <p class="text-red-700 font-medium">Please correct the errors below.</p>
                 </div>
             {% endif %}
 
-            {{ form.as_div }}
+            <div class="space-y-5">
+                {% for field in form %}
+                    <div>
+                        {% if field.field.widget.input_type == "checkbox" %}
+                            <div class="flex items-center gap-3">
+                                {{ field }}
+                                <label for="{{ field.id_for_label }}" class="text-sm font-medium text-gray-700">
+                                    {{ field.label }}
+                                </label>
+                            </div>
+                        {% else %}
+                            <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                                {{ field.label }}
+                                {% if field.field.required %}<span class="text-red-500">*</span>{% endif %}
+                            </label>
+                            {{ field }}
+                        {% endif %}
+                        {% if field.help_text %}
+                            <p class="mt-1 text-xs text-gray-500">{{ field.help_text }}</p>
+                        {% endif %}
+                        {% if field.errors %}
+                            {% for error in field.errors %}
+                                <p class="mt-1 text-sm text-red-600">{{ error }}</p>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
 
-            <div class="mt-6 flex space-x-3">
+            <div class="mt-8 flex space-x-3 border-t border-gray-200 pt-6">
                 <button type="submit" class="px-6 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors">
                     Save
                 </button>

@@ -5,7 +5,7 @@ from django.test import Client
 from django.urls import reverse
 from model_bakery import baker
 
-from races.models import Race
+from races.models import Race, Result
 from runs.models import Run
 
 
@@ -99,6 +99,24 @@ class TestRaceList:
         assert response.status_code == 200
         assert b"Test Trail Race" in response.content
         assert b"Old Race" not in response.content
+
+    def test_filter_has_results(self, staff_client, race, inactive_race):
+        racer = baker.make("races.Racer", first_name="Jane", last_name="Doe", phone="555-1234")
+        race_type = baker.make("races.RaceType", name="50K")
+        baker.make(Result, race=race, racer=racer, race_type=race_type)
+        response = staff_client.get(reverse("staff:race-list"), {"has_results": "yes"})
+        assert response.status_code == 200
+        assert b"Test Trail Race" in response.content
+        assert b"Old Race" not in response.content
+
+    def test_filter_no_results(self, staff_client, race, inactive_race):
+        racer = baker.make("races.Racer", first_name="Jane", last_name="Doe", phone="555-1234")
+        race_type = baker.make("races.RaceType", name="50K")
+        baker.make(Result, race=race, racer=racer, race_type=race_type)
+        response = staff_client.get(reverse("staff:race-list"), {"has_results": "no"})
+        assert response.status_code == 200
+        assert b"Old Race" in response.content
+        assert b"Test Trail Race" not in response.content
 
     def test_filter_by_year(self, staff_client, race, inactive_race):
         response = staff_client.get(reverse("staff:race-list"), {"year": "2020"})
