@@ -144,10 +144,16 @@ class RaceFilterSet(django_filters.FilterSet):
         label="Year",
         empty_label="All Years",
     )
+    active = django_filters.TypedChoiceFilter(
+        field_name="active",
+        label="Active",
+        choices=[("", "All Statuses"), ("true", "Active"), ("false", "Inactive")],
+        coerce=lambda x: x == "true",
+    )
 
     class Meta:
         model = Race
-        fields = ["active", "year"]
+        fields = ["year", "active"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -220,9 +226,22 @@ class RaceCRUDView(StaffCRUDView):
 
 
 class RunFilterSet(django_filters.FilterSet):
+    day_of_week = django_filters.ChoiceFilter(
+        field_name="day_of_week",
+        label="Day of Week",
+        empty_label="All Days",
+        choices=Run.DAY_OF_WEEK,
+    )
+    active = django_filters.TypedChoiceFilter(
+        field_name="active",
+        label="Active",
+        choices=[("", "All Statuses"), ("true", "Active"), ("false", "Inactive")],
+        coerce=lambda x: x == "true",
+    )
+
     class Meta:
         model = Run
-        fields = ["active", "day_of_week"]
+        fields = ["day_of_week", "active"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
