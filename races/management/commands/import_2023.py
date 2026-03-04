@@ -100,15 +100,6 @@ RACES = [
 
 @click.command()
 def command():
-    ultrasignup_ids = list(
-        Race.objects.exclude(ultrasignup_id=None)
-        .order_by("-pk")
-        .only("ultrasignup_id")
-        .values_list("ultrasignup_id", flat=True)
-    )
-
-    race_ids = list(set(ultrasignup_ids).union(set(RACES)))
-
     with sync_playwright() as p:
         # Launch the browser and open a new page
         dids = []
