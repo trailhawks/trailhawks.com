@@ -40,6 +40,7 @@
                             <a class="px-4 py-2 text-sm lg:text-base font-medium text-gray-700 hover:text-red-700 hover:bg-red-50 rounded transition-colors" href="{% url 'member_list' %}">Members</a>
                             <a class="px-4 py-2 text-sm lg:text-base font-medium text-gray-700 hover:text-red-700 hover:bg-red-50 rounded transition-colors" href="{% url 'sponsor_list' %}">Sponsors</a>
                             <a class="px-4 py-2 text-sm lg:text-base font-medium text-gray-700 hover:text-red-700 hover:bg-red-50 rounded transition-colors" href="{% url 'about' %}">About</a>
+                            <a class="px-4 py-2 text-sm lg:text-base font-medium text-gray-700 hover:text-red-700 hover:bg-red-50 rounded transition-colors" href="https://mailchi.mp/5a9778680502/dtbrlj8g85" target="_blank" rel="noopener">Newsletter</a>
                         </div>
 
                         <!-- Action buttons and social -->
@@ -57,9 +58,6 @@
                             </a>
                             <a class="px-3 py-1 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors text-sm lg:text-base" href="/contact/">
                                 <i class="fa fa-envelope mr-1"></i>Contact
-                            </a>
-                            <a class="px-3 py-1 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors text-sm lg:text-base" href="https://mailchi.mp/5a9778680502/dtbrlj8g85" target="_blank" rel="noopener">
-                                <i class="fa fa-newspaper-o mr-1"></i>Newsletter
                             </a>
                             <div class="flex items-center gap-1 ml-2 border-l pl-2 border-gray-300">
                                 <a class="p-1 text-gray-600 hover:text-red-600 transition-colors" href="https://www.facebook.com/home.php#/group.php?gid=91186762641&amp;ref=ts" aria-label="Facebook">
@@ -97,6 +95,9 @@
                         <a class="px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-700 border-b border-gray-100 transition-colors" href="{% url 'about' %}">
                             <i class="fa fa-info-circle mr-2 text-red-400"></i>About
                         </a>
+                        <a class="px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-700 border-b border-gray-100 transition-colors" href="https://mailchi.mp/5a9778680502/dtbrlj8g85" target="_blank" rel="noopener">
+                            <i class="fa fa-newspaper-o mr-2 text-red-400"></i>Newsletter
+                        </a>
                         <div class="border-t-2 border-gray-200 mt-2">
                             {% if user.is_staff %}
                                 <a class="px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-700 border-b border-gray-100 transition-colors" href="{% url 'staff:dashboard' %}">
@@ -113,15 +114,12 @@
                                 <i class="fa fa-map mr-2 text-red-400"></i>Guide to Clinton Lake
                             </a>
                         </div>
-                        <div class="flex flex-wrap gap-2 p-4 bg-gray-50">
+                        <div class="flex gap-2 p-4 bg-gray-50">
                             <a class="flex-1 px-3 py-2 bg-yellow-400 hover:bg-yellow-500 text-red-900 font-semibold rounded-lg transition-colors text-center" href="https://runsignup.com/MemberOrg/LawrenceTrailHawks/Register">
                                 <i class="fa fa-plus-circle mr-1"></i>Join Us
                             </a>
                             <a class="flex-1 px-3 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors text-center" href="/contact/">
                                 <i class="fa fa-envelope mr-1"></i>Contact
-                            </a>
-                            <a class="flex-1 px-3 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors text-center" href="https://mailchi.mp/5a9778680502/dtbrlj8g85" target="_blank" rel="noopener">
-                                <i class="fa fa-newspaper-o mr-1"></i>Newsletter
                             </a>
                         </div>
                         <div class="flex justify-center gap-4 p-4 border-t border-gray-200">
