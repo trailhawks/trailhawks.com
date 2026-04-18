@@ -701,14 +701,15 @@ wheels = [
 
 [[package]]
 name = "django-health-check"
-version = "3.20.8"
+version = "4.3.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "django" },
+    { name = "dnspython" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/03/e4/6700a587b75c89ea3ba14240be5d5412b825dcb6ec0b1f76e60a310daafb/django_health_check-3.20.8.tar.gz", hash = "sha256:bbb7286af4b4e2079d262eeb3e68014c8980f8fcfbd295bca1ec31cbf827b83c", size = 15664, upload-time = "2025-12-22T23:58:58.78Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/67/83/c84fda118c436d0f4a702fff05014f1807adcec441456153d743031aa467/django_health_check-4.3.0.tar.gz", hash = "sha256:6c33abe4fd401b951f51adbd494eb0cdc34ebc379d99db93b440c765483b2a99", size = 21537, upload-time = "2026-04-15T17:11:57.141Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/2b/1f/6f508be8c39d45cff06c4fda7f50a137c627a2fbe970cef451111c6199f2/django_health_check-3.20.8-py3-none-any.whl", hash = "sha256:89f06fd3ecfefb13a8444cbc49508c76f1f49c816624026f720a28e0e67a458c", size = 29522, upload-time = "2025-12-22T23:58:57.226Z" },
+    { url = "https://files.pythonhosted.org/packages/21/39/efbb9da9a4b0f593e73eaa8b848477cc88fb04ede16356a4ec013535ba4f/django_health_check-4.3.0-py3-none-any.whl", hash = "sha256:6717f772afdab809df19c5e58bcde5e5dc6834dc6a99237dad519187ddd3e3df", size = 26612, upload-time = "2026-04-15T17:11:55.793Z" },
 ]
 
 [[package]]
@@ -3672,7 +3673,7 @@ requires-dist = [
     { name = "django-contrib-comments" },
     { name = "django-favicon" },
     { name = "django-filter" },
-    { name = "django-health-check" },
+    { name = "django-health-check", specifier = ">=4.0.0" },
     { name = "django-ical" },
     { name = "django-markdownify" },
     { name = "django-markup-deprecated" },
