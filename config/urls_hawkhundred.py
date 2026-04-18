@@ -7,6 +7,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import include, path
 from django.views.generic import TemplateView
 
+from health_check.views import HealthCheckView
+
 from sitemaps.races import StaticViewSitemap
 
 sitemaps = {
@@ -61,7 +63,7 @@ urlpatterns = [
     ),
     path("", include("favicon.urls")),
     path("admin/", admin.site.urls),
-    path("health/", include("health_check.urls")),
+    path("health/", HealthCheckView.as_view(checks=["health_check.Database"])),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += staticfiles_urlpatterns()

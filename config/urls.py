@@ -6,6 +6,8 @@ from django.contrib.sitemaps.views import sitemap
 from django.urls import include, path
 from django.views.generic import TemplateView
 
+from health_check.views import HealthCheckView
+
 from blog.models import Post
 from config import __version__
 from config.api import api
@@ -75,7 +77,7 @@ urlpatterns = [
     path("", include("favicon.urls")),
     path("staff/", include("config.staff_urls")),
     path(settings.ADMIN_URL, admin.site.urls),
-    path("health/", include("health_check.urls")),
+    path("health/", HealthCheckView.as_view(checks=["health_check.Database"])),
 ]
 
 # if settings.DEBUG:
