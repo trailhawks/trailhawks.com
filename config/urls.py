@@ -11,6 +11,7 @@ from health_check.views import HealthCheckView
 from blog.models import Post
 from config import __version__
 from config.api import api
+from config.views import VersionView
 from core.views import AboutView, HomepageView, HumansView, StyleGuideView, ThanksView
 from members.views import officer_list
 from news.models import News
@@ -66,6 +67,7 @@ urlpatterns = [
     path("api/", api.urls),
     path("humans.txt", HumansView.as_view()),
     path("robots.txt", include("robots.urls")),
+    path("version.txt", VersionView.as_view()),
     path(
         "sitemap.xml",
         sitemap,

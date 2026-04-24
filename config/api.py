@@ -2,6 +2,7 @@ from datetime import date, datetime
 
 from ninja import NinjaAPI, Schema
 
+from config import __version__
 from blog.models import Post
 from events.models import Event
 from members.models import Member
@@ -148,3 +149,8 @@ def list_events(request):
 @api.get("/sponsors/", response=list[SponsorSchema])
 def list_sponsors(request):
     return Sponsor.objects.filter(active=True)
+
+
+@api.get("/version/")
+def version(request):
+    return {"version": __version__}
