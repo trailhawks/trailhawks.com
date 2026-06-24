@@ -242,7 +242,7 @@ TAILWIND_CLI_DIST_CSS = env.str("TAILWIND_CLI_DIST_CSS", default="css/tailwind.c
 TAILWIND_CLI_SRC_CSS = env.str("TAILWIND_CLI_SRC_CSS", default="frontend/index.css")
 TAILWIND_CLI_VERSION = env.str("TAILWIND_CLI_VERSION", default="4.2.1")
 
-AI_MODEL = env("AI_MODEL", default="openai:gpt-5-mini")
+AI_MODEL = env("AI_MODEL", default="openai-chat:gpt-5-mini")
 
 PRODUCTION_PROCESSES = {
     "web": {
