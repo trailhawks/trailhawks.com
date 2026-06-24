@@ -53,7 +53,7 @@ dependencies = [
     "django-syncr @ git+https://github.com/trailhawks/django-syncr.git",
     "django-ninja>=1.5.3",
     "neapolitan",
-    "pydantic-ai>=1.107.0,<2",
+    "pydantic-ai>=2.0,<3",
 ]
 
 [project.optional-dependencies]
