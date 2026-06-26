@@ -26,7 +26,7 @@ and 'discounts', use plain text (not HTML or markdown).
 
 def get_race_agent() -> Agent[None, RaceAgentResult]:
     return Agent(
-        settings.AI_MODEL,
+        settings.OPENAI_API_MODEL,
         system_prompt=SYSTEM_PROMPT,
         output_type=RaceAgentResult,
     )
@@ -155,7 +155,7 @@ def format_race_context(race) -> str:
 def get_chat_agent(race) -> Agent:
     race_context = format_race_context(race)
     return Agent(
-        settings.AI_MODEL,
+        settings.OPENAI_API_MODEL,
         system_prompt=CHAT_SYSTEM_PROMPT.format(race_context=race_context),
     )
 
