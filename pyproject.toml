@@ -29,7 +29,7 @@ dependencies = [
     "django-taggit",
     "django-tailwind-cli>=4.5.1",
     "django-thumbor==0.5",
-    "django<6.0",
+    "django<6.1",
     "environs[django]",
     "feedparser",
     "flickrapi==2.0",
