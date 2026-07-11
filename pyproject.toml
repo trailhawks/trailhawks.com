@@ -15,7 +15,7 @@ dependencies = [
     "django-contrib-comments",
     "django-favicon",
     "django-filter",
-    "django-health-check>=4.0.0",
+    "django-health-check==4.3.0",
     "django-ical",
     "django-markdownify",
     "django-markup-deprecated",
