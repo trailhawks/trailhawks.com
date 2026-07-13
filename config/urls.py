@@ -3,8 +3,9 @@ from django.contrib import admin
 from django.contrib.flatpages.sitemaps import FlatPageSitemap
 from django.contrib.sitemaps import GenericSitemap
 from django.contrib.sitemaps.views import sitemap
-from django.urls import include, path
+from django.urls import include, path, re_path
 from django.views.generic import TemplateView
+from django.views.static import serve
 
 from health_check.views import HealthCheckView
 
@@ -82,6 +83,9 @@ urlpatterns = [
     path("health/", HealthCheckView.as_view(checks=["health_check.Database"])),
 ]
 
-# if settings.DEBUG:
-#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-#     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+# Serve user-uploaded media (race logos, etc.) directly through Django. WhiteNoise
+# only handles STATIC_URL, so without this /media/ 404s in production. Uploads come
+# from a handful of trusted admins, so serving them this way is fine.
+urlpatterns += [
+    re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
+]
