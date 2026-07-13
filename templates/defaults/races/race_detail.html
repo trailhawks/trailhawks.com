@@ -83,10 +83,12 @@
                                 <i class="fa fa-clock"></i>
                                 {{ object.start_datetime|time:"g:i A" }}
                             </span>
-                            <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full text-sm md:text-base">
-                                <i class="fa fa-route"></i>
-                                {{ object.distance }}
-                            </span>
+                            {% if object.distance %}
+                                <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full text-sm md:text-base">
+                                    <i class="fa fa-route"></i>
+                                    {{ object.distance }}
+                                </span>
+                            {% endif %}
                             {% if object.cut_off %}
                                 <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full text-sm md:text-base">
                                     <i class="fa fa-hourglass-half"></i>
@@ -523,15 +525,17 @@
                                 <div class="font-semibold">{{ object.start_datetime|time:"g:i A" }}</div>
                             </div>
                         </div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
-                                <i class="fa fa-route text-red-600"></i>
+                        {% if object.distance %}
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fa fa-route text-red-600"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm text-gray-500">Distance</div>
+                                    <div class="font-semibold">{{ object.distance }}</div>
+                                </div>
                             </div>
-                            <div>
-                                <div class="text-sm text-gray-500">Distance</div>
-                                <div class="font-semibold">{{ object.distance }}</div>
-                            </div>
-                        </div>
+                        {% endif %}
                         {% if object.cut_off %}
                             <div class="flex items-center gap-3">
                                 <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
