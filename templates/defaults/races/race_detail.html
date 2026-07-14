@@ -29,8 +29,9 @@
 
 
 {% block post_script %}
-    <script>
-        {% if object.location %}
+    {% if object.location %}
+        <script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}"></script>
+        <script>
             function initialize() {
                 var myLatlng = new google.maps.LatLng({{ object.location.latitude }}, {{ object.location.longitude }});
 
@@ -48,8 +49,8 @@
                 });
             }
             google.maps.event.addDomListener(window, 'load', initialize);
-        {% endif %}
-    </script>
+        </script>
+    {% endif %}
 {% endblock post_script %}
 
 

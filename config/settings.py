@@ -55,6 +55,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "core.context_processors.google_maps",
             ],
         },
     }
@@ -175,6 +176,12 @@ ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=list())
 CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS", default=list())
 
 ADMIN_URL = env("ADMIN_URL", default="admin/")
+
+# Client-side Google Maps key (used on the race detail map). This key is public
+# by nature; restrict it by HTTP referrer in the Google Cloud console. Override
+# per environment with GOOGLE_MAPS_API_KEY; the previously committed key is kept
+# as the default only so existing deploys keep working until it is rotated.
+GOOGLE_MAPS_API_KEY = env.str("GOOGLE_MAPS_API_KEY", default="AIzaSyAeAsggQuaA-oS-lzAFXGScNbMjiAsJFss")
 
 MACHINE_TAG_NAMESPACE = "trailhawks"
 

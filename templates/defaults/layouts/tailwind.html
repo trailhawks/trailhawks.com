@@ -17,11 +17,7 @@
                     {% endblock opengraph %}
 
                     {% block styles %}
-                        <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
-                        {% comment %}
                         {% tailwind_css %}
-                        <link href="{% static 'css/tailwind.css' %}" rel="stylesheet" media="screen">
-                        {% endcomment %}
                         <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" media="screen">
                         <style>
                             /* Fix for navigation on smaller screens */
@@ -82,9 +78,7 @@
 
                 {% block scripts %}
                     <script src="https://unpkg.com/htmx.org@2.0.4"></script>
-                    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAeAsggQuaA-oS-lzAFXGScNbMjiAsJFss&sensor=false"></script>
                     <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
-                    <script type="text/javascript" src="{% static 'js/ZeroClipboard.js' %}"></script>
                     <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
                 {% endblock scripts %}
                 {% block post_script %}
