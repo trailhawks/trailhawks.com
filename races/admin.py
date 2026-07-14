@@ -121,7 +121,7 @@ class RaceAdmin(admin.ModelAdmin):
                     "slug": obj.slug,
                 },
             )
-            return format_html(f'<a href="{url}">Download CSV</a>')
+            return format_html('<a href="{}">Download CSV</a>', url)
         return None
 
 
@@ -186,5 +186,5 @@ class SeriesTypeAdmin(admin.ModelAdmin):
                 "series_results_index",
                 kwargs={"slug": obj.slug},
             )
-            return format_html(f'<a href="{url}">Download {obj.races.count()} Races (CSV)</a>')
+            return format_html('<a href="{}">Download {} Races (CSV)</a>', url, obj.races.count())
         return None
