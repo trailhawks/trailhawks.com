@@ -45,19 +45,16 @@ def fetch_results(did):
         return []
 
 
-def discover_distances(did):
-    """Return ordered [(distance_name, did), ...] for the event `did` belongs to."""
-    try:
-        html = _get(EVENT_PAGE.format(did=did)).text
-    except requests.RequestException:
-        return [(None, did)]
+def parse_distances(html, did):
+    """Pure parse: map the event page `html` to ordered [(distance_name, did), ...].
 
+    The event's distances are the consecutive run of result-tab dids that
+    contains `did`, paired in order with the names in the "distances" list.
+    """
     names_match = re.search(r'distances">([^<]+)<', html)
     names = [n.strip() for n in names_match.group(1).split(",")] if names_match else []
 
-    # dids that appear as result tabs on this page
     tab_dids = {int(x) for x in re.findall(r"results_event\.aspx\?did=(\d+)", html)}
-    # the event's distances are the consecutive run of tab dids containing `did`
     run = [did]
     d = did - 1
     while d in tab_dids:
@@ -70,11 +67,16 @@ def discover_distances(did):
 
     if names and len(names) == len(run):
         return list(zip(names, run))
-    # fall back: pair as far as they line up, label the rest by did
-    pairs = []
-    for i, dd in enumerate(run):
-        pairs.append((names[i] if i < len(names) else None, dd))
-    return pairs
+    return [(names[i] if i < len(names) else None, dd) for i, dd in enumerate(run)]
+
+
+def discover_distances(did):
+    """Return ordered [(distance_name, did), ...] for the event `did` belongs to."""
+    try:
+        html = _get(EVENT_PAGE.format(did=did)).text
+    except requests.RequestException:
+        return [(None, did)]
+    return parse_distances(html, did)
 
 
 def _clean_time(formattime):
