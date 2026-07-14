@@ -20,9 +20,7 @@
 
 
 {% block content %}
-    <section class="py-4">
-        <h1 class="font-bold text-3xl md:text-6xl py-4">{{ object.full_hawk_name }}</h1>
-    </section>
+    {% include "includes/_page_header.html" with title=object.full_hawk_name %}
 
     <div class="flex flex-col sm:flex-row items-start gap-6">
         {% if object.avatar %}
@@ -53,7 +51,7 @@
                 {% for result in object.get_race_results %}
                     <li class="py-2 border-b border-gray-100">
                         Ran
-                        <a class="text-red-600 hover:text-red-800 hover:bg-yellow-100 underline" href="{{ result.race.get_absolute_url }}">{{ result.race.title }}</a>
+                        <a class="text-red-600 hover:text-red-800 hover:underline" href="{{ result.race.get_absolute_url }}">{{ result.race.title }}</a>
                         in <span class="font-semibold">{{ result.time }}</span>
                         on {{ result.race.start_datetime|date }}
                     </li>
@@ -68,9 +66,9 @@
             <ul class="space-y-2">
                 {% for result in object.get_race_reports %}
                     <li class="py-2 border-b border-gray-100">
-                        <a class="text-red-600 hover:text-red-800 hover:bg-yellow-100 underline" href="{{ result.report }}">{{ result.title }}</a>
+                        <a class="text-red-600 hover:text-red-800 hover:underline" href="{{ result.report }}">{{ result.title }}</a>
                         for
-                        <a class="text-red-600 hover:text-red-800 hover:bg-yellow-100 underline" href="{{ result.race.get_absolute_url }}">{{ result.race.title }}</a>
+                        <a class="text-red-600 hover:text-red-800 hover:underline" href="{{ result.race.get_absolute_url }}">{{ result.race.title }}</a>
                         on {{ result.race.start_datetime|date }}
                     </li>
                 {% endfor %}
@@ -84,7 +82,7 @@
             <ul class="space-y-2">
                 {% for post in object.get_blog_posts %}
                     <li class="py-2 border-b border-gray-100">
-                        <a class="text-red-600 hover:text-red-800 hover:bg-yellow-100 underline" href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                        <a class="text-red-600 hover:text-red-800 hover:underline" href="{{ post.get_absolute_url }}">{{ post.title }}</a>
                         on {{ post.publish|date }}
                     </li>
                 {% endfor %}

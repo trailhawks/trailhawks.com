@@ -15,27 +15,34 @@
 
 
 {% block content %}
-    <div class="flex flex-auto gap-8">
-        <div class="md:w-2/3 text-lg">
-            <section class="py-4">
-                <h1 class="font-bold text-6xl py-4">Weekly runs</h1>
+    {% include "includes/_page_header.html" with title="Weekly Runs" subtitle="The Trail Hawks host multiple group runs every week, with varying distance and difficulty. Runners of all abilities are welcome — come join us on the trails." %}
 
-                <p class="text-xl font-light">The Trailhawks have multiple runs per week. All with varying levels of distance and difficulty.</p>
-
-                <p>We welcome runners of all abilities. So come join us for a run.</p>
-            </section>
-
-            <section class="py-4">
-                <h2 class="font-bold text-6xl py-2">Our run schedule</h2>
-
-                {% for object in object_list %}
-                    <h3 class="font-bold text-2xl py-4">
-                        <a class="underline bg-yellow-300" href="{{ object.get_absolute_url }}">{{ object.get_day_of_week_display }}: {{ object.name }}</a>
-                        {% if object.run_time %}at {{ object.run_time }}{% endif %}
-                        {% if object.location %}at <a class="underline" href="#">{{ object.location }}</a>{% endif %}
-                    </h3>
-                {% endfor %}
-            </section>
+    <section class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+        <div class="bg-gray-800 px-4 py-3">
+            <h2 class="font-bold text-lg text-white flex items-center gap-2">
+                <i class="fa fa-running"></i>
+                Our Run Schedule
+            </h2>
         </div>
-    </div>
+        <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+            {% for object in object_list %}
+                <a href="{{ object.get_absolute_url }}" class="block p-4 bg-gray-50 rounded-lg hover:bg-red-50 border border-transparent hover:border-red-300 transition-all group">
+                    <div class="flex items-center justify-between">
+                        <span class="font-semibold text-gray-900 group-hover:text-red-700">{{ object.get_day_of_week_display }}s</span>
+                        {% if object.run_time %}
+                            <span class="text-sm text-gray-500 bg-white px-2 py-0.5 rounded">{{ object.run_time }}</span>
+                        {% endif %}
+                    </div>
+                    <p class="text-sm text-red-600 mt-1 font-medium">{{ object.name }}</p>
+                    {% if object.location %}
+                        <p class="text-xs text-gray-500 mt-1 flex items-center gap-1">
+                            <i class="fa fa-map-marker-alt"></i>{{ object.location }}
+                        </p>
+                    {% endif %}
+                </a>
+            {% empty %}
+                <p class="text-gray-500 p-3">No weekly runs scheduled.</p>
+            {% endfor %}
+        </div>
+    </section>
 {% endblock content %}

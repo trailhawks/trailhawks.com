@@ -16,30 +16,28 @@
 
 
 {% block content %}
-    <div class="flex flex-auto gap-8">
-        <div class="md:w-2/3">
-            <section class="py-4">
-                <h1 class="font-bold text-6xl py-4">Sponsors</h1>
+    {% include "includes/_page_header.html" with title="Sponsors" subtitle="Our sponsors and partners who support the Lawrence Trail Hawks and the trail running community." %}
+
+    <div class="space-y-6">
+        {% for sponsor in object_list %}
+            <section class="bg-white border border-gray-200 rounded-xl shadow-sm p-6">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4">{{ sponsor.name }}</h2>
+                {% if sponsor.logo %}
+                    <a href="{{ sponsor.url }}" class="block mb-4 hover:opacity-80 transition-opacity">
+                        <img class="p-1 max-w-full h-auto rounded border border-gray-200" src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }}">
+                    </a>
+                {% endif %}
+                {% if sponsor.address %}
+                    <address class="text-gray-600 mb-2 not-italic">
+                        {{ sponsor.address }}
+                    </address>
+                {% endif %}
+                {% if sponsor.discount_detail %}
+                    <p><strong>Discount: </strong>{{ sponsor.discount_detail }}</p>
+                {% endif %}
             </section>
-            {% for sponsor in object_list %}
-                <section class="py-6">
-                    <h2 class="text-4xl font-bold mb-4">{{ sponsor.name }}</h2>
-                    {% if sponsor.logo %}
-                        <a href="{{ sponsor.url }}" class="block mb-4 hover:opacity-80 transition-opacity">
-                            <img class="p-1 max-w-full h-auto rounded border border-gray-200" src="{{ sponsor.logo.url }}" alt="{{ sponsor.name }}">
-                        </a>
-                    {% endif %}
-                    {% if sponsor.address %}
-                        <address class="text-gray-600 mb-2 not-italic">
-                            {{ sponsor.address }}
-                        </address>
-                    {% endif %}
-                    {% if sponsor.discount_detail %}
-                        <p><strong>Discount: </strong>{{ sponsor.discount_detail }}</p>
-                    {% endif %}
-                </section>
-                <hr class="border-gray-200">
-            {% endfor %}
-        </div>
+        {% empty %}
+            <p class="text-gray-500">No sponsors to show yet.</p>
+        {% endfor %}
     </div>
 {% endblock content %}

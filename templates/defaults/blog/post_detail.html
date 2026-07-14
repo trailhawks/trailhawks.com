@@ -17,52 +17,48 @@
 
 
 {% block content %}
-    <div>
-        <div class="w-full">
-            <section class="py-4">
-                <h1 class="font-bold text-3xl md:text-6xl py-4">{{ object.title }}</h1>
-            </section>
+    <div class="max-w-3xl">
+        {% include "includes/_page_header.html" with title=object.title %}
 
-            <h4>
-                {{ object.publish|date}} by
-                <a class="underline hover:bg-yellow-300" href="{{ object.author.get_absolute_url }}">{{ object.author}}</a>
-            </h4>
+        <p class="text-sm text-gray-500 mb-6">
+            {{ object.publish|date }} by
+            <a class="text-red-600 hover:text-red-800 hover:underline" href="{{ object.author.get_absolute_url }}">{{ object.author }}</a>
+        </p>
 
-            {% if object.repost_url and object.repost_date %}
-                <div class='original-post'>
-                    <p>Originally published on <a class="underline hover:bg-yellow-300" href="{{ object.repost_url }}">{% firstof object.repost_date|date 'unknown' %}</a></p>
-                </div>
-            {% endif %}
-
-            <div class="prose md:prose-xl max-w-none">
-                {{ object.body|markdownify }}
+        {% if object.repost_url and object.repost_date %}
+            <div class="original-post">
+                <p>Originally published on <a class="text-red-600 hover:text-red-800 hover:underline" href="{{ object.repost_url }}">{% firstof object.repost_date|date 'unknown' %}</a></p>
             </div>
+        {% endif %}
+
+        <div class="prose md:prose-xl max-w-none prose-a:text-red-600 hover:prose-a:text-red-800">
+            {{ object.body|markdownify }}
+        </div>
 
             {# render_facebook_like obj=object #}
 
-            <nav class="flex justify-between items-center py-6 border-t border-gray-200 mt-8" aria-label="Post navigation">
-                {% if object.get_previous_by_publish %}
-                    <a href="{{ object.get_previous_post.get_absolute_url }}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:text-red-600 transition-colors">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                        </svg>
-                        Older
-                    </a>
-                {% else %}
-                    <span></span>
-                {% endif %}
+        <nav class="flex justify-between items-center py-6 border-t border-gray-200 mt-8" aria-label="Post navigation">
+            {% if object.get_previous_by_publish %}
+                <a href="{{ object.get_previous_post.get_absolute_url }}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:text-red-600 transition-colors">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    Older
+                </a>
+            {% else %}
+                <span></span>
+            {% endif %}
 
-                {% if object.get_next_by_publish %}
-                    <a href="{{ object.get_next_post.get_absolute_url }}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:text-red-600 transition-colors">
-                        Newer
-                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                    </a>
-                {% else %}
-                    <span></span>
-                {% endif %}
-            </nav>
-        </div>
+            {% if object.get_next_by_publish %}
+                <a href="{{ object.get_next_post.get_absolute_url }}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:text-red-600 transition-colors">
+                    Newer
+                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+            {% else %}
+                <span></span>
+            {% endif %}
+        </nav>
     </div>
 {% endblock content%}

@@ -15,43 +15,52 @@
 
 
 {% block content %}
-    <div class="flex flex-auto gap-8">
-        <div class="md:w-2/3 text-lg">
-            <section class="py-4">
-                <h1 class="font-bold text-6xl py-4">Club Members and Info</h1>
+    <div class="w-full">
+        {% include "includes/_page_header.html" with title="Club Members and Info" %}
 
-                <p class="text-2xl font-light py-2">
-                    Brought to you by runners,
-                    <a class="hover:bg-yellow-400 underline" href="#members">members</a>,
-                    and
-                    <a class="hover:bg-yellow-400 underline" href="#officers">officers</a>
-                    like you!
-                </p>
+        <section class="mb-8">
+            <p class="text-xl md:text-2xl font-light text-gray-700">
+                Brought to you by runners,
+                <a class="text-red-600 hover:text-red-800 hover:underline" href="#members">members</a>,
+                and
+                <a class="text-red-600 hover:text-red-800 hover:underline" href="#officers">officers</a>
+                like you!
+            </p>
 
-                <p class="py-8">
-                    <a class="py-2 px-3 text-2xl font-normal leading-tight text-center text-white align-middle bg-red-600 rounded border select-none whitespace-no-wrap hover:bg-red-700 hover:text-yellow-100" href="https://runsignup.com/MemberOrg/LawrenceTrailHawks/Register">Become a member!</a>
-                </p>
-            </section>
+            <p class="mt-6">
+                <a class="inline-flex items-center gap-2 py-3 px-6 font-semibold text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors" href="https://runsignup.com/MemberOrg/LawrenceTrailHawks/Register">
+                    <i class="fa fa-plus-circle"></i>Become a member!
+                </a>
+            </p>
+        </section>
 
-            <section class="py-4" id="members">
-                <h2 class="text-4xl font-bold py-4">Members</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1">
-                    {% for member in object_list %}
-                        <a class="hover:bg-yellow-400 underline" href="{{ member.get_absolute_url }}">{{ member.full_hawk_name }}</a>
-                    {% endfor %}
-                </div>
-                {% block member_detail %}{% endblock %}
-            </section>
+        <section class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-8" id="members">
+            <div class="bg-red-700 px-4 py-3">
+                <h2 class="font-bold text-lg text-white flex items-center gap-2">
+                    <i class="fa fa-users"></i>Members
+                </h2>
+            </div>
+            <div class="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-2">
+                {% for member in object_list %}
+                    <a class="text-red-600 hover:text-red-800 hover:underline" href="{{ member.get_absolute_url }}">{{ member.full_hawk_name }}</a>
+                {% endfor %}
+            </div>
+            {% block member_detail %}{% endblock %}
+        </section>
 
-            <section class="py-4" id="officers">
-                <h2 class="text-4xl font-bold py-4">Officers</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1">
-                    {% for term in current_officers %}
-                        <div class="font-bold">{{ term.office.name }}</div>
-                        <div><a class="hover:bg-yellow-400 underline" href="{{ term.member.get_absolute_url }}">{{ term.member }}</a></div>
-                    {% endfor %}
-                </div>
-            </section>
+        <section class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden mb-8" id="officers">
+            <div class="bg-gray-800 px-4 py-3">
+                <h2 class="font-bold text-lg text-white flex items-center gap-2">
+                    <i class="fa fa-user-tie"></i>Officers
+                </h2>
+            </div>
+            <div class="p-4 grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
+                {% for term in current_officers %}
+                    <div class="font-bold text-gray-900">{{ term.office.name }}</div>
+                    <div><a class="text-red-600 hover:text-red-800 hover:underline" href="{{ term.member.get_absolute_url }}">{{ term.member }}</a></div>
+                {% endfor %}
+            </div>
+        </section>
 
             {% comment %}
             <section class="py-4">
@@ -90,6 +99,5 @@
                 </div>
             </section>
             {% endcomment %}
-        </div>
     </div>
 {% endblock content %}
