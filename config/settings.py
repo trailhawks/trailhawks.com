@@ -177,11 +177,11 @@ CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS", default=list())
 
 ADMIN_URL = env("ADMIN_URL", default="admin/")
 
-# Client-side Google Maps key (used on the race detail map). This key is public
-# by nature; restrict it by HTTP referrer in the Google Cloud console. Override
-# per environment with GOOGLE_MAPS_API_KEY; the previously committed key is kept
-# as the default only so existing deploys keep working until it is rotated.
-GOOGLE_MAPS_API_KEY = env.str("GOOGLE_MAPS_API_KEY", default="AIzaSyAeAsggQuaA-oS-lzAFXGScNbMjiAsJFss")
+# Client-side Google Maps key (used on the race detail map). Set per environment
+# via the GOOGLE_MAPS_API_KEY env var (managed in Coolify). Restrict the key by
+# HTTP referrer in the Google Cloud console. When unset, the map is simply not
+# rendered rather than shipping a broken request.
+GOOGLE_MAPS_API_KEY = env.str("GOOGLE_MAPS_API_KEY", default="")
 
 MACHINE_TAG_NAMESPACE = "trailhawks"
 

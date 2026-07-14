@@ -29,7 +29,7 @@
 
 
 {% block post_script %}
-    {% if object.location %}
+    {% if object.location and GOOGLE_MAPS_API_KEY %}
         <script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}"></script>
         <script>
             function initialize() {
