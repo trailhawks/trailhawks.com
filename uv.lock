@@ -2917,7 +2917,7 @@ wheels = [
 
 [[package]]
 name = "trailhawks"
-version = "2026.7.16"
+version = "2026.7.17"
 source = { virtual = "." }
 dependencies = [
     { name = "beautifulsoup4" },
