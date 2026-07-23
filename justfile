@@ -60,6 +60,10 @@ bootstrap *ARGS:
         --rm \
         db /bin/bash
 
+# Crawl the site for broken links (excludes /django-admin/)
+@crawl *ARGS:
+    {{ manage }} crawl --exclude '^/django-admin/' {{ ARGS }}
+
 # Stop and remove all Docker containers
 @down:
     docker compose down

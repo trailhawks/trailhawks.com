@@ -94,6 +94,7 @@ INSTALLED_APPS = [
 INSTALLED_APPS += [
     # "storages",
     "ajaximage",
+    "django_crawl",
     "django_filters",
     "django_prodserver",
     "django_q",

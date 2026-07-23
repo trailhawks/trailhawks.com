@@ -13,6 +13,7 @@ dependencies = [
     "django-browser-reload",
     "django-click",
     "django-contrib-comments",
+    "django-crawl",
     "django-favicon",
     "django-filter",
     "django-health-check==4.3.0",

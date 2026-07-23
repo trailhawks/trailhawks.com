@@ -517,6 +517,28 @@ wheels = [
 ]
 
 [[package]]
+name = "django-crawl"
+version = "1.1.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+    { name = "django-rich" },
+    { name = "rich" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/b1/44/ca57b4b5581e09451b00751d72b4470b70463ad6ad493c6ee852d3b6a87f/django_crawl-1.1.0.tar.gz", hash = "sha256:ad3a924c6bcbae236db9ff5623c5e728d3b680ad4b53463e70b909b97a093c55", size = 86638, upload-time = "2026-07-22T21:45:31.438Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/00/93/3f441b2be3e910b5be3c36d36d54e6ba61bf36d6826ea01ef4864384fa96/django_crawl-1.1.0-cp310-abi3-macosx_10_12_x86_64.whl", hash = "sha256:56ee8b41735d0e976087a361f543cfbc5edeb33a73ea55136c80be03e1f3c9ae", size = 429967, upload-time = "2026-07-22T21:45:16.988Z" },
+    { url = "https://files.pythonhosted.org/packages/b9/fc/06e022624e29219f2925b242bc3740e6078d8ec5077dee44905723271c16/django_crawl-1.1.0-cp310-abi3-macosx_11_0_arm64.whl", hash = "sha256:5fbb8363fa250df7bcd373ae8fcdc34500ffa34efa3be2d2cbcf770997243902", size = 421879, upload-time = "2026-07-22T21:45:18.693Z" },
+    { url = "https://files.pythonhosted.org/packages/7d/a8/50dbc5346f2b5f263f2e1be86673430480772c42cd6a129664294329339b/django_crawl-1.1.0-cp310-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:a2fe8fb33e84c48a4494648336cfc9e13354fe96e88e514a10b3c46d3bd4ad3e", size = 475174, upload-time = "2026-07-22T21:45:20.293Z" },
+    { url = "https://files.pythonhosted.org/packages/c9/ef/b958803441434a225eaae5c19a6e3a6de01ac0804e91c9d3db19edb426b8/django_crawl-1.1.0-cp310-abi3-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:b40df087f2b39ceefb1092d37ad6727856f8e6b3b95f281378c6dc5b8bae6166", size = 461713, upload-time = "2026-07-22T21:45:21.841Z" },
+    { url = "https://files.pythonhosted.org/packages/96/d2/c14727da6139f5cbcebdcb48bb24e10b1cfd9a0cc33acba596e80f86be78/django_crawl-1.1.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:96103cfef71ec080ec320e0a8771b108dc0daaa3d2d63be907237eddcaa2b4f3", size = 464077, upload-time = "2026-07-22T21:45:23.585Z" },
+    { url = "https://files.pythonhosted.org/packages/39/bf/8782d24060aafe8888291808b566b48faa5f6bd352a6009bf9550a4acfc9/django_crawl-1.1.0-cp310-abi3-musllinux_1_1_aarch64.whl", hash = "sha256:568dd93ea344a73c09c21646905266eccde811bb42983a1afbbf0d54c11d00d5", size = 652586, upload-time = "2026-07-22T21:45:25.472Z" },
+    { url = "https://files.pythonhosted.org/packages/e4/60/21ab47bc4f3e27827cfed86832983ab5899422bd64452362685b72ba007c/django_crawl-1.1.0-cp310-abi3-musllinux_1_1_x86_64.whl", hash = "sha256:2bfd55bbe7b2338d8a9e92428d07088f136844842e191c84959e3da72a607c6b", size = 697010, upload-time = "2026-07-22T21:45:26.967Z" },
+    { url = "https://files.pythonhosted.org/packages/22/1b/75bc4251f33a1f22ed53c58120184069f2b265241d84000ef5c2d296b600/django_crawl-1.1.0-cp310-abi3-win_amd64.whl", hash = "sha256:9551d5bd319eb1127bcc9a7c142031ffbff3959bbb458e92f6d3a8578034557e", size = 369123, upload-time = "2026-07-22T21:45:28.593Z" },
+    { url = "https://files.pythonhosted.org/packages/07/4c/c4ab5768f832a49b57e8d5e227e0bba911a5f760e14ffb4f3bfda47104fe/django_crawl-1.1.0-cp310-abi3-win_arm64.whl", hash = "sha256:6d3681c8976c7a861c8c6abdd4150629ad0175c480260b5e282f075fcb062995", size = 363001, upload-time = "2026-07-22T21:45:30.115Z" },
+]
+
+[[package]]
 name = "django-favicon"
 version = "0.1.4"
 source = { registry = "https://pypi.org/simple" }
@@ -654,6 +676,19 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/c4/90/f083ae5fae92c121ed26689c21bba68cb4651defe62bdb70200ef47ece06/django_recurrence-1.14.tar.gz", hash = "sha256:154a6221bd6667c35250d9fa89bbc4792b3f1ec5dc8dff0f5872186b6df3cf76", size = 102449, upload-time = "2025-12-19T21:30:44.915Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/85/08/fec7dd78259512152c75e8c64ac5ba389eef55569915b190f6b798f6ff7a/django_recurrence-1.14-py3-none-any.whl", hash = "sha256:3e7420a38c7fa2f5073598e2a4236c65a983213f30f4413618448b43514649cd", size = 135711, upload-time = "2025-12-19T21:30:43.599Z" },
+]
+
+[[package]]
+name = "django-rich"
+version = "2.2.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+    { name = "rich" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/a6/67/e307a5fef657e7992468f567b521534c52e01bdda5a1ae5b12de679a670f/django_rich-2.2.0.tar.gz", hash = "sha256:ecec7842d040024ed8a225699388535e46b87277550c33f46193b52cece2f780", size = 62427, upload-time = "2025-09-18T11:42:17.182Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/27/ed/23fa669493d78cd67e7f6734fa380f8690f2b4d75b4f72fd645a52c3b32a/django_rich-2.2.0-py3-none-any.whl", hash = "sha256:a0d2c916bd9750b6e9beb57407aef5e836c8705d7dbe9e4fd4725f7bbe41c407", size = 9210, upload-time = "2025-09-18T11:42:15.779Z" },
 ]
 
 [[package]]
@@ -2894,6 +2929,7 @@ dependencies = [
     { name = "django-browser-reload" },
     { name = "django-click" },
     { name = "django-contrib-comments" },
+    { name = "django-crawl" },
     { name = "django-favicon" },
     { name = "django-filter" },
     { name = "django-health-check" },
@@ -2960,6 +2996,7 @@ requires-dist = [
     { name = "django-browser-reload" },
     { name = "django-click" },
     { name = "django-contrib-comments" },
+    { name = "django-crawl" },
     { name = "django-favicon" },
     { name = "django-filter" },
     { name = "django-health-check", specifier = "==4.3.0" },
