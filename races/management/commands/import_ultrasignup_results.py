@@ -149,9 +149,7 @@ def import_race(race, commit, echo):
                 else False
             )
             if commit and racer:
-                Result.objects.update_or_create(
-                    race=race, race_type=race_type, racer=racer, defaults=defaults
-                )
+                Result.objects.update_or_create(race=race, race_type=race_type, racer=racer, defaults=defaults)
             stats["updated" if exists else "created"] += 1
 
     return stats
