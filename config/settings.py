@@ -251,7 +251,7 @@ TAILWIND_CLI_DIST_CSS = env.str("TAILWIND_CLI_DIST_CSS", default="css/tailwind.c
 TAILWIND_CLI_SRC_CSS = env.str("TAILWIND_CLI_SRC_CSS", default="frontend/index.css")
 TAILWIND_CLI_VERSION = env.str("TAILWIND_CLI_VERSION", default="4.2.1")
 
-OPENAI_API_MODEL = env("OPENAI_API_MODEL", default="openai-chat:gpt-5.4-nano")
+PYDANTIC_AI_MODEL = env("PYDANTIC_AI_MODEL", default="openai-responses:gpt-5.6-luna")
 
 PRODUCTION_PROCESSES = {
     "web": {
