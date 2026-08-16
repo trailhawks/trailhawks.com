@@ -1,69 +1,94 @@
+[dependency-groups]
+dev = [
+  "model-bakery>=1.23.3"
+]
+
 [project]
-name = "trailhawks"
-version = "2026.8.3"
-description = "Lawrence Trail Hawks website"
 authors = [
-    {name = "Jeff Triplett", email = "jeff.triplett@gmail.com"},
+  {name = "Jeff Triplett", email = "jeff.triplett@gmail.com"}
 ]
-requires-python = ">=3.13"
 dependencies = [
-    "beautifulsoup4",
-    "dateutils",
-    "django-braces",
-    "django-browser-reload",
-    "django-click",
-    "django-contrib-comments",
-    "django-crawl",
-    "django-favicon",
-    "django-filter",
-    "django-health-check==4.3.0",
-    "django-ical",
-    "django-markdownify",
-    "django-markup-deprecated",
-    "django-prodserver[django-q2]",
-    "django-q2",
-    "blessed",
-    "django-robots",
-    "django-shorturls",
-    "django-simple-open-graph==0.3",
-    "django-storages",
-    "django-taggit",
-    "django-tailwind-cli>=4.5.1",
-    "django-thumbor==0.5",
-    "django<6.1",
-    "environs[django]",
-    "feedparser",
-    "flickrapi==2.0",
-    "heroicons[django]",
-    "html5lib",
-    "httplib2",
-    "lxml",
-    "micawber",
-    "num2words",
-    "pandas",
-    "playwright",
-    "psycopg2-binary",
-    "python-slugify",
-    "requests",
-    "rich",
-    "titlecase",
-    "typer",
-    "uwsgi",
-    "whitenoise",
-    "django-ajaximage @ git+https://github.com/trailhawks/django-ajaximage.git",
-    "django-syncr @ git+https://github.com/trailhawks/django-syncr.git",
-    "django-ninja>=1.5.3",
-    "neapolitan",
-    "pydantic-ai>=2.0,<3",
+  "beautifulsoup4",
+  "dateutils",
+  "django-braces",
+  "django-browser-reload",
+  "django-click",
+  "django-contrib-comments",
+  "django-crawl",
+  "django-favicon",
+  "django-filter",
+  "django-health-check==4.3.0",
+  "django-ical",
+  "django-markdownify",
+  "django-markup-deprecated",
+  "django-prodserver[django-q2]",
+  "django-q2",
+  "blessed",
+  "django-robots",
+  "django-shorturls",
+  "django-simple-open-graph==0.3",
+  "django-storages",
+  "django-taggit",
+  "django-tailwind-cli>=4.5.1",
+  "django-thumbor==0.5",
+  "django<6.1",
+  "environs[django]",
+  "feedparser",
+  "flickrapi==2.0",
+  "heroicons[django]",
+  "html5lib",
+  "httplib2",
+  "lxml",
+  "micawber",
+  "num2words",
+  "pandas",
+  "playwright",
+  "psycopg2-binary",
+  "python-slugify",
+  "requests",
+  "rich",
+  "titlecase",
+  "typer",
+  "uwsgi",
+  "whitenoise",
+  "django-ajaximage @ git+https://github.com/trailhawks/django-ajaximage.git",
+  "django-syncr @ git+https://github.com/trailhawks/django-syncr.git",
+  "django-ninja>=1.5.3",
+  "neapolitan",
+  "pydantic-ai>=2.0,<3"
 ]
+description = "Lawrence Trail Hawks website"
+name = "trailhawks"
+requires-python = ">=3.13"
+version = "2026.8.3"
 
 [project.optional-dependencies]
 dev = [
-    "bumpver",
-    "friendly",
-    "pre-commit",
-    "pytest",
-    "pytest-django",
+  "bumpver",
+  "friendly",
+  "pre-commit",
+  "pytest",
+  "pytest-django"
+]
+
+[tool.bumpver]
+commit = true
+commit_message = ":bookmark: bump version {old_version} -> {new_version}"
+current_version = "2026.8.3"
+push = false
+tag = true
+version_pattern = "YYYY.MM.INC1"
+
+[tool.bumpver.file_patterns]
+"README.md" = [
+  "{version}"
+]
+"core/__init__.py" = [
+  '__version__ = "{version}"'
+]
+"pyproject.toml" = [
+  'current_version = "{version}"',
+  'version = "{version}"'
 ]
 
 [tool.pytest.ini_options]
@@ -71,74 +96,52 @@ DJANGO_SETTINGS_MODULE = "config.settings"
 addopts = "--nomigrations --reuse-db"
 python_files = ["test_*.py", "*_test.py"]
 
-[tool.bumpver]
-current_version = "2026.8.3"
-version_pattern = "YYYY.MM.INC1"
-commit_message = ":bookmark: bump version {old_version} -> {new_version}"
-commit = true
-tag = true
-push = false
-
-[tool.bumpver.file_patterns]
-"pyproject.toml" = [
-    'current_version = "{version}"',
-    'version = "{version}"',
-]
-"core/__init__.py" = [
-    '__version__ = "{version}"',
-]
-"README.md" = [
-    "{version}",
-]
-
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.
 exclude = [
-    ".bzr",
-    ".direnv",
-    ".eggs",
-    ".git",
-    ".github",
-    ".hg",
-    ".mypy_cache",
-    ".nox",
-    ".pants.d",
-    ".ruff_cache",
-    ".svn",
-    ".tox",
-    ".venv",
-    "__pypackages__",
-    "_build",
-    "buck-out",
-    "build",
-    "CONTRIBUTORS.md",
-    "dist",
-    "migrations",
-    "node_modules",
-    "settings/docker.py",
-    "static",
-    "venv",
+  ".bzr",
+  ".direnv",
+  ".eggs",
+  ".git",
+  ".github",
+  ".hg",
+  ".mypy_cache",
+  ".nox",
+  ".pants.d",
+  ".ruff_cache",
+  ".svn",
+  ".tox",
+  ".venv",
+  "__pypackages__",
+  "_build",
+  "buck-out",
+  "build",
+  "CONTRIBUTORS.md",
+  "dist",
+  "migrations",
+  "node_modules",
+  "settings/docker.py",
+  "static",
+  "venv"
 ]
-
-# per-file-ignores = {}
-
 # Same as Black.
 line-length = 120
-
 # Assume Python 3.12.
 target-version = "py312"
 
 [tool.ruff.lint]
-# Enable Pyflakes `E` and `F` codes by default.
-select = ["E", "F"]
-ignore = ["E501", "E741"] # temporary
-
-# Allow autofix for all enabled rules (when `--fix`) is provided.
-fixable = ["A", "B", "C", "D", "E", "F"]
-unfixable = []
-
 # Allow unused variables when underscore-prefixed.
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+# Allow autofix for all enabled rules (when `--fix`) is provided.
+fixable = ["A", "B", "C", "D", "E", "F"]
+ignore = ["E501", "E741"]  # temporary
+# Enable Pyflakes `E` and `F` codes by default.
+select = ["E", "F"]
+unfixable = []
+
+[tool.ruff.lint.mccabe]
+# Unlike Flake8, default to a complexity level of 10.
+max-complexity = 10
 
 # Ignore `E402` (import violations) in all `__init__.py` files, and in `path/to/file.py`.
 [tool.ruff.lint.per-file-ignores]
@@ -147,12 +150,3 @@ dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 "config/settings_tailwind.py" = ["F403", "F405"]
 "config/settings_trailhawks.py" = ["F403", "F405"]
 "manage.py" = ["E402"]
-
-[tool.ruff.lint.mccabe]
-# Unlike Flake8, default to a complexity level of 10.
-max-complexity = 10
-
-[dependency-groups]
-dev = [
-    "model-bakery>=1.23.3",
-]
