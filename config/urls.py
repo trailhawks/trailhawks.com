@@ -65,7 +65,7 @@ urlpatterns = [
     path("runs/", include("runs.urls")),
     path("sponsors/", include("sponsors.urls")),
     path("ajaximage/", include("ajaximage.urls")),
-    path("api/", api.urls),
+    path("apis/", api.urls),
     path("humans.txt", HumansView.as_view()),
     path("robots.txt", include("robots.urls")),
     path("version.txt", VersionView.as_view()),

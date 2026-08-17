@@ -68,10 +68,10 @@ class Command(TyperCommand):
         console.print(f"[bold]Fetching {endpoint}...[/bold]")
 
         try:
-            response = client.get(f"/api/{endpoint}/")
+            response = client.get(f"/apis/{endpoint}/")
             response.raise_for_status()
         except httpx.HTTPStatusError as exc:
-            console.print(f"  [red]API returned {exc.response.status_code} for /api/{endpoint}/ — skipping.[/red]")
+            console.print(f"  [red]API returned {exc.response.status_code} for /apis/{endpoint}/ — skipping.[/red]")
             console.print("  [red]You may need to deploy schema changes to production first.[/red]")
             return
 
