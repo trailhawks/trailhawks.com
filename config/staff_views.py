@@ -126,7 +126,7 @@ class StaffCRUDView(LoginRequiredMixin, UserPassesTestMixin, CRUDView):
         response.context_data["search_query"] = request.GET.get("q", "")
 
         model_name = self.model._meta.model_name
-        if request.headers.get("HX-Request"):
+        if request.htmx:
             response.template_name = f"neapolitan/{model_name}_list_partial.html"
         else:
             response.template_name = f"neapolitan/{model_name}_list.html"

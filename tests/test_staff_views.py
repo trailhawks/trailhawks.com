@@ -127,7 +127,7 @@ class TestRaceList:
     def test_htmx_returns_partial(self, staff_client, race):
         response = staff_client.get(
             reverse("staff:race-list"),
-            HTTP_HX_REQUEST="true",
+            headers={"HX-Request": "true"},
         )
         assert response.status_code == 200
         assert b"<!DOCTYPE html>" not in response.content
@@ -230,7 +230,7 @@ class TestRunList:
     def test_htmx_returns_partial(self, staff_client, run):
         response = staff_client.get(
             reverse("staff:run-list"),
-            HTTP_HX_REQUEST="true",
+            headers={"HX-Request": "true"},
         )
         assert response.status_code == 200
         assert b"<!DOCTYPE html>" not in response.content

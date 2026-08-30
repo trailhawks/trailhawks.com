@@ -18,6 +18,7 @@ dependencies = [
   "django-favicon",
   "django-filter",
   "django-health-check==4.3.0",
+  "django-htmx",
   "django-ical",
   "django-markdownify",
   "django-markup-deprecated",
