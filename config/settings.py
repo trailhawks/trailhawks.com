@@ -255,13 +255,10 @@ TAILWIND_CLI_VERSION = env.str("TAILWIND_CLI_VERSION", default="4.2.1")
 
 PYDANTIC_AI_MODEL = env("PYDANTIC_AI_MODEL", default="openai-responses:gpt-5.6-luna")
 
+# No "web" entry: start-web.sh runs uwsgi directly, not through prodserver.
 PRODUCTION_PROCESSES = {
-    "web": {
-        "BACKEND": "django_prodserver.backends.uwsgi.UwsgiServer",
-        "ARGS": {"http": "0.0.0.0:8000", "processes": 2},
-    },
     "worker": {
-        "BACKEND": "django_prodserver.backends.django_q2.DjangoQ2Worker",
+        "BACKEND": "django_prodserver.backends.workers.django_q2.DjangoQ2Worker",
         "ARGS": {},
     },
 }
