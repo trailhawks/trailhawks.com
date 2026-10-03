@@ -1,8 +1,10 @@
 #!/bin/sh
 uv run -m manage migrate --noinput
 uv run -m manage collectstatic --noinput
-# uv run -m manage prodserver web
-uv run uwsgi \
+# uwsgi serves the site directly, not through django-prodserver. `exec`
+# hands the container's stop signal to uwsgi so it shuts down cleanly
+# instead of being killed after the stop timeout.
+exec uv run uwsgi \
     --buffer-size=8196 \
     --chdir=/src \
     --enable-threads \
