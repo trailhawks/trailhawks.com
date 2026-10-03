@@ -9,6 +9,7 @@ from django.views.static import serve
 
 from health_check.views import HealthCheckView
 
+from config.views import VersionView
 from sitemaps.races import StaticViewSitemap
 
 sitemaps = {
@@ -55,6 +56,7 @@ urlpatterns = [
     path("sponsors/", include("sponsors.urls")),
     path("ajaximage/", include("ajaximage.urls")),
     path("robots.txt", include("robots.urls")),
+    path("version.txt", VersionView.as_view()),
     path(
         "sitemap.xml",
         sitemap,
