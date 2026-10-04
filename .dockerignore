@@ -147,3 +147,8 @@ media_root
 previews
 settings/
 static_root/
+compose*.yml
+# Built inside the image by collectstatic; a host copy would only be stale.
+staticfiles/
+# Local uploads (gitignored).
+media/
