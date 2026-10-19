@@ -51,6 +51,13 @@ jobs:
           uv run --locked -m manage tailwind --skip-checks build
           uv run --locked -m manage collectstatic --noinput
 
+      - name: Django system checks (includes model-name validation)
+        env:
+          DATABASE_URL: 'postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres'
+          SECRET_KEY: 'for-testing'
+        run: |
+          uv run -m manage check --fail-level WARNING
+
       - name: Test with pytest
         env:
           DATABASE_URL: 'postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres'

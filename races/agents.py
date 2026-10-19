@@ -24,9 +24,14 @@ and 'discounts', use plain text (not HTML or markdown).
 """
 
 
+def _build_model_identifier() -> str:
+    """Return the pydantic-ai model identifier (``provider:model_name``) used by every agent."""
+    return settings.PYDANTIC_AI_MODEL
+
+
 def get_race_agent() -> Agent[None, RaceAgentResult]:
     return Agent(
-        settings.PYDANTIC_AI_MODEL,
+        _build_model_identifier(),
         system_prompt=SYSTEM_PROMPT,
         output_type=RaceAgentResult,
     )
@@ -155,7 +160,7 @@ def format_race_context(race) -> str:
 def get_chat_agent(race) -> Agent:
     race_context = format_race_context(race)
     return Agent(
-        settings.PYDANTIC_AI_MODEL,
+        _build_model_identifier(),
         system_prompt=CHAT_SYSTEM_PROMPT.format(race_context=race_context),
     )
 

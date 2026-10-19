@@ -5,7 +5,7 @@ dev = [
 
 [project]
 authors = [
-  {name = "Jeff Triplett", email = "jeff.triplett@gmail.com"}
+  { name = "Jeff Triplett", email = "jeff.triplett@gmail.com" }
 ]
 dependencies = [
   "beautifulsoup4",
