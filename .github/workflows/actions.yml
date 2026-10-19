@@ -56,7 +56,7 @@ jobs:
           DATABASE_URL: 'postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres'
           SECRET_KEY: 'for-testing'
         run: |
-          uv run -m manage check
+          uv run -m manage check --fail-level WARNING
 
       - name: Test with pytest
         env:

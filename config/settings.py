@@ -253,7 +253,7 @@ TAILWIND_CLI_DIST_CSS = env.str("TAILWIND_CLI_DIST_CSS", default="css/tailwind.c
 TAILWIND_CLI_SRC_CSS = env.str("TAILWIND_CLI_SRC_CSS", default="frontend/index.css")
 TAILWIND_CLI_VERSION = env.str("TAILWIND_CLI_VERSION", default="4.2.1")
 
-PYDANTIC_AI_MODEL = env("PYDANTIC_AI_MODEL", default="openai-chat:gpt-5.6-luna")
+PYDANTIC_AI_MODEL = env("PYDANTIC_AI_MODEL", default="openai-responses:gpt-5.6-luna")
 
 # No "web" entry: start-web.sh runs uwsgi directly, not through prodserver.
 PRODUCTION_PROCESSES = {
