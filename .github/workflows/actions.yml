@@ -12,6 +12,12 @@ on:
 permissions:
   contents: write
 
+# Serialize runs per ref so two quick merges to main can't race the
+# version-bump push (a lost race also skips the production push below).
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   test:
     runs-on: ubuntu-24.04
@@ -111,5 +117,9 @@ jobs:
 
       - name: Push Release Build to GitHub
         run: |
+          # If main moved while this job ran, rebase the bump commits onto it
+          # instead of failing non-fast-forward (which would also skip the
+          # production push and strand deploys until the next merge).
+          git pull --rebase origin main
           git push origin main
           git push origin main:production --force
